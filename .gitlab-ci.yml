@@ -1,14 +1,12 @@
 stages:
-  - buildserver
-  - buildclient
-  - testserver
-  - testclient
+  - build
+  - test
 
 variables:
   MAVEN_CLI_OP: "clean"
 
 buildserver:
-  stage: buildserver
+  stage: build
   script:
     - cd server
     - mvn $MAVEN_CLI_OP compile
@@ -16,7 +14,7 @@ buildserver:
     - ugrad
 
 buildclient:
-  stage: buildclient
+  stage: build
   script:
     - cd client
     - mvn $MAVEN_CLI_OP compile
@@ -24,7 +22,7 @@ buildclient:
     - ugrad
 
 testserver:
-  stage: testserver
+  stage: test
   script:
     - cd server
     - mvn verify
@@ -37,7 +35,7 @@ testserver:
     - ugrad
 
 testclient:
-  stage: testclient
+  stage: test
   script:
     - cd client
     - mvn verify
