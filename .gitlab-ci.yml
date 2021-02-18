@@ -1,0 +1,48 @@
+stages:
+  - build
+  - test
+
+variables:
+  MAVEN_CLI_OP: "clean"
+
+buildserver:
+  stage: build
+  script:
+    - cd server
+    - mvn $MAVEN_CLI_OP compile
+  tags:
+    - ugrad
+
+buildclient:
+  stage: build
+  script:
+    - cd client
+    - mvn $MAVEN_CLI_OP compile
+  tags:
+    - ugrad
+
+testserver:
+  stage: test
+  script:
+    - cd server
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+  tags:
+    - ugrad
+
+testclient:
+  stage: test
+  script:
+    - cd client
+    - mvn verify
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+  tags:
+    - ugrad
