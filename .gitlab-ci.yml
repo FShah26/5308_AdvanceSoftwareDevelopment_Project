@@ -30,7 +30,7 @@ testserver:
     when: always
     reports:
       junit:
-        - target/surefire-reports/TEST-*.xml
+        - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
 
@@ -43,6 +43,6 @@ testclient:
     when: always
     reports:
       junit:
-        - target/surefire-reports/TEST-*.xml
+        - client/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
