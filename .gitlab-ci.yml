@@ -39,10 +39,11 @@ deploy:
   before_script:
     - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent -s)
+    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - echo -n "$DEPLOY_SSH_KEY"
+
   script:
     - cd server
-    - echo "$DEPLOY_SSH_KEY"
-    - chmod og-rwx ${DEPLOY_SSH_KEY}
     - echo "Starting the deploy script"
     - zip -v -r output_compressed.zip . -i output
     - scp -r -v -o StrictHostKeyChecking=no output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
