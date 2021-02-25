@@ -5,7 +5,7 @@ stages:
 variables:
   MAVEN_CLI_OP: "clean"
 
-server:
+build:
   stage: build
   script:
     - cd server
@@ -13,7 +13,7 @@ server:
   tags:
     - ugrad
 
-client:
+test:
   stage: test
   script:
     - cd server
