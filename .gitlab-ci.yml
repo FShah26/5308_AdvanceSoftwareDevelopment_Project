@@ -46,7 +46,7 @@ deploy:
     - echo "Starting the deploy script"
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - zip -v -r output_compressed.zip . -i output
-    - scp -r -v -o StrictHostKeyChecking=no -i $DEPLOY_SSH_KEY output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
+    - scp -r -v -i $DEPLOY_SSH_KEY output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
     - echo "Deploy Success"
   tags:
     - ugrad
