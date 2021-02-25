@@ -34,12 +34,11 @@ deploy:
   stage: deploy
   image: maven:latest
   before_script:
-    - apt-get update -y && apt-get install openssh-client -y
     - eval $(ssh-agent)
   script:
     - echo "Starting the deploy script"
-    - zip -r output.zip output
-    - scp -r -v -o StrictHostKeyChecking=no output.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output.zip"
+    - zip -r output_compressed.zip output
+    - scp -r -v -o StrictHostKeyChecking=no output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
     - echo "Deploy Success"
   tags:
     - ugrad
