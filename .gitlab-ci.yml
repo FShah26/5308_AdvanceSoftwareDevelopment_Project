@@ -40,7 +40,8 @@ deploy:
   script:
     - cd server
     # https://docs.gitlab.com/ee/ci/ssh_keys/
-    - echo "$DEPLOY_SSH_KEY " | tr -d '\r' | ssh-add -
+    - echo "$DEPLOY_SSH_KEY
+    " | tr -d '\r' | ssh-add -
     - echo "Starting the deploy script"
     - zip -v -r output_compressed.zip . -i output
     - scp -r -v -o StrictHostKeyChecking=no output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
