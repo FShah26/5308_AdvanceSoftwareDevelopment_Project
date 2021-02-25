@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - deploy
 
 variables:
   MAVEN_CLI_OP: "clean"
@@ -10,6 +11,9 @@ build:
   script:
     - cd server
     - mvn $MAVEN_CLI_OP compile
+  artifacts:
+    paths:
+      - output
   tags:
     - ugrad
 
@@ -25,3 +29,19 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
+
+deploy:
+  stage: deploy
+  image: maven:latest
+  before_script:
+    - apt-get update -y && apt-get install openssh-client -y
+    - eval $(ssh-agent)
+  script:
+    - echo "Starting the deploy script"
+    - zip -r output.zip output
+    - scp -r -v -o StrictHostKeyChecking=no output.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output.zip"
+    - echo "Deploy Success"
+  tags:
+    - ugrad
+  only:
+    - develop
