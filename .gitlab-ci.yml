@@ -44,7 +44,7 @@ deploy:
   script:
     - cd server
     - echo "Starting the deploy script"
-    - chmod og-rwx ${DEPLOY_SSH_KEY}
+    - chmod 400 ${DEPLOY_SSH_KEY}
     - zip -v -r output_compressed.zip . -i output
     - scp -r -v output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
     - echo "Deploy Success"
