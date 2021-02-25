@@ -32,14 +32,16 @@ test:
   tags:
     - ugrad
 
+# Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
 deploy:
   stage: deploy
   image: maven:latest
   before_script:
-    - eval $(ssh-agent)
+    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
+    - eval $(ssh-agent -s)
   script:
     - cd server
-    # https://docs.gitlab.com/ee/ci/ssh_keys/
+    - echo "$SSH_PRIVATE_KEY"
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - echo "Starting the deploy script"
     - zip -v -r output_compressed.zip . -i output
