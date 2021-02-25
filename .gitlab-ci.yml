@@ -41,7 +41,7 @@ deploy:
     - eval $(ssh-agent -s)
   script:
     - cd server
-    - echo "$SSH_PRIVATE_KEY"
+    - echo "$DEPLOY_SSH_KEY"
     - chmod og-rwx ${DEPLOY_SSH_KEY}
     - echo "Starting the deploy script"
     - zip -v -r output_compressed.zip . -i output
