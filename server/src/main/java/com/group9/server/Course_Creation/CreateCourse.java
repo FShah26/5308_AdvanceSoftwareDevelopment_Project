@@ -30,7 +30,6 @@ public class CreateCourse {
     String course_credit;
     String course_faculty;
     String course_Department;
-    String input;
 
     Scanner sc;
     public void creation() {

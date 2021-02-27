@@ -23,10 +23,6 @@ public class CourseDao extends JdbcDaoSupport implements ICourseDao {
     @PostConstruct
     private void initialize(){setDataSource(dataSource);}
 
-    public void setDataSource() {
-        this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-    }
-
     @Override
     public void CreateCourses(String course_id,String course_name,String course_credit,String course_faculty,String course_Department) {
         SimpleJdbcCall jdbcCall = new
