@@ -29,19 +29,3 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
-
-deploy:
-  stage: deploy
-  image: maven:latest
-  before_script:
-    - eval $(ssh-agent)
-  script:
-    - cd server
-    - echo "Starting the deploy script"
-    - zip -r output_compressed.zip output
-    - scp -r -v -o StrictHostKeyChecking=no output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
-    - echo "Deploy Success"
-  tags:
-    - ugrad
-  only:
-    - develop
