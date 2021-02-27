@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  # - deploy
+  - deploy
 
 variables:
   MAVEN_CLI_OP: "clean"
@@ -30,23 +30,23 @@ test:
   tags:
     - ugrad
 
-# Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
-# deploy:
-#   stage: deploy
-#   image: maven:latest
-#   before_script:
-#     - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
-#     - eval $(ssh-agent -s)
-#     - echo -n "$DEPLOY_SSH_KEY"
+Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
+deploy:
+  stage: deploy
+  image: maven:latest
+  before_script:
+    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
+    - eval $(ssh-agent -s)
+    - echo -n "$DEPLOY_SSH_KEY"
 
-#   script:
-#     - cd server
-#     - echo "Starting the deploy script"
-#     - chmod 400 ${DEPLOY_SSH_KEY}
-#     - zip -v -r output_compressed.zip . -i output
-#     - scp -r -v output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
-#     - echo "Deploy Success"
-#   tags:
-#     - ugrad
-#   only:
-#     - cd-test
+  script:
+    - cd server
+    - echo "Starting the deploy script"
+    - chmod 400 ${DEPLOY_SSH_KEY}
+    - zip -v -r output_compressed.zip . -i output
+    - scp -r -v output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/output_compressed.zip"
+    - echo "Deploy Success"
+  tags:
+    - ugrad
+  only:
+    - cd-test
