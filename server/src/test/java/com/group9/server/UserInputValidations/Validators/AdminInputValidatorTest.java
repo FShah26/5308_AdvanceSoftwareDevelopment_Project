@@ -10,7 +10,7 @@ class AdminInputValidatorTest {
     void valid_input() {
         AdminInputValidator vcc = new AdminInputValidator();
         Assertions.assertEquals(true,
-                vcc.validate("3"));
+                vcc.validate("2"));
     }
 
     @Test
