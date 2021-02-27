@@ -1,8 +1,6 @@
-package com.group9.server.Course_Creation;
+package com.group9.server.UserInputValidations.Validators;
 
-import org.springframework.stereotype.Component;
-
-import java.nio.charset.CoderResult;
+import com.group9.server.UserInputValidations.Interface.IValidate;
 
 
 public class ValidateCourseCreation implements IValidate {
