@@ -27,7 +27,7 @@ public class ServerApplication implements CommandLineRunner {
         homePage = ctx.getBean("appHome",IHomePage.class);
         homePage.GetMenu();
         homePage.SelectMenu();
-
+        ctx.close();
 
     }
 }
