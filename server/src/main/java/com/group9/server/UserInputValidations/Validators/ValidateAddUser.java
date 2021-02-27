@@ -10,7 +10,7 @@ public class ValidateAddUser implements IValidate {
 
         String output="";
         int x = 0;
-        if( x != Integer.parseInt(id))
+        if( x == Integer.parseInt(id))
         {output = "False";
             System.out.println("PLEASE ENTER VALID ID");}
         else if(userid.length() < 3)
@@ -19,7 +19,7 @@ public class ValidateAddUser implements IValidate {
         else if(password.length() < 4)
         {output = "False";
             System.out.println("PLEASE ENTER VALID PASSWORD");}
-        else if( x != Integer.parseInt(user_type))
+        else if( x == Integer.parseInt(user_type))
         { output = "False";
             System.out.println("PLEASE ENTER VALID USER_TYPE");}
         else
