@@ -14,7 +14,7 @@ build:
     - mvn $MAVEN_CLI_OP compile
   artifacts:
     paths:
-      - target
+      - server/target
   tags:
     - ugrad
 
