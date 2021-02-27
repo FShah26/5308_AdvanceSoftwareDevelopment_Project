@@ -43,7 +43,7 @@ public class HomePageConfiguration {
     }
 
     @Bean
-    public ICourseService Create_Courses(){
+    public ICourseService Create_Course(){
         return new CourseService();
     }
 

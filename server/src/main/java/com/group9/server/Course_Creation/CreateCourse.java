@@ -1,64 +1,82 @@
 package com.group9.server.Course_Creation;
 
 import com.group9.server.Course_Creation.ServiceLayer.ICourseService;
+import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
 import com.group9.server.UserInputValidations.Interface.IValidate;
+import com.group9.server.UserInputValidations.Validators.AdminCreateCourseConfirm;
+import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;
 
-public class CreateCourse{
+import static java.lang.System.out;
+
+public class CreateCourse {
 
     @Autowired
     IValidate validate;
 
-    @Autowired
-    ICourseService cs;
+    IAdminInputValidator inputValidator;
 
-    public void creation(){
+    @Autowired
+    public CreateCourse() {
+        this.inputValidator = new AdminCreateCourseConfirm();
+    }
+
+    @Autowired
+    ICourseService courseService;
+    String course_id;
+    String course_name;
+    String course_credit;
+    String course_faculty;
+    String course_Department;
+    String input;
+
+    Scanner sc;
+    public void creation() {
         System.out.println("************************************************");
         System.out.println("      ENTER DETAILS TO CREATE NEW COURSE        ");
         System.out.println("************************************************");
-        Scanner sc= new Scanner(System.in);
+         sc = new Scanner(System.in);
         System.out.print("Enter Course ID : ");
-        String course_id = sc.nextLine();
+         course_id = sc.nextLine();
         System.out.print("Enter Course Name : ");
-        String course_name = sc.nextLine();
+         course_name = sc.nextLine();
         System.out.print("Enter Course Credit : ");
-        String course_credit= sc.nextLine();
+         course_credit = sc.nextLine();
         System.out.print("Enter Faculty Moderator ID : ");
-        String course_faculty =sc.nextLine();
+         course_faculty = sc.nextLine();
         System.out.print("DEPARTMENT : ");
-        String course_Department = sc.nextLine();
+         course_Department = sc.nextLine();
 
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");
-        int input = sc.nextInt();
+        SelectMenu();
 
-        switch (input){
-            case 1:
-            {
-                String output = validate.validate_input(course_id,course_credit,course_faculty);
+    }
 
-                if(output.equals("true")) {
-                    cs.Create_Courses(course_id,course_name,course_credit,course_faculty,course_Department);
-                }
-                else
-                    System.out.println(output);
+    public void SelectMenu() {
+        String menuOption = sc.nextLine();
+        ValidateInput(menuOption);
+    }
 
-                break;
-            }
-            case 2:
-            {
-                System.out.println("COURSE CREATION HAS BEEN CANCELLED");
-                break;
-            }
-            default:
-            {
-                System.out.println("PLEASE PROVIDE CORRECT INPUT..");
-                break;
-            }
+    public void ValidateInput(String input) {
+        if (this.inputValidator.validate(input)) {
+            String output = validate.validate_input(course_id, course_credit, course_faculty);
+
+            if (output.equals("true")) {
+                courseService.Create_Courses(course_id, course_name, course_credit, course_faculty, course_Department);
+            } else
+                System.out.println(output);
         }
-
+        else
+          {
+              displayInvalidMenuOptionMsg();
+              creation();
+         }
+}
+    public void displayInvalidMenuOptionMsg(){
+        out.println("Invalid Option! Please choose a valid option from above menu.");
     }
 
 }
