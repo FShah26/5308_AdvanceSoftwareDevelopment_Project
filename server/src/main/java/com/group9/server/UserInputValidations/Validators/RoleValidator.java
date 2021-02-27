@@ -8,7 +8,7 @@ public class RoleValidator implements IUserInputValidator {
     String regex;
 
         public RoleValidator(){
-        this.regex="^\\s*([1-3]|[*])\\s*$";
+        this.regex="^\\s*([1-4]|[*])\\s*$";
     }
 
     @Override

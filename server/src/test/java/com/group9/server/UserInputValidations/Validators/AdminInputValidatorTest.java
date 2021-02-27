@@ -1,10 +1,7 @@
 package com.group9.server.UserInputValidations.Validators;
 
-import com.group9.server.Course_Creation.CreateCourse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AdminInputValidatorTest {
 

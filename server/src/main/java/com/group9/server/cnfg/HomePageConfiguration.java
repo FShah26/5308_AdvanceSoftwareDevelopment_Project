@@ -1,13 +1,14 @@
 package com.group9.server.cnfg;
 
-import com.group9.server.Course_Creation.AdminDashboard;
-import com.group9.server.Course_Creation.CreateCourse;
-import com.group9.server.Course_Creation.DaoLayer.CourseDao;
-import com.group9.server.Course_Creation.DaoLayer.ICourseDao;
+import com.group9.server.AddUser.AdminDashboard;
+import com.group9.server.AddUser.AddUser;
+import com.group9.server.AddUser.DaoLayer.AddUserDao;
+import com.group9.server.AddUser.DaoLayer.IAddUserDao;
+import com.group9.server.AddUser.ServiceLayer.AddUserService;
+import com.group9.server.AddUser.ServiceLayer.IAddUserService;
 import com.group9.server.UserInputValidations.Interface.IValidate;
-import com.group9.server.Course_Creation.ServiceLayer.CourseService;
-import com.group9.server.Course_Creation.ServiceLayer.ICourseService;
-import com.group9.server.UserInputValidations.Validators.ValidateCourseCreation;
+import com.group9.server.AddUser.ServiceLayer.AddUserService;
+import com.group9.server.UserInputValidations.Validators.ValidateAddUser;
 import com.group9.server.Modules.Implementation.ApplicationHome;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +29,8 @@ public class HomePageConfiguration {
     }
 
     @Bean
-    public CreateCourse create(){
-        return new CreateCourse();
+    public AddUser create(){
+        return new AddUser();
     }
 
     @Bean
@@ -39,17 +40,17 @@ public class HomePageConfiguration {
 
     @Bean
     public IValidate validate(){
-        return new ValidateCourseCreation();
+        return new ValidateAddUser();
     }
 
     @Bean
-    public ICourseService Create_Course(){
-        return new CourseService();
+    public IAddUserService Create_Course(){
+        return new AddUserService();
     }
 
     @Bean
-    public ICourseDao CreateCourses(){
-        return new CourseDao();
+    public IAddUserDao CreateCourses(){
+        return new AddUserDao();
     }
 
     @Value("${JDBC.driver}")

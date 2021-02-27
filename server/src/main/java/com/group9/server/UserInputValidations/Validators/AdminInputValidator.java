@@ -7,7 +7,7 @@ public class AdminInputValidator implements IAdminInputValidator {
     String regex;
 
     public AdminInputValidator(){
-        this.regex="^\\s*([1-3])\\s*$";
+        this.regex="^\\s*([2])\\s*$";
     }
 
     @Override

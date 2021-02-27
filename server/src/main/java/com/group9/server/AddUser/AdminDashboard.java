@@ -1,9 +1,7 @@
-package com.group9.server.Course_Creation;
+package com.group9.server.AddUser;
 
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
-import com.group9.server.UserInputValidations.Interface.IUserInputValidator;
 import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
-import com.group9.server.UserInputValidations.Validators.RoleValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +18,7 @@ public class AdminDashboard {
         this.inputValidator = new AdminInputValidator();
     }
     @Autowired
-    CreateCourse cc;
+    AddUser cc;
 
     public void dashboard(){
 
