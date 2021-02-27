@@ -10,10 +10,11 @@ build:
   stage: build
   script:
     - cd server
+    - echo "Building with Maven"
     - mvn $MAVEN_CLI_OP compile
   artifacts:
     paths:
-      - output
+      - target
   tags:
     - ugrad
 
@@ -21,6 +22,7 @@ test:
   stage: test
   script:
     - cd server
+    - echo "Testing..."
     - mvn verify
   artifacts:
     when: always
