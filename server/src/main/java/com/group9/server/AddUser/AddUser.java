@@ -1,10 +1,8 @@
 package com.group9.server.Course_Creation;
 
-import com.group9.server.Course_Creation.ServiceLayer.ICourseService;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
 import com.group9.server.UserInputValidations.Interface.IValidate;
 import com.group9.server.UserInputValidations.Validators.AdminCreateCourseConfirm;
-import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;

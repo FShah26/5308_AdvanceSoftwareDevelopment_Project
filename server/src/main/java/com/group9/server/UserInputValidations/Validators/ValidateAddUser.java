@@ -9,7 +9,7 @@ public class ValidateCourseCreation implements IValidate {
     public String validate_input(String CourseID,String Credit,String FacultyID) {
 
         String output="";
-        if(CourseID.length()<4)
+        if(id.length()<4)
             output ="PLEASE ENTER VALID COURSE ID STARTING WITH CSCI";
         else if(!(CourseID.substring(0,4)).equals("CSCI"))
             output ="PLEASE ENTER VALID COURSE ID STARTING WITH CSCI";

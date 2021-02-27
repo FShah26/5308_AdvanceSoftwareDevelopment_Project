@@ -24,16 +24,17 @@ public class AdminDashboard {
 
     public void dashboard(){
 
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("************************************************");
         System.out.println("                 ADMIN DASHBOARD                ");
         System.out.println("************************************************");
 
         System.out.println("Press 1 --> Enter Course and Assign Faculty.");
-        System.out.println("Press 2 --> Student Course Enrollment.");
-        System.out.println("Press 3 --> Making General Announcement.");
-        System.out.println("Press 4 --> To Log Out.");
+        System.out.println("Press 2 --> Add New User.");
+        System.out.println("Press 3 --> Student Course Enrollment.");
+        System.out.println("Press 4 --> Making General Announcement.");
+        System.out.println("Press 5 --> To Log Out.");
         System.out.println();
         SelectMenu();
     }

@@ -7,7 +7,7 @@ public class AdminCreateCourseConfirm implements IAdminInputValidator {
     String regex;
 
     public AdminCreateCourseConfirm(){
-        this.regex="^\\s*([1-2])\\s*$";
+        this.regex="^\\s*([1-4])\\s*$";
     }
 
     @Override
