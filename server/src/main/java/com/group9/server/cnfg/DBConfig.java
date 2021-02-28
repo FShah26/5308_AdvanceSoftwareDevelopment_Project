@@ -1,11 +1,11 @@
 package com.group9.server.cnfg;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -23,7 +23,7 @@ public class DBConfig {
 
     @Bean
     public DataSource dataSources() {
-        BasicDataSource bs = new BasicDataSource();
+        DriverManagerDataSource bs = new DriverManagerDataSource();
         bs.setDriverClassName(driverClassName);
         bs.setUrl(url);
         bs.setUsername(user);
@@ -32,7 +32,7 @@ public class DBConfig {
 
     }
 
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public JdbcTemplate jdbcTemplate(DataSource dataSources) {
+        return new JdbcTemplate(dataSources);
     }
 }

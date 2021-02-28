@@ -8,16 +8,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-import static java.lang.System.*;
+import static java.lang.System.out;
 
 @Component
 public class ApplicationHome implements IHomePage {
 
     IUserInputValidator inputValidator;
+
     @Autowired
     public ApplicationHome() {
         this.inputValidator = new RoleValidator();
     }
+
     @Override
     public void GetMenu() {
         out.println("Welcome to the Course Management System");
@@ -30,26 +32,34 @@ public class ApplicationHome implements IHomePage {
     }
 
     @Override
-    public void SelectMenu() {
+    public String SelectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         ValidateSelectedMenuOption(menuOption);
+        switch (menuOption.trim()) {
+            case "1":
+                return "admin";
+            case "2":
+                return "faculty";
+            case "3":
+                return "student";
+            default:
+                return "admin";
+        }
     }
 
     @Override
     public void ValidateSelectedMenuOption(String menuOption) {
-        if (this.inputValidator.validate(menuOption)) {
-            out.println("Login");
-        }
-        else {
+        if (!this.inputValidator.validate(menuOption)) {
             displayInvalidMenuOptionMsg();
             SelectMenu();
         }
     }
-    public void displayInvalidMenuOptionMsg(){
-            out.println("Invalid Option!");
-            out.println("Please choose a valid option from above menu.");
-        }
+
+    public void displayInvalidMenuOptionMsg() {
+        out.println("Invalid Option!");
+        out.println("Please choose a valid option from above menu.");
+    }
 
 
 }
