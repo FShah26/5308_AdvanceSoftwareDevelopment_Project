@@ -6,11 +6,13 @@ import com.group9.server.UserInputValidations.Interface.IValidate;
 import com.group9.server.UserInputValidations.Validators.AdminCreateCourseConfirm;
 import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 import static java.lang.System.out;
 
+@Component
 public class CreateCourse {
 
     @Autowired
@@ -18,7 +20,7 @@ public class CreateCourse {
 
     IAdminInputValidator inputValidator;
 
-    @Autowired
+
     public CreateCourse() {
         this.inputValidator = new AdminCreateCourseConfirm();
     }

@@ -1,8 +1,9 @@
 package com.group9.server.UserInputValidations.Validators;
 
 import com.group9.server.UserInputValidations.Interface.IValidate;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class ValidateCourseCreation implements IValidate {
 
     @Override

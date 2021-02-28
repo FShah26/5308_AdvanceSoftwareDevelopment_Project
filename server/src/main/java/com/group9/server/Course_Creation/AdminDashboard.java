@@ -46,7 +46,13 @@ public class AdminDashboard {
 
     public void checkinput(String selection){
         if (this.inputValidator.validate(selection)) {
-            cc.creation();
+            if(selection.equals("1")){
+                cc.creation();
+            }
+            else
+            {
+                System.out.print("Yet to develop..");
+            }
         }
         else {
             displayInvalidMenuOptionMsg();

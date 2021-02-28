@@ -11,6 +11,7 @@ import com.group9.server.UserInputValidations.Validators.ValidateCourseCreation;
 import com.group9.server.Modules.Implementation.ApplicationHome;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
+@ComponentScan(basePackages = "com.group9.server")
 @PropertySource("classpath:JDBC.properties")
 public class HomePageConfiguration {
 
@@ -28,28 +30,8 @@ public class HomePageConfiguration {
     }
 
     @Bean
-    public CreateCourse create(){
-        return new CreateCourse();
-    }
-
-    @Bean
     public AdminDashboard dashboard(){
         return new AdminDashboard();
-    }
-
-    @Bean
-    public IValidate validate(){
-        return new ValidateCourseCreation();
-    }
-
-    @Bean
-    public ICourseService Create_Course(){
-        return new CourseService();
-    }
-
-    @Bean
-    public ICourseDao CreateCourses(){
-        return new CourseDao();
     }
 
     @Value("${JDBC.driver}")
