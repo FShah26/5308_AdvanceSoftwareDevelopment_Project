@@ -1,9 +1,9 @@
-package com.group9.server.Course_Creation;
+package com.group9.server.Modules.Implementation;
 
+import com.group9.server.Modules.Implementation.CreateCourse;
+import com.group9.server.Modules.Interface.IDashboard;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
-import com.group9.server.UserInputValidations.Interface.IUserInputValidator;
 import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
-import com.group9.server.UserInputValidations.Validators.RoleValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class AdminDashboard {
+public class AdminDashboard implements IDashboard {
 
     IAdminInputValidator inputValidator;
     @Autowired
@@ -22,6 +22,7 @@ public class AdminDashboard {
     @Autowired
     CreateCourse cc;
 
+    @Override
     public void dashboard(){
 
         Scanner sc= new Scanner(System.in);

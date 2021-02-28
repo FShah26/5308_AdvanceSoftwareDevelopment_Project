@@ -1,4 +1,4 @@
-package com.group9.server.Course_Creation.ServiceLayer;
+package com.group9.server.services.Interface;
 
 
 public interface ICourseService {

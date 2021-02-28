@@ -1,5 +1,6 @@
-package com.group9.server.Course_Creation.DaoLayer;
+package com.group9.server.dao.Impl;
 
+import com.group9.server.dao.Interface.ICourseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

@@ -1,10 +1,9 @@
-package com.group9.server.Course_Creation.ServiceLayer;
+package com.group9.server.services.Implementation;
 
-import com.group9.server.Course_Creation.DaoLayer.ICourseDao;
-import com.group9.server.Course_Creation.ServiceLayer.ICourseService;
+import com.group9.server.services.Interface.ICourseService;
+import com.group9.server.dao.Interface.ICourseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class CourseService implements ICourseService {

@@ -1,4 +1,4 @@
-package com.group9.server.Course_Creation.DaoLayer;
+package com.group9.server.dao.Interface;
 
 import javax.sql.DataSource;
 import java.util.List;

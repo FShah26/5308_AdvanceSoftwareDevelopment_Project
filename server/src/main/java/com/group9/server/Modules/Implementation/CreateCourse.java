@@ -1,10 +1,9 @@
-package com.group9.server.Course_Creation;
+package com.group9.server.Modules.Implementation;
 
-import com.group9.server.Course_Creation.ServiceLayer.ICourseService;
+import com.group9.server.services.Interface.ICourseService;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
 import com.group9.server.UserInputValidations.Interface.IValidate;
 import com.group9.server.UserInputValidations.Validators.AdminCreateCourseConfirm;
-import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
