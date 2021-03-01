@@ -1,5 +1,6 @@
-package com.group9.server.AddUser.DaoLayer;
+package com.group9.server.Dao.Impl;
 
+import com.group9.server.Dao.Interface.IAddUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

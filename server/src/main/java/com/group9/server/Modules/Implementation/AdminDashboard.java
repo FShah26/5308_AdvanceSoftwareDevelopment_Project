@@ -1,5 +1,6 @@
-package com.group9.server.AddUser;
+package com.group9.server.Modules.Implementation;
 
+import com.group9.server.Modules.Implementation.AddUser;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
 import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,12 @@ public class AdminDashboard {
 
     public void checkinput(String selection){
         if (this.inputValidator.validate(selection)) {
-            cc.creation();
+            if(selection.equals("2")) {
+                cc.creation();
+            }
+            else{
+                System.out.println("Yet to develop..");
+            }
         }
         else {
             displayInvalidMenuOptionMsg();

@@ -1,4 +1,4 @@
-package com.group9.server.AddUser.ServiceLayer;
+package com.group9.server.Services.Interface;
 
 
 public interface IAddUserService {

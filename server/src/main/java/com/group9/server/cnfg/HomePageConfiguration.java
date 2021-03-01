@@ -1,13 +1,12 @@
 package com.group9.server.cnfg;
 
-import com.group9.server.AddUser.AdminDashboard;
-import com.group9.server.AddUser.AddUser;
-import com.group9.server.AddUser.DaoLayer.AddUserDao;
-import com.group9.server.AddUser.DaoLayer.IAddUserDao;
-import com.group9.server.AddUser.ServiceLayer.AddUserService;
-import com.group9.server.AddUser.ServiceLayer.IAddUserService;
+import com.group9.server.Modules.Implementation.AdminDashboard;
+import com.group9.server.Modules.Implementation.AddUser;
+import com.group9.server.Dao.Impl.AddUserDao;
+import com.group9.server.Dao.Interface.IAddUserDao;
+import com.group9.server.Services.Implementation.AddUserService;
+import com.group9.server.Services.Interface.IAddUserService;
 import com.group9.server.UserInputValidations.Interface.IValidate;
-import com.group9.server.AddUser.ServiceLayer.AddUserService;
 import com.group9.server.UserInputValidations.Validators.ValidateAddUser;
 import com.group9.server.Modules.Implementation.ApplicationHome;
 import org.springframework.beans.factory.annotation.Value;

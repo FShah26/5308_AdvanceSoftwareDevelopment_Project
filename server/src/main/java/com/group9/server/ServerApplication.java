@@ -1,6 +1,6 @@
 package com.group9.server;
 
-import com.group9.server.AddUser.AdminDashboard;
+import com.group9.server.Modules.Implementation.AdminDashboard;
 import com.group9.server.cnfg.HomePageConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

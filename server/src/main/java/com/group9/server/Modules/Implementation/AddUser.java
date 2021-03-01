@@ -1,12 +1,10 @@
-package com.group9.server.AddUser;
+package com.group9.server.Modules.Implementation;
 
-import com.group9.server.AddUser.ServiceLayer.AddUserService;
-import com.group9.server.AddUser.ServiceLayer.IAddUserService;
-//import com.group9.server.AddUser.ServiceLayer.IAddUserService;
+import com.group9.server.Services.Interface.IAddUserService;
+//import com.group9.server.ServiceLayer.IAddUserService;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
 import com.group9.server.UserInputValidations.Interface.IValidate;
 import com.group9.server.UserInputValidations.Validators.AdminAddUserConfirm;
-import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;
