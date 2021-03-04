@@ -1,5 +1,6 @@
 package com.group9.server.cnfg;
 
+import com.group9.server.Modules.Implementation.AdminDashboard;
 import com.group9.server.Modules.Implementation.AdminImpl;
 import com.group9.server.Modules.Implementation.ApplicationHome;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class HomePageConfiguration {
 
     @Bean
-    public ApplicationHome appHome() {
+    public ApplicationHome appHome(){
         return new ApplicationHome();
     }
 
@@ -19,4 +20,11 @@ public class HomePageConfiguration {
     public AdminImpl admin() {
         return new AdminImpl();
     }
+
+    @Bean
+    public AdminDashboard dashboard(){
+        return new AdminDashboard();
+    }
+
+
 }
