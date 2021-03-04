@@ -1,6 +1,7 @@
 package com.group9.server;
 
 import com.group9.server.Modules.Implementation.AdminDashboard;
+import com.group9.server.Modules.Implementation.AdminDashboard;
 import com.group9.server.Modules.Interface.IDashboard;
 import com.group9.server.Modules.Interface.IHomePage;
 import com.group9.server.Modules.Interface.IUser;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+
 
 @SpringBootApplication
 public class ServerApplication implements CommandLineRunner {
@@ -20,6 +24,7 @@ public class ServerApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
+
     }
 
     @Override
