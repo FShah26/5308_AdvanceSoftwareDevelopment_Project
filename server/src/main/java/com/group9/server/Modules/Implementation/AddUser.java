@@ -1,9 +1,8 @@
 package com.group9.server.Modules.Implementation;
 
 import com.group9.server.Services.Interface.IAddUserService;
-//import com.group9.server.ServiceLayer.IAddUserService;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
-import com.group9.server.UserInputValidations.Interface.IValidate;
+import com.group9.server.UserInputValidations.Interface.IValidateAddUser;
 import com.group9.server.UserInputValidations.Validators.AdminAddUserConfirm;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +13,7 @@ import static java.lang.System.out;
 public class AddUser {
 
     @Autowired
-    IValidate validate;
+    IValidateAddUser validate;
 
     IAdminInputValidator inputValidator;
 

@@ -1,7 +1,6 @@
 package com.group9.server.dao.Impl;
 
-import com.group9.server.dao.Interface.IAddUserDao;
-
+import com.group9.server.dao.Interface.IUserAuthDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,31 +14,30 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 @Component
-public class AddUserDao extends JdbcDaoSupport implements IAddUserDao {
+public class UserAuthenticationDAO extends JdbcDaoSupport implements IUserAuthDao {
+
 
     @Autowired
     DataSource dataSource;
 
     JdbcTemplate jdbcTemplateObject;
 
+
     @PostConstruct
-    private void initialize(){setDataSource(dataSource);}
+    private void initialize() {
+        setDataSource(dataSource);
+    }
 
     @Override
-    public void AddUser(String id,String userid,String password,String user_type) {
+    public boolean AuthorizeUser(String uname, String pass, String role) {
         SimpleJdbcCall jdbcCall = new
-                SimpleJdbcCall(dataSource).withProcedureName("Create_NewUser");
+                SimpleJdbcCall(dataSource).withProcedureName("VerifyUserCredentials");
         SqlParameterSource inParams = new MapSqlParameterSource()
-                .addValue("id",id)
-                .addValue("userid", userid)
-                .addValue("password", password)
-                .addValue("user_type", user_type);
-        System.out.println();
-        System.out.println("Please wait.. processing...");
-        System.out.println();
+                .addValue("userId", uname)
+                .addValue("password", pass)
+                .addValue("userrole", role);
         Map results = jdbcCall.execute(inParams);
-        String message =(String)results.get("msg");
-        System.out.println(message);
+        return (boolean) results.get("isValid");
+
     }
 }
-

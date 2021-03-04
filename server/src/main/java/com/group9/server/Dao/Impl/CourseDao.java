@@ -1,7 +1,6 @@
 package com.group9.server.dao.Impl;
 
-import com.group9.server.dao.Interface.IAddUserDao;
-
+import com.group9.server.dao.Interface.ICourseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,7 +14,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 
 @Component
-public class AddUserDao extends JdbcDaoSupport implements IAddUserDao {
+public class CourseDao extends JdbcDaoSupport implements ICourseDao {
 
     @Autowired
     DataSource dataSource;
@@ -26,14 +25,15 @@ public class AddUserDao extends JdbcDaoSupport implements IAddUserDao {
     private void initialize(){setDataSource(dataSource);}
 
     @Override
-    public void AddUser(String id,String userid,String password,String user_type) {
+    public void CreateCourses(String course_id,String course_name,String course_credit,String course_faculty,String course_Department) {
         SimpleJdbcCall jdbcCall = new
-                SimpleJdbcCall(dataSource).withProcedureName("Create_NewUser");
+                SimpleJdbcCall(dataSource).withProcedureName("Create_NewCourse");
         SqlParameterSource inParams = new MapSqlParameterSource()
-                .addValue("id",id)
-                .addValue("userid", userid)
-                .addValue("password", password)
-                .addValue("user_type", user_type);
+                .addValue("course_id",course_id)
+                .addValue("course_name", course_name)
+                .addValue("Department", course_Department)
+                .addValue("course_credit", course_credit)
+                .addValue("course_Faculty", course_faculty);
         System.out.println();
         System.out.println("Please wait.. processing...");
         System.out.println();

@@ -1,4 +1,3 @@
-/*
 package com.group9.server.cnfg;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +23,7 @@ public class DBConfig {
 
     @Bean
     public DataSource dataSources() {
-        DriverManagerDataSource bs =new DriverManagerDataSource();
+        DriverManagerDataSource bs = new DriverManagerDataSource();
         bs.setDriverClassName(driverClassName);
         bs.setUrl(url);
         bs.setUsername(user);
@@ -33,9 +32,7 @@ public class DBConfig {
 
     }
 
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public JdbcTemplate jdbcTemplate(DataSource dataSources) {
+        return new JdbcTemplate(dataSources);
     }
 }
-
-*/

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 public class RoleValidator implements IUserInputValidator {
     String regex;
 
-        public RoleValidator(){
-        this.regex="^\\s*([1-4]|[*])\\s*$";
+    public RoleValidator() {
+        this.regex = "^\\s*([1-3]|[*])\\s*$";
     }
 
     @Override

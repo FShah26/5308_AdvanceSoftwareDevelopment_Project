@@ -1,6 +1,6 @@
 package com.group9.server.Services.Implementation;
 
-import com.group9.server.Dao.Interface.IAddUserDao;
+import com.group9.server.dao.Interface.IAddUserDao;
 import com.group9.server.Services.Interface.IAddUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

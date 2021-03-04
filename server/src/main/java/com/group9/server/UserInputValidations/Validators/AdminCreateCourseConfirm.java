@@ -2,11 +2,11 @@ package com.group9.server.UserInputValidations.Validators;
 
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
 
-public class AdminInputValidator implements IAdminInputValidator {
+public class AdminCreateCourseConfirm implements IAdminInputValidator {
 
     String regex;
 
-    public AdminInputValidator(){
+    public AdminCreateCourseConfirm(){
         this.regex="^\\s*([1-2])\\s*$";
     }
 
