@@ -1,12 +1,9 @@
 package com.group9.server.Modules.Implementation;
 
-import com.group9.server.Modules.Implementation.AddUser;
-import com.group9.server.Modules.Implementation.CreateCourse;
+import com.group9.server.Announcements.IAnnouncementInput;
 import com.group9.server.Modules.Interface.IDashboard;
 import com.group9.server.UserInputValidations.Interface.IAdminInputValidator;
-import com.group9.server.UserInputValidations.Interface.IUserInputValidator;
 import com.group9.server.UserInputValidations.Validators.AdminInputValidator;
-import com.group9.server.UserInputValidations.Validators.RoleValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +23,8 @@ public class AdminDashboard implements IDashboard {
     CreateCourse cc;
     @Autowired
     AddUser ac;
+    @Autowired
+    IAnnouncementInput ai;
 
     @Override
     public void dashboard(){
@@ -56,6 +55,9 @@ public class AdminDashboard implements IDashboard {
             }
             else if(selection.equals("2")) {
                 ac.creation();
+            }
+            else if(selection.equals("4")) {
+                ai.make_announcement();
             }
             else{
                 System.out.println("Yet to develop..");

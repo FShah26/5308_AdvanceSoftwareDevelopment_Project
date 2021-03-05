@@ -1,6 +1,7 @@
 package com.group9.server.cnfg;
 
 import com.group9.server.Modules.Implementation.*;
+import com.group9.server.Modules.Interface.IDashboard;
 import com.group9.server.UserInputValidations.Interface.IValidateAddUser;
 import com.group9.server.UserInputValidations.Validators.ValidateCourseCreation;
 import com.group9.server.dao.Impl.AddUserDao;
@@ -26,11 +27,7 @@ public class HomePageConfiguration {
     public ApplicationHome appHome(){
         return new ApplicationHome();
     }
-   // @Bean
 
-    //public CreateCourse create(){
-      //  return new CreateCourse();
-    //}
     @Bean
     public AddUser add_user(){
         return new AddUser();
@@ -41,7 +38,7 @@ public class HomePageConfiguration {
     }
 
     @Bean
-    public AdminDashboard dashboard(){
+    public IDashboard dashboard(){
         return new AdminDashboard();
     }
     @Bean
