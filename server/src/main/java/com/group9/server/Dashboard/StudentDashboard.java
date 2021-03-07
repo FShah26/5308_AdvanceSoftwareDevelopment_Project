@@ -45,7 +45,18 @@ public class StudentDashboard implements IDashboard {
 
     public void checkInput(String selection) {
         if (this.validator.validate(selection)) {
-            out.println("Do something....");
+            switch (selection){
+                case "4":
+                    out.println("View Notes");
+                    break;
+
+                case "5":
+                    out.println("Add Notes");
+                    break;
+
+                default:
+                    out.println("Coming up!");
+            }
         } else {
             displayInvalidMenuOptionMsg();
             selectMenu();
