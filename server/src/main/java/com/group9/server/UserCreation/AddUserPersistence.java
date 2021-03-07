@@ -2,17 +2,9 @@ package com.group9.server.UserCreation;
 
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcCall;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import java.sql.*;
-import java.util.Map;
 
 @Component
 public class AddUserPersistence implements IAddUserPersistence {

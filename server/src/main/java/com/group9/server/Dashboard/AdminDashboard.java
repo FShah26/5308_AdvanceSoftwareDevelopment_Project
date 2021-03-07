@@ -1,6 +1,5 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.IAnnouncementInput;
 import com.group9.server.CourseCreation.CreateCourse;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;

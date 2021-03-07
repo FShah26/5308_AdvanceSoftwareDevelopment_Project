@@ -49,28 +49,4 @@ public class HomePageConfiguration {
     public IValidate validate(){
         return new ValidateCourseCreation();
     }
-
-   // @Bean
-    //public ICourseService Create_Course(){
-    //    return new CourseService();
-    //}
-
-   // @Bean
-   // public ICourseDao CreateCourses(){
-     //   return new CourseDao();
-    //}
-//
-//    @Bean
-//    public IAddUserLogic Add_User(){
-//        return new AddUserLogic();
-//    }
-////
-//    @Bean
-//    public IAddUserPersistence AddUser(){
-//        return new AddUserPersistence();
-//    }
-
-
-
-
 }

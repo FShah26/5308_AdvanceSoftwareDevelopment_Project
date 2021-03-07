@@ -2,12 +2,8 @@ package com.group9.server.Login;
 
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
 import java.sql.*;
 
 @Component
@@ -21,10 +17,10 @@ public class UserAuthenticationPersistence implements IUserAuthPersistence {
         String dbURL = db.url;
         String user = db.user;
         String password = db.password;
-        Boolean output=false;
+        Boolean output = false;
         try (
                 Connection conn = DriverManager.getConnection(dbURL, user, password);
-                CallableStatement statement = conn.prepareCall("{call VerifyUserCredentials(?, ?, ?, ?)}");
+                CallableStatement statement = conn.prepareCall("{call VerifyUserCredentials(?, ?, ?, ?)}")
         ) {
 
             statement.registerOutParameter(4, Types.VARCHAR);
@@ -36,7 +32,7 @@ public class UserAuthenticationPersistence implements IUserAuthPersistence {
             statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output =false;
+            output = false;
         }
         return output;
     }
