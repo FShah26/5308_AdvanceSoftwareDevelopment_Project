@@ -1,6 +1,6 @@
 package com.group9.server.AddUser;
 
-import com.group9.server.UserInputValidations.Validators.ValidateAddUser;
+import com.group9.server.Login.ValidateAddUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

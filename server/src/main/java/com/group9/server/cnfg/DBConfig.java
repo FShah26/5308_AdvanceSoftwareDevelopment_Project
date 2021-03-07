@@ -13,13 +13,13 @@ import javax.sql.DataSource;
 @PropertySource("classpath:JDBC.properties")
 public class DBConfig {
     @Value("${JDBC.driver}")
-    private String driverClassName;
+    public String driverClassName;
     @Value("${JDBC.url}")
-    private String url;
+    public String url;
     @Value("${JDBC.user}")
-    private String user;
+    public String user;
     @Value("${JDBC.password}")
-    private String password;
+    public String password;
 
     @Bean
     public DataSource dataSources() {
@@ -29,10 +29,5 @@ public class DBConfig {
         bs.setUsername(user);
         bs.setPassword(password);
         return bs;
-
-    }
-
-    public JdbcTemplate jdbcTemplate(DataSource dataSources) {
-        return new JdbcTemplate(dataSources);
     }
 }

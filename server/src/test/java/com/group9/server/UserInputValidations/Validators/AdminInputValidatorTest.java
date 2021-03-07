@@ -1,5 +1,6 @@
 package com.group9.server.UserInputValidations.Validators;
 
+import com.group9.server.Dashboard.AdminInputValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
