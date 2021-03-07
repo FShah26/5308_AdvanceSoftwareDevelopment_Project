@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.sql.*;
 
 @Component
-public class NotesPersistence implements INotesPersistence{
+public class NotesPersistence implements INotesPersistence {
 
     DBConfig config;
     Connection con;

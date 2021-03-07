@@ -1,7 +1,6 @@
 package com.group9.server.Dashboard;
 
 import com.group9.server.Notes.IStudentNotes;
-import com.group9.server.Notes.StudentNotes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -49,7 +48,7 @@ public class StudentDashboard implements IDashboard {
 
     public void checkInput(String selection) {
         if (this.validator.validate(selection)) {
-            switch (selection){
+            switch (selection) {
                 case "4":
                     notes.viewNotes("hashik", "LJJSKDFJ");
                     break;

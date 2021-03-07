@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class NotesLogic implements INotesLogic{
+public class NotesLogic implements INotesLogic {
 
     NotesPersistence persistence;
 
@@ -23,7 +23,7 @@ public class NotesLogic implements INotesLogic{
         try {
             ResultSet set = persistence.fetchNotes(studentID, courseID);
 
-            while(set.next()){
+            while (set.next()) {
                 subjectNotes.notes.add(set.getString(1));
             }
 

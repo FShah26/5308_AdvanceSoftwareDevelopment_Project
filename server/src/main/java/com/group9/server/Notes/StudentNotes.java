@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StudentNotes implements IStudentNotes{
+public class StudentNotes implements IStudentNotes {
     INotesLogic notesLogic;
 
     @Autowired
@@ -17,10 +17,10 @@ public class StudentNotes implements IStudentNotes{
         NotesList list = notesLogic.viewNotes(studentID, courseID);
 
         System.out.println("Notes for course ID: " + courseID);
-        if(list.notes.size() == 0){
+        if (list.notes.size() == 0) {
             System.out.println("Looks like you don't have any notes for this course");
         } else {
-            for(String note: list.notes){
+            for (String note : list.notes) {
                 System.out.println("--------------------");
                 System.out.println(note);
             }
