@@ -25,7 +25,7 @@ public class StudentNotesTest {
             "CSCI00",
     })
     public void viewNotesTest(String course) {
-        try{
+        try {
             list = new NotesList(course);
             when(mockNotesLogic.viewNotes("hashik", "INVALID COURSE")).thenReturn(new NotesList(course));
             list.notes.add("TEST");
@@ -36,7 +36,7 @@ public class StudentNotesTest {
 
             underTest.viewNotes("hashik", "INVALID COURSE");
             underTest.viewNotes("hashik", course);
-        } catch (Exception e){
+        } catch (Exception e) {
             Assertions.fail("Failed with exception");
         }
     }

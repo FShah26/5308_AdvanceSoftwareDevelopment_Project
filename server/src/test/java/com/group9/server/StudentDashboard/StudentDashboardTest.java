@@ -4,7 +4,6 @@ import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Dashboard.StudentDashboard;
 import com.group9.server.Notes.IStudentNotes;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.mockito.Mockito;
 
 public class StudentDashboardTest {

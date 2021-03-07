@@ -23,7 +23,7 @@ public class NotesLogic implements INotesLogic {
         try {
             ResultSet set = persistence.fetchNotes(studentID, courseID);
 
-            if(set != null){
+            if (set != null) {
                 while (set.next()) {
                     subjectNotes.notes.add(set.getString(1));
                 }

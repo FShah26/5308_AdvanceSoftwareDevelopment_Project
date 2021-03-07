@@ -25,13 +25,13 @@ public class NotesLogicTest {
 
     @Test
     @DisplayName("viewNotesTest")
-    public void viewNotesTest(){
+    public void viewNotesTest() {
         Assertions.assertNotNull(underTest.viewNotes("hashik", "CSCI1000"));
     }
 
     @Test
     @DisplayName("fetchNotesTest")
-    public void fetchNotesTest(){
+    public void fetchNotesTest() {
         Assertions.assertDoesNotThrow(() -> underTest.addNotes("hashik", "CSCI123", "HELLO"));
     }
 }
