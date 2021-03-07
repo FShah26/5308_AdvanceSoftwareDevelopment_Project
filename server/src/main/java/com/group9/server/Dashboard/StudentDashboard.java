@@ -51,7 +51,7 @@ public class StudentDashboard implements IDashboard {
         if (this.validator.validate(selection)) {
             switch (selection){
                 case "4":
-                    notes.viewNotes("hashik", "CSCI123");
+                    notes.viewNotes("hashik", "LJJSKDFJ");
                     break;
 
                 case "5":

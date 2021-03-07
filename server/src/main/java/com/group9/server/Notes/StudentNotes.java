@@ -14,7 +14,17 @@ public class StudentNotes implements IStudentNotes{
 
     @Override
     public void viewNotes(String studentID, String courseID) {
-        notesLogic.viewNotes(studentID, courseID);
+        NotesList list = notesLogic.viewNotes(studentID, courseID);
+
+        System.out.println("Notes for course ID: " + courseID);
+        if(list.notes.size() == 0){
+            System.out.println("Looks like you don't have any notes for this course");
+        } else {
+            for(String note: list.notes){
+                System.out.println("--------------------");
+                System.out.println(note);
+            }
+        }
     }
 
     @Override

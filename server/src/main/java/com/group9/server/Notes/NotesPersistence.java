@@ -19,14 +19,12 @@ public class NotesPersistence implements INotesPersistence{
     }
 
     @Override
-    public void fetchNotes(String studentID, String courseID) throws SQLException {
+    public ResultSet fetchNotes(String studentID, String courseID) throws SQLException {
         CallableStatement statement = con.prepareCall("{call fetch_notes(?, ?)}");
         statement.setString(1, studentID);
         statement.setString(2, courseID);
         ResultSet set = statement.executeQuery();
-        while(set.next()){
-            System.out.println(set.getString(1));
-        }
+        return set;
     }
 
     @Override
