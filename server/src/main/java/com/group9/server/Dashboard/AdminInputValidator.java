@@ -1,6 +1,6 @@
 package com.group9.server.Dashboard;
 
-public class AdminInputValidator implements IAdminInputValidator {
+public class AdminInputValidator implements InputValidator {
 
     String regex;
 

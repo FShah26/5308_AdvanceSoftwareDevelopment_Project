@@ -2,6 +2,7 @@ package com.group9.server;
 
 import com.group9.server.Dashboard.AdminDashboard;
 import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.Dashboard.StudentDashboard;
 import com.group9.server.HomePage.IHomePage;
 import com.group9.server.Login.IUser;
 import com.group9.server.Login.IUserAuthLogic;
@@ -22,7 +23,6 @@ public class ServerApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
-
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ServerApplication implements CommandLineRunner {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
         authLogic = ctx.getBean(UserAuthenticationLogic.class);
         homePage = ctx.getBean("appHome", IHomePage.class);
-        
+
         homePage.getMenu();
         AppUserRole = homePage.selectMenu();
 
@@ -41,7 +41,9 @@ public class ServerApplication implements CommandLineRunner {
         if (isValid) {
             System.out.println("Login Successful !");
             if (AppUserRole.equals("admin")) {
-                cc = ctx.getBean("dashboard", AdminDashboard.class);
+                cc = ctx.getBean(AdminDashboard.class);
+            } else if(AppUserRole.equals("student")){
+                cc = ctx.getBean(StudentDashboard.class);
             }
             cc.dashboard();
         } else {

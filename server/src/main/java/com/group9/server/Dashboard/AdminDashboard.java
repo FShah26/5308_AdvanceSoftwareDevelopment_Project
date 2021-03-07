@@ -12,7 +12,7 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
-    IAdminInputValidator inputValidator;
+    InputValidator inputValidator;
     @Autowired
     public AdminDashboard() {
         this.inputValidator = new AdminInputValidator();

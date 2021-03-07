@@ -1,10 +1,9 @@
 package com.group9.server.cnfg;
 
-import com.group9.server.Dashboard.AdminDashboard;
+import com.group9.server.Dashboard.*;
 import com.group9.server.HomePage.ApplicationHome;
 import com.group9.server.UserCreation.AddUser;
 import com.group9.server.Login.adminImpl;
-import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Login.IValidateAddUser;
 import com.group9.server.CourseCreation.ValidateCourseCreation;
 import com.group9.server.UserCreation.AddUserPersistence;
@@ -37,10 +36,6 @@ public class HomePageConfiguration {
         return new adminImpl();
     }
 
-    @Bean
-    public IDashboard dashboard(){
-        return new AdminDashboard();
-    }
     @Bean
     public IValidateAddUser validateAddUser(){
         return new ValidateAddUser();
