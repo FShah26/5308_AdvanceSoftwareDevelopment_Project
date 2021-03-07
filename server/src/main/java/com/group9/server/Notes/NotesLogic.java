@@ -23,11 +23,13 @@ public class NotesLogic implements INotesLogic {
         try {
             ResultSet set = persistence.fetchNotes(studentID, courseID);
 
-            while (set.next()) {
-                subjectNotes.notes.add(set.getString(1));
+            if(set != null){
+                while (set.next()) {
+                    subjectNotes.notes.add(set.getString(1));
+                }
             }
-
             return subjectNotes;
+
         } catch (SQLException throwables) {
             System.out.println("Fetching Notes Failed");
             throwables.printStackTrace();

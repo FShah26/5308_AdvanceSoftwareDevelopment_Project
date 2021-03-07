@@ -31,7 +31,8 @@ public class StudentNotes implements IStudentNotes {
 
     @Override
     public void addNotes(String studentID, String courseID, String notes) {
-        System.out.println(notesLogic.addNotes(studentID, courseID, notes));
+        String message = notesLogic.addNotes(studentID, courseID, notes);
+        System.out.println(message);
     }
 
     public String getCourseInput() {
