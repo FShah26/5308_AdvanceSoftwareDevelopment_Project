@@ -5,14 +5,10 @@ import com.group9.server.HomePage.ApplicationHome;
 import com.group9.server.UserCreation.AddUser;
 import com.group9.server.Login.adminImpl;
 import com.group9.server.Dashboard.IDashboard;
-import com.group9.server.Login.IValidateAddUser;
+import com.group9.server.UserCreation.IValidateAddUser;
 import com.group9.server.CourseCreation.ValidateCourseCreation;
-import com.group9.server.UserCreation.AddUserPersistence;
-import com.group9.server.UserCreation.IAddUserPersistence;
-import com.group9.server.UserCreation.AddUserLogic;
-import com.group9.server.UserCreation.IAddUserLogic;
 import com.group9.server.CourseCreation.IValidate;
-import com.group9.server.Login.ValidateAddUser;
+import com.group9.server.UserCreation.ValidateAddUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -41,10 +37,10 @@ public class HomePageConfiguration {
     public IDashboard dashboard(){
         return new AdminDashboard();
     }
-    @Bean
-    public IValidateAddUser validateAddUser(){
-        return new ValidateAddUser();
-    }
+    //@Bean
+    //public IValidateAddUser validateAddUser(){
+      //  return new ValidateAddUser();
+    //}
     @Bean
     public IValidate validate(){
         return new ValidateCourseCreation();

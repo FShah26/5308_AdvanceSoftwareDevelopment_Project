@@ -1,7 +1,6 @@
 package com.group9.server.UserCreation;
 
 import com.group9.server.Dashboard.IAdminInputValidator;
-import com.group9.server.Login.IValidateAddUser;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;

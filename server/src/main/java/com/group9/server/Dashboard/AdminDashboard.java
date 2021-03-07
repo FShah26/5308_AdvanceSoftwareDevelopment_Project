@@ -1,6 +1,7 @@
 package com.group9.server.Dashboard;
 
 import com.group9.server.CourseCreation.CreateCourse;
+import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class AdminDashboard implements IDashboard {
     CreateCourse cc;
     @Autowired
     AddUser ac;
+    @Autowired
+    EnrollStudent es;
 
     @Override
     public void dashboard(){
@@ -51,6 +54,9 @@ public class AdminDashboard implements IDashboard {
             }
             else if(selection.equals("2")) {
                 ac.creation();
+            }
+            else if(selection.equals("3")){
+                es.creation();
             }
             else{
                 System.out.println("Yet to develop..");
