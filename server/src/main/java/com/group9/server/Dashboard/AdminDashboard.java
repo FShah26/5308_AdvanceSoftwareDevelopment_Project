@@ -22,8 +22,6 @@ public class AdminDashboard implements IDashboard {
     CreateCourse cc;
     @Autowired
     AddUser ac;
-    @Autowired
-    IAnnouncementInput ai;
 
     @Override
     public void dashboard(){
@@ -54,9 +52,6 @@ public class AdminDashboard implements IDashboard {
             }
             else if(selection.equals("2")) {
                 ac.creation();
-            }
-            else if(selection.equals("4")) {
-                ai.make_announcement();
             }
             else{
                 System.out.println("Yet to develop..");
