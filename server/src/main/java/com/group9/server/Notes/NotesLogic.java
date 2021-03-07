@@ -39,9 +39,9 @@ public class NotesLogic implements INotesLogic {
     @Override
     public String addNotes(String studentID, String courseID, String notes) {
         String message = "";
-        try{
+        try {
             message = persistence.insertNotes(studentID, courseID, notes);
-        }catch (SQLException exception){
+        } catch (SQLException exception) {
             System.out.println("Adding notes failed");
             exception.printStackTrace();
         }

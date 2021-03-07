@@ -66,7 +66,7 @@ public class StudentDashboard implements IDashboard {
                     course = notes.getCourseInput();
                     String text = notes.getNotesText();
 
-                    notes.addNotes(username,course, text);
+                    notes.addNotes(username, course, text);
                     break;
 
                 default:

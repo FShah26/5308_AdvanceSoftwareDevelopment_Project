@@ -16,16 +16,16 @@ public class AdminDashboard implements IDashboard {
 
     InputValidator inputValidator;
     @Autowired
-    public AdminDashboard() {
-        this.inputValidator = new AdminInputValidator();
-    }
-    @Autowired
     CreateCourse cc;
     @Autowired
     AddUser ac;
+    @Autowired
+    public AdminDashboard() {
+        this.inputValidator = new AdminInputValidator();
+    }
 
     @Override
-    public void dashboard(){
+    public void dashboard() {
 
         System.out.println("************************************************");
         System.out.println("                 ADMIN DASHBOARD                ");
@@ -51,24 +51,22 @@ public class AdminDashboard implements IDashboard {
         checkinput(menuOption);
     }
 
-    public void checkinput(String selection){
+    public void checkinput(String selection) {
         if (this.inputValidator.validate(selection)) {
-            if(selection.equals("1")){
+            if (selection.equals("1")) {
                 cc.creation();
-            }
-            else if(selection.equals("2")) {
+            } else if (selection.equals("2")) {
                 ac.creation();
-            }
-            else{
+            } else {
                 System.out.println("Yet to develop..");
             }
-        }
-        else {
+        } else {
             displayInvalidMenuOptionMsg();
             selectMenu();
         }
     }
-    public void displayInvalidMenuOptionMsg(){
+
+    public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from menu.");
     }
 }
