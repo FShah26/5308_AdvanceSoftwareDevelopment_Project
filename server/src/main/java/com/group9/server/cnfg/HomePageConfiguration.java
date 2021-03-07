@@ -1,23 +1,23 @@
 package com.group9.server.cnfg;
 
-import com.group9.server.Modules.Implementation.*;
-import com.group9.server.Modules.Interface.IDashboard;
-import com.group9.server.UserInputValidations.Interface.IValidateAddUser;
-import com.group9.server.UserInputValidations.Validators.ValidateCourseCreation;
-import com.group9.server.dao.Impl.AddUserDao;
-import com.group9.server.dao.Impl.CourseDao;
-import com.group9.server.dao.Interface.IAddUserDao;
-import com.group9.server.services.Implementation.AddUserService;
-import com.group9.server.services.Interface.IAddUserService;
-import com.group9.server.UserInputValidations.Interface.IValidate;
-import com.group9.server.UserInputValidations.Validators.ValidateAddUser;
-import com.group9.server.dao.Interface.ICourseDao;
+import com.group9.server.Dashboard.AdminDashboard;
+import com.group9.server.HomePage.ApplicationHome;
+import com.group9.server.UserCreation.AddUser;
+import com.group9.server.Login.AdminImpl;
+import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.Login.IValidateAddUser;
+import com.group9.server.CourseCreation.ValidateCourseCreation;
+import com.group9.server.UserCreation.AddUserDao;
+import com.group9.server.UserCreation.IAddUserDao;
+import com.group9.server.UserCreation.AddUserService;
+import com.group9.server.UserCreation.IAddUserService;
+import com.group9.server.CourseCreation.IValidate;
+import com.group9.server.Login.ValidateAddUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import com.group9.server.services.Interface.ICourseService;
-import com.group9.server.services.Implementation.CourseService;
+
 @ComponentScan(basePackages = "com.group9.server.*")
 @Configuration
 @PropertySource("classpath:JDBC.properties")

@@ -1,6 +1,6 @@
 package com.group9.server.Announcements;
 
-import com.group9.server.Modules.Interface.IDashboard;
+import com.group9.server.Dashboard.IDashboard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
