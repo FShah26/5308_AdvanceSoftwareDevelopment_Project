@@ -31,12 +31,19 @@ public class StudentNotes implements IStudentNotes {
 
     @Override
     public void addNotes(String studentID, String courseID, String notes) {
-        notesLogic.addNotes(studentID, courseID, notes);
+        System.out.println(notesLogic.addNotes(studentID, courseID, notes));
     }
 
-    public String getCourseInput(){
+    public String getCourseInput() {
         System.out.println("Enter the course ID:");
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String getNotesText() {
+        System.out.println("Enter the text for the notes: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 }

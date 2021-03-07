@@ -6,4 +6,6 @@ public interface IStudentNotes {
     void addNotes(String studentID, String courseID, String notes);
 
     String getCourseInput();
+
+    String getNotesText();
 }

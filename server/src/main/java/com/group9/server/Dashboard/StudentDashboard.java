@@ -53,20 +53,26 @@ public class StudentDashboard implements IDashboard {
     }
 
     public void checkInput(String selection) {
+        String course;
+
         if (this.validator.validate(selection)) {
             switch (selection) {
                 case "4":
-                    String course = notes.getCourseInput();
+                    course = notes.getCourseInput();
                     notes.viewNotes(username, course);
                     break;
 
                 case "5":
-                    out.println("Add Notes");
+                    course = notes.getCourseInput();
+                    String text = notes.getNotesText();
+
+                    notes.addNotes(username,course, text);
                     break;
 
                 default:
                     out.println("Coming up!");
             }
+            dashboard();
         } else {
             displayInvalidMenuOptionMsg();
             selectMenu();

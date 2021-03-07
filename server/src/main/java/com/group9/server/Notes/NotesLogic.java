@@ -9,10 +9,10 @@ import java.sql.SQLException;
 @Component
 public class NotesLogic implements INotesLogic {
 
-    NotesPersistence persistence;
+    INotesPersistence persistence;
 
     @Autowired
-    public NotesLogic(NotesPersistence persistence) {
+    public NotesLogic(INotesPersistence persistence) {
         this.persistence = persistence;
     }
 
@@ -37,7 +37,14 @@ public class NotesLogic implements INotesLogic {
     }
 
     @Override
-    public void addNotes(String studentID, String courseID, String notes) {
-
+    public String addNotes(String studentID, String courseID, String notes) {
+        String message = "";
+        try{
+            message = persistence.insertNotes(studentID, courseID, notes);
+        }catch (SQLException exception){
+            System.out.println("Adding notes failed");
+            exception.printStackTrace();
+        }
+        return message;
     }
 }

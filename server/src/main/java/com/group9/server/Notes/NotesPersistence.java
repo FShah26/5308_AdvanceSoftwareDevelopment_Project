@@ -28,7 +28,14 @@ public class NotesPersistence implements INotesPersistence {
     }
 
     @Override
-    public void insertNotes(String studentID, String courseID, String notes) {
+    public String insertNotes(String studentID, String courseID, String notes) throws SQLException {
+        CallableStatement statement = con.prepareCall("{call add_notes(?, ?, ?, ?)}");
+        statement.registerOutParameter(4, Types.VARCHAR);
+        statement.setString(1, studentID);
+        statement.setString(2, courseID);
+        statement.setString(3, notes);
+        statement.execute();
 
+        return statement.getString("message");
     }
 }
