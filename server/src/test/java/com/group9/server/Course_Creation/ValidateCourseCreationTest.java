@@ -1,6 +1,6 @@
 package com.group9.server.Course_Creation;
 
-import com.group9.server.UserInputValidations.Validators.ValidateCourseCreation;
+import com.group9.server.CourseCreation.ValidateCourseCreation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

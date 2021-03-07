@@ -1,22 +1,23 @@
 package com.group9.server.cnfg;
 
-import com.group9.server.Modules.Implementation.*;
-import com.group9.server.UserInputValidations.Interface.IValidateAddUser;
-import com.group9.server.UserInputValidations.Validators.ValidateCourseCreation;
-import com.group9.server.dao.Impl.AddUserDao;
-import com.group9.server.dao.Impl.CourseDao;
-import com.group9.server.dao.Interface.IAddUserDao;
-import com.group9.server.services.Implementation.AddUserService;
-import com.group9.server.services.Interface.IAddUserService;
-import com.group9.server.UserInputValidations.Interface.IValidate;
-import com.group9.server.UserInputValidations.Validators.ValidateAddUser;
-import com.group9.server.dao.Interface.ICourseDao;
+import com.group9.server.Dashboard.AdminDashboard;
+import com.group9.server.HomePage.ApplicationHome;
+import com.group9.server.UserCreation.AddUser;
+import com.group9.server.Login.adminImpl;
+import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.Login.IValidateAddUser;
+import com.group9.server.CourseCreation.ValidateCourseCreation;
+import com.group9.server.UserCreation.AddUserPersistence;
+import com.group9.server.UserCreation.IAddUserPersistence;
+import com.group9.server.UserCreation.AddUserLogic;
+import com.group9.server.UserCreation.IAddUserLogic;
+import com.group9.server.CourseCreation.IValidate;
+import com.group9.server.Login.ValidateAddUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import com.group9.server.services.Interface.ICourseService;
-import com.group9.server.services.Implementation.CourseService;
+
 @ComponentScan(basePackages = "com.group9.server.*")
 @Configuration
 @PropertySource("classpath:JDBC.properties")
@@ -26,22 +27,18 @@ public class HomePageConfiguration {
     public ApplicationHome appHome(){
         return new ApplicationHome();
     }
-   // @Bean
 
-    //public CreateCourse create(){
-      //  return new CreateCourse();
-    //}
     @Bean
     public AddUser add_user(){
         return new AddUser();
     }
     @Bean
-    public AdminImpl admin() {
-        return new AdminImpl();
+    public adminImpl admin() {
+        return new adminImpl();
     }
 
     @Bean
-    public AdminDashboard dashboard(){
+    public IDashboard dashboard(){
         return new AdminDashboard();
     }
     @Bean
@@ -52,28 +49,4 @@ public class HomePageConfiguration {
     public IValidate validate(){
         return new ValidateCourseCreation();
     }
-
-   // @Bean
-    //public ICourseService Create_Course(){
-    //    return new CourseService();
-    //}
-
-   // @Bean
-   // public ICourseDao CreateCourses(){
-     //   return new CourseDao();
-    //}
-
-    @Bean
-    public IAddUserService Add_User(){
-        return new AddUserService();
-    }
-
-    @Bean
-    public IAddUserDao AddUser(){
-        return new AddUserDao();
-    }
-
-
-
-
 }

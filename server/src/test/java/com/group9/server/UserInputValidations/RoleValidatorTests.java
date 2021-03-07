@@ -1,7 +1,6 @@
 package com.group9.server.UserInputValidations;
 
-import com.group9.server.UserInputValidations.Interface.IUserInputValidator;
-import com.group9.server.UserInputValidations.Validators.RoleValidator;
+import com.group9.server.Login.RoleValidator;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.TestComponent;
 
