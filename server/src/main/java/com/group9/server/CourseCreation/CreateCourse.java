@@ -22,7 +22,7 @@ public class CreateCourse {
     }
 
     @Autowired
-    ICourseService courseService;
+    ICourseLogic courseService;
     String course_id;
     String course_name;
     String course_credit;
@@ -62,7 +62,7 @@ public class CreateCourse {
             String output = validate.validate_input(course_id, course_credit, course_faculty);
 
             if (output.equals("true")) {
-                courseService.Create_Courses(course_id, course_name, course_credit, course_faculty, course_Department);
+                courseService.courseCreate(course_id, course_name, course_credit, course_faculty, course_Department);
             } else
                 System.out.println(output);
         }

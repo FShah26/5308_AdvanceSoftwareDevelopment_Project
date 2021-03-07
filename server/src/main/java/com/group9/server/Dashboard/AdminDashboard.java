@@ -38,10 +38,10 @@ public class AdminDashboard implements IDashboard {
         System.out.println("Press 4 --> Making General Announcement.");
         System.out.println("Press 5 --> To Log Out.");
         System.out.println();
-        SelectMenu();
+        selectMenu();
     }
 
-    public void SelectMenu() {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkinput(menuOption);
@@ -64,7 +64,7 @@ public class AdminDashboard implements IDashboard {
         }
         else {
             displayInvalidMenuOptionMsg();
-            SelectMenu();
+            selectMenu();
         }
     }
     public void displayInvalidMenuOptionMsg(){

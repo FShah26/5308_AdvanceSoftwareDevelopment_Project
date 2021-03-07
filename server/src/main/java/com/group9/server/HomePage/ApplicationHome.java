@@ -20,7 +20,7 @@ public class ApplicationHome implements IHomePage {
     }
 
     @Override
-    public void GetMenu() {
+    public void getMenu() {
         out.println("Welcome to the Course Management System");
         out.println("Please choose your category:");
         out.println("1 -> Admin");
@@ -31,10 +31,10 @@ public class ApplicationHome implements IHomePage {
     }
 
     @Override
-    public String SelectMenu() {
+    public String selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
-        ValidateSelectedMenuOption(menuOption);
+        validateSelectedMenuOption(menuOption);
         switch (menuOption.trim()) {
             case "1":
                 return "admin";
@@ -48,10 +48,10 @@ public class ApplicationHome implements IHomePage {
     }
 
     @Override
-    public void ValidateSelectedMenuOption(String menuOption) {
+    public void validateSelectedMenuOption(String menuOption) {
         if (!this.inputValidator.validate(menuOption)) {
             displayInvalidMenuOptionMsg();
-            SelectMenu();
+            selectMenu();
         }
     }
 

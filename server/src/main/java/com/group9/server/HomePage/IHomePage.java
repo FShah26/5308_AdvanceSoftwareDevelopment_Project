@@ -1,9 +1,9 @@
 package com.group9.server.HomePage;
 
 public interface IHomePage {
-    void GetMenu();
+    void getMenu();
 
-    String SelectMenu();
+    String selectMenu();
 
-    void ValidateSelectedMenuOption(String menuOption);
+    void validateSelectedMenuOption(String menuOption);
 }

@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 @Component
-public class UserAuthenticationService implements IUserAuthService {
+public class UserAuthenticationLogic implements IUserAuthLogic {
 
     @Autowired
-    IUserAuthDao userAuthenticationDAO;
+    IUserAuthPersistence userAuthenticationDAO;
     private String username;
     private String password;
 
@@ -30,8 +30,8 @@ public class UserAuthenticationService implements IUserAuthService {
     }
 
     @Override
-    public boolean ValidateUserCredentials(String uname, String pass, String role) {
+    public boolean validateUserCredentials(String uname, String pass, String role) {
         System.out.println("Validating Credentials...");
-        return userAuthenticationDAO.AuthorizeUser(uname, pass, role);
+        return userAuthenticationDAO.authorizeUser(uname, pass, role);
     }
 }

@@ -21,7 +21,7 @@ public class AddUser {
     }
 
     @Autowired
-    IAddUserService addUserService;
+    IAddUserLogic addUserService;
     String id;
     String userid;
     String password;
@@ -44,21 +44,21 @@ public class AddUser {
 
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");
-        SelectMenu();
+        selectMenu();
 
     }
 
-    public void SelectMenu() {
+    public void selectMenu() {
         String menuOption = sc.nextLine();
-        ValidateInput(menuOption);
+        validateInput(menuOption);
     }
 
-    public void ValidateInput(String input) {
+    public void validateInput(String input) {
         if (this.inputValidator.validate(input)) {
             String output = validate.validate_input(id, userid, password, user_type);
 
             if (output.equals("true")) {
-                addUserService.AddUser(id, userid, password, user_type);
+                addUserService.addUser(id, userid, password, user_type);
             } else
                 System.out.println(output);
         }

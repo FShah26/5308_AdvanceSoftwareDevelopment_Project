@@ -32,11 +32,11 @@ public class ServerApplication implements CommandLineRunner {
         ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
 
         homePage = ctx.getBean("appHome", IHomePage.class);
-        homePage.GetMenu();
-        AppUserRole = homePage.SelectMenu();
+        homePage.getMenu();
+        AppUserRole = homePage.selectMenu();
 
         appUser = ctx.getBean(AppUserRole, IUser.class);
-        boolean isValid = appUser.AuthorizeUser();
+        boolean isValid = appUser.authorizeUser();
         if (isValid) {
             System.out.println("Login Successful !");
             if(AppUserRole.equals("admin")){

@@ -4,25 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
-public class AdminImpl implements IUser {
+public class adminImpl implements IUser {
 
     @Autowired
-    IUserAuthService userAuthService;
+    IUserAuthLogic userAuthService;
     private String Username;
     private String Password;
     private final String Role;
 
     @Autowired
-    public AdminImpl() {
+    public adminImpl() {
         this.Role = "admin";
     }
 
 
     @Override
-    public boolean AuthorizeUser() {
+    public boolean authorizeUser() {
         ArrayList<String> cred = new ArrayList<String>();
         cred = userAuthService.getUserCredentials();
-        boolean isValid = userAuthService.ValidateUserCredentials(cred.get(0), cred.get(1), this.Role);
+        boolean isValid = userAuthService.validateUserCredentials(cred.get(0), cred.get(1), this.Role);
         return isValid;
 
     }
