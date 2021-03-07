@@ -19,7 +19,7 @@ public class ServerApplication implements CommandLineRunner {
 
     String AppUserRole;
     IUserAuthLogic authLogic;
-    IDashboard cc;
+    IDashboard dashboard;
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
@@ -29,7 +29,6 @@ public class ServerApplication implements CommandLineRunner {
     public void run(String[] args) {
 
         IHomePage homePage;
-        IUser appUser;
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
         authLogic = ctx.getBean(UserAuthenticationLogic.class);
         homePage = ctx.getBean("appHome", IHomePage.class);
@@ -41,11 +40,13 @@ public class ServerApplication implements CommandLineRunner {
         if (isValid) {
             System.out.println("Login Successful !");
             if (AppUserRole.equals("admin")) {
-                cc = ctx.getBean(AdminDashboard.class);
+                dashboard = ctx.getBean(AdminDashboard.class);
             } else if(AppUserRole.equals("student")){
-                cc = ctx.getBean(StudentDashboard.class);
+                dashboard = ctx.getBean(StudentDashboard.class);
             }
-            cc.dashboard();
+            dashboard.setUsername(authLogic.getUsername());
+            dashboard.dashboard();
+
         } else {
             System.out.println("Invalid username or password!");
             System.out.println("Please enter correct credentials.");

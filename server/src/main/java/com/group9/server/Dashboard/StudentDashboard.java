@@ -12,6 +12,7 @@ import static java.lang.System.out;
 public class StudentDashboard implements IDashboard {
     InputValidator validator;
     IStudentNotes notes;
+    private String username;
 
     @Autowired
     public StudentDashboard(InputValidator validator, IStudentNotes notes) {
@@ -39,6 +40,11 @@ public class StudentDashboard implements IDashboard {
         selectMenu();
     }
 
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
@@ -50,7 +56,7 @@ public class StudentDashboard implements IDashboard {
         if (this.validator.validate(selection)) {
             switch (selection) {
                 case "4":
-                    notes.viewNotes("hashik", "LJJSKDFJ");
+                    notes.viewNotes(username, "LJJSKDFJ");
                     break;
 
                 case "5":

@@ -12,6 +12,8 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
+    String username;
+
     InputValidator inputValidator;
     @Autowired
     public AdminDashboard() {
@@ -36,6 +38,11 @@ public class AdminDashboard implements IDashboard {
         System.out.println("Press 5 --> To Log Out.");
         System.out.println();
         selectMenu();
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void selectMenu() {

@@ -8,4 +8,6 @@ public interface IUserAuthLogic {
     ArrayList<String> getUserCredentials();
 
     boolean validateUserCredentials(String uname, String pass, String role);
+
+    String getUsername();
 }

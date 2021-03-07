@@ -41,4 +41,9 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
         System.out.println("Validating Credentials...");
         return userAuthPersistence.authorizeUser(uname, pass, role);
     }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
 }
