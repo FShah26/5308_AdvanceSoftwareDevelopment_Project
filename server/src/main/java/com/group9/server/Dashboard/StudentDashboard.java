@@ -23,11 +23,15 @@ public class StudentDashboard implements IDashboard {
         System.out.println("               STUDENT DASHBOARD                ");
         System.out.println("************************************************");
 
-        System.out.println("Press 1 --> Add Notes");
-        System.out.println("Press 2 --> View Notes");
-        System.out.println("Press 3 --> ");
-        System.out.println("Press 4 --> ");
-        System.out.println("Press 5 --> To Log Out.");
+        System.out.println("Press 1 --> Notifications");
+        System.out.println("Press 2 --> Up-coming lectures");
+        System.out.println("Press 3 --> Announcements");
+        System.out.println("Press 4 --> View Notes");
+        System.out.println("Press 5 --> Add Notes");
+        System.out.println("Press 6 --> Attendance");
+        System.out.println("Press 7 --> Request Meeting");
+        System.out.println("Press 8 --> Send Feedback");
+        System.out.println("Press 9 --> Tests");
         System.out.println();
         selectMenu();
     }

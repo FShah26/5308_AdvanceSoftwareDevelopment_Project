@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class StudentValidator implements InputValidator{
 
-    static final String regexForValidation = "^\\s*([1-2])\\s*$";
+    static final String regexForValidation = "^\\s*([1-9])\\s*$";
 
     @Override
     public boolean validate(String userInput) {
