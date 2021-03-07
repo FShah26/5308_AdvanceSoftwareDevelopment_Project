@@ -3,6 +3,8 @@ package com.group9.server.Notes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Scanner;
+
 @Component
 public class StudentNotes implements IStudentNotes {
     INotesLogic notesLogic;
@@ -30,5 +32,11 @@ public class StudentNotes implements IStudentNotes {
     @Override
     public void addNotes(String studentID, String courseID, String notes) {
         notesLogic.addNotes(studentID, courseID, notes);
+    }
+
+    public String getCourseInput(){
+        System.out.println("Enter the course ID:");
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 }
