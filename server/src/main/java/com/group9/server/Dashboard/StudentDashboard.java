@@ -1,5 +1,7 @@
 package com.group9.server.Dashboard;
 
+import com.group9.server.Notes.IStudentNotes;
+import com.group9.server.Notes.StudentNotes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +12,12 @@ import static java.lang.System.out;
 @Component
 public class StudentDashboard implements IDashboard {
     InputValidator validator;
+    IStudentNotes notes;
 
     @Autowired
-    public StudentDashboard(InputValidator validator) {
+    public StudentDashboard(InputValidator validator, IStudentNotes notes) {
         this.validator = validator;
+        this.notes = notes;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class StudentDashboard implements IDashboard {
         if (this.validator.validate(selection)) {
             switch (selection){
                 case "4":
-                    out.println("View Notes");
+                    notes.viewNotes("hashik", "CSCI123");
                     break;
 
                 case "5":

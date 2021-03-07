@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StudentNotes implements IStudentNotes{
-    @Autowired
     INotesLogic notesLogic;
 
     @Autowired

@@ -21,7 +21,6 @@ public class NotesPersistence implements INotesPersistence{
     @Override
     public void fetchNotes(String studentID, String courseID) throws SQLException {
         CallableStatement statement = con.prepareCall("{call fetch_notes(?, ?)}");
-        statement.registerOutParameter(4, Types.VARCHAR);
         statement.setString(1, studentID);
         statement.setString(2, courseID);
         ResultSet set = statement.executeQuery();
