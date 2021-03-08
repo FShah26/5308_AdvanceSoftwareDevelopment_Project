@@ -1,6 +1,5 @@
 package com.group9.server.Login;
 
-import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,6 +1,7 @@
 package com.group9.server.StudentCourseEnrollment;
 
-import com.group9.server.Dashboard.IAdminInputValidator;
+import com.group9.server.Dashboard.AdminInputValidator;
+import com.group9.server.Dashboard.InputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,20 +15,18 @@ public class EnrollStudent {
     @Autowired
     IValidateEnrollStudent validate;
 
-    IAdminInputValidator inputValidator;
-
-
-    public EnrollStudent() {
-        this.inputValidator = new AdminEnrollStudentConfirm();
-    }
-
+    InputValidator inputValidator;
     @Autowired
     IEnrollStudentLogic enrollstudent;
     String userId;
     String courseId;
     String Term;
-
     Scanner sc;
+
+    public EnrollStudent() {
+        this.inputValidator = new AdminInputValidator();
+    }
+
     public void creation() {
         System.out.println("**********************************************************");
         System.out.println("      ENTER DETAILS TO ENROLL NEW STUDENT TO A COURSE     ");
@@ -59,14 +58,13 @@ public class EnrollStudent {
                 enrollstudent.enrollStudent(userId, courseId, Term);
             } else
                 System.out.println(output);
-        }
-        else
-        {
+        } else {
             displayInvalidMenuOptionMsg();
             creation();
         }
     }
-    public void displayInvalidMenuOptionMsg(){
+
+    public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from above menu.");
     }
 

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class adminImpl implements IUser {
 
+    private final String Role;
     @Autowired
     IUserAuthLogic userAuthService;
     private String Username;
     private String Password;
-    private final String Role;
 
     @Autowired
     public adminImpl() {
