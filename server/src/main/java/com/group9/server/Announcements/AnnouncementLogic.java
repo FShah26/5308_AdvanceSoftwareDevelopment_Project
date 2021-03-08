@@ -11,10 +11,15 @@ public class AnnouncementLogic implements IAnnouncementLogic {
     @Autowired
     IAnnouncementPersistence persist;
     @Override
-    public String make_announcement(String user_name,String message) {
+    public String make_announcement(String user_role,String message) {
         String output;
        if(validate.validate_announcement(message)){
-           output=persist.InsertAnnouncement(user_name,message);
+           try {
+               output = persist.InsertAnnouncement(user_role, message);
+           }
+           catch(Exception ex){
+               output ="Failed to make announcement";
+           }
        }
        else
        {
