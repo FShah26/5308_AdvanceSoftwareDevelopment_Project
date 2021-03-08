@@ -1,10 +1,10 @@
 package com.group9.server;
 
 import com.group9.server.Dashboard.AdminDashboard;
+import com.group9.server.Dashboard.FacultyDashboard;
 import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.StudentDashboard;
 import com.group9.server.HomePage.IHomePage;
-import com.group9.server.Login.IUser;
 import com.group9.server.Login.IUserAuthLogic;
 import com.group9.server.Login.UserAuthenticationLogic;
 import com.group9.server.cnfg.HomePageConfiguration;
@@ -43,6 +43,9 @@ public class ServerApplication implements CommandLineRunner {
                 dashboard = ctx.getBean(AdminDashboard.class);
             } else if(AppUserRole.equals("student")){
                 dashboard = ctx.getBean(StudentDashboard.class);
+            }
+            else if(AppUserRole.equals("faculty")){
+                dashboard = ctx.getBean(FacultyDashboard.class);
             }
             dashboard.setUsername(authLogic.getUsername());
             dashboard.dashboard();
