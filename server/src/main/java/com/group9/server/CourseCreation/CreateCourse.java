@@ -1,6 +1,6 @@
 package com.group9.server.CourseCreation;
 
-import com.group9.server.Dashboard.IAdminInputValidator;
+import com.group9.server.Dashboard.InputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class CreateCourse {
     @Autowired
     IValidate validate;
 
-    IAdminInputValidator inputValidator;
+    InputValidator inputValidator;
 
 
     public CreateCourse() {

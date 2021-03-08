@@ -12,18 +12,20 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
-    IAdminInputValidator inputValidator;
-    @Autowired
-    public AdminDashboard() {
-        this.inputValidator = new AdminInputValidator();
-    }
+    String username;
+
+    InputValidator inputValidator;
     @Autowired
     CreateCourse cc;
     @Autowired
     AddUser ac;
+    @Autowired
+    public AdminDashboard() {
+        this.inputValidator = new AdminInputValidator();
+    }
 
     @Override
-    public void dashboard(){
+    public void dashboard() {
 
         System.out.println("************************************************");
         System.out.println("                 ADMIN DASHBOARD                ");
@@ -38,30 +40,33 @@ public class AdminDashboard implements IDashboard {
         selectMenu();
     }
 
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkinput(menuOption);
     }
 
-    public void checkinput(String selection){
+    public void checkinput(String selection) {
         if (this.inputValidator.validate(selection)) {
-            if(selection.equals("1")){
+            if (selection.equals("1")) {
                 cc.creation();
-            }
-            else if(selection.equals("2")) {
+            } else if (selection.equals("2")) {
                 ac.creation();
-            }
-            else{
+            } else {
                 System.out.println("Yet to develop..");
             }
-        }
-        else {
+        } else {
             displayInvalidMenuOptionMsg();
             selectMenu();
         }
     }
-    public void displayInvalidMenuOptionMsg(){
+
+    public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from menu.");
     }
 }

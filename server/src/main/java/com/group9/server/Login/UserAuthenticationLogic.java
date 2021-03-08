@@ -4,15 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 @Component
 public class UserAuthenticationLogic implements IUserAuthLogic {
 
     @Autowired
-    IUserAuthPersistence userAuthenticationDAO;
+    IUserAuthPersistence userAuthPersistence;
     private String username;
     private String password;
+
+    @Override
+    public boolean initiateLogin(String userRole) {
+        List<String> credentials = getUserCredentials();
+        return validateUserCredentials(credentials.get(0), credentials.get(1), userRole);
+    }
 
     @Override
     public ArrayList<String> getUserCredentials() {
@@ -32,6 +39,11 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     @Override
     public boolean validateUserCredentials(String uname, String pass, String role) {
         System.out.println("Validating Credentials...");
-        return userAuthenticationDAO.authorizeUser(uname, pass, role);
+        return userAuthPersistence.authorizeUser(uname, pass, role);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 }
