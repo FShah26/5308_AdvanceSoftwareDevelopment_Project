@@ -2,9 +2,9 @@ package com.group9.server.cnfg;
 
 import com.group9.server.CourseCreation.IValidate;
 import com.group9.server.CourseCreation.ValidateCourseCreation;
+import com.group9.server.Dashboard.AdminDashboard;
+import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.HomePage.ApplicationHome;
-import com.group9.server.Login.IValidateAddUser;
-import com.group9.server.Login.ValidateAddUser;
 import com.group9.server.Login.adminImpl;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.context.annotation.Bean;
@@ -30,11 +30,6 @@ public class HomePageConfiguration {
     @Bean
     public adminImpl admin() {
         return new adminImpl();
-    }
-
-    @Bean
-    public IValidateAddUser validateAddUser() {
-        return new ValidateAddUser();
     }
 
     @Bean

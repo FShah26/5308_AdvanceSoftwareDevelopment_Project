@@ -1,6 +1,7 @@
 package com.group9.server.Dashboard;
 
 import com.group9.server.CourseCreation.CreateCourse;
+import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ public class AdminDashboard implements IDashboard {
     @Autowired
     AddUser ac;
     @Autowired
+    EnrollStudent es;
     public AdminDashboard() {
         this.inputValidator = new AdminInputValidator();
     }
@@ -57,6 +59,10 @@ public class AdminDashboard implements IDashboard {
                 cc.creation();
             } else if (selection.equals("2")) {
                 ac.creation();
+            }
+            else if(selection.equals("3")){
+                es.creation();
+
             } else {
                 System.out.println("Yet to develop..");
             }
