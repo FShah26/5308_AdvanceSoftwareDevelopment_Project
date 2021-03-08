@@ -1,5 +1,6 @@
 package com.group9.server.Dashboard;
 
+import com.group9.server.Announcements.IAnnouncementInput;
 import com.group9.server.CourseCreation.CreateCourse;
 import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
@@ -16,6 +17,8 @@ public class AdminDashboard implements IDashboard {
     String username;
 
     InputValidator inputValidator;
+    @Autowired
+    IAnnouncementInput announcement;
     @Autowired
     CreateCourse cc;
     @Autowired
@@ -62,8 +65,10 @@ public class AdminDashboard implements IDashboard {
             }
             else if(selection.equals("3")){
                 es.creation();
-
-            } else {
+            }
+            else if(selection.equals("4")){
+                    announcement.make_announcement("admin");}
+            else {
                 System.out.println("Yet to develop..");
             }
         } else {
