@@ -1,5 +1,6 @@
 package com.group9.server.cnfg;
 
+import com.group9.server.Announcements.IAnnouncementPersistence;
 import com.group9.server.CourseCreation.IValidate;
 import com.group9.server.CourseCreation.ValidateCourseCreation;
 import com.group9.server.Dashboard.AdminDashboard;
@@ -36,4 +37,5 @@ public class HomePageConfiguration {
     public IValidate validate() {
         return new ValidateCourseCreation();
     }
+
 }

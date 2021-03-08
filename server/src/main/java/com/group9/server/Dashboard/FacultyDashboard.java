@@ -12,35 +12,28 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class AdminDashboard implements IDashboard {
-
+public class FacultyDashboard implements IDashboard{
     String username;
 
     InputValidator inputValidator;
-    @Autowired
-    IAnnouncementInput announcement;
-    @Autowired
-    CreateCourse cc;
-    @Autowired
-    AddUser ac;
-    @Autowired
-    EnrollStudent es;
-    public AdminDashboard() {
-        this.inputValidator = new AdminInputValidator();
+
+    public FacultyDashboard() {
+        this.inputValidator = new FacultyValidator();
     }
 
     @Override
     public void dashboard() {
 
         System.out.println("************************************************");
-        System.out.println("                 ADMIN DASHBOARD                ");
+        System.out.println("               FACULTY DASHBOARD                ");
         System.out.println("************************************************");
 
-        System.out.println("Press 1 --> Enter Course and Assign Faculty.");
-        System.out.println("Press 2 --> Add New User.");
-        System.out.println("Press 3 --> Student Course Enrollment.");
-        System.out.println("Press 4 --> Making General Announcement.");
-        System.out.println("Press 5 --> To Log Out.");
+        System.out.println("Press 1 --> Notifications");
+        System.out.println("Press 2 --> Manage Lectures");
+        System.out.println("Press 3 --> Send Announcement");
+        System.out.println("Press 4 --> Manage Meetings");
+        System.out.println("Press 5 --> View Feedback");
+        System.out.println("Press 6 --> Log out");
         System.out.println();
         selectMenu();
     }
@@ -58,20 +51,9 @@ public class AdminDashboard implements IDashboard {
 
     public void checkinput(String selection) {
         if (this.inputValidator.validate(selection)) {
-            if (selection.equals("1")) {
-                cc.creation();
-            } else if (selection.equals("2")) {
-                ac.creation();
-            }
-            else if(selection.equals("3")){
-                es.creation();
-            }
-            else if(selection.equals("4")){
-                    announcement.make_announcement("admin");}
-            else {
-                System.out.println("Yet to develop..");
-            }
-        } else {
+          System.out.println("Yet to develop..");
+        }
+        else {
             displayInvalidMenuOptionMsg();
             selectMenu();
         }
