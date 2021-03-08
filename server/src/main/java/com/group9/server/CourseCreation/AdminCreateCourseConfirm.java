@@ -1,8 +1,8 @@
 package com.group9.server.CourseCreation;
 
-import com.group9.server.Dashboard.IAdminInputValidator;
+import com.group9.server.Dashboard.InputValidator;
 
-public class AdminCreateCourseConfirm implements IAdminInputValidator {
+public class AdminCreateCourseConfirm implements InputValidator {
 
     String regex;
 
