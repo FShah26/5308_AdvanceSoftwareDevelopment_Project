@@ -1,5 +1,10 @@
-package com.group9.server.Login;
+package com.group9.server.UserCreation;
 
+import com.group9.server.UserCreation.IValidateAddUser;
+import org.springframework.stereotype.Component;
+
+
+@Component
 public class ValidateAddUser implements IValidateAddUser {
 
     @Override
@@ -21,6 +26,7 @@ public class ValidateAddUser implements IValidateAddUser {
             System.out.println("PLEASE ENTER VALID USER_TYPE");
         } else
             output = "true";
+
 
         return output;
 
