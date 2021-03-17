@@ -2,6 +2,7 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Announcements.IAnnouncementInput;
 import com.group9.server.CourseCreation.CreateCourse;
+import com.group9.server.ManageLecture.IManageLecture;
 import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class FacultyDashboard implements IDashboard{
     String username;
 
     InputValidator inputValidator;
+    @Autowired
+    IManageLecture manageLecture;
 
     public FacultyDashboard() {
         this.inputValidator = new FacultyValidator();
@@ -51,7 +54,11 @@ public class FacultyDashboard implements IDashboard{
 
     public void checkinput(String selection) {
         if (this.inputValidator.validate(selection)) {
-          System.out.println("Yet to develop..");
+            if (selection.equals("2")) {
+                manageLecture.showManageLectureMenu(this.username);
+            } else {
+                System.out.println("Yet to develop...");
+            }
         }
         else {
             displayInvalidMenuOptionMsg();
