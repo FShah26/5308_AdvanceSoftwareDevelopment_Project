@@ -9,13 +9,13 @@ public class FetchAnnouncementsFromPersistenceTest {
     FetchAnnouncementsFromPersistence underTest;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         underTest = new FetchAnnouncementsImpl();
     }
 
     @Test
     @DisplayName("fetchAnnouncementsFromDatabaseTest")
-    public void fetchAnnouncementsFromDatabaseTest(){
+    public void fetchAnnouncementsFromDatabaseTest() {
         Assertions.assertNotNull(underTest.fetchAnnouncementsFromDatabase());
     }
 }

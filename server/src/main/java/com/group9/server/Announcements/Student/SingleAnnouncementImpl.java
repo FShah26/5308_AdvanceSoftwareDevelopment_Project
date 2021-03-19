@@ -1,6 +1,6 @@
 package com.group9.server.Announcements.Student;
 
-public class SingleAnnouncementImpl implements SingleAnnouncement{
+public class SingleAnnouncementImpl implements SingleAnnouncement {
     private String userID;
     private String announcement;
 

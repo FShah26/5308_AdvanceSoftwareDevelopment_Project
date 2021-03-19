@@ -7,7 +7,7 @@ public class SingleAnnouncementTest {
     SingleAnnouncement underTest;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         underTest = new SingleAnnouncementImpl();
     }
 
