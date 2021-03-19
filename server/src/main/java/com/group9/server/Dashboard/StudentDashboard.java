@@ -13,8 +13,8 @@ import static java.lang.System.out;
 public class StudentDashboard implements IDashboard {
     InputValidator validator;
     IStudentNotes notes;
-    private String username;
     IFeedback feedback;
+    private String username;
 
     @Autowired
     public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback) {
@@ -23,6 +23,7 @@ public class StudentDashboard implements IDashboard {
         this.feedback = feedback;
 
     }
+
     @Override
     public void dashboard() {
 
@@ -60,6 +61,9 @@ public class StudentDashboard implements IDashboard {
 
         if (this.validator.validate(selection)) {
             switch (selection) {
+                case "3":
+                    break;
+                    
                 case "4":
                     course = notes.getCourseInput();
                     notes.viewNotes(username, course);
