@@ -44,7 +44,7 @@ deploy:
     - echo "Starting the deploy script"
     - chmod og-rwx ${DEPLOY_SSH}
     - zip -v -r output_compressed.zip target
-    - scp -r -v -o StrictHostKeyChecking=no -i "${DEPLOY_SSH}" output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/${CI_COMMIT_REF_NAME}.zip"
+    - scp -r -v -o StrictHostKeyChecking=no -i "${DEPLOY_SSH}" output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/DeployMaster-${CI_COMMIT_SHORT_SHA}.zip"
     - echo "Deploy Success"
   tags:
     - ugrad
