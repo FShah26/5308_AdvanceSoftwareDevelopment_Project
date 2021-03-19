@@ -7,7 +7,7 @@ public class SingleAnnouncementImpl implements SingleAnnouncement {
     @Override
     public void printAnnouncement() {
         System.out.println(userID);
-        System.out.println("  Message: " + announcement +"\n");
+        System.out.println("  Message: " + announcement + "\n");
     }
 
     @Override
