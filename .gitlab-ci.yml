@@ -14,7 +14,7 @@ build:
     - mvn $MAVEN_CLI_OP compile
   artifacts:
     paths:
-      - target
+      - server/target
   tags:
     - ugrad
 
@@ -31,3 +31,22 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
+
+# Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
+deploy:
+  stage: deploy
+  image: maven:latest
+  before_script:
+    - "command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )"
+    - eval $(ssh-agent -s)
+  script:
+    - cd server
+    - echo "Starting the deploy script"
+    - chmod og-rwx ${DEPLOY_SSH}
+    - zip -v -r output_compressed.zip target
+    - scp -r -v -o StrictHostKeyChecking=no -i "${DEPLOY_SSH}" output_compressed.zip "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIR}/DeployMaster-${CI_COMMIT_SHORT_SHA}.zip"
+    - echo "Deploy Success"
+  tags:
+    - ugrad
+  only:
+    - master
