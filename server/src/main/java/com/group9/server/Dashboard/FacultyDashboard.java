@@ -1,9 +1,6 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.IAnnouncementInput;
-import com.group9.server.CourseCreation.CreateCourse;
-import com.group9.server.StudentCourseEnrollment.EnrollStudent;
-import com.group9.server.UserCreation.AddUser;
+import com.group9.server.Feedback.IFeedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,13 +9,15 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class FacultyDashboard implements IDashboard{
-    String username;
+public class FacultyDashboard implements IDashboard {
+    InputValidator validator;
+    IFeedback feedback;
+    private String username;
 
-    InputValidator inputValidator;
-
-    public FacultyDashboard() {
-        this.inputValidator = new FacultyValidator();
+    @Autowired
+    public FacultyDashboard(InputValidator validator, IFeedback feedback) {
+        this.validator = validator;
+        this.feedback = feedback;
     }
 
     @Override
@@ -50,8 +49,15 @@ public class FacultyDashboard implements IDashboard{
     }
 
     public void checkinput(String selection) {
-        if (this.inputValidator.validate(selection)) {
-          System.out.println("Yet to develop..");
+        if (this.validator.validate(selection)) {
+            switch (selection) {
+                case "5":
+                    feedback.viewFeedback(username);
+                    break;
+                default:
+                    System.out.println("Yet to develop..");
+        }
+        dashboard();
         }
         else {
             displayInvalidMenuOptionMsg();

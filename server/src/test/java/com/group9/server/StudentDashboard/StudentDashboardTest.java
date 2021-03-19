@@ -2,8 +2,10 @@ package com.group9.server.StudentDashboard;
 
 import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Dashboard.StudentDashboard;
+import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Notes.IStudentNotes;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 public class StudentDashboardTest {
@@ -11,11 +13,12 @@ public class StudentDashboardTest {
 
     InputValidator mockValidator = Mockito.mock(InputValidator.class);
     IStudentNotes mockStudentNotes = Mockito.mock(IStudentNotes.class);
+    IFeedback mockFeedback = Mockito.mock(IFeedback.class);
 
 
     @BeforeEach
     public void setUp() {
-        underTest = new StudentDashboard(mockValidator, mockStudentNotes);
+        underTest = new StudentDashboard(mockValidator, mockStudentNotes, mockFeedback);
         underTest.setUsername("hashik");
     }
 }

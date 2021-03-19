@@ -1,5 +1,6 @@
 package com.group9.server.Dashboard;
 
+import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Notes.IStudentNotes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,13 +14,15 @@ public class StudentDashboard implements IDashboard {
     InputValidator validator;
     IStudentNotes notes;
     private String username;
+    IFeedback feedback;
 
     @Autowired
-    public StudentDashboard(InputValidator validator, IStudentNotes notes) {
+    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback) {
         this.validator = validator;
         this.notes = notes;
-    }
+        this.feedback = feedback;
 
+    }
     @Override
     public void dashboard() {
 
@@ -67,6 +70,13 @@ public class StudentDashboard implements IDashboard {
                     String text = notes.getNotesText();
 
                     notes.addNotes(username, course, text);
+                    break;
+                case "8":
+                    String student_name = feedback.getStudentName();
+                    String fb = feedback.getFeedbackText();
+                    String faculty = feedback.getFacultyID();
+
+                    feedback.addFeedback(username, student_name, fb, faculty);
                     break;
 
                 default:

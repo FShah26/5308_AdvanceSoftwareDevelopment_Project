@@ -1,7 +1,5 @@
 package com.group9.server.StudentCourseEnrollment;
 
-import com.group9.server.CourseCreation.IValidate;
-import com.group9.server.StudentCourseEnrollment.IValidateEnrollStudent;
 import org.springframework.stereotype.Component;
 
 @Component

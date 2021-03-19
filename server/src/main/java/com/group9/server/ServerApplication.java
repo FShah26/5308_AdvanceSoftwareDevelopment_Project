@@ -41,7 +41,8 @@ public class ServerApplication implements CommandLineRunner {
             System.out.println("Login Successful !");
             if (AppUserRole.equals("admin")) {
                 dashboard = ctx.getBean(AdminDashboard.class);
-            } else if(AppUserRole.equals("student")){
+            }
+            else if(AppUserRole.equals("student")){
                 dashboard = ctx.getBean(StudentDashboard.class);
             }
             else if(AppUserRole.equals("faculty")){
