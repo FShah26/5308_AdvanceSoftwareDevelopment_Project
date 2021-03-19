@@ -49,4 +49,4 @@ deploy:
   tags:
     - ugrad
   only:
-    - master
+    - cd-test
