@@ -12,7 +12,7 @@ public class AnnouncementListImpl implements AnnouncementList {
 
     @Override
     public void printAllAnnouncements() {
-        System.out.println("User          Announcement");
+        System.out.println("============== Announcements ============== ");
         for (SingleAnnouncement announcement : announcementList) {
             announcement.printAnnouncement();
         }
