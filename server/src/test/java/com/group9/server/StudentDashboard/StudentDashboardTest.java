@@ -1,5 +1,6 @@
 package com.group9.server.StudentDashboard;
 
+import com.group9.server.Announcements.Student.ViewAnnouncements;
 import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Dashboard.StudentDashboard;
 import com.group9.server.Feedback.IFeedback;
@@ -14,11 +15,11 @@ public class StudentDashboardTest {
     InputValidator mockValidator = Mockito.mock(InputValidator.class);
     IStudentNotes mockStudentNotes = Mockito.mock(IStudentNotes.class);
     IFeedback mockFeedback = Mockito.mock(IFeedback.class);
-
+    ViewAnnouncements announcements = Mockito.mock(ViewAnnouncements.class);
 
     @BeforeEach
     public void setUp() {
-        underTest = new StudentDashboard(mockValidator, mockStudentNotes, mockFeedback);
+        underTest = new StudentDashboard(mockValidator, mockStudentNotes, mockFeedback, announcements);
         underTest.setUsername("hashik");
     }
 }
