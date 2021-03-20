@@ -7,6 +7,7 @@ import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -30,7 +31,7 @@ public class AdminDashboard implements IDashboard {
     }
 
     @Override
-    public void dashboard() {
+    public void dashboard() throws SQLException {
 
         System.out.println("************************************************");
         System.out.println("                 ADMIN DASHBOARD                ");
@@ -50,13 +51,13 @@ public class AdminDashboard implements IDashboard {
         this.username = username;
     }
 
-    public void selectMenu() {
+    public void selectMenu() throws SQLException {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkinput(menuOption);
     }
 
-    public void checkinput(String selection) {
+    public void checkinput(String selection) throws SQLException {
         if (this.inputValidator.validate(selection)) {
             if (selection.equals("1")) {
                 cc.creation();

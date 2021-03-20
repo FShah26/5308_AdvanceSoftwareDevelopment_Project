@@ -13,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.sql.SQLException;
+
 
 @SpringBootApplication
 public class ServerApplication implements CommandLineRunner {
@@ -26,7 +28,7 @@ public class ServerApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String[] args) {
+    public void run(String[] args) throws SQLException {
 
         IHomePage homePage;
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
