@@ -1,5 +1,8 @@
 package com.group9.server.Dashboard;
 
+import com.group9.server.Announcements.Student.AnnouncementList;
+import com.group9.server.Announcements.Student.ViewAnnouncements;
+import com.group9.server.Announcements.Student.ViewAnnouncementsImpl;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Notes.IStudentNotes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +16,18 @@ import static java.lang.System.out;
 public class StudentDashboard implements IDashboard {
     InputValidator validator;
     IStudentNotes notes;
-    private String username;
     IFeedback feedback;
+    ViewAnnouncements announcements;
+    private String username;
 
     @Autowired
-    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback) {
+    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements) {
         this.validator = validator;
         this.notes = notes;
         this.feedback = feedback;
-
+        this.announcements = announcements;
     }
+
     @Override
     public void dashboard() {
 
@@ -60,6 +65,10 @@ public class StudentDashboard implements IDashboard {
 
         if (this.validator.validate(selection)) {
             switch (selection) {
+                case "3":
+                    announcements.displayAllAnnouncements();
+                    break;
+                    
                 case "4":
                     course = notes.getCourseInput();
                     notes.viewNotes(username, course);
