@@ -23,7 +23,6 @@ public class StudentDashboard implements IDashboard {
     private String username;
     IFeedback feedback;
     ViewAnnouncements announcements;
-    private String username;
 
     @Autowired
     public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements) {
@@ -34,7 +33,7 @@ public class StudentDashboard implements IDashboard {
     }
 
     @Override
-    public void dashboard() {
+    public void dashboard() throws SQLException {
 
         System.out.println("************************************************");
         System.out.println("               STUDENT DASHBOARD                ");
@@ -59,13 +58,13 @@ public class StudentDashboard implements IDashboard {
     }
 
 
-    public void selectMenu() {
+    public void selectMenu() throws SQLException {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
-    public void checkInput(String selection) {
+    public void checkInput(String selection) throws SQLException {
         String course;
 
         if (this.validator.validate(selection)) {

@@ -1,5 +1,6 @@
 package com.group9.server.Meeting;
 
+import com.group9.server.Notes.INotesPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,12 @@ public class RequestMeetingLogic implements IRequestMeetingLogic {
 
     @Autowired
     IRequestMeetingPersistence request;
+
+
+    @Autowired
+    public RequestMeetingLogic(IRequestMeetingPersistence request) {
+        this.request = request;
+    }
 
     @Override
     public RegisteredCourses viewCourses(String studentId) {
