@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 @Component
 public class AnnoucementInput implements IAnnouncementInput {
@@ -20,7 +21,7 @@ public class AnnoucementInput implements IAnnouncementInput {
     String role;
 
     @Override
-    public void make_announcement(String user_role) {
+    public void make_announcement(String user_role) throws SQLException {
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
@@ -31,7 +32,7 @@ public class AnnoucementInput implements IAnnouncementInput {
         select_option();
     }
     @Override
-    public void select_option() {
+    public void select_option() throws SQLException {
         String print_output;
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");
