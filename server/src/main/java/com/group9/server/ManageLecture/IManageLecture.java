@@ -4,5 +4,5 @@ import java.util.Date;
 
 public interface IManageLecture {
     void showManageLectureMenu(String facultyId);
-    void scheduleLecture();
+    void manageLectureAction(String selection);
 }

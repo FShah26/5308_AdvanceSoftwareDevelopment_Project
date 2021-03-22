@@ -2,59 +2,35 @@ package com.group9.server.ManageLecture;
 
 import com.group9.server.Login.IUserInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 import static java.lang.System.out;
 
-@Component
-public class ScheduleLecture implements IManageLectureActions {
+public class RescheduleLecture implements IManageLectureActions {
+
     public String facultyId;
     public String courseId;
+    public String lecId;
     public String topic;
     public String lecDate;
-
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator userConfirmationOptionValidator;
 
     @Autowired
-    public ScheduleLecture(IManageLectureLogic manageLectureLogic) {
+    public RescheduleLecture(IManageLectureLogic manageLectureLogic) {
         this.userConfirmationOptionValidator = new UserConfirmationOptionValidator();
         this.manageLectureLogic = manageLectureLogic;
     }
 
-    @Override
-    public void getUserInputs() {
-        String selectedOption;
-        System.out.println("************************************************");
-        System.out.println("               SCHEDULING LECTURE                ");
-        System.out.println("************************************************");
-        this.courseId = getCourseId();
-        this.topic = getLectureTopic();
-        this.lecDate = getLectureDate();
-    }
-
-    public void showUserConfirmationOptions() {
-        System.out.println("-->Press 1 to confirm");
-        System.out.println("-->Press 2 to Cancel");
-    }
-
-    @Override
-    public boolean getUserConfirmation() {
-        showUserConfirmationOptions();
-        Scanner sc = new Scanner(System.in);
-        String menuOption = sc.nextLine();
-        while (this.userConfirmationOptionValidator.validate(menuOption) == false) {
-            displayInvalidMenuOptionMsg();
-            showUserConfirmationOptions();
-            menuOption = sc.nextLine();
-        }
-        return (Integer.parseInt(menuOption.trim()) == 1);
-    }
-
     public String getCourseId() {
         System.out.println("Enter the course ID:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    public String getLectureId() {
+        System.out.println("Enter the lecture ID you want to reschedule:");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -71,16 +47,54 @@ public class ScheduleLecture implements IManageLectureActions {
         return scanner.nextLine();
     }
 
+    public void getCourseLectures(String facultyId, String courseId) {
+        while (manageLectureLogic.viewLectures(facultyId, courseId) == false) {
+            courseId = getCourseId();
+        }
+    }
+
+    @Override
+    public void getUserInputs() {
+        String selectedOption;
+        System.out.println("************************************************");
+        System.out.println("               RESCHEDULING LECTURE                ");
+        System.out.println("************************************************");
+        this.courseId = getCourseId();
+        getCourseLectures(this.facultyId, this.courseId);
+        this.lecId = getLectureId();
+        this.topic = getLectureTopic();
+        this.lecDate = getLectureDate();
+    }
+
+    @Override
+    public void showUserConfirmationOptions() {
+        System.out.println("-->Press 1 to confirm");
+        System.out.println("-->Press 2 to Cancel");
+    }
+
     @Override
     public boolean save() {
         boolean result = false;
-        result = manageLectureLogic.scheduleLecture(this.facultyId, this.courseId, this.topic, this.lecDate);
+        result = manageLectureLogic.rescheduleLecture(this.lecId, this.courseId, this.topic, this.lecDate);
         if (result) {
-            out.println("Lecture Scheduled successfully");
+            out.println("Lecture Rescheduled successfully");
         } else {
-            out.println("Lecture scheduling failed.");
+            out.println("Lecture Rescheduled Failed");
         }
         return result;
+    }
+
+    @Override
+    public boolean getUserConfirmation() {
+        showUserConfirmationOptions();
+        Scanner sc = new Scanner(System.in);
+        String menuOption = sc.nextLine();
+        while (this.userConfirmationOptionValidator.validate(menuOption) == false) {
+            displayInvalidMenuOptionMsg();
+            showUserConfirmationOptions();
+            menuOption = sc.nextLine();
+        }
+        return (Integer.parseInt(menuOption.trim()) == 1);
     }
 
     @Override
@@ -91,5 +105,8 @@ public class ScheduleLecture implements IManageLectureActions {
     @Override
     public void setFacultyId(String facultyId) {
         this.facultyId = facultyId;
+
     }
+
+
 }

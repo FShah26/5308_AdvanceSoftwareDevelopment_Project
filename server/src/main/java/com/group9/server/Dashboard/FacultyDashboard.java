@@ -1,6 +1,8 @@
 package com.group9.server.Dashboard;
 
 import com.group9.server.Feedback.IFeedback;
+import com.group9.server.ManageLecture.IManageLecture;
+import com.group9.server.ManageLecture.IManageLectureLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +11,11 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class FacultyDashboard implements IDashboard {
+public class    FacultyDashboard implements IDashboard {
     InputValidator validator;
     IFeedback feedback;
+    @Autowired
+    IManageLecture manageLecture;
     private String username;
 
     @Autowired
@@ -51,6 +55,9 @@ public class FacultyDashboard implements IDashboard {
     public void checkinput(String selection) {
         if (this.validator.validate(selection)) {
             switch (selection) {
+                case "2":
+                    manageLecture.showManageLectureMenu(this.username);
+                    break;
                 case "5":
                     feedback.viewFeedback(username);
                     break;
