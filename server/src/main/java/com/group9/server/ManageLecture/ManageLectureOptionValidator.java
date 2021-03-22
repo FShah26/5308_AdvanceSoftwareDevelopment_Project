@@ -7,7 +7,7 @@ public class ManageLectureOptionValidator implements IUserInputValidator {
     String regex;
 
     public ManageLectureOptionValidator() {
-        this.regex = "^\\s*([1-3])\\s*$";
+        this.regex = "^\\s*([1-3]|\\*)\\s*$";
     }
 
     @Override
