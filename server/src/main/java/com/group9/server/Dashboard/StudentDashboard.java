@@ -6,6 +6,7 @@ import com.group9.server.Announcements.Student.ViewAnnouncementsImpl;
 import com.group9.server.Meeting.IRequestMeeting;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Notes.IStudentNotes;
+import com.group9.server.UpcomingLecture.UpcomingLecture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,8 @@ public class StudentDashboard implements IDashboard {
     private String username;
     IFeedback feedback;
     ViewAnnouncements announcements;
+    @Autowired
+    UpcomingLecture lecture;
 
     @Autowired
     public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements) {
@@ -69,6 +72,9 @@ public class StudentDashboard implements IDashboard {
 
         if (this.validator.validate(selection)) {
             switch (selection) {
+                case "2":
+                    lecture.lectureDisplay(username);
+                    break;
                 case "3":
                     announcements.displayAllAnnouncements();
                     break;
