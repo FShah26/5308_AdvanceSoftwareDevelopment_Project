@@ -1,8 +1,11 @@
 package com.group9.server.Feedback;
 
+import com.group9.server.Dashboard.IDashboard;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +17,11 @@ public class Feedback implements IFeedback {
     public Feedback(IFeedbackLogic feedbackLogic) {
         this.feedbackLogic = feedbackLogic;
     }
+
+    @Qualifier("studentDashboard")
+    @Autowired
+    IDashboard dashboard;
+
 
     @Override
     public void viewFeedback(String faculty_id) {
@@ -34,9 +42,10 @@ public class Feedback implements IFeedback {
     }
 
     @Override
-    public void addFeedback(String user_id, String userName, String feedback,String faculty_id) {
+    public void addFeedback(String user_id, String userName, String feedback,String faculty_id) throws SQLException {
         String message = feedbackLogic.addFeedback(user_id, userName, feedback, faculty_id);
         System.out.println(message);
+        dashboard.dashboard();
     }
     @Override
     public String getStudentName() {
