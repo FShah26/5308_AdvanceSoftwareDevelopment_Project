@@ -1,7 +1,9 @@
 package com.group9.server.CourseCreation;
 
+import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.InputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -16,6 +18,9 @@ public class CreateCourse {
 
     InputValidator inputValidator;
 
+    @Qualifier("adminDashboard")
+    @Autowired
+    IDashboard dash;
 
     public CreateCourse() {
         this.inputValidator = new AdminCreateCourseConfirm();
@@ -31,23 +36,23 @@ public class CreateCourse {
 
     Scanner sc;
     public void creation() {
-        System.out.println("************************************************");
-        System.out.println("      ENTER DETAILS TO CREATE NEW COURSE        ");
-        System.out.println("************************************************");
+        out.println("************************************************");
+        out.println("      ENTER DETAILS TO CREATE NEW COURSE        ");
+        out.println("************************************************");
          sc = new Scanner(System.in);
-        System.out.print("Enter Course ID : ");
+        out.print("Enter Course ID : ");
          course_id = sc.nextLine();
-        System.out.print("Enter Course Name : ");
+        out.print("Enter Course Name : ");
          course_name = sc.nextLine();
-        System.out.print("Enter Course Credit : ");
+        out.print("Enter Course Credit : ");
          course_credit = sc.nextLine();
-        System.out.print("Enter Faculty Moderator ID : ");
+        out.print("Enter Faculty Moderator ID : ");
          course_faculty = sc.nextLine();
-        System.out.print("DEPARTMENT : ");
+        out.print("DEPARTMENT : ");
          course_Department = sc.nextLine();
 
-        System.out.println("-->Press 1 to confirm");
-        System.out.println("-->Press 2 to Cancel");
+        out.println("-->Press 1 to confirm");
+        out.println("-->Press 2 to Cancel");
         SelectMenu();
 
     }
@@ -58,19 +63,26 @@ public class CreateCourse {
     }
 
     public void ValidateInput(String input) {
-        if (this.inputValidator.validate(input)) {
-            String output = validate.validate_input(course_id, course_credit, course_faculty);
+        try
+        {
+            if (this.inputValidator.validate(input)) {
+                String output = validate.validate_input(course_id, course_credit, course_faculty);
 
-            if (output.equals("true")) {
-                courseService.courseCreate(course_id, course_name, course_credit, course_faculty, course_Department);
-            } else
-                System.out.println(output);
+                if (output.equals("true")) {
+                    courseService.courseCreate(course_id, course_name, course_credit, course_faculty, course_Department);
+                } else {
+                    out.println(output);
+                }
+                dash.dashboard();
+            } else {
+                displayInvalidMenuOptionMsg();
+                creation();
+            }
         }
-        else
-          {
-              displayInvalidMenuOptionMsg();
-              creation();
-         }
+        catch ( Exception ex)
+        {
+            System.out.print("Some Unknown Error Occured..");
+        }
 }
     public void displayInvalidMenuOptionMsg(){
         out.println("Invalid Option! Please choose a valid option from above menu.");

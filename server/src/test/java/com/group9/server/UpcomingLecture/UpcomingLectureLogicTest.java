@@ -1,17 +1,12 @@
 package com.group9.server.UpcomingLecture;
 
-import com.group9.server.Notes.INotesLogic;
-import com.group9.server.Notes.INotesPersistence;
-import com.group9.server.Notes.NotesLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class UpcomingLectureLogicTest {

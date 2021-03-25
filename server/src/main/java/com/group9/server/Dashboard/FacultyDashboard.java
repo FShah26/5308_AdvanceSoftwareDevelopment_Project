@@ -2,7 +2,6 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
-import com.group9.server.ManageLecture.IManageLectureLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

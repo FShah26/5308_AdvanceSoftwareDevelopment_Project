@@ -1,9 +1,13 @@
 package com.group9.server.UserCreation;
 
 
+import com.group9.server.Dashboard.AdminDashboard;
+import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.InputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -12,7 +16,9 @@ public class AddUser {
 
     @Autowired
     IValidateAddUser validate;
-
+    @Qualifier("adminDashboard")
+    @Autowired
+    IDashboard dash;
     InputValidator inputValidator;
     @Autowired
     IAddUserLogic addUserService;
@@ -25,41 +31,43 @@ public class AddUser {
     @Autowired
     public AddUser() {
         this.inputValidator = new AdminAddUserConfirm();
+        this.dash = new AdminDashboard();
     }
 
-    public void creation() {
-        System.out.println("************************************************");
-        System.out.println("      ENTER DETAILS TO CREATE NEW USER        ");
-        System.out.println("************************************************");
+    public void creation() throws SQLException {
+        out.println("************************************************");
+        out.println("      ENTER DETAILS TO CREATE NEW USER        ");
+        out.println("************************************************");
         sc = new Scanner(System.in);
-        System.out.print("Enter id : ");
+        out.print("Enter id : ");
         id = sc.nextLine();
-        System.out.print("Enter userid : ");
+        out.print("Enter userid : ");
         userid = sc.nextLine();
-        System.out.print("Enter password : ");
+        out.print("Enter password : ");
         password = sc.nextLine();
-        System.out.print("Enter user_type : ");
+        out.print("Enter user_type : ");
         user_type = sc.nextLine();
 
-        System.out.println("-->Press 1 to confirm");
-        System.out.println("-->Press 2 to Cancel");
+        out.println("-->Press 1 to confirm");
+        out.println("-->Press 2 to Cancel");
         selectMenu();
 
     }
 
-    public void selectMenu() {
+    public void selectMenu() throws SQLException {
         String menuOption = sc.nextLine();
         validateInput(menuOption);
     }
 
-    public void validateInput(String input) {
+    public void validateInput(String input) throws SQLException {
         if (this.inputValidator.validate(input)) {
             String output = validate.validate_input(id, userid, password, user_type);
 
             if (output.equals("true")) {
                 addUserService.addUser(id, userid, password, user_type);
+                dash.dashboard();
             } else
-                System.out.println(output);
+                out.println(output);
         } else {
             displayInvalidMenuOptionMsg();
             creation();

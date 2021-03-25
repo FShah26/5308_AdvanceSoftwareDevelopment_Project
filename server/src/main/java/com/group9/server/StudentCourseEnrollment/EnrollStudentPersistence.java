@@ -1,6 +1,5 @@
 package com.group9.server.StudentCourseEnrollment;
 
-import com.group9.server.UserCreation.IAddUserPersistence;
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

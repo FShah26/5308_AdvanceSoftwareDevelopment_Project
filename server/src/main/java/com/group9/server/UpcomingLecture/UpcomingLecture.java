@@ -39,7 +39,7 @@ public class UpcomingLecture implements IUpcomingLecture{
         System.out.println("************************************************");
         System.out.println("              UPCOMING LECTURES                 ");
         System.out.println("************************************************");
-        System.out.println("-->Press select the courses to view lectures.");
+        System.out.println("-->Press select the courses to view their upcoming lecture time.");
         checkinput();
     }
 
@@ -51,7 +51,6 @@ public class UpcomingLecture implements IUpcomingLecture{
             System.out.println("Looks like you not enrolled to any courses.");
         }
         else {
-            System.out.println("Select any course below to see their upcoming lecture time..");
             for (String courseid : course.courseId)
             {
                 coursenumber++;
@@ -71,19 +70,19 @@ public class UpcomingLecture implements IUpcomingLecture{
             ArrayList<LectureDetails> details = lectureLogic.upcoming(selected);
             if(details.size()>0)
             {
-                System.out.println("_______________________________________________________________________________");
-                System.out.printf("%-20s%-15s%-20s%-20s\n", "Faculty ID","Course","Topic","Lecture Date and Time");
-                System.out.println("-------------------------------------------------------------------------------");
+                System.out.println("________________________________________________________________________________________________________________");
+                System.out.printf("%-20s%-15s%-50s%-50s\n", "Faculty ID","Course","Topic","Lecture Date and Time");
+                System.out.println("----------------------------------------------------------------------------------------------------------------");
                 for(LectureDetails m: details)
                 {
-                    System.out.printf("%-20s%-15s%-20s%-20s\n", m.facultyid,m.courseid,m.topic,m.date);
+                    System.out.printf("%-20s%-15s%-50s%-50s\n", m.facultyid,m.courseid,m.topic,m.date);
                 }
             }
             else
             {
                 System.out.println("Seems like there is no upcoming lecture for this course as of now.Select different course or navigate back to your dashboard.");
-                lectureDisplay(studentId);
             }
+            lectureDisplay(studentId);
         }
         else if(courseOption.equals("*"))
         {

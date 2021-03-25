@@ -3,7 +3,6 @@ package com.group9.server.Announcements;
 import com.group9.server.Dashboard.IDashboard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -41,6 +40,7 @@ public class AnnoucementInput implements IAnnouncementInput {
         if(menuOption.equals("1")){
             print_output =  logic.make_announcement(role,input);
             System.out.println(print_output);
+            dash.dashboard();
         }
         else if(menuOption.equals("2")){
             dash.dashboard();
