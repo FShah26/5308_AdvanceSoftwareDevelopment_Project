@@ -4,7 +4,7 @@ import com.group9.server.Announcements.Student.ViewAnnouncements;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Meeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
-import com.group9.server.UpcomingLecture.UpcomingLecture;
+import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,7 @@ public class StudentDashboard implements IDashboard {
     IFeedback feedback;
     ViewAnnouncements announcements;
     @Autowired
-    UpcomingLecture lecture;
+    UpcomingLectureDisplay lecture;
 
     @Autowired
     public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements) {

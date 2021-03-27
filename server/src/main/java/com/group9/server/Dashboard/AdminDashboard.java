@@ -2,6 +2,7 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Announcements.Admin.IAnnouncementInput;
 import com.group9.server.CourseCreation.CreateCourse;
+import com.group9.server.CourseCreation.ICreateCourse;
 import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class AdminDashboard implements IDashboard {
     @Autowired
     IAnnouncementInput announcement;
     @Autowired
-    CreateCourse cc;
+    ICreateCourse cc;
     @Autowired
     AddUser ac;
     @Autowired

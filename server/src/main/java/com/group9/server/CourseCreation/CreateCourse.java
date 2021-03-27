@@ -11,10 +11,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class CreateCourse {
-
-    @Autowired
-    IValidate validate;
+public class CreateCourse implements ICreateCourse{
 
     InputValidator inputValidator;
 
@@ -35,6 +32,7 @@ public class CreateCourse {
     String course_Department;
 
     Scanner sc;
+    @Override
     public void creation() {
         out.println("************************************************");
         out.println("      ENTER DETAILS TO CREATE NEW COURSE        ");
@@ -57,23 +55,21 @@ public class CreateCourse {
 
     }
 
+    @Override
     public void SelectMenu() {
         String menuOption = sc.nextLine();
         ValidateInput(menuOption);
     }
 
+    @Override
     public void ValidateInput(String input) {
+        String message= " ";
         try
         {
             if (this.inputValidator.validate(input)) {
-                String output = validate.validate_input(course_id, course_credit, course_faculty);
-
-                if (output.equals("true")) {
-                    courseService.courseCreate(course_id, course_name, course_credit, course_faculty, course_Department);
-                } else {
-                    out.println(output);
-                }
-                dash.dashboard();
+                     message = courseService.courseCreate(course_id, course_name, course_credit, course_faculty, course_Department);
+                     System.out.println(message);
+                     dash.dashboard();
             } else {
                 displayInvalidMenuOptionMsg();
                 creation();
@@ -83,7 +79,8 @@ public class CreateCourse {
         {
             System.out.print("Some Unknown Error Occured..");
         }
-}
+    }
+    @Override
     public void displayInvalidMenuOptionMsg(){
         out.println("Invalid Option! Please choose a valid option from above menu.");
     }

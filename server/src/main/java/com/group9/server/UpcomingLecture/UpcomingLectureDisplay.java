@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 @Component
-public class UpcomingLecture implements IUpcomingLecture{
+public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
 
     @Autowired
     IRequestMeetingLogic meeting;
@@ -40,11 +40,11 @@ public class UpcomingLecture implements IUpcomingLecture{
         System.out.println("              UPCOMING LECTURES                 ");
         System.out.println("************************************************");
         System.out.println("-->Press select the courses to view their upcoming lecture time.");
-        checkinput();
+        checkInput();
     }
 
     @Override
-    public void checkinput() throws SQLException {
+    public void checkInput() throws SQLException {
         course = meeting.viewCourses(studentId);
         int coursenumber = 0;
         if (course.courseId.size() == 0) {

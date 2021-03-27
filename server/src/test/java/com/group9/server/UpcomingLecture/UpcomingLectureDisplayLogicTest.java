@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import static org.mockito.Mockito.when;
 
-class UpcomingLectureLogicTest {
+class UpcomingLectureDisplayLogicTest {
 
     ILecturePersistence mockPersistence = Mockito.mock(ILecturePersistence.class);
     IUpcomingLectureLogic underTest;
