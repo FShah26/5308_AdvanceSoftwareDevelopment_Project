@@ -1,6 +1,6 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.IAnnouncementInput;
+import com.group9.server.Announcements.Admin.IAnnouncementInput;
 import com.group9.server.CourseCreation.CreateCourse;
 import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
@@ -16,6 +16,7 @@ import static java.lang.System.out;
 public class AdminDashboard implements IDashboard {
 
     String username;
+    String userrole;
 
     InputValidator inputValidator;
     @Autowired
@@ -28,6 +29,7 @@ public class AdminDashboard implements IDashboard {
     EnrollStudent es;
     public AdminDashboard() {
         this.inputValidator = new AdminInputValidator();
+        this.userrole ="admin";
     }
 
     @Override
@@ -54,10 +56,10 @@ public class AdminDashboard implements IDashboard {
     public void selectMenu() throws SQLException {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
-        checkinput(menuOption);
+        checkInput(menuOption);
     }
 
-    public void checkinput(String selection) throws SQLException {
+    public void checkInput(String selection) throws SQLException {
         if (this.inputValidator.validate(selection)) {
             if (selection.equals("1")) {
                 cc.creation();
@@ -68,7 +70,7 @@ public class AdminDashboard implements IDashboard {
                 es.creation();
             }
             else if(selection.equals("4")){
-                    announcement.make_announcement("admin");}
+                    announcement.make_announcement(userrole,username);}
             else {
                 System.out.println("Yet to develop..");
             }

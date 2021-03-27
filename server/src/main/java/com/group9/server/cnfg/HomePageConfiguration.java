@@ -29,10 +29,5 @@ public class HomePageConfiguration {
     public adminImpl admin() {
         return new adminImpl();
     }
-//
-//    @Bean
-//    public IValidate validate() {
-//        return new ValidateCourseCreation();
-//    }
 
 }

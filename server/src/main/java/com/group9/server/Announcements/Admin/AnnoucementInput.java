@@ -1,4 +1,4 @@
-package com.group9.server.Announcements;
+package com.group9.server.Announcements.Admin;
 
 import com.group9.server.Dashboard.IDashboard;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +17,19 @@ public class AnnoucementInput implements IAnnouncementInput {
     IDashboard dash;
     String input;
     Scanner sc;
-    String role;
+    String userRole;
+    String userId;
 
     @Override
-    public void make_announcement(String user_role) throws SQLException {
+    public void make_announcement(String userRole,String userId) throws SQLException {
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
         sc = new Scanner(System.in);
         System.out.print("Enter New Announcement : ");
         input = sc.nextLine();
-        role = user_role;
+        this.userRole = userRole;
+        this.userId =userId;
         select_option();
     }
     @Override
@@ -38,7 +40,7 @@ public class AnnoucementInput implements IAnnouncementInput {
 
         String menuOption = sc.nextLine();
         if(menuOption.equals("1")){
-            print_output =  logic.make_announcement(role,input);
+            print_output =  logic.make_announcement(userRole,input,userId);
             System.out.println(print_output);
             dash.dashboard();
         }
