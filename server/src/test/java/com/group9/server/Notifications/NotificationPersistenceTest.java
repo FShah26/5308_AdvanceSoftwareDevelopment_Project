@@ -26,6 +26,6 @@ class NotificationPersistenceTest {
 
     @Test
     void fetchNotificationsFromDatabase() throws SQLException {
-        Assertions.assertNotNull(underTest.fetchNotificationsFromDatabase());
+        Assertions.assertNotNull(underTest.fetchNotificationsFromDatabase("hashik"));
     }
 }

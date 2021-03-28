@@ -4,10 +4,7 @@ import com.group9.server.cnfg.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Component
 public class NotificationPersistenceImpl implements NotificationPersistence {
@@ -19,7 +16,9 @@ public class NotificationPersistenceImpl implements NotificationPersistence {
     }
 
     @Override
-    public ResultSet fetchNotificationsFromDatabase() throws SQLException {
-        return null;
+    public ResultSet fetchNotificationsFromDatabase(String user) throws SQLException {
+        CallableStatement statement = con.prepareCall("{call fetch_user_notifications(?)}");
+        statement.setString(1, user);
+        return statement.executeQuery();
     }
 }

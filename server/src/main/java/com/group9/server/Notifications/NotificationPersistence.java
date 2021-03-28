@@ -4,5 +4,5 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface NotificationPersistence {
-    ResultSet fetchNotificationsFromDatabase() throws SQLException;
+    ResultSet fetchNotificationsFromDatabase(String user) throws SQLException;
 }

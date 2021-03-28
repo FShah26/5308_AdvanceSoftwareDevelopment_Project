@@ -20,7 +20,7 @@ public class ViewUserNotificationsImpl implements ViewUserNotifications {
     @Override
     public void displayAllNotifications(String user) {
         try {
-            ResultSet notificationsSet = persistence.fetchNotificationsFromDatabase();
+            ResultSet notificationsSet = persistence.fetchNotificationsFromDatabase(user);
 
             System.out.println("============== Notifications ============== ");
             while (notificationsSet.next()) {

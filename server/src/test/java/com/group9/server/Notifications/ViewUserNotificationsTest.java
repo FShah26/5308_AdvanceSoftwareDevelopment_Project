@@ -1,6 +1,7 @@
 package com.group9.server.Notifications;
 
 import com.mysql.cj.jdbc.result.ResultSetImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -19,7 +20,7 @@ class ViewUserNotificationsTest {
     void setUp() throws SQLException {
         when(mockSet.getString(1)).thenReturn("Hashik");
         when(mockSet.getString(2)).thenReturn("Test Notification");
-        when(mockPersistence.fetchNotificationsFromDatabase()).thenReturn(mockSet);
+        when(mockPersistence.fetchNotificationsFromDatabase("Some Guy")).thenReturn(mockSet);
 
         underTest = new ViewUserNotificationsImpl(mockPersistence);
     }
