@@ -24,8 +24,8 @@ public class ViewUserNotificationsImpl implements ViewUserNotifications {
 
             System.out.println("============== Notifications ============== ");
             while (notificationsSet.next()) {
-                String from = notificationsSet.getString("1");
-                String message = notificationsSet.getString("2");
+                String from = notificationsSet.getString(1);
+                String message = notificationsSet.getString(2);
                 printNotification(from, message);
             }
 

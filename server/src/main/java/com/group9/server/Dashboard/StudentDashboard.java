@@ -74,8 +74,9 @@ public class StudentDashboard implements IDashboard {
         if (this.validator.validate(selection)) {
             switch (selection) {
                 case "1":
-
+                    notifications.displayAllNotifications(username);
                     break;
+
                 case "2":
                     lecture.lectureDisplay(username);
                     break;
@@ -99,6 +100,7 @@ public class StudentDashboard implements IDashboard {
                 case "7":
                     meeting.meetingDisplay(username);
                     break;
+
                 case "8":
                     String student_name = feedback.getStudentName();
                     String fb = feedback.getFeedbackText();
