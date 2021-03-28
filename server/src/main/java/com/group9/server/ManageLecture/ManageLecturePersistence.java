@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.Date;
-import java.util.TimeZone;
 
 @Component
 public class ManageLecturePersistence implements IManageLecturePersistence{

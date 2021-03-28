@@ -1,6 +1,5 @@
 package com.group9.server.Meeting;
 
-import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,7 +8,13 @@ public class CourseSelectionValidator implements ICourseSelectionValidator {
 
     @Override
     public boolean validate(String userInput, int courselength) {
-        this.regex = "^\\s*([1-"+courselength+"])\\s*$";
-        return userInput.matches(this.regex);
+        if(courselength>0) {
+            this.regex = "^\\s*([1-" + courselength + "])\\s*$";
+            return userInput.matches(this.regex);
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -1,7 +1,5 @@
 package com.group9.server.UpcomingLecture;
 
-import com.group9.server.Meeting.IRequestMeetingPersistence;
-import com.group9.server.Meeting.MeetingDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

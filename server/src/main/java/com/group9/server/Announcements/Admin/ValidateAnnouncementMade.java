@@ -1,6 +1,5 @@
-package com.group9.server.Announcements;
+package com.group9.server.Announcements.Admin;
 
-import com.group9.server.Announcements.IValidateAnnouncementMade;
 import org.springframework.stereotype.Component;
 
 @Component
