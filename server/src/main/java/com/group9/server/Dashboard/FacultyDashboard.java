@@ -22,11 +22,12 @@ public class FacultyDashboard implements IDashboard {
     private String username;
 
     @Autowired
-    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications,IManageLecture manageLecture) {
+    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications,IManageLecture manageLecture,IQuiz quiz) {
         this.validator = validator;
         this.feedback = feedback;
         this.notifications = notifications;
         this.manageLecture = manageLecture;
+        this.quiz = quiz;
     }
 
     @Override
