@@ -1,6 +1,6 @@
 package com.group9.server.Dashboard;
 
-public class FacultyValidator implements InputValidator{
+public class FacultyValidator implements InputValidator {
 
     String regex;
 
