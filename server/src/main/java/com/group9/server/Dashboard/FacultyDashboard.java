@@ -2,7 +2,6 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
-import com.group9.server.ManageLecture.IManageLectureLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +10,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class    FacultyDashboard implements IDashboard {
+public class FacultyDashboard implements IDashboard {
     InputValidator validator;
     IFeedback feedback;
     @Autowired
@@ -37,7 +36,7 @@ public class    FacultyDashboard implements IDashboard {
         System.out.println("Press 4 --> Manage Meetings");
         System.out.println("Press 5 --> View Feedback");
         System.out.println("Press 6 --> Log out");
-        System.out.println();
+        System.out.println("Choose Option:");
         selectMenu();
     }
 
@@ -61,12 +60,15 @@ public class    FacultyDashboard implements IDashboard {
                 case "5":
                     feedback.viewFeedback(username);
                     break;
+                case "6":
+                    System.out.println("Loggin gout...");
+                    System.out.println("Logged out successfully...");
+                    System.exit(0);
                 default:
                     System.out.println("Yet to develop..");
-        }
-        dashboard();
-        }
-        else {
+            }
+            dashboard();
+        } else {
             displayInvalidMenuOptionMsg();
             selectMenu();
         }
