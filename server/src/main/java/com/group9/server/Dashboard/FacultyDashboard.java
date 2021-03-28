@@ -17,16 +17,16 @@ public class FacultyDashboard implements IDashboard {
     InputValidator validator;
     IFeedback feedback;
     IQuiz quiz;
-    @Autowired
     IManageLecture manageLecture;
     ViewUserNotifications notifications;
     private String username;
 
     @Autowired
-    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications, IQuiz quiz) {
+    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications,IManageLecture manageLecture,IQuiz quiz) {
         this.validator = validator;
         this.feedback = feedback;
         this.notifications = notifications;
+        this.manageLecture = manageLecture;
         this.quiz = quiz;
     }
 
@@ -44,7 +44,7 @@ public class FacultyDashboard implements IDashboard {
         System.out.println("Press 5 --> View Feedback");
         System.out.println("Press 6 --> Add question for a quiz");
         System.out.println("Press 7 --> Log out");
-        System.out.println();
+        System.out.println("Choose Option:");
         selectMenu();
     }
 
@@ -87,7 +87,11 @@ public class FacultyDashboard implements IDashboard {
                         quiz.addQuestion(courseId, quizNumber, question, optionA, optionB, optionC, optionD, answer);
                     }
                     break;
-
+                case "7":
+                    System.out.println("Logging out...");
+                    System.out.println("Logged out successfully...");
+                    System.exit(0);
+                    break;
                 default:
                     System.out.println("Yet to develop..");
             }
