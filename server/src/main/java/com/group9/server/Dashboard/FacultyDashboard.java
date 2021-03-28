@@ -2,6 +2,7 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
+import com.group9.server.Notifications.ViewUserNotifications;
 import com.group9.server.Quiz.IQuiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,13 +19,14 @@ public class FacultyDashboard implements IDashboard {
     IQuiz quiz;
     @Autowired
     IManageLecture manageLecture;
+    ViewUserNotifications notifications;
     private String username;
 
     @Autowired
-    public FacultyDashboard(InputValidator validator, IFeedback feedback, IQuiz quiz) {
+    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications) {
         this.validator = validator;
         this.feedback = feedback;
-        this.quiz = quiz;
+        this.notifications = notifications;
     }
 
     @Override
@@ -59,8 +61,11 @@ public class FacultyDashboard implements IDashboard {
     public void checkinput(String selection) throws SQLException {
         if (this.validator.validate(selection)) {
             switch (selection) {
+                case "1":
+                    notifications.displayAllNotifications(username);
+                    break;
                 case "2":
-                    manageLecture.showManageLectureMenu(this.username);
+                    manageLecture.showManageLectureMenu(username);
                     break;
                 case "5":
                     feedback.viewFeedback(username);
