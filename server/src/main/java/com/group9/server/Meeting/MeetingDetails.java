@@ -1,7 +1,5 @@
 package com.group9.server.Meeting;
 
-import java.util.Date;
-
 public class MeetingDetails {
     String MeetingId;
     String RaisedFor;

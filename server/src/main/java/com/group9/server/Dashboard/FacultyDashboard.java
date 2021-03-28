@@ -12,7 +12,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class    FacultyDashboard implements IDashboard {
+public class FacultyDashboard implements IDashboard {
     InputValidator validator;
     IFeedback feedback;
     IQuiz quiz;

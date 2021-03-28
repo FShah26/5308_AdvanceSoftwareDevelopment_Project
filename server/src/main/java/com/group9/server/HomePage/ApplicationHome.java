@@ -59,6 +59,4 @@ public class ApplicationHome implements IHomePage {
         out.println("Invalid Option!");
         out.println("Please choose a valid option from above menu.");
     }
-
-
 }

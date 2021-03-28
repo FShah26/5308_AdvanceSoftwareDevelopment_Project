@@ -1,13 +1,11 @@
 package com.group9.server.Meeting;
 
-import com.group9.server.Notes.INotesPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Component
 public class RequestMeetingLogic implements IRequestMeetingLogic {

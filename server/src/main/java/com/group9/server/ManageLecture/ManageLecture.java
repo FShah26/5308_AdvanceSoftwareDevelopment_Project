@@ -1,13 +1,9 @@
 package com.group9.server.ManageLecture;
 
-import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Login.IUserInputValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;

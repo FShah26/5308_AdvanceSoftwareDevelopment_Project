@@ -13,7 +13,7 @@ public class CoursePersistence implements ICoursePersistence {
     DBConfig db;
 
     @Override
-    public void createCourses(String course_id, String course_name, String course_credit, String course_faculty, String course_Department) {
+    public String createCourses(String course_id, String course_name, String course_credit, String course_faculty, String course_Department) {
         String dbURL = db.url;
         String user = db.user;
         String password = db.password;
@@ -36,7 +36,7 @@ public class CoursePersistence implements ICoursePersistence {
             ex.printStackTrace();
             output = "Error Catched";
         }
-        System.out.println(output);
+        return output;
     }
 }
 
