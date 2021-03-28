@@ -18,6 +18,7 @@ class NotificationPersistenceTest {
 
     @Autowired
     DBConfig config;
+
     @BeforeEach
     void setUp() throws SQLException {
         underTest = new NotificationPersistenceImpl(config);
