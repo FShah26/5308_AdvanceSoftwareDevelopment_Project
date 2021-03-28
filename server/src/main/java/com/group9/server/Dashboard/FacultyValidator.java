@@ -5,7 +5,7 @@ public class FacultyValidator implements InputValidator {
     String regex;
 
     public FacultyValidator() {
-        this.regex = "^\\s*([1-5])\\s*$";
+        this.regex = "^\\s*([1-6])\\s*$";
     }
 
     @Override
