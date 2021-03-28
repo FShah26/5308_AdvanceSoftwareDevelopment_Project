@@ -1,5 +1,6 @@
 package com.group9.server.Notifications;
 
+import com.mysql.cj.jdbc.result.ResultSetImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
