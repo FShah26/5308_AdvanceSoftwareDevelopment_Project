@@ -4,6 +4,7 @@ import com.group9.server.Announcements.Student.ViewAnnouncements;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Meeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
+import com.group9.server.Notifications.ViewUserNotifications;
 import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,18 +20,20 @@ public class StudentDashboard implements IDashboard {
     IStudentNotes notes;
     @Autowired
     IRequestMeeting meeting;
-    private String username;
     IFeedback feedback;
     ViewAnnouncements announcements;
+    ViewUserNotifications notifications;
     @Autowired
     UpcomingLectureDisplay lecture;
+    private String username;
 
     @Autowired
-    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements) {
+    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements, ViewUserNotifications notifications) {
         this.validator = validator;
         this.notes = notes;
         this.feedback = feedback;
         this.announcements = announcements;
+        this.notifications = notifications;
     }
 
     @Override
@@ -70,9 +73,13 @@ public class StudentDashboard implements IDashboard {
 
         if (this.validator.validate(selection)) {
             switch (selection) {
+                case "1":
+
+                    break;
                 case "2":
                     lecture.lectureDisplay(username);
                     break;
+
                 case "3":
                     announcements.displayAllAnnouncements();
                     break;

@@ -62,10 +62,9 @@ public class FacultyDashboard implements IDashboard {
                     break;
                 default:
                     System.out.println("Yet to develop..");
-        }
-        dashboard();
-        }
-        else {
+            }
+            dashboard();
+        } else {
             displayInvalidMenuOptionMsg();
             selectMenu();
         }
