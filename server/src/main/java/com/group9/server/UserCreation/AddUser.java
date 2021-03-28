@@ -26,6 +26,9 @@ public class AddUser {
     String userid;
     String password;
     String user_type;
+    String name;
+    String email_address;
+    String department;
     Scanner sc;
 
     @Autowired
@@ -47,6 +50,12 @@ public class AddUser {
         password = sc.nextLine();
         out.print("Enter user_type : ");
         user_type = sc.nextLine();
+        out.print("Enter Name of the user : ");
+        name = sc.nextLine();
+        out.print("Enter email address of the student : ");
+        email_address = sc.nextLine();
+        out.print("Enter department : ");
+        department = sc.nextLine();
 
         out.println("-->Press 1 to confirm");
         out.println("-->Press 2 to Cancel");
@@ -65,6 +74,7 @@ public class AddUser {
 
             if (output.equals("true")) {
                 addUserService.addUser(id, userid, password, user_type);
+                addUserService.addUserDetails(userid, user_type, name, email_address, department);
                 dash.dashboard();
             } else
                 out.println(output);

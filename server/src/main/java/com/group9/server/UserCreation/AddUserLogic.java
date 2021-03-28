@@ -13,5 +13,10 @@ public class AddUserLogic implements IAddUserLogic {
     public void addUser(String id, String userid, String password, String user_type) {
         addUserPersistence.addUser(id,userid,password,user_type);
     }
+    @Override
+    public void addUserDetails(String userid, String user_type, String name, String email_address, String department){
+        addUserPersistence.addUserDetails(userid, user_type, name, email_address, department);
+    }
+
 }
 
