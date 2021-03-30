@@ -36,4 +36,23 @@ public class QuizPersistence implements IQuizPersistence {
 
         return statement.getString("message");
     }
+
+    @Override
+    public ResultSet fetchQuiz(String courseId, String quizNumber) throws SQLException{
+        CallableStatement statement = con.prepareCall("{call fetch_quiz(?,?)}");
+        statement.setString(1, courseId);
+        statement.setString(2, quizNumber);
+        ResultSet set = statement.executeQuery();
+        return set;
+    }
+
+    @Override
+    public ResultSet fetchCourseQuiz(String courseId) throws SQLException {
+        CallableStatement statement = con.prepareCall("{call fetch_course_quiz(?)}");
+        statement.setString(1, courseId);
+        ResultSet set = statement.executeQuery();
+        return set;
+    }
+
+
 }
