@@ -2,6 +2,8 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
+import com.group9.server.Meeting.Faculty.IManageMeeting;
+import com.group9.server.Meeting.Faculty.ManageMeeting;
 import com.group9.server.Notifications.ViewUserNotifications;
 import com.group9.server.Quiz.IQuiz;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,13 @@ public class FacultyDashboard implements IDashboard {
     IQuiz quiz;
     IManageLecture manageLecture;
     ViewUserNotifications notifications;
+    @Autowired
+    IManageMeeting manageMeeting;
+
     private String username;
 
     @Autowired
-    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications,IManageLecture manageLecture,IQuiz quiz) {
+    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications, IManageLecture manageLecture, IQuiz quiz) {
         this.validator = validator;
         this.feedback = feedback;
         this.notifications = notifications;
@@ -66,7 +71,10 @@ public class FacultyDashboard implements IDashboard {
                     notifications.displayAllNotifications(username);
                     break;
                 case "2":
-                    manageLecture.showManageLectureMenu(username);
+                    manageLecture.showManageLectureMenu(this.username);
+                    break;
+                case "4":
+                    manageMeeting.display(username);
                     break;
                 case "5":
                     feedback.viewFeedback(username);

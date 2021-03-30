@@ -60,7 +60,8 @@ public class RequestMeetingLogic implements IRequestMeetingLogic {
                     String RaisedFor = set.getString(2);
                     String RaisedOn = set.getString(3);
                     String Status=set.getString(4);
-                    MeetingDetails meetingDetails = new MeetingDetails(MeetingId,RaisedFor,RaisedOn,Status);
+                    String facultyResponse=set.getString(5);
+                    MeetingDetails meetingDetails = new MeetingDetails(MeetingId,RaisedFor,RaisedOn,Status,facultyResponse);
                     details.add(meetingDetails);
                 }
         } catch (SQLException throwables) {
