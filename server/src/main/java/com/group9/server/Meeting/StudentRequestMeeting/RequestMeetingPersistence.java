@@ -1,4 +1,4 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.StudentRequestMeeting;
 
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.stereotype.Component;

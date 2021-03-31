@@ -1,4 +1,4 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.StudentRequestMeeting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -60,7 +60,8 @@ public class RequestMeetingLogic implements IRequestMeetingLogic {
                     String RaisedFor = set.getString(2);
                     String RaisedOn = set.getString(3);
                     String Status=set.getString(4);
-                    MeetingDetails meetingDetails = new MeetingDetails(MeetingId,RaisedFor,RaisedOn,Status);
+                    String facultyResponse=set.getString(5);
+                    MeetingDetails meetingDetails = new MeetingDetails(MeetingId,RaisedFor,RaisedOn,Status,facultyResponse);
                     details.add(meetingDetails);
                 }
         } catch (SQLException throwables) {

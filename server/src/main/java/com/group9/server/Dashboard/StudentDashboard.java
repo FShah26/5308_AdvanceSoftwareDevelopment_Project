@@ -2,7 +2,7 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Announcements.Student.ViewAnnouncements;
 import com.group9.server.Feedback.IFeedback;
-import com.group9.server.Meeting.IRequestMeeting;
+import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
 import com.group9.server.Notifications.ViewUserNotifications;
 import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
