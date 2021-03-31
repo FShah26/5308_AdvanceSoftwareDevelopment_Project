@@ -1,14 +1,15 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.FacultyManageMeeting;
 
 import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MeetingOptionValidator implements IUserInputValidator {
+public class ManageMeetingOptionValidator implements IUserInputValidator {
 
     String regex;
-    public MeetingOptionValidator() {
-        this.regex = "^\\s*([1-2]|\\*)\\s*$";
+
+    public ManageMeetingOptionValidator() {
+        this.regex = "^\\s*([1-3]|\\*)\\s*$";
     }
 
     @Override

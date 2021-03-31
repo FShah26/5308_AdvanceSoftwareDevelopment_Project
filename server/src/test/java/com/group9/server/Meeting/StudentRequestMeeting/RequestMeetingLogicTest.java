@@ -1,5 +1,8 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.StudentRequestMeeting;
 
+import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeetingLogic;
+import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeetingPersistence;
+import com.group9.server.Meeting.StudentRequestMeeting.RequestMeetingLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

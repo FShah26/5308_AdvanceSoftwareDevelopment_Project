@@ -1,4 +1,4 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.StudentRequestMeeting;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

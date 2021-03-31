@@ -1,8 +1,6 @@
-package com.group9.server.Meeting.Faculty;
+package com.group9.server.Meeting.FacultyManageMeeting;
 
-import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Login.IUserInputValidator;
-import com.group9.server.Meeting.MeetingDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -27,7 +25,6 @@ public class ManageMeetingLogic implements IManageMeetingLogic{
     @Override
     public Boolean meetingLogic(String selectedOption)
     {
-        String output="";
         if (this.managemeetingvalidate.validate(selectedOption)){
             return true;
         }

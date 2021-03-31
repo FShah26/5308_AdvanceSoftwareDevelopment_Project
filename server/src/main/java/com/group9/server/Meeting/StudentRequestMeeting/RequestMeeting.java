@@ -1,8 +1,7 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.StudentRequestMeeting;
 
 import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Login.IUserInputValidator;
-import com.group9.server.Meeting.Faculty.IManageMeetingLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

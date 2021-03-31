@@ -1,4 +1,4 @@
-package com.group9.server.Meeting;
+package com.group9.server.Meeting.StudentRequestMeeting;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

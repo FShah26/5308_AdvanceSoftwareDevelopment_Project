@@ -1,9 +1,9 @@
 package com.group9.server.UpcomingLecture;
 
 import com.group9.server.Dashboard.IDashboard;
-import com.group9.server.Meeting.ICourseSelectionValidator;
-import com.group9.server.Meeting.IRequestMeetingLogic;
-import com.group9.server.Meeting.RegisteredCourses;
+import com.group9.server.Meeting.StudentRequestMeeting.ICourseSelectionValidator;
+import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeetingLogic;
+import com.group9.server.Meeting.StudentRequestMeeting.RegisteredCourses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

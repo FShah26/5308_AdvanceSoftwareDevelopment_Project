@@ -1,16 +1,9 @@
-package com.group9.server.Meeting.Faculty;
+package com.group9.server.Meeting.FacultyManageMeeting;
 
 import com.group9.server.Login.IUserInputValidator;
-import com.group9.server.ManageLecture.IManageLectureLogic;
-import com.group9.server.ManageLecture.IManageLecturePersistence;
-import com.group9.server.Meeting.MeetingOptionValidator;
-import com.group9.server.Notifications.NotificationPersistence;
-import com.group9.server.Notifications.ViewUserNotifications;
-import com.group9.server.Notifications.ViewUserNotificationsImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mockito;
@@ -18,7 +11,6 @@ import org.mockito.Mockito;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class ManageMeetingLogicTest {

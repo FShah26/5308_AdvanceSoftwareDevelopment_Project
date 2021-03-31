@@ -2,8 +2,7 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
-import com.group9.server.Meeting.Faculty.IManageMeeting;
-import com.group9.server.Meeting.Faculty.ManageMeeting;
+import com.group9.server.Meeting.FacultyManageMeeting.IManageMeeting;
 import com.group9.server.Notifications.ViewUserNotifications;
 import com.group9.server.Quiz.IQuiz;
 import org.springframework.beans.factory.annotation.Autowired;
