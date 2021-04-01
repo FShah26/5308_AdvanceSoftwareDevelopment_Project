@@ -5,6 +5,7 @@ import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
 import com.group9.server.Notifications.ViewUserNotifications;
+import com.group9.server.Quiz.Student.IQuizAssessment;
 import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,8 @@ public class StudentDashboard implements IDashboard {
     ViewUserNotifications notifications;
     @Autowired
     UpcomingLectureDisplay lecture;
+    @Autowired
+    IQuizAssessment quizAssessment;
     private String username;
 
     @Autowired
@@ -108,9 +111,11 @@ public class StudentDashboard implements IDashboard {
 
                     feedback.addFeedback(username, student_name, fb, faculty);
                     break;
+                case "9":
+                    quizAssessment.showQuizMenu(this.username);
 
                 default:
-                    out.println("Coming up!");
+                    dashboard();
             }
         } else {
             displayInvalidMenuOptionMsg();
