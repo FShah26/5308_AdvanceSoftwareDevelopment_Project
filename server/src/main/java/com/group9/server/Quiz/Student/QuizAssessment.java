@@ -50,7 +50,7 @@ public class QuizAssessment implements IQuizAssessment {
                     assessQuiz();
                     break;
                 case "2":
-                    //call view grades
+                    viewQuiz();
                     break;
                 default:
                     break;
@@ -76,8 +76,11 @@ public class QuizAssessment implements IQuizAssessment {
             }
             showQuizMenu(this.studentId);
         }
+    }
 
-
+    @Override
+    public void viewQuiz() {
+        quizAssessmentLogic.viewGrades(this.studentId);
     }
 
     public String getValidCourseIdInput() {

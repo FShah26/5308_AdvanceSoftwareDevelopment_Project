@@ -51,4 +51,11 @@ public class GradingPersistence implements IGradingPersistence {
         statement.execute();
         return statement.getBoolean("isSuccessful");
     }
+    @Override
+    public ResultSet Grades(String studentId) throws SQLException {
+        CallableStatement statement = con.prepareCall("{call view_grades(?)}");
+        statement.setString(1, studentId);
+        ResultSet set = statement.executeQuery();
+        return set;
+    }
 }
