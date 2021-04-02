@@ -4,6 +4,7 @@ import com.group9.server.Quiz.IQuizPersistence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -11,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.mockito.stubbing.OngoingStubbing;
 
+import javax.swing.text.View;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -192,6 +194,4 @@ public class QuizAssessmentLogicTest {
     public void updateGradesTest2(String courseId, String studentId, String quizNumber, double grades, int attempt, Timestamp lastAttemptTimestamp) {
         Assertions.assertTrue(underTest.updateGrades(courseId, studentId, quizNumber, grades, attempt, lastAttemptTimestamp));
     }
-
-
 }

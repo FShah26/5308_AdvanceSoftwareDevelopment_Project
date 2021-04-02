@@ -10,4 +10,6 @@ public interface IGradingPersistence {
     boolean updateStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException;
 
     ResultSet fetchPreviousGrades(String courseId, String studentId, String quizNumber) throws SQLException;
+
+    ResultSet Grades(String studentId) throws SQLException;
 }
