@@ -9,8 +9,6 @@ public class adminImpl implements IUser {
     private final String Role;
     @Autowired
     IUserAuthLogic userAuthService;
-    private String Username;
-    private String Password;
 
     @Autowired
     public adminImpl() {
