@@ -1,6 +1,6 @@
 package com.group9.server.StudentDashboard;
 
-import com.group9.server.Announcements.Student.ViewAnnouncements;
+import com.group9.server.Announcements.Student.IViewAnnouncements;
 import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Dashboard.StudentDashboard;
 import com.group9.server.Database.ISingletonDatabase;
@@ -18,7 +18,7 @@ public class StudentDashboardTest {
     InputValidator mockValidator = Mockito.mock(InputValidator.class);
     IStudentNotes mockStudentNotes = Mockito.mock(IStudentNotes.class);
     IFeedback mockFeedback = Mockito.mock(IFeedback.class);
-    ViewAnnouncements announcements = Mockito.mock(ViewAnnouncements.class);
+    IViewAnnouncements announcements = Mockito.mock(IViewAnnouncements.class);
     ViewUserNotifications notifications = Mockito.mock(ViewUserNotifications.class);
     IRequestMeeting meeting = Mockito.mock(IRequestMeeting.class);
     IUpcomingLectureDisplay lecture = Mockito.mock(IUpcomingLectureDisplay.class);

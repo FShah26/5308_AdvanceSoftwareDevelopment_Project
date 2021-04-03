@@ -1,19 +1,18 @@
 package com.group9.server.Meeting.StudentRequestMeeting;
 
 public class MeetingDetails {
-    String MeetingId;
-    String RaisedFor;
-    String RaisedOn;
-    String Status;
+    String meetingId;
+    String raisedFor;
+    String raisedOn;
+    String status;
     String facultyResponse;
 
-    public MeetingDetails(String MeetingId,String RaisedFor,String RaisedOn,String Status,String facultyResponse)
-    {
-        this.MeetingId=MeetingId;
-        this.RaisedFor=RaisedFor;
-        this.RaisedOn=RaisedOn;
-        this.Status = Status;
-        this.facultyResponse=facultyResponse;
+    public MeetingDetails(String meetingId, String raisedFor, String raisedOn, String status, String facultyResponse) {
+        this.meetingId = meetingId;
+        this.raisedFor = raisedFor;
+        this.raisedOn = raisedOn;
+        this.status = status;
+        this.facultyResponse = facultyResponse;
     }
 }
 

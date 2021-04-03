@@ -80,7 +80,7 @@ public class FacultyDashboard implements IDashboard {
                     manageLecture.showManageLectureMenu(this.username);
                     break;
                 case "3":
-                    announcementInput.make_announcement(this.role,this.username);
+                    announcementInput.announcement(this.role,this.username);
                     break;
                 case "4":
                     manageMeeting.display(username);

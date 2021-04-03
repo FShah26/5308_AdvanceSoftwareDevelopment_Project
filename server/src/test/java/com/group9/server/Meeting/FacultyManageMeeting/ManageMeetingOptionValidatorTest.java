@@ -14,7 +14,7 @@ class ManageMeetingOptionValidatorTest {
             "1,true",
             "7,false",
     })
-    void validateTest(String selection,boolean expectedOutput) {
-        Assertions.assertEquals(expectedOutput,valid.validate(selection));
+    void validateTest(String selection, boolean expectedOutput) {
+        Assertions.assertEquals(expectedOutput, valid.validate(selection));
     }
 }

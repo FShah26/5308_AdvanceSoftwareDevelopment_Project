@@ -1,8 +1,5 @@
 package com.group9.server.Meeting.FacultyManageMeeting;
 
-import com.group9.server.Dashboard.IDashboard;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -12,18 +9,14 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class ManageMeeting implements IManageMeeting{
+public class ManageMeeting implements IManageMeeting {
 
-    IDashboard dash;
-    IManageMeetingLogic meetingLogic;
+    IManageMeetingLogic manageMeetingLogic;
     String facultyId;
-    Scanner sc=new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
-    @Autowired
-    public ManageMeeting(@Qualifier("facultyDashboard") IDashboard dash,IManageMeetingLogic meetingLogic)
-    {
-        this.dash = dash;
-        this.meetingLogic=meetingLogic;
+    public ManageMeeting(IManageMeetingLogic manageMeetingLogic) {
+        this.manageMeetingLogic = manageMeetingLogic;
     }
 
     @Override
@@ -42,76 +35,68 @@ public class ManageMeeting implements IManageMeeting{
 
     @Override
     public void selectMenu() throws SQLException {
-        String menuOption = sc.nextLine();
+        String menuOption = scanner.nextLine();
         checkInput(menuOption);
     }
 
     public void manageMeetingAction(String selection) {
         try {
             if (selection.equals("*")) {
-                dash.showDashboard();
-            }
-            else {
-                    ArrayList<ManageMeetingDetails> details = meetingLogic.viewMeetings(this.facultyId, selection);
-                    if (details.size() > 0) {
-                    out.println("________________________________________________________________________________________________________________________________");
-                    out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n", "MeetingID", "Raised By", "Course", "Requested On", "Status", "Reason");
-                    out.println("--------------------------------------------------------------------------------------------------------------------------------");
-                    for (ManageMeetingDetails m : details) {
-                        out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n", m.meetingId, m.raisedBy, m.raisedFor, m.raisedOn, m.status, m.reason);
+                System.out.println("Back to Dashboard");
+            } else {
+                ArrayList<ManageMeetingDetails> details = manageMeetingLogic.viewMeetings(this.facultyId, selection);
+                if (details.size() > 0) {
+                    System.out.println("________________________________________________________________________________________________________________________________");
+                    System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n", "MeetingID", "Raised By", "Course", "Requested On", "Status", "Reason");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
+                    for (ManageMeetingDetails meeting : details) {
+                        System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n", meeting.meetingId, meeting.raisedBy, meeting.raisedFor, meeting.raisedOn, meeting.status, meeting.reason);
                     }
                     if (selection.equals("1")) {
-                        out.println("Do you want to respond to any meeting request? ");
-                        out.println("yes");
-                        out.println("no");
-                        String userinput = sc.nextLine();
+                        System.out.println("Do you want to respond to any meeting request? ");
+                        System.out.println("yes");
+                        System.out.println("no");
+                        String userinput = scanner.nextLine();
 
                         if (userinput.equals("yes")) {
-                            out.println("Enter meeting id for which you want to respond:");
-                            String meetId = sc.nextLine();
-                            out.println("Enter meeting Response(Approve/Reject): ");
-                            String decision = sc.nextLine();
-                            out.println("Enter response text:");
-                            String response = sc.nextLine();
-                            if (meetingLogic.validateinput(meetId, decision) && response.length() > 0) {
-                                String output = meetingLogic.respondMeetingRequest(Integer.parseInt(meetId), decision, response);
-                                out.println(output);
-                            }
-                            else {
-                                out.println("Incorrect inputs provided..");
+                            System.out.println("Enter meeting id for which you want to respond:");
+                            String meetId = scanner.nextLine();
+                            System.out.println("Enter meeting Response(Approve/Reject): ");
+                            String decision = scanner.nextLine();
+                            System.out.println("Enter response text:");
+                            String response = scanner.nextLine();
+                            if (manageMeetingLogic.validateInput(meetId, decision) && response.length() > 0) {
+                                String output = manageMeetingLogic.respondMeetingRequest(Integer.parseInt(meetId), decision, response);
+                                System.out.println(output);
+                            } else {
+                                System.out.println("Incorrect inputs provided..");
                                 checkInput(selection);
                             }
-                        }
-                        else if (userinput.equals("no")) {
+                        } else if (userinput.equals("no")) {
                             display(this.facultyId);
-                        }
-                        else {
-                            out.print("Incorrect Input");
+                        } else {
+                            System.out.print("Incorrect Input");
                         }
                     }
-                }
-                else {
-                    out.println("Seems like you don't have any request in this state..");
+                } else {
+                    System.out.println("Seems like you don't have any request in this state..");
                 }
             }
-        }
-        catch (Exception ex){
-            out.println("Error occurred");
+        } catch (Exception ex) {
+            System.out.println("Error occurred");
         }
     }
 
     @Override
-    public void checkInput(String selection){
+    public void checkInput(String selection) {
         try {
-            if (meetingLogic.meetingLogic(selection)) {
+            if (manageMeetingLogic.meetingValidation(selection)) {
                 manageMeetingAction(selection);
-            }
-            else {
+            } else {
                 displayInvalidMenuOptionMsg();
                 selectMenu();
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             out.println("System got some error");
         }
     }

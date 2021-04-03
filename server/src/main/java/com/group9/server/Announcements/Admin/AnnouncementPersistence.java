@@ -9,6 +9,8 @@ import java.sql.*;
 @Component
 public class AnnouncementPersistence implements IAnnouncementPersistence {
 
+    final String MAKE_ANNOUNCEMENT = "{call Make_NewAnnouncement(?, ?, ?, ?, ?)}";
+    final String GET_COURSES = "{call get_assigned_courses(?)}";
     Connection connection;
 
     public AnnouncementPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -19,10 +21,8 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
     @Override
     public String InsertAnnouncement(String userRole, String courseId, String message, String userId) {
         String output = "";
-        try (
-                CallableStatement statement = connection.prepareCall("{call Make_NewAnnouncement(?, ?, ?, ?, ?)}")
-        ) {
-
+        try {
+            CallableStatement statement = connection.prepareCall(MAKE_ANNOUNCEMENT);
             statement.registerOutParameter(5, Types.VARCHAR);
             statement.setString(1, userId);
             statement.setString(2, userRole);
@@ -39,9 +39,8 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
     }
 
     public ResultSet getFacultyCourses(String facultyId) throws SQLException {
-        String output = "";
         ResultSet set = null;
-        CallableStatement statement = connection.prepareCall("{call get_assigned_courses(?)}");
+        CallableStatement statement = connection.prepareCall(GET_COURSES);
         statement.setString(1, facultyId);
         set = statement.executeQuery();
         return set;

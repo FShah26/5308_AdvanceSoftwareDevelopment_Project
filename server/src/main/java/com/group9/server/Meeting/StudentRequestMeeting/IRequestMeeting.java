@@ -4,8 +4,12 @@ import java.sql.SQLException;
 
 public interface IRequestMeeting {
     void meetingDisplay(String username) throws SQLException;
+
     void selectMenu() throws SQLException;
-    void checkinput(String selection) throws SQLException;
+
+    void checkInput(String selection) throws SQLException;
+
     void manageMeetingAction(String selection);
-    void selectCourse(int i)throws SQLException;
+
+    void selectCourse(int select) throws SQLException;
 }

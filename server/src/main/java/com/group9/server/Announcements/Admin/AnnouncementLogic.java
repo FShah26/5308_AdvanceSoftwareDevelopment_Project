@@ -1,6 +1,5 @@
 package com.group9.server.Announcements.Admin;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -11,15 +10,18 @@ import java.util.List;
 @Component
 public class AnnouncementLogic implements IAnnouncementLogic {
 
-    @Autowired
     IValidateAnnouncementMade validate;
-    @Autowired
     IAnnouncementPersistence persist;
 
+    public AnnouncementLogic(IValidateAnnouncementMade validate, IAnnouncementPersistence persist) {
+        this.validate = validate;
+        this.persist = persist;
+    }
+
     @Override
-    public String make_announcement(String userRole, String courseId, String message, String userId) {
+    public String makeAnnouncement(String userRole, String courseId, String message, String userId) {
         String output;
-        if (validate.validate_announcement(message)) {
+        if (validate.validateAnnouncement(message)) {
             try {
                 output = persist.InsertAnnouncement(userRole, courseId, message, userId);
             } catch (Exception ex) {

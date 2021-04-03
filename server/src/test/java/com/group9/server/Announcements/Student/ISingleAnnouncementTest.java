@@ -3,12 +3,12 @@ package com.group9.server.Announcements.Student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SingleAnnouncementTest {
-    SingleAnnouncement underTest;
+public class ISingleAnnouncementTest {
+    ISingleAnnouncement underTest;
 
     @BeforeEach
     public void setUp() {
-        underTest = new SingleAnnouncementImpl();
+        underTest = new SingleAnnouncement();
     }
 
     @Test

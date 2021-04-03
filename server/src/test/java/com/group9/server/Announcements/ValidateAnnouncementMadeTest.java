@@ -16,7 +16,7 @@ class ValidateAnnouncementMadeTest {
     @DisplayName("validate_announcementTest")
     void validate_announcementTest(String value, boolean expectedOutput) {
         ValidateAnnouncementMade validator = new ValidateAnnouncementMade();
-        boolean testOutput = validator.validate_announcement(value);
+        boolean testOutput = validator.validateAnnouncement(value);
         Assertions.assertEquals(testOutput, expectedOutput);
     }
 }

@@ -5,14 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-class AnnouncementListTest {
+class IAnnouncementListTest {
 
-    AnnouncementList underTest;
-    SingleAnnouncement singleAnnouncementMock;
+    IAnnouncementList underTest;
+    ISingleAnnouncement singleAnnouncementMock;
 
     @BeforeEach
     void setUp() {
-        underTest = new AnnouncementListImpl();
+        underTest = new AnnouncementList();
     }
 
     @Test
@@ -24,7 +24,7 @@ class AnnouncementListTest {
     @Test
     @DisplayName("addAnnouncementTest")
     void addAnnouncementTest() {
-        singleAnnouncementMock = Mockito.mock(SingleAnnouncement.class);
+        singleAnnouncementMock = Mockito.mock(ISingleAnnouncement.class);
         underTest.addAnnouncement(singleAnnouncementMock);
     }
 }

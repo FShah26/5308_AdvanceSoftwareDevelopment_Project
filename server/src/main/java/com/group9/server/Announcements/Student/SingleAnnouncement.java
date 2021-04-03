@@ -1,9 +1,22 @@
 package com.group9.server.Announcements.Student;
 
-public interface SingleAnnouncement {
-    void printAnnouncement();
+public class SingleAnnouncement implements ISingleAnnouncement {
+    private String userID;
+    private String announcement;
 
-    void setUserID(String id);
+    @Override
+    public void printAnnouncement() {
+        System.out.println(userID);
+        System.out.println("  Message: " + announcement + "\n");
+    }
 
-    void setAnnouncement(String announcement);
+    @Override
+    public void setUserID(String id) {
+        this.userID = id;
+    }
+
+    @Override
+    public void setAnnouncement(String announcement) {
+        this.announcement = announcement;
+    }
 }
