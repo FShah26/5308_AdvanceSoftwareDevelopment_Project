@@ -71,8 +71,8 @@ public class AddUser {
     public void validateInput(String input) throws SQLException {
         if (this.inputValidator.validate(input)) {
             String output = validate.validateInput(id, userId, password, userType);
-            String toProceed = "true";
-            if (output.equals(toProceed)) {
+            final String TO_PROCEED = "true";
+            if (output.equals(TO_PROCEED)) {
                 addUserService.addUser(id, userId, password, userType);
                 addUserService.addUserDetails(userId, userType, name, emailAddress, department);
                 dash.dashboard();

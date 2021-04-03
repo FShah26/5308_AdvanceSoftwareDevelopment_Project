@@ -22,11 +22,11 @@ public class EnrollStudent {
     IDashboard dash;
     InputValidator inputValidator;
     @Autowired
-    IEnrollStudentLogic enrollstudent;
+    IEnrollStudentLogic enrollStudent;
     String userId;
     String courseId;
     String Term;
-    Scanner sc;
+    Scanner scanner;
 
     public EnrollStudent() {
         this.inputValidator = new AdminInputValidator();
@@ -36,13 +36,13 @@ public class EnrollStudent {
         out.println("**********************************************************");
         out.println("      ENTER DETAILS TO ENROLL NEW STUDENT TO A COURSE     ");
         out.println("**********************************************************");
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         out.print("Enter User ID : ");
-        userId = sc.nextLine();
+        userId = scanner.nextLine();
         out.print("Enter Course ID : ");
-        courseId = sc.nextLine();
+        courseId = scanner.nextLine();
         out.print("Enter Term : ");
-        Term = sc.nextLine();
+        Term = scanner.nextLine();
 
         out.println("-->Press 1 to confirm");
         out.println("-->Press 2 to Cancel");
@@ -51,16 +51,16 @@ public class EnrollStudent {
     }
 
     public void SelectMenu() throws SQLException {
-        String menuOption = sc.nextLine();
+        String menuOption = scanner.nextLine();
         ValidateInput(menuOption);
     }
 
     public void ValidateInput(String input) throws SQLException {
         if (this.inputValidator.validate(input)) {
-            String output = validate.validate_input(userId, courseId, Term);
-
-            if (output.equals("true")) {
-                enrollstudent.enrollStudent(userId, courseId, Term);
+            String output = validate.validateInput(userId, courseId, Term);
+            final String TO_PROCEED = "true";
+            if (output.equals(TO_PROCEED)) {
+                enrollStudent.enrollStudent(userId, courseId, Term);
                 dash.dashboard();
             } else
                 out.println(output);
