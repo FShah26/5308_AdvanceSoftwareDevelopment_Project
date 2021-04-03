@@ -3,6 +3,11 @@ package com.group9.server.Announcements.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class AnnouncementLogic implements IAnnouncementLogic {
 
@@ -11,11 +16,11 @@ public class AnnouncementLogic implements IAnnouncementLogic {
     @Autowired
     IAnnouncementPersistence persist;
     @Override
-    public String make_announcement(String userRole,String message,String userId) {
+    public String make_announcement(String userRole,String courseId,String message,String userId) {
         String output;
        if(validate.validate_announcement(message)){
            try {
-               output = persist.InsertAnnouncement(userRole, message,userId);
+               output = persist.InsertAnnouncement(userRole,courseId ,message,userId);
            }
            catch(Exception ex){
                output ="Failed to make announcement";
@@ -26,5 +31,32 @@ public class AnnouncementLogic implements IAnnouncementLogic {
            output="Please enter only valid message with upto 2000 characters...";
        }
         return output;
+    }
+
+    public int validateCourseId(String facultyId, String courseId) {
+        List<String> lstStudentCourse = new ArrayList<>();
+        ResultSet set = null;
+        try {
+            set = persist.getFacultyCourses(facultyId);
+            if (null == set || set.next() == false) {
+                System.out.println("No course assigned to you");
+                return -1;
+            } else {
+                lstStudentCourse.add(set.getString(1));
+                while (set.next()) {
+                    lstStudentCourse.add(set.getString(1));
+                }
+            }
+            if (lstStudentCourse.contains(courseId)) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Error validating courseId");
+            ex.getMessage();
+            return -1;
+        }
+        System.out.println("Incorrect Course Id");
+        return 0;
     }
 }

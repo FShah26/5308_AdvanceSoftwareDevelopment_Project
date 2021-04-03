@@ -7,31 +7,38 @@ import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import static java.lang.System.out;
+
 @Component
-public class AnnoucementInput implements IAnnouncementInput {
+public class FacultyAnnouncement implements IAnnouncementInput{
 
     @Autowired
-    IAnnouncementLogic logic;
+    IAnnouncementLogic announcementLogic;
     @Autowired
-    @Qualifier("adminDashboard")
+    @Qualifier("facultyDashboard")
     IDashboard dash;
     String input;
     Scanner sc;
     String userRole;
     String userId;
+    String courseId;
+
 
     @Override
-    public void make_announcement(String userRole,String userId) throws SQLException {
+    public void make_announcement(String userRole, String userId) throws SQLException {
+        this.userRole = userRole;
+        this.userId =userId;
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
+        this.courseId = getValidCourseIdInput();
         sc = new Scanner(System.in);
         System.out.print("Enter New Announcement : ");
         input = sc.nextLine();
-        this.userRole = userRole;
-        this.userId =userId;
         select_option();
     }
+
     @Override
     public void select_option() throws SQLException {
         String print_output;
@@ -40,7 +47,7 @@ public class AnnoucementInput implements IAnnouncementInput {
 
         String menuOption = sc.nextLine();
         if(menuOption.equals("1")){
-            print_output =  logic.make_announcement(userRole,null,input,userId);
+            print_output =  announcementLogic.make_announcement(userRole,courseId,input,userId);
             System.out.println(print_output);
             dash.dashboard();
         }
@@ -52,5 +59,20 @@ public class AnnoucementInput implements IAnnouncementInput {
             System.out.println("Please select correct option");
             select_option();
         }
+    }
+
+    public String getValidCourseIdInput() {
+        int state = 0;
+        Scanner sc = new Scanner(System.in);
+        out.println("Enter CourseId: ");
+        String courseId = sc.nextLine();
+        while ((state = announcementLogic.validateCourseId(this.userId, courseId)) == 0) {
+            out.println("Enter a valid courseID: ");
+            courseId = sc.nextLine();
+        }
+        if (state == -1) {
+            return null;
+        }
+        return courseId;
     }
 }

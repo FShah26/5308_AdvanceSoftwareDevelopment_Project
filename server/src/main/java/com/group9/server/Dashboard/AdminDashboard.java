@@ -5,6 +5,7 @@ import com.group9.server.CourseCreation.ICreateCourse;
 import com.group9.server.StudentCourseEnrollment.EnrollStudent;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ public class AdminDashboard implements IDashboard {
     String userrole;
 
     InputValidator inputValidator;
+    @Qualifier("annoucementInput")
     @Autowired
     IAnnouncementInput announcement;
     @Autowired
@@ -36,16 +38,16 @@ public class AdminDashboard implements IDashboard {
     @Override
     public void dashboard() throws SQLException {
 
-        System.out.println("************************************************");
-        System.out.println("                 ADMIN DASHBOARD                ");
-        System.out.println("************************************************");
+        out.println("************************************************");
+        out.println("                 ADMIN DASHBOARD                ");
+        out.println("************************************************");
 
-        System.out.println("Press 1 --> Enter Course and Assign Faculty.");
-        System.out.println("Press 2 --> Add New User.");
-        System.out.println("Press 3 --> Student Course Enrollment.");
-        System.out.println("Press 4 --> Making General Announcement.");
-        System.out.println("Press 5 --> To Log Out.");
-        System.out.println();
+        out.println("Press 1 --> Enter Course and Assign Faculty.");
+        out.println("Press 2 --> Add New User.");
+        out.println("Press 3 --> Student Course Enrollment.");
+        out.println("Press 4 --> Making General Announcement.");
+        out.println("Press 5 --> To Log Out.");
+        out.println();
         selectMenu();
     }
 
@@ -71,7 +73,7 @@ public class AdminDashboard implements IDashboard {
             } else if (selection.equals("4")) {
                 announcement.make_announcement(userrole, username);
             } else {
-                System.out.println("Yet to develop..");
+                out.println("Yet to develop..");
             }
         } else {
             displayInvalidMenuOptionMsg();
