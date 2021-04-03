@@ -1,9 +1,9 @@
 package com.group9.server.Notes;
 
 public interface IStudentNotes {
-    void viewNotes(String studentID, String courseID);
+    void viewNotes(String studentId, String courseId);
 
-    void addNotes(String studentID, String courseID, String notes);
+    void addNotes(String studentId, String courseId, String notes);
 
     String getCourseInput();
 

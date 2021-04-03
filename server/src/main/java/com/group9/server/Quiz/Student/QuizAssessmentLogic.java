@@ -237,7 +237,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     public ArrayList<ViewGrades> gradeList(String studentId) {
         ArrayList<ViewGrades> grades = new ArrayList<ViewGrades>();
         try{
-            ResultSet set = gradingPersistence.Grades(studentId);
+            ResultSet set = gradingPersistence.grades(studentId);
             while (set.next()) {
                 String courseId=set.getString(1);
                 String quizId = set.getString(2);

@@ -17,7 +17,8 @@ public class NotificationPersistenceImpl implements NotificationPersistence {
 
     @Override
     public ResultSet fetchNotificationsFromDatabase(String user) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_user_notifications(?)}");
+        final String FETCH_USER_NOTIFICATION = "{call fetch_user_notifications(?)}";
+        CallableStatement statement = con.prepareCall(FETCH_USER_NOTIFICATION);
         statement.setString(1, user);
         return statement.executeQuery();
     }

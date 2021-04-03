@@ -18,9 +18,11 @@ public class UserAuthenticationPersistence implements IUserAuthPersistence {
         String user = db.user;
         String password = db.password;
         Boolean output = false;
+        final String VERIFY_CREDENTIALS = "{call VerifyUserCredentials(?, ?, ?, ?)}";
         try (
                 Connection conn = DriverManager.getConnection(dbURL, user, password);
-                CallableStatement statement = conn.prepareCall("{call VerifyUserCredentials(?, ?, ?, ?)}")
+
+                CallableStatement statement = conn.prepareCall(VERIFY_CREDENTIALS)
         ) {
 
             statement.registerOutParameter(4, Types.VARCHAR);

@@ -10,14 +10,14 @@ class ValidateEnrollStudentTest {
     void invalid_input() {
         ValidateEnrollStudent ves = new ValidateEnrollStudent();
         Assertions.assertEquals("PLEASE ENTER VALID COURSE ID STARTING WITH CSCI",
-                ves.validate_input("5","CSC213","summer"));
+                ves.validateInput("5","CSC213","summer"));
     }
 
     @Test
     void valid_input() {
         ValidateEnrollStudent ves = new ValidateEnrollStudent();
         Assertions.assertEquals("true",
-                ves.validate_input("4","CSCI200","winter"));
+                ves.validateInput("4","CSCI200","winter"));
     }
 
 }

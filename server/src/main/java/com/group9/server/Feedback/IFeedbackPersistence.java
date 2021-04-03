@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface IFeedbackPersistence {
-    ResultSet fetchFeedback(String faculty_id) throws SQLException;
+    ResultSet fetchFeedback(String facultyId) throws SQLException;
 
-    String insertFeedback(String user_id, String userName, String feedback, String faculty_id) throws SQLException;
+    String insertFeedback(String userId, String userName, String feedback, String facultyId) throws SQLException;
 
 }

@@ -15,10 +15,10 @@ public class StudentNotes implements IStudentNotes {
     }
 
     @Override
-    public void viewNotes(String studentID, String courseID) {
-        NotesList list = notesLogic.viewNotes(studentID, courseID);
+    public void viewNotes(String studentId, String courseId) {
+        NotesList list = notesLogic.viewNotes(studentId, courseId);
 
-        System.out.println("Notes for course ID: " + courseID);
+        System.out.println("Notes for course ID: " + courseId);
         if (list.notes.size() == 0) {
             System.out.println("Looks like you don't have any notes for this course");
         } else {
@@ -30,8 +30,8 @@ public class StudentNotes implements IStudentNotes {
     }
 
     @Override
-    public void addNotes(String studentID, String courseID, String notes) {
-        String message = notesLogic.addNotes(studentID, courseID, notes);
+    public void addNotes(String studentId, String courseId, String notes) {
+        String message = notesLogic.addNotes(studentId, courseId, notes);
         System.out.println(message);
     }
 

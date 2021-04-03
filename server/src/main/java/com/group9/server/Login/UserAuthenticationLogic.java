@@ -24,13 +24,13 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     @Override
     public ArrayList<String> getUserCredentials() {
         ArrayList<String> credentials = new ArrayList<String>();
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome User !");
         System.out.println("Please enter your username :");
-        username = sc.nextLine();
+        username = scanner.nextLine();
         credentials.add(username);
         System.out.println("Please enter your password :");
-        password = sc.nextLine();
+        password = scanner.nextLine();
         credentials.add(password);
 
         return credentials;

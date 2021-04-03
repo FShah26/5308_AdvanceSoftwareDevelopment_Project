@@ -18,9 +18,10 @@ public class EnrollStudentPersistence implements IEnrollStudentPersistence {
         String user = db.user;
         String pass = db.password;
         String output="";
+        final String STUDENT_COURSE_ENROLLMENT = "{call StudentCourseEnrollment(?, ?, ?, ?)}";
         try (
                 Connection conn = DriverManager.getConnection(dbURL, user, pass);
-                CallableStatement statement = conn.prepareCall("{call StudentCourseEnrollment(?, ?, ?, ?)}");
+                CallableStatement statement = conn.prepareCall(STUDENT_COURSE_ENROLLMENT);
         ) {
             statement.registerOutParameter(4, Types.VARCHAR);
             statement.setString(1, userId);

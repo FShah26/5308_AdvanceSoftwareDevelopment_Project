@@ -1,7 +1,7 @@
 package com.group9.server.Notes;
 
 public interface INotesLogic {
-    NotesList viewNotes(String studentID, String courseID);
+    NotesList viewNotes(String studentId, String courseId);
 
-    String addNotes(String studentID, String courseID, String notes);
+    String addNotes(String studentId, String courseId, String notes);
 }

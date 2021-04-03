@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class ValidateEnrollStudent implements IValidateEnrollStudent {
 
     @Override
-    public String validate_input(String userId,String courseId,String Term) {
+    public String validateInput(String userId,String courseId,String Term) {
 
         String output="";
         if(!(courseId).startsWith("CSCI"))

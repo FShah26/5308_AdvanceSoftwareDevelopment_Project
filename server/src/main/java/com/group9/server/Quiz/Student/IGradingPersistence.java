@@ -11,5 +11,5 @@ public interface IGradingPersistence {
 
     ResultSet fetchPreviousGrades(String courseId, String studentId, String quizNumber) throws SQLException;
 
-    ResultSet Grades(String studentId) throws SQLException;
+    ResultSet grades(String studentId) throws SQLException;
 }

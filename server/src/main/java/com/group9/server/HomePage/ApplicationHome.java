@@ -32,8 +32,8 @@ public class ApplicationHome implements IHomePage {
 
     @Override
     public String selectMenu() {
-        Scanner sc = new Scanner(System.in);
-        String menuOption = sc.nextLine();
+        Scanner scanner = new Scanner(System.in);
+        String menuOption = scanner.nextLine();
         validateSelectedMenuOption(menuOption);
         switch (menuOption.trim()) {
             case "1":
