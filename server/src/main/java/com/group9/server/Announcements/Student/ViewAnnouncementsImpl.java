@@ -15,6 +15,7 @@ public class ViewAnnouncementsImpl implements ViewAnnouncements {
     @Autowired
     public ViewAnnouncementsImpl(FetchAnnouncementsFromPersistence persistence) {
         announcementsPersistence = persistence;
+        // Creation of empty announcement list. Don't try to inject this.
         announcementList = new AnnouncementListImpl();
     }
 

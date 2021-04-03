@@ -1,23 +1,28 @@
 package com.group9.server.Announcements.Student;
 
+import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class FetchAnnouncementsImpl implements FetchAnnouncementsFromPersistence {
-    Connection con;
+    Connection connection;
 
     @Autowired
-    public FetchAnnouncementsImpl(DBConfig config) throws SQLException {
-        con = DriverManager.getConnection(config.url, config.user, config.password);
+    public FetchAnnouncementsImpl(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
     }
 
     @Override
     public ResultSet fetchAnnouncementsFromDatabase() throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_announcements()}");
+        CallableStatement statement = connection.prepareCall("{call fetch_announcements()}");
         return statement.executeQuery();
     }
 }

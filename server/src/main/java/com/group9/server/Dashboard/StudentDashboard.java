@@ -1,6 +1,7 @@
 package com.group9.server.Dashboard;
 
 import com.group9.server.Announcements.Student.ViewAnnouncements;
+import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
@@ -19,6 +20,7 @@ import static java.lang.System.out;
 public class StudentDashboard implements IDashboard {
     InputValidator validator;
     IStudentNotes notes;
+    ISingletonDatabase database;
     @Autowired
     IRequestMeeting meeting;
     IFeedback feedback;
@@ -31,12 +33,13 @@ public class StudentDashboard implements IDashboard {
     private String username;
 
     @Autowired
-    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements, ViewUserNotifications notifications) {
+    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, ViewAnnouncements announcements, ViewUserNotifications notifications, ISingletonDatabase database) {
         this.validator = validator;
         this.notes = notes;
         this.feedback = feedback;
         this.announcements = announcements;
         this.notifications = notifications;
+        this.database = database;
     }
 
     @Override

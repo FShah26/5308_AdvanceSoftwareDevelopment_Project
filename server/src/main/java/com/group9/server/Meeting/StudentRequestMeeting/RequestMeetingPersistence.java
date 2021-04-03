@@ -1,5 +1,6 @@
 package com.group9.server.Meeting.StudentRequestMeeting;
 
+import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.stereotype.Component;
 
@@ -7,12 +8,11 @@ import java.sql.*;
 
 @Component
 public class RequestMeetingPersistence implements IRequestMeetingPersistence {
-    DBConfig config;
     Connection con;
 
-    public RequestMeetingPersistence(DBConfig config) throws SQLException {
-        this.config = config;
-        con = DriverManager.getConnection(config.url, config.user, config.password);
+    public RequestMeetingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        database = database.getInstance();
+        con = database.getConnection(config);
     }
 
     @Override
