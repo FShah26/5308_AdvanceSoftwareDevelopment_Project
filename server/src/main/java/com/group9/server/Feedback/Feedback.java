@@ -24,8 +24,8 @@ public class Feedback implements IFeedback {
 
 
     @Override
-    public void viewFeedback(String faculty_id) {
-        FeedbackList list = feedbackLogic.viewFeedback(faculty_id);
+    public void viewFeedback(String facultyId) {
+        FeedbackList list = feedbackLogic.viewFeedback(facultyId);
 
         if (list.feedback.size() == 0) {
             System.out.println("Looks like you don't have any feedback");
@@ -42,8 +42,8 @@ public class Feedback implements IFeedback {
     }
 
     @Override
-    public void addFeedback(String user_id, String userName, String feedback,String faculty_id) throws SQLException {
-        String message = feedbackLogic.addFeedback(user_id, userName, feedback, faculty_id);
+    public void addFeedback(String userId, String userName, String feedback,String facultyId) throws SQLException {
+        String message = feedbackLogic.addFeedback(userId, userName, feedback, facultyId);
         System.out.println(message);
         dashboard.dashboard();
     }

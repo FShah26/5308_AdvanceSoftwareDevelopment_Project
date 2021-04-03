@@ -19,21 +19,23 @@ public class FeedbackPersistence implements IFeedbackPersistence {
     }
 
     @Override
-    public ResultSet fetchFeedback(String faculty_id) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_feedback(?)}");
-        statement.setString(1, faculty_id);
+    public ResultSet fetchFeedback(String facultyId) throws SQLException {
+        final String FETCH_FEEDBACK = "{call fetch_feedback(?)}";
+        CallableStatement statement = con.prepareCall(FETCH_FEEDBACK);
+        statement.setString(1, facultyId);
         ResultSet set = statement.executeQuery();
         return set;
     }
 
     @Override
-    public String insertFeedback(String user_id, String userName, String feedback, String faculty_id) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call add_feedback(?, ?, ?, ?, ?)}");
+    public String insertFeedback(String userId, String userName, String feedback, String facultyId) throws SQLException {
+        final String ADD_FEEDBACK = "{call add_feedback(?, ?, ?, ?, ?)}";
+        CallableStatement statement = con.prepareCall(ADD_FEEDBACK);
         statement.registerOutParameter(5, Types.VARCHAR);
-        statement.setString(1, user_id);
+        statement.setString(1, userId);
         statement.setString(2, userName);
         statement.setString(3, feedback);
-        statement.setString(4,faculty_id);
+        statement.setString(4,facultyId);
         statement.execute();
 
         return statement.getString("message");

@@ -17,11 +17,11 @@ public class FeedbackLogic implements IFeedbackLogic {
     }
 
     @Override
-    public FeedbackList viewFeedback(String faculty_id) {
+    public FeedbackList viewFeedback(String facultyId) {
         FeedbackList feedback = new FeedbackList();
 
         try {
-            ResultSet set = persistence.fetchFeedback(faculty_id);
+            ResultSet set = persistence.fetchFeedback(facultyId);
 
             if (set != null) {
                 while (set.next()) {
@@ -41,10 +41,10 @@ public class FeedbackLogic implements IFeedbackLogic {
 
 
     @Override
-    public String addFeedback(String user_id, String userName, String feedback, String faculty_id) {
+    public String addFeedback(String userId, String userName, String feedback, String facultyId) {
         String message = "";
         try {
-            message = persistence.insertFeedback(user_id, userName, feedback, faculty_id);
+            message = persistence.insertFeedback(userId, userName, feedback, facultyId);
         } catch (SQLException exception) {
             System.out.println("Adding feedback failed");
             exception.printStackTrace();
