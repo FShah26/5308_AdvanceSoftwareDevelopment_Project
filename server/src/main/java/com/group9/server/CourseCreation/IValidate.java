@@ -1,5 +1,5 @@
 package com.group9.server.CourseCreation;
 
 public interface IValidate {
-    public String validate_input(String CourseID,String Credit,String FacultyID);
+    String validateInput(String CourseId, String Credit, String FacultyId);
 }

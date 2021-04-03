@@ -19,13 +19,14 @@ class ManageMeetingLogicTest {
     IUserInputValidator mockValidator = Mockito.mock(ManageMeetingOptionValidator.class);
     IManageMeetingLogic underTest;
     ResultSet mockSet = Mockito.mock(ResultSet.class);
+
     @BeforeEach
     void setUp() throws SQLException {
         when(mockSet.getString(1)).thenReturn("Hashik");
         when(mockValidator.validate("2")).thenReturn(true);
         when(mockValidator.validate("6")).thenReturn(false);
-        when(mockPersistence.meetingLog("1","utkarshp123")).thenReturn(mockSet);
-        underTest = new ManageMeetingLogic(mockValidator,mockPersistence);
+        when(mockPersistence.meetingLog("1", "utkarshp123")).thenReturn(mockSet);
+        underTest = new ManageMeetingLogic(mockPersistence);
     }
 
     @DisplayName("meetingLogicTest")
@@ -34,8 +35,8 @@ class ManageMeetingLogicTest {
             "2,true",
             "6,false",
     })
-    void meetingLogicTest(String value,boolean expectedOutput) {
-        Assertions.assertEquals(expectedOutput,underTest.meetingLogic(value));
+    void meetingLogicTest(String value, boolean expectedOutput) {
+        Assertions.assertEquals(expectedOutput, underTest.meetingValidation(value));
     }
 
     @DisplayName("validateinput")
@@ -44,8 +45,8 @@ class ManageMeetingLogicTest {
             "no,Approve,false",
             "1,Approve,true",
     })
-    void validateinputTest(String selection,String decision,boolean expectedOutput) {
-        Assertions.assertEquals(expectedOutput,underTest.validateinput(selection,decision));
+    void validateinputTest(String selection, String decision, boolean expectedOutput) {
+        Assertions.assertEquals(expectedOutput, underTest.validateInput(selection, decision));
     }
 
     @DisplayName("respondMeetingRequest")
@@ -53,7 +54,7 @@ class ManageMeetingLogicTest {
     @CsvSource({
             "12,Approve,Hi this is testcase",
     })
-    void respondMeetingRequestTest(int meetingid,String decision, String response) {
+    void respondMeetingRequestTest(int meetingid, String decision, String response) {
         Assertions.assertDoesNotThrow(() -> underTest.respondMeetingRequest(meetingid, decision, response));
     }
 }

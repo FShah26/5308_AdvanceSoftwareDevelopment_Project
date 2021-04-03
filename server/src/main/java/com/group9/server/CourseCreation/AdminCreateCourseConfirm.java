@@ -4,10 +4,11 @@ import com.group9.server.Dashboard.InputValidator;
 
 public class AdminCreateCourseConfirm implements InputValidator {
 
+    final String CONDITION = "^\\s*([1-2])\\s*$";
     String regex;
 
-    public AdminCreateCourseConfirm(){
-        this.regex="^\\s*([1-2])\\s*$";
+    public AdminCreateCourseConfirm() {
+        this.regex = CONDITION;
     }
 
     @Override

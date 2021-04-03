@@ -7,13 +7,11 @@ public class CourseSelectionValidator implements ICourseSelectionValidator {
     String regex;
 
     @Override
-    public boolean validate(String userInput, int courselength) {
-        if(courselength>0) {
-            this.regex = "^\\s*([1-" + courselength + "])\\s*$";
+    public boolean validate(String userInput, int courseLength) {
+        if (courseLength > 0) {
+            this.regex = "^\\s*([1-" + courseLength + "])\\s*$";
             return userInput.matches(this.regex);
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

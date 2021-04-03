@@ -8,15 +8,15 @@ class ValidateCourseCreationTest {
 
     @Test
     void invalid_input() {
-        ValidateCourseCreation vcc = new ValidateCourseCreation();
+        ValidateCourseCreation validate = new ValidateCourseCreation();
         Assertions.assertEquals("PLEASE ENTER VALID COURSE ID STARTING WITH CSCI",
-                vcc.validate_input("CSC213","4","FID12"));
+                validate.validateInput("CSC213", "4", "FID12"));
     }
 
     @Test
     void valid_input() {
-        ValidateCourseCreation vcc = new ValidateCourseCreation();
+        ValidateCourseCreation validate = new ValidateCourseCreation();
         Assertions.assertEquals("true",
-                vcc.validate_input("CSCI123","4","FID12"));
+                validate.validateInput("CSCI123", "4", "FID12"));
     }
 }

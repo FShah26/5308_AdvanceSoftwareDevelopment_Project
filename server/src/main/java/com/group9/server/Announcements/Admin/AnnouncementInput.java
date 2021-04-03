@@ -1,58 +1,51 @@
 package com.group9.server.Announcements.Admin;
 
-import com.group9.server.Dashboard.IDashboard;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
 @Component
-public class AnnoucementInput implements IAnnouncementInput {
+public class AnnouncementInput implements IAnnouncementInput {
 
-    @Autowired
-    IAnnouncementLogic logic;
-    @Autowired
-    @Qualifier("adminDashboard")
-    IDashboard dash;
+    IAnnouncementLogic announcementLogic;
     String input;
-    Scanner sc;
+    Scanner scanner;
     String userRole;
     String userId;
 
-    @Override
-    public void make_announcement(String userRole, String userId) throws SQLException {
-        System.out.println("************************************************");
-        System.out.println("                ENTER Announcement              ");
-        System.out.println("************************************************");
-        sc = new Scanner(System.in);
-        System.out.print("Enter New Announcement : ");
-        input = sc.nextLine();
-        this.userRole = userRole;
-        this.userId = userId;
-        select_option();
+    public AnnouncementInput(IAnnouncementLogic announcementLogic) {
+        this.announcementLogic = announcementLogic;
     }
 
     @Override
-    public void select_option() throws SQLException {
+    public void announcement(String userRole, String userId) throws SQLException {
+        System.out.println("************************************************");
+        System.out.println("                ENTER Announcement              ");
+        System.out.println("************************************************");
+        scanner = new Scanner(System.in);
+        System.out.print("Enter New Announcement : ");
+        input = scanner.nextLine();
+        this.userRole = userRole;
+        this.userId = userId;
+        selectOption();
+    }
+
+    @Override
+    public void selectOption() throws SQLException {
         String print_output;
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");
 
-        String menuOption = sc.nextLine();
+        String menuOption = scanner.nextLine();
         if (menuOption.equals("1")) {
-            print_output = logic.make_announcement(userRole, null, input, userId);
+            print_output = announcementLogic.makeAnnouncement(userRole, null, input, userId);
             System.out.println(print_output);
-            dash.showDashboard();
-        }
-        else if(menuOption.equals("2")){
-            dash.showDashboard();
-        }
-        else
-        {
+        } else if (menuOption.equals("2")) {
+            System.out.println("Back to Dashboard");
+        } else {
             System.out.println("Please select correct option");
-            select_option();
+            selectOption();
         }
     }
 }

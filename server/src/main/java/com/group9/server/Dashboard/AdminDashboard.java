@@ -16,15 +16,15 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
-    String username;
-    String userrole;
+    String userName;
+    String userRole;
 
     InputValidator inputValidator;
-    @Qualifier("annoucementInput")
+    @Qualifier("announcementInput")
     @Autowired
     IAnnouncementInput announcement;
     @Autowired
-    ICreateCourse cc;
+    ICreateCourse createCourse;
     @Autowired
     AddUser ac;
     @Autowired
@@ -32,7 +32,7 @@ public class AdminDashboard implements IDashboard {
 
     public AdminDashboard() {
         this.inputValidator = new AdminInputValidator();
-        this.userrole = "admin";
+        this.userRole = "admin";
     }
 
     @Override
@@ -52,8 +52,8 @@ public class AdminDashboard implements IDashboard {
     }
 
     @Override
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
     public void selectMenu() throws SQLException {
@@ -65,13 +65,13 @@ public class AdminDashboard implements IDashboard {
     public void checkInput(String selection) throws SQLException {
         if (this.inputValidator.validate(selection)) {
             if (selection.equals("1")) {
-                cc.creation();
+                createCourse.creation();
             } else if (selection.equals("2")) {
                 ac.creation();
             } else if (selection.equals("3")) {
                 es.creation();
             } else if (selection.equals("4")) {
-                announcement.make_announcement(userrole, username);
+                announcement.announcement(userRole, userName);
             } else {
                 out.println("Yet to develop..");
             }
@@ -79,6 +79,7 @@ public class AdminDashboard implements IDashboard {
             displayInvalidMenuOptionMsg();
             selectMenu();
         }
+        showDashboard();
     }
 
     public void displayInvalidMenuOptionMsg() {
