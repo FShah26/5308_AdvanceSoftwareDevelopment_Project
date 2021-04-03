@@ -4,12 +4,16 @@ import com.group9.server.Dashboard.AdminDashboard;
 import com.group9.server.Dashboard.FacultyDashboard;
 import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.StudentDashboard;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserDashboardFactory implements IUserDashboardFactory {
-    AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
+    ApplicationContext context;
+
+    public UserDashboardFactory(ApplicationContext context) {
+        this.context = context;
+    }
 
     @Override
     public IDashboard getDashboard(String userType, String userName) {
@@ -17,13 +21,13 @@ public class UserDashboardFactory implements IUserDashboardFactory {
 
         switch (userType) {
             case UserConstants.ADMIN:
-                userDashboard = ctx.getBean(AdminDashboard.class);
+                userDashboard = context.getBean(AdminDashboard.class);
                 break;
             case UserConstants.FACULTY:
-                userDashboard = ctx.getBean(FacultyDashboard.class);
+                userDashboard = context.getBean(FacultyDashboard.class);
                 break;
             case UserConstants.STUDENT:
-                userDashboard = ctx.getBean(StudentDashboard.class);
+                userDashboard = context.getBean(StudentDashboard.class);
                 break;
         }
         userDashboard.setUsername(userName);

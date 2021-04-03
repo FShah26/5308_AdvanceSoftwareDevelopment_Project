@@ -2,7 +2,6 @@ package com.group9.server.Login;
 
 import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.HomePage.IUserDashboardFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,10 +16,11 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     private String password;
     private boolean authStatus = false;
 
-    public UserAuthenticationLogic(IUserAuthPersistence userAuthPersistence, IUserDashboardFactory dashboardFactory){
+    public UserAuthenticationLogic(IUserAuthPersistence userAuthPersistence, IUserDashboardFactory dashboardFactory) {
         this.userAuthPersistence = userAuthPersistence;
         this.dashboardFactory = dashboardFactory;
     }
+
     @Override
     public IDashboard initiateLogin(String userRole) {
         List<String> credentials = getUserCredentials();
@@ -46,7 +46,7 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     public IDashboard validateUserCredentials(String uname, String pass, String userRole) {
         System.out.println("Validating Credentials...");
         authStatus = userAuthPersistence.authorizeUser(uname, pass, userRole);
-        if(authStatus) {
+        if (authStatus) {
             return dashboardFactory.getDashboard(userRole, userRole);
         }
         return null;

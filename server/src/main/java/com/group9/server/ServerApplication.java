@@ -1,10 +1,13 @@
 package com.group9.server;
 
 import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.Database.ISingletonDatabase;
+import com.group9.server.Database.SingletonDatabase;
 import com.group9.server.HomePage.HomePageConfiguration;
 import com.group9.server.HomePage.IHomePage;
 import com.group9.server.Login.IUserAuthLogic;
 import com.group9.server.Login.UserAuthenticationLogic;
+import com.group9.server.Database.DBConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +22,9 @@ public class ServerApplication implements CommandLineRunner {
     String userType;
     IUserAuthLogic authLogic;
     IDashboard userDashboard;
+    ISingletonDatabase database;
+    Connection connection;
+    IHomePage homePage;
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
@@ -26,7 +32,6 @@ public class ServerApplication implements CommandLineRunner {
 
     @Override
     public void run(String[] args) throws SQLException {
-        IHomePage homePage;
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
         authLogic = ctx.getBean(UserAuthenticationLogic.class);
         homePage = ctx.getBean("appHome", IHomePage.class);

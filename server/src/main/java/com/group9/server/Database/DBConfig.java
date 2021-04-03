@@ -1,4 +1,4 @@
-package com.group9.server.cnfg;
+package com.group9.server.Database;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

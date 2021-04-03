@@ -17,7 +17,7 @@ public class HomePageConfiguration {
     }
 
     @Bean
-    public AddUser add_user() {
+    public AddUser addUser() {
         return new AddUser();
     }
 }

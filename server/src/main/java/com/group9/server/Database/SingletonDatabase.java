@@ -1,6 +1,5 @@
 package com.group9.server.Database;
 
-import com.group9.server.cnfg.DBConfig;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
