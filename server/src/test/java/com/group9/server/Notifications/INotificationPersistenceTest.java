@@ -18,8 +18,8 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = DBConfig.class)
-class NotificationPersistenceTest {
-    NotificationPersistence underTest;
+class INotificationPersistenceTest {
+    INotificationPersistence underTest;
     ISingletonDatabase mockDatabase = mock(ISingletonDatabase.class);
 
     @Autowired
@@ -29,7 +29,7 @@ class NotificationPersistenceTest {
     void setUp() throws SQLException {
         when(mockDatabase.getInstance()).thenReturn(mockDatabase);
         when(mockDatabase.getConnection(config)).thenReturn(DriverManager.getConnection(config.url, config.user, config.password));
-        underTest = new NotificationPersistenceImpl(config, mockDatabase);
+        underTest = new NotificationPersistence(config, mockDatabase);
     }
 
     @Test

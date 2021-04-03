@@ -1,12 +1,11 @@
 package com.group9.server.Dashboard;
 
 import com.group9.server.Announcements.Student.IViewAnnouncements;
-import com.group9.server.Announcements.Student.ViewAnnouncements;
 import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
-import com.group9.server.Notifications.ViewUserNotifications;
+import com.group9.server.Notifications.IViewUserNotifications;
 import com.group9.server.Quiz.Student.IQuizAssessment;
 import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class StudentDashboard implements IDashboard {
     IRequestMeeting meeting;
     IFeedback feedback;
     IViewAnnouncements announcements;
-    ViewUserNotifications notifications;
+    IViewUserNotifications notifications;
     @Autowired
     UpcomingLectureDisplay lecture;
     @Autowired
@@ -34,7 +33,7 @@ public class StudentDashboard implements IDashboard {
     private String username;
 
     @Autowired
-    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, IViewAnnouncements announcements, ViewUserNotifications notifications, ISingletonDatabase database) {
+    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, IViewAnnouncements announcements, IViewUserNotifications notifications, ISingletonDatabase database) {
         this.validator = validator;
         this.notes = notes;
         this.feedback = feedback;

@@ -9,6 +9,8 @@ import java.sql.*;
 
 @Component
 public class NotesPersistence implements INotesPersistence {
+    final String FETCH_NOTES = "{call fetch_notes(?, ?)}";
+    final String ADD_NOTES = "{call add_notes(?, ?, ?, ?)}";
     Connection connection;
 
     @Autowired
@@ -19,7 +21,6 @@ public class NotesPersistence implements INotesPersistence {
 
     @Override
     public ResultSet fetchNotes(String studentId, String courseId) throws SQLException {
-        final String FETCH_NOTES = "{call fetch_notes(?, ?)}";
         CallableStatement statement = connection.prepareCall(FETCH_NOTES);
         statement.setString(1, studentId);
         statement.setString(2, courseId);
@@ -29,7 +30,6 @@ public class NotesPersistence implements INotesPersistence {
 
     @Override
     public String insertNotes(String studentId, String courseId, String notes) throws SQLException {
-        final String ADD_NOTES = "{call add_notes(?, ?, ?, ?)}";
         CallableStatement statement = connection.prepareCall(ADD_NOTES);
         statement.registerOutParameter(4, Types.VARCHAR);
         statement.setString(1, studentId);

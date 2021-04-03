@@ -4,7 +4,7 @@ import com.group9.server.Announcements.Admin.IAnnouncementInput;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
 import com.group9.server.Meeting.FacultyManageMeeting.IManageMeeting;
-import com.group9.server.Notifications.ViewUserNotifications;
+import com.group9.server.Notifications.IViewUserNotifications;
 import com.group9.server.Quiz.IQuiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,7 +21,7 @@ public class FacultyDashboard implements IDashboard {
     IFeedback feedback;
     IQuiz quiz;
     IManageLecture manageLecture;
-    ViewUserNotifications notifications;
+    IViewUserNotifications notifications;
     @Qualifier("facultyAnnouncement")
     @Autowired
     IAnnouncementInput announcementInput;
@@ -32,7 +32,7 @@ public class FacultyDashboard implements IDashboard {
     private String role;
 
     @Autowired
-    public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications, IManageLecture manageLecture, IQuiz quiz) {
+    public FacultyDashboard(InputValidator validator, IFeedback feedback, IViewUserNotifications notifications, IManageLecture manageLecture, IQuiz quiz) {
         this.validator = validator;
         this.feedback = feedback;
         this.notifications = notifications;
