@@ -1,18 +1,23 @@
 package com.group9.server.Notifications;
 
+import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.cnfg.DBConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class NotificationPersistenceImpl implements NotificationPersistence {
     Connection con;
 
     @Autowired
-    public NotificationPersistenceImpl(DBConfig config) throws SQLException {
-        con = DriverManager.getConnection(config.url, config.user, config.password);
+    public NotificationPersistenceImpl(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        con = databaseInstance.getConnection(config);
     }
 
     @Override

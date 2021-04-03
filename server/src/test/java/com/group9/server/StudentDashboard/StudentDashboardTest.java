@@ -3,6 +3,7 @@ package com.group9.server.StudentDashboard;
 import com.group9.server.Announcements.Student.ViewAnnouncements;
 import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Dashboard.StudentDashboard;
+import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
 import com.group9.server.Notes.IStudentNotes;
@@ -21,10 +22,11 @@ public class StudentDashboardTest {
     ViewUserNotifications notifications = Mockito.mock(ViewUserNotifications.class);
     IRequestMeeting meeting = Mockito.mock(IRequestMeeting.class);
     IUpcomingLectureDisplay lecture = Mockito.mock(IUpcomingLectureDisplay.class);
+    ISingletonDatabase mockDatabase = Mockito.mock(ISingletonDatabase.class);
 
     @BeforeEach
     public void setUp() {
-        underTest = new StudentDashboard(mockValidator, mockStudentNotes, mockFeedback, announcements, notifications);
+        underTest = new StudentDashboard(mockValidator, mockStudentNotes, mockFeedback, announcements, notifications, mockDatabase);
         underTest.setUsername("hashik");
     }
 }

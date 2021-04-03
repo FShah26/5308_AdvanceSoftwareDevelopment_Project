@@ -4,6 +4,7 @@ import com.group9.server.Dashboard.AdminDashboard;
 import com.group9.server.Dashboard.FacultyDashboard;
 import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.StudentDashboard;
+import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.HomePage.IHomePage;
 import com.group9.server.Login.IUserAuthLogic;
 import com.group9.server.Login.UserAuthenticationLogic;
@@ -22,6 +23,7 @@ public class ServerApplication implements CommandLineRunner {
     String AppUserRole;
     IUserAuthLogic authLogic;
     IDashboard dashboard;
+    ISingletonDatabase database;
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
@@ -34,7 +36,7 @@ public class ServerApplication implements CommandLineRunner {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
         authLogic = ctx.getBean(UserAuthenticationLogic.class);
         homePage = ctx.getBean("appHome", IHomePage.class);
-
+        
         homePage.getMenu();
         AppUserRole = homePage.selectMenu();
 
