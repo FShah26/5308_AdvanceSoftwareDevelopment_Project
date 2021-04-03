@@ -1,6 +1,7 @@
 package com.group9.server.Quiz;
 
 import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,20 +10,19 @@ import java.sql.*;
 @Component
 public class QuizPersistence implements IQuizPersistence {
 
-    DBConfig config;
-    Connection con;
+    Connection connection;
 
     @Autowired
-    public QuizPersistence(DBConfig config) throws SQLException {
-        this.config = config;
-        con = DriverManager.getConnection(config.url, config.user, config.password);
+    public QuizPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
     }
 
     @Override
     public String insertQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String
             optionC, String optionD, String answer) throws SQLException {
         final String ADD_QUESTION = "{call add_question(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
-        CallableStatement statement = con.prepareCall(ADD_QUESTION);
+        CallableStatement statement = connection.prepareCall(ADD_QUESTION);
         statement.registerOutParameter(9, Types.VARCHAR);
         statement.setString(1, courseId);
         statement.setString(2, quizNumber);
@@ -41,7 +41,7 @@ public class QuizPersistence implements IQuizPersistence {
     @Override
     public ResultSet fetchQuiz(String courseId, String quizNumber) throws SQLException {
         final String FETCH_QUIZ = "{call fetch_quiz(?,?)}";
-        CallableStatement statement = con.prepareCall(FETCH_QUIZ);
+        CallableStatement statement = connection.prepareCall(FETCH_QUIZ);
         statement.setString(1, courseId);
         statement.setString(2, quizNumber);
         ResultSet set = statement.executeQuery();
@@ -51,7 +51,7 @@ public class QuizPersistence implements IQuizPersistence {
     @Override
     public ResultSet fetchCourseQuiz(String courseId) throws SQLException {
         final String FETCh_COURSE = "{call fetch_course_quiz(?)}";
-        CallableStatement statement = con.prepareCall(FETCh_COURSE);
+        CallableStatement statement = connection.prepareCall(FETCh_COURSE);
         statement.setString(1, courseId);
         ResultSet set = statement.executeQuery();
         return set;
@@ -60,7 +60,7 @@ public class QuizPersistence implements IQuizPersistence {
     @Override
     public ResultSet fetchRegisteredCourses(String studentId) throws SQLException {
         final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
-        CallableStatement statement = con.prepareCall(REGISTERED_COURSE);
+        CallableStatement statement = connection.prepareCall(REGISTERED_COURSE);
         statement.setString(1, studentId);
         ResultSet set = statement.executeQuery();
         return set;

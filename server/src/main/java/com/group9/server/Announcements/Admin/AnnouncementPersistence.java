@@ -1,25 +1,26 @@
 package com.group9.server.Announcements.Admin;
 
 import com.group9.server.Database.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 
 @Component
 public class AnnouncementPersistence implements IAnnouncementPersistence {
-    @Autowired
-    DBConfig db;
+
+    Connection connection;
+
+    public AnnouncementPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
+    }
 
     @Override
     public String InsertAnnouncement(String userRole, String courseId, String message, String userId) {
-        String dbURL = db.url;
-        String user = db.user;
-        String password = db.password;
         String output = "";
         try (
-                Connection conn = DriverManager.getConnection(dbURL, user, password);
-                CallableStatement statement = conn.prepareCall("{call Make_NewAnnouncement(?, ?, ?, ?, ?)}")
+                CallableStatement statement = connection.prepareCall("{call Make_NewAnnouncement(?, ?, ?, ?, ?)}")
         ) {
 
             statement.registerOutParameter(5, Types.VARCHAR);
@@ -38,13 +39,9 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
     }
 
     public ResultSet getFacultyCourses(String facultyId) throws SQLException {
-        String dbURL = db.url;
-        String user = db.user;
-        String password = db.password;
         String output = "";
         ResultSet set = null;
-        Connection conn = DriverManager.getConnection(dbURL, user, password);
-        CallableStatement statement = conn.prepareCall("{call get_assigned_courses(?)}");
+        CallableStatement statement = connection.prepareCall("{call get_assigned_courses(?)}");
         statement.setString(1, facultyId);
         set = statement.executeQuery();
         return set;

@@ -1,6 +1,7 @@
 package com.group9.server.Quiz.Student;
 
 import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,33 +10,32 @@ import java.sql.*;
 @Component
 public class GradingPersistence implements IGradingPersistence {
 
-    DBConfig config;
-    Connection con;
+    Connection connection;
 
     @Autowired
-    public GradingPersistence(DBConfig config) throws SQLException {
-        this.config = config;
-        con = DriverManager.getConnection(config.url, config.user, config.password);
+    public GradingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
     }
 
     @Override
     public boolean addStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException {
         final String ADD_QUIZ_GRADES = "{call add_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
-        CallableStatement statement = con.prepareCall(ADD_QUIZ_GRADES);
+        CallableStatement statement = connection.prepareCall(ADD_QUIZ_GRADES);
         return executeGradeModification(studentId, quizNumber, courseId, grades, attempt, lastAttemptDate, statement);
     }
 
     @Override
     public boolean updateStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException {
         final String UPDATE_QUIZ_GRADES = "{call update_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
-        CallableStatement statement = con.prepareCall(UPDATE_QUIZ_GRADES);
+        CallableStatement statement = connection.prepareCall(UPDATE_QUIZ_GRADES);
         return executeGradeModification(studentId, quizNumber, courseId, grades, attempt, lastAttemptDate, statement);
     }
 
     @Override
     public ResultSet fetchPreviousGrades(String courseId, String studentId, String quizNumber) throws SQLException {
         final String FETCH_GRADES = "{call fetch_grades(?, ?, ?)}";
-        CallableStatement statement = con.prepareCall(FETCH_GRADES);
+        CallableStatement statement = connection.prepareCall(FETCH_GRADES);
         statement.setString(1, courseId);
         statement.setString(2, studentId);
         statement.setString(3, quizNumber);
@@ -57,7 +57,7 @@ public class GradingPersistence implements IGradingPersistence {
     @Override
     public ResultSet grades(String studentId) throws SQLException {
         final String VIEW_GRADES = "{call view_grades(?)}";
-        CallableStatement statement = con.prepareCall(VIEW_GRADES);
+        CallableStatement statement = connection.prepareCall(VIEW_GRADES);
         statement.setString(1, studentId);
         ResultSet set = statement.executeQuery();
         return set;
