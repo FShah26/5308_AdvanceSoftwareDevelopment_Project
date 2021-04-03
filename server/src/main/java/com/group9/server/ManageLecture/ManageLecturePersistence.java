@@ -12,7 +12,7 @@ import java.util.Date;
 public class ManageLecturePersistence implements IManageLecturePersistence {
 
     Connection connection;
-    
+
     public ManageLecturePersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
