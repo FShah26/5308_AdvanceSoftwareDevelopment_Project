@@ -22,8 +22,7 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 public class ServerApplication implements CommandLineRunner {
-
-    String AppUserRole;
+    String userType;
     IUserAuthLogic authLogic;
     IDashboard dashboard;
     ISingletonDatabase database;
@@ -45,18 +44,18 @@ public class ServerApplication implements CommandLineRunner {
         connection = database.getConnection(ctx.getBean(DBConfig.class));
 
         homePage.getMenu();
-        AppUserRole = homePage.selectMenu();
+        userType = homePage.UserTypeSelectMenu();
 
-        boolean isValid = authLogic.initiateLogin(AppUserRole);
-        if (isValid) {
+        boolean loginSuccess = authLogic.initiateLogin(userType);
+        if (loginSuccess) {
             System.out.println("Login Successful !");
-            if (AppUserRole.equals("admin")) {
+            if (userType.equals("admin")) {
                 dashboard = ctx.getBean(AdminDashboard.class);
             }
-            else if(AppUserRole.equals("student")){
+            else if(userType.equals("student")){
                 dashboard = ctx.getBean(StudentDashboard.class);
             }
-            else if(AppUserRole.equals("faculty")){
+            else if(userType.equals("faculty")){
                 dashboard = ctx.getBean(FacultyDashboard.class);
             }
             dashboard.setUsername(authLogic.getUsername());

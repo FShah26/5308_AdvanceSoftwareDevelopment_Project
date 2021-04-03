@@ -11,7 +11,9 @@ import static java.lang.System.out;
 
 @Component
 public class ApplicationHome implements IHomePage {
-
+    private static final String ADMIN_SELECTION = "1";
+    private static final String FACULTY_SELECTION = "2";
+    private static final String STUDENT_SELECTION = "3";
     IUserInputValidator inputValidator;
 
     @Autowired
@@ -31,27 +33,26 @@ public class ApplicationHome implements IHomePage {
     }
 
     @Override
-    public String selectMenu() {
+    public String UserTypeSelectMenu() {
         Scanner scanner = new Scanner(System.in);
         String menuOption = scanner.nextLine();
         validateSelectedMenuOption(menuOption);
         switch (menuOption.trim()) {
-            case "1":
-                return "admin";
-            case "2":
-                return "faculty";
-            case "3":
-                return "student";
-            default:
-                return "admin";
+            case ADMIN_SELECTION:
+                return UserConstants.ADMIN;
+            case FACULTY_SELECTION:
+                return UserConstants.FACULTY;
+            case STUDENT_SELECTION:
+                return UserConstants.STUDENT;
         }
+        return UserConstants.ADMIN;
     }
 
     @Override
     public void validateSelectedMenuOption(String menuOption) {
         if (!this.inputValidator.validate(menuOption)) {
             displayInvalidMenuOptionMsg();
-            selectMenu();
+            UserTypeSelectMenu();
         }
     }
 
