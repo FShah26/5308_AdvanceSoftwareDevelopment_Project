@@ -36,7 +36,7 @@ public class AdminDashboard implements IDashboard {
     }
 
     @Override
-    public void dashboard() throws SQLException {
+    public void showDashboard() throws SQLException {
 
         out.println("************************************************");
         out.println("                 ADMIN DASHBOARD                ");

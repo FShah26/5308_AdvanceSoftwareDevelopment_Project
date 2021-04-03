@@ -1,9 +1,5 @@
-package com.group9.server.cnfg;
+package com.group9.server.HomePage;
 
-import com.group9.server.CourseCreation.IValidate;
-import com.group9.server.CourseCreation.ValidateCourseCreation;
-import com.group9.server.HomePage.ApplicationHome;
-import com.group9.server.Login.adminImpl;
 import com.group9.server.UserCreation.AddUser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,10 +20,4 @@ public class HomePageConfiguration {
     public AddUser add_user() {
         return new AddUser();
     }
-
-    @Bean
-    public adminImpl admin() {
-        return new adminImpl();
-    }
-
 }

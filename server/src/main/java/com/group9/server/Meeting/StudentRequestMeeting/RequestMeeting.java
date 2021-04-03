@@ -115,7 +115,7 @@ public class RequestMeeting implements IRequestMeeting {
                 }
             }
             else if (selection.equals("*")) {
-                dash.dashboard();
+                dash.showDashboard();
             }
             meetingDisplay(this.studentId);
         }

@@ -1,5 +1,7 @@
 package com.group9.server.Login;
 
+import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.HomePage.IUserDashboardFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,14 +11,18 @@ import java.util.Scanner;
 
 @Component
 public class UserAuthenticationLogic implements IUserAuthLogic {
-
-    @Autowired
     IUserAuthPersistence userAuthPersistence;
+    IUserDashboardFactory dashboardFactory;
     private String username;
     private String password;
+    private boolean authStatus = false;
 
+    public UserAuthenticationLogic(IUserAuthPersistence userAuthPersistence, IUserDashboardFactory dashboardFactory){
+        this.userAuthPersistence = userAuthPersistence;
+        this.dashboardFactory = dashboardFactory;
+    }
     @Override
-    public boolean initiateLogin(String userRole) {
+    public IDashboard initiateLogin(String userRole) {
         List<String> credentials = getUserCredentials();
         return validateUserCredentials(credentials.get(0), credentials.get(1), userRole);
     }
@@ -37,9 +43,18 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     }
 
     @Override
-    public boolean validateUserCredentials(String uname, String pass, String role) {
+    public IDashboard validateUserCredentials(String uname, String pass, String userRole) {
         System.out.println("Validating Credentials...");
-        return userAuthPersistence.authorizeUser(uname, pass, role);
+        authStatus = userAuthPersistence.authorizeUser(uname, pass, userRole);
+        if(authStatus) {
+            return dashboardFactory.getDashboard(userRole, userRole);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isAuthSuccessful() {
+        return authStatus;
     }
 
     @Override

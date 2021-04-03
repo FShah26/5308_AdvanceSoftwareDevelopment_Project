@@ -49,7 +49,7 @@ public class ManageMeeting implements IManageMeeting{
     public void manageMeetingAction(String selection) {
         try {
             if (selection.equals("*")) {
-                dash.dashboard();
+                dash.showDashboard();
             }
             else {
                     ArrayList<ManageMeetingDetails> details = meetingLogic.viewMeetings(this.facultyId, selection);

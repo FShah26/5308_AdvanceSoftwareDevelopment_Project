@@ -43,7 +43,7 @@ public class StudentDashboard implements IDashboard {
     }
 
     @Override
-    public void dashboard() throws SQLException {
+    public void showDashboard() throws SQLException {
 
         System.out.println("************************************************");
         System.out.println("               STUDENT DASHBOARD                ");
@@ -118,7 +118,7 @@ public class StudentDashboard implements IDashboard {
                     quizAssessment.showQuizMenu(this.username);
 
                 default:
-                    dashboard();
+                    showDashboard();
             }
         } else {
             displayInvalidMenuOptionMsg();

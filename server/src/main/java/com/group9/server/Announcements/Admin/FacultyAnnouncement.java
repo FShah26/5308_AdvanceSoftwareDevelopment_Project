@@ -49,10 +49,13 @@ public class FacultyAnnouncement implements IAnnouncementInput {
         if (menuOption.equals("1")) {
             print_output = announcementLogic.make_announcement(userRole, courseId, input, userId);
             System.out.println(print_output);
-            dash.dashboard();
-        } else if (menuOption.equals("2")) {
-            dash.dashboard();
-        } else {
+            dash.showDashboard();
+        }
+        else if(menuOption.equals("2")){
+            dash.showDashboard();
+        }
+        else
+        {
             System.out.println("Please select correct option");
             select_option();
         }
