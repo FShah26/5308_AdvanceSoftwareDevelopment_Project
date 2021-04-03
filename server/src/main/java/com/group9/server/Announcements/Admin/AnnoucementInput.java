@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+
 @Component
 public class AnnoucementInput implements IAnnouncementInput {
 
@@ -21,7 +22,7 @@ public class AnnoucementInput implements IAnnouncementInput {
     String userId;
 
     @Override
-    public void make_announcement(String userRole,String userId) throws SQLException {
+    public void make_announcement(String userRole, String userId) throws SQLException {
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
@@ -29,9 +30,10 @@ public class AnnoucementInput implements IAnnouncementInput {
         System.out.print("Enter New Announcement : ");
         input = sc.nextLine();
         this.userRole = userRole;
-        this.userId =userId;
+        this.userId = userId;
         select_option();
     }
+
     @Override
     public void select_option() throws SQLException {
         String print_output;
@@ -39,16 +41,13 @@ public class AnnoucementInput implements IAnnouncementInput {
         System.out.println("-->Press 2 to Cancel");
 
         String menuOption = sc.nextLine();
-        if(menuOption.equals("1")){
-            print_output =  logic.make_announcement(userRole,null,input,userId);
+        if (menuOption.equals("1")) {
+            print_output = logic.make_announcement(userRole, null, input, userId);
             System.out.println(print_output);
             dash.dashboard();
-        }
-        else if(menuOption.equals("2")){
+        } else if (menuOption.equals("2")) {
             dash.dashboard();
-        }
-        else
-        {
+        } else {
             System.out.println("Please select correct option");
             select_option();
         }

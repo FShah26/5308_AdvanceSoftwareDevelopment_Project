@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class FacultyAnnouncement implements IAnnouncementInput{
+public class FacultyAnnouncement implements IAnnouncementInput {
 
     @Autowired
     IAnnouncementLogic announcementLogic;
@@ -28,7 +28,7 @@ public class FacultyAnnouncement implements IAnnouncementInput{
     @Override
     public void make_announcement(String userRole, String userId) throws SQLException {
         this.userRole = userRole;
-        this.userId =userId;
+        this.userId = userId;
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
@@ -46,16 +46,13 @@ public class FacultyAnnouncement implements IAnnouncementInput{
         System.out.println("-->Press 2 to Cancel");
 
         String menuOption = sc.nextLine();
-        if(menuOption.equals("1")){
-            print_output =  announcementLogic.make_announcement(userRole,courseId,input,userId);
+        if (menuOption.equals("1")) {
+            print_output = announcementLogic.make_announcement(userRole, courseId, input, userId);
             System.out.println(print_output);
             dash.dashboard();
-        }
-        else if(menuOption.equals("2")){
+        } else if (menuOption.equals("2")) {
             dash.dashboard();
-        }
-        else
-        {
+        } else {
             System.out.println("Please select correct option");
             select_option();
         }
