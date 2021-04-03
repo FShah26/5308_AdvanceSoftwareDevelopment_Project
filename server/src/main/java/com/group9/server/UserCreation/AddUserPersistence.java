@@ -1,27 +1,26 @@
 package com.group9.server.UserCreation;
 
 import com.group9.server.Database.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 
 @Component
 public class AddUserPersistence implements IAddUserPersistence {
+    final String CREATE_NEW_USER = "{call Create_NewUser(?, ?, ?, ?, ?)}";
+    final String USER_DETAILS = "{call add_user_details(?, ?, ?, ?, ?, ?)}";
+    Connection connection;
 
-    @Autowired
-    DBConfig db;
-
+    public AddUserPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
+    }
     @Override
     public void addUser(String id, String userId, String password, String userType) {
-        String dbURL = db.url;
-        String user = db.user;
-        String pass = db.password;
         String output = "";
-        final String CREATE_NEW_USER = "{call Create_NewUser(?, ?, ?, ?, ?)}";
         try (
-                Connection conn = DriverManager.getConnection(dbURL, user, pass);
-                CallableStatement statement = conn.prepareCall(CREATE_NEW_USER);
+                CallableStatement statement = connection.prepareCall(CREATE_NEW_USER);
         ) {
 
             statement.registerOutParameter(5, Types.VARCHAR);
@@ -36,18 +35,14 @@ public class AddUserPersistence implements IAddUserPersistence {
             ex.printStackTrace();
             output = "Error Catched";
         }
+
     }
 
     @Override
     public void addUserDetails(String userId, String userType, String name, String emailAddress, String department) {
-        String dbURL = db.url;
-        String user = db.user;
-        String pass = db.password;
         String output = "";
-        final String USER_DETAILS = "{call add_user_details(?, ?, ?, ?, ?, ?)}";
         try (
-                Connection conn = DriverManager.getConnection(dbURL, user, pass);
-                CallableStatement statement = conn.prepareCall(USER_DETAILS);
+                CallableStatement statement = connection.prepareCall(USER_DETAILS);
         ) {
 
             statement.registerOutParameter(6, Types.VARCHAR);
