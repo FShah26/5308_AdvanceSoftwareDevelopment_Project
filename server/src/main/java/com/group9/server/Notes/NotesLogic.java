@@ -17,11 +17,11 @@ public class NotesLogic implements INotesLogic {
     }
 
     @Override
-    public NotesList viewNotes(String studentID, String courseID) {
-        NotesList subjectNotes = new NotesList(courseID);
+    public NotesList viewNotes(String studentId, String courseId) {
+        NotesList subjectNotes = new NotesList(courseId);
 
         try {
-            ResultSet set = persistence.fetchNotes(studentID, courseID);
+            ResultSet set = persistence.fetchNotes(studentId, courseId);
 
             if (set != null) {
                 while (set.next()) {
@@ -39,10 +39,10 @@ public class NotesLogic implements INotesLogic {
     }
 
     @Override
-    public String addNotes(String studentID, String courseID, String notes) {
+    public String addNotes(String studentId, String courseId, String notes) {
         String message = "";
         try {
-            message = persistence.insertNotes(studentID, courseID, notes);
+            message = persistence.insertNotes(studentId, courseId, notes);
         } catch (SQLException exception) {
             System.out.println("Adding notes failed");
             exception.printStackTrace();

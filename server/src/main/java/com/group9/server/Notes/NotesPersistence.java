@@ -19,20 +19,22 @@ public class NotesPersistence implements INotesPersistence {
     }
 
     @Override
-    public ResultSet fetchNotes(String studentID, String courseID) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_notes(?, ?)}");
-        statement.setString(1, studentID);
-        statement.setString(2, courseID);
+    public ResultSet fetchNotes(String studentId, String courseId) throws SQLException {
+        final String FETCH_NOTES = "{call fetch_notes(?, ?)}";
+        CallableStatement statement = con.prepareCall(FETCH_NOTES);
+        statement.setString(1, studentId);
+        statement.setString(2, courseId);
         ResultSet set = statement.executeQuery();
         return set;
     }
 
     @Override
-    public String insertNotes(String studentID, String courseID, String notes) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call add_notes(?, ?, ?, ?)}");
+    public String insertNotes(String studentId, String courseId, String notes) throws SQLException {
+        final String ADD_NOTES = "{call add_notes(?, ?, ?, ?)}";
+        CallableStatement statement = con.prepareCall(ADD_NOTES);
         statement.registerOutParameter(4, Types.VARCHAR);
-        statement.setString(1, studentID);
-        statement.setString(2, courseID);
+        statement.setString(1, studentId);
+        statement.setString(2, courseId);
         statement.setString(3, notes);
         statement.execute();
 
