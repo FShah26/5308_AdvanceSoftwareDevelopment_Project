@@ -18,7 +18,6 @@ public class ManageLecture implements IManageLecture{
     IUserInputValidator manageLectureOptionValidator;
     Map<String,IManageLectureActions> action = new HashMap<>();
 
-    @Autowired
     public ManageLecture(IManageLectureLogic manageLectureLogic){
         this.facultyId="";
         this.manageLectureLogic=manageLectureLogic;
@@ -46,12 +45,12 @@ public class ManageLecture implements IManageLecture{
     }
 
     public void selectMenu() {
-        Scanner sc = new Scanner(System.in);
-        String menuOption = sc.nextLine();
-        checkinput(menuOption);
+        Scanner scanner = new Scanner(System.in);
+        String menuOption = scanner.nextLine();
+        checkInput(menuOption);
     }
 
-    public void checkinput(String selection) {
+    public void checkInput(String selection) {
         if (this.manageLectureOptionValidator.validate(selection)) {
             manageLectureAction(selection);
         }

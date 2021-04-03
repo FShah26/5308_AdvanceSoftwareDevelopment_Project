@@ -14,14 +14,12 @@ public class CancelLecture implements IManageLectureActions{
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator userConfirmationOptionValidator;
 
-    @Autowired
     public CancelLecture(IManageLectureLogic manageLectureLogic){
         this.userConfirmationOptionValidator=new UserConfirmationOptionValidator();
         this.manageLectureLogic=manageLectureLogic;
     }
     @Override
     public void getUserInputs() {
-        String selectedOption;
         System.out.println("************************************************");
         System.out.println("               Cancelling LECTURE                ");
         System.out.println("************************************************");
