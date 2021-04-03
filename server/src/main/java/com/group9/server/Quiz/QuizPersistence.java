@@ -9,7 +9,10 @@ import java.sql.*;
 
 @Component
 public class QuizPersistence implements IQuizPersistence {
-
+    final String ADD_QUESTION = "{call add_question(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    final String FETCH_QUIZ = "{call fetch_quiz(?,?)}";
+    final String FETCH_COURSE = "{call fetch_course_quiz(?)}";
+    final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
     Connection connection;
 
     @Autowired
@@ -21,7 +24,6 @@ public class QuizPersistence implements IQuizPersistence {
     @Override
     public String insertQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String
             optionC, String optionD, String answer) throws SQLException {
-        final String ADD_QUESTION = "{call add_question(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement statement = connection.prepareCall(ADD_QUESTION);
         statement.registerOutParameter(9, Types.VARCHAR);
         statement.setString(1, courseId);
@@ -40,7 +42,6 @@ public class QuizPersistence implements IQuizPersistence {
 
     @Override
     public ResultSet fetchQuiz(String courseId, String quizNumber) throws SQLException {
-        final String FETCH_QUIZ = "{call fetch_quiz(?,?)}";
         CallableStatement statement = connection.prepareCall(FETCH_QUIZ);
         statement.setString(1, courseId);
         statement.setString(2, quizNumber);
@@ -50,8 +51,7 @@ public class QuizPersistence implements IQuizPersistence {
 
     @Override
     public ResultSet fetchCourseQuiz(String courseId) throws SQLException {
-        final String FETCh_COURSE = "{call fetch_course_quiz(?)}";
-        CallableStatement statement = connection.prepareCall(FETCh_COURSE);
+        CallableStatement statement = connection.prepareCall(FETCH_COURSE);
         statement.setString(1, courseId);
         ResultSet set = statement.executeQuery();
         return set;
@@ -59,7 +59,6 @@ public class QuizPersistence implements IQuizPersistence {
 
     @Override
     public ResultSet fetchRegisteredCourses(String studentId) throws SQLException {
-        final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
         CallableStatement statement = connection.prepareCall(REGISTERED_COURSE);
         statement.setString(1, studentId);
         ResultSet set = statement.executeQuery();
