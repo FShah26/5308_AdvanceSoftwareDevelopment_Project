@@ -1,6 +1,7 @@
 package com.group9.server.Quiz.Student;
 
 import com.group9.server.cnfg.DBConfig;
+import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,19 +21,22 @@ public class GradingPersistence implements IGradingPersistence {
 
     @Override
     public boolean addStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call add_quiz_grades(?, ?, ?, ?, ?, ?, ?)}");
+        final String ADD_QUIZ_GRADES = "{call add_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
+        CallableStatement statement = con.prepareCall(ADD_QUIZ_GRADES);
         return executeGradeModification(studentId, quizNumber, courseId, grades, attempt, lastAttemptDate, statement);
     }
 
     @Override
     public boolean updateStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call update_quiz_grades(?, ?, ?, ?, ?, ?, ?)}");
+        final String UPDATE_QUIZ_GRADES = "{call update_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
+        CallableStatement statement = con.prepareCall(UPDATE_QUIZ_GRADES);
         return executeGradeModification(studentId, quizNumber, courseId, grades, attempt, lastAttemptDate, statement);
     }
 
     @Override
     public ResultSet fetchPreviousGrades(String courseId, String studentId, String quizNumber) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_grades(?, ?, ?)}");
+        final String FETCH_GRADES = "{call fetch_grades(?, ?, ?)}";
+        CallableStatement statement = con.prepareCall(FETCH_GRADES);
         statement.setString(1, courseId);
         statement.setString(2, studentId);
         statement.setString(3, quizNumber);
@@ -52,8 +56,9 @@ public class GradingPersistence implements IGradingPersistence {
         return statement.getBoolean("isSuccessful");
     }
     @Override
-    public ResultSet Grades(String studentId) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call view_grades(?)}");
+    public ResultSet grades(String studentId) throws SQLException {
+        final String VIEW_GRADES = "{call view_grades(?)}";
+        CallableStatement statement = con.prepareCall(VIEW_GRADES);
         statement.setString(1, studentId);
         ResultSet set = statement.executeQuery();
         return set;

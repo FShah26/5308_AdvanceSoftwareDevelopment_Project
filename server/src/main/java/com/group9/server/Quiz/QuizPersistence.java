@@ -19,11 +19,12 @@ public class QuizPersistence implements IQuizPersistence {
     }
 
     @Override
-    public String insertQuestion(String course_Id, String quizNumber, String question, String optionA, String optionB, String
+    public String insertQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String
             optionC, String optionD, String answer) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call add_question(?, ?, ?, ?, ?, ?, ?, ?, ?)}");
+        final String ADD_QUESTION = "{call add_question(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+        CallableStatement statement = con.prepareCall(ADD_QUESTION);
         statement.registerOutParameter(9, Types.VARCHAR);
-        statement.setString(1, course_Id);
+        statement.setString(1, courseId);
         statement.setString(2, quizNumber);
         statement.setString(3, question);
         statement.setString(4, optionA);
@@ -39,7 +40,8 @@ public class QuizPersistence implements IQuizPersistence {
 
     @Override
     public ResultSet fetchQuiz(String courseId, String quizNumber) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_quiz(?,?)}");
+        final String FETCH_QUIZ = "{call fetch_quiz(?,?)}";
+        CallableStatement statement = con.prepareCall(FETCH_QUIZ);
         statement.setString(1, courseId);
         statement.setString(2, quizNumber);
         ResultSet set = statement.executeQuery();
@@ -48,16 +50,18 @@ public class QuizPersistence implements IQuizPersistence {
 
     @Override
     public ResultSet fetchCourseQuiz(String courseId) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call fetch_course_quiz(?)}");
+        final String FETCh_COURSE = "{call fetch_course_quiz(?)}";
+        CallableStatement statement = con.prepareCall(FETCh_COURSE);
         statement.setString(1, courseId);
         ResultSet set = statement.executeQuery();
         return set;
     }
 
     @Override
-    public ResultSet fetchRegisteredCourses(String studentID) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call RegisteredCourses(?)}");
-        statement.setString(1, studentID);
+    public ResultSet fetchRegisteredCourses(String studentId) throws SQLException {
+        final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
+        CallableStatement statement = con.prepareCall(REGISTERED_COURSE);
+        statement.setString(1, studentId);
         ResultSet set = statement.executeQuery();
         return set;
     }

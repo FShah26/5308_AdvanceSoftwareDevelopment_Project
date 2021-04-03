@@ -23,9 +23,9 @@ public class Quiz implements IQuiz {
 //    IDashboard dashboard;
 
     @Override
-    public void addQuestion(String course_Id, String quizNumber, String question, String optionA, String optionB, String
+    public void addQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String
             optionC, String optionD, String answer) throws SQLException {
-        String message = quizLogic.addQuestion(course_Id, quizNumber, question, optionA, optionB, optionC, optionD, answer);
+        String message = quizLogic.addQuestion(courseId, quizNumber, question, optionA, optionB, optionC, optionD, answer);
         System.out.println(message);
 
     }

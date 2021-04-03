@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public interface IQuiz {
 
-    void addQuestion(String course_Id, String quizNumber, String question, String optionA, String optionB, String optionC, String optionD, String answer) throws SQLException;
+    void addQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String optionC, String optionD, String answer) throws SQLException;
 
     String getCourseId();
     String getQuizNumber();

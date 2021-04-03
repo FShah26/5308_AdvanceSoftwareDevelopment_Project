@@ -17,11 +17,11 @@ public class QuizLogic implements IQuizLogic {
     }
 
     @Override
-    public String addQuestion(String course_Id, String quizNumber, String question, String optionA, String optionB, String
+    public String addQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String
             optionC, String optionD, String answer) {
         String message = "";
         try {
-            message = persistence.insertQuestion(course_Id, quizNumber, question, optionA, optionB, optionC, optionD, answer);
+            message = persistence.insertQuestion(courseId, quizNumber, question, optionA, optionB, optionC, optionD, answer);
         } catch (SQLException exception) {
             System.out.println("Adding question failed");
             exception.printStackTrace();
