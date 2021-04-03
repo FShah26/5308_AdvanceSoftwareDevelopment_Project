@@ -81,9 +81,9 @@ public class ManageMeeting implements IManageMeeting {
                     System.out.println("Seems like you don't have any request in this state..");
                 }
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Error occurred");
-                    }
+        }
     }
 
     @Override
@@ -101,7 +101,12 @@ public class ManageMeeting implements IManageMeeting {
     }
 
     @Override
-    public void displayInvalidMenuOptionMsg(){
+    public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from menu.");
+    }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        display(userId);
     }
 }

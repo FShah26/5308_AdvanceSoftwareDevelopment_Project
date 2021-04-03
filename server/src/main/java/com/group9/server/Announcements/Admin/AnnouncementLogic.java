@@ -35,7 +35,7 @@ public class AnnouncementLogic implements IAnnouncementLogic {
 
     public int validateCourseId(String facultyId, String courseId) {
         List<String> lstStudentCourse = new ArrayList<>();
-        ResultSet set = null;
+        ResultSet set;
         try {
             set = persist.getFacultyCourses(facultyId);
             if (null == set || set.next() == false) {
