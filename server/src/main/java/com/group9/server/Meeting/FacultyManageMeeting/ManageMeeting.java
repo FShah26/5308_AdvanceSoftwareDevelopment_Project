@@ -2,7 +2,6 @@ package com.group9.server.Meeting.FacultyManageMeeting;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +19,7 @@ public class ManageMeeting implements IManageMeeting {
     }
 
     @Override
-    public void display(String facultyId) throws SQLException {
+    public void display(String facultyId) {
         this.facultyId = facultyId;
         out.println("************************************************");
         out.println("                 MANAGE MEETING                 ");
@@ -34,7 +33,7 @@ public class ManageMeeting implements IManageMeeting {
     }
 
     @Override
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         String menuOption = scanner.nextLine();
         checkInput(menuOption);
     }
@@ -82,9 +81,9 @@ public class ManageMeeting implements IManageMeeting {
                     System.out.println("Seems like you don't have any request in this state..");
                 }
             }
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             System.out.println("Error occurred");
-        }
+                    }
     }
 
     @Override
@@ -102,7 +101,7 @@ public class ManageMeeting implements IManageMeeting {
     }
 
     @Override
-    public void displayInvalidMenuOptionMsg() {
+    public void displayInvalidMenuOptionMsg(){
         out.println("Invalid Option! Please choose a valid option from menu.");
     }
 }

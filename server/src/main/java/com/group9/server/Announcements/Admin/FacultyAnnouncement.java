@@ -24,7 +24,7 @@ public class FacultyAnnouncement implements IAnnouncementInput {
 
 
     @Override
-    public void announcement(String userRole, String userId) throws SQLException {
+    public void announcement(String userRole, String userId) {
         this.userRole = userRole;
         this.userId = userId;
         System.out.println("************************************************");
@@ -38,7 +38,7 @@ public class FacultyAnnouncement implements IAnnouncementInput {
     }
 
     @Override
-    public void selectOption() throws SQLException {
+    public void selectOption()  {
         String print_output;
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");

@@ -39,7 +39,7 @@ public class AddUser implements IAddUser {
         this.dash = new AdminDashboard();
     }
 
-    public void creation() throws SQLException {
+    public void creation()  {
         out.println("************************************************");
         out.println("      ENTER DETAILS TO CREATE NEW USER        ");
         out.println("************************************************");
@@ -65,12 +65,12 @@ public class AddUser implements IAddUser {
 
     }
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu()  {
         String menuOption = scanner.nextLine();
         validateInput(menuOption);
     }
 
-    public void validateInput(String input) throws SQLException {
+    public void validateInput(String input)  {
         if (this.inputValidator.validate(input)) {
             String output = validate.validateInput(id, userId, password, userType);
             final String TO_PROCEED = "true";

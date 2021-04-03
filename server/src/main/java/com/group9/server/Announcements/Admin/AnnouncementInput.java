@@ -19,7 +19,7 @@ public class AnnouncementInput implements IAnnouncementInput {
     }
 
     @Override
-    public void announcement(String userRole, String userId) throws SQLException {
+    public void announcement(String userRole, String userId)  {
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
@@ -32,7 +32,7 @@ public class AnnouncementInput implements IAnnouncementInput {
     }
 
     @Override
-    public void selectOption() throws SQLException {
+    public void selectOption() {
         String print_output;
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public interface IAnnouncementInput {
 
-    void announcement(String userRole, String userId) throws SQLException;
+    void announcement(String userRole, String userId);
 
-    void selectOption() throws SQLException;
+    void selectOption() ;
 }

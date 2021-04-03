@@ -12,7 +12,6 @@ import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -44,8 +43,7 @@ public class StudentDashboard implements IDashboard {
     }
 
     @Override
-    public void showDashboard() throws SQLException {
-
+    public void showDashboard(){
         System.out.println("************************************************");
         System.out.println("               STUDENT DASHBOARD                ");
         System.out.println("************************************************");
@@ -69,13 +67,13 @@ public class StudentDashboard implements IDashboard {
     }
 
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
-    public void checkInput(String selection) throws SQLException {
+    public void checkInput(String selection) {
         String course;
 
         if (this.validator.validate(selection)) {

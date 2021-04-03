@@ -28,7 +28,7 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     }
 
     @Override
-    public void lectureDisplay(String username) throws SQLException {
+    public void lectureDisplay(String username)  {
         studentId = username;
         System.out.println("************************************************");
         System.out.println("              UPCOMING LECTURES                 ");
@@ -38,7 +38,7 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     }
 
     @Override
-    public void checkInput() throws SQLException {
+    public void checkInput()  {
         course = meeting.viewCourse(studentId);
         int coursenumber = 0;
         if (course.courseId.size() == 0) {
@@ -54,10 +54,11 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     }
 
     @Override
-    public void selectCourse(int number) throws SQLException {
+    public void selectCourse(int number)  {
         String courseOption = scanner.nextLine();
-        if (this.courseSelection.validate(courseOption, number)) {
-            String selected = course.courseId.get(Integer.parseInt(courseOption) - 1);
+        if(this.courseSelection.validate(courseOption,number))
+        {
+            String selected = course.courseId.get(Integer.parseInt(courseOption)-1);
             ArrayList<LectureDetails> details = lectureLogic.upcoming(selected);
             if (details.size() > 0) {
                 System.out.println("________________________________________________________________________________________________________________");

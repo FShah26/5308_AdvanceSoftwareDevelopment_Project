@@ -36,8 +36,9 @@ public class RequestMeetingLogic implements IRequestMeetingLogic {
     public String raiseMeetingRequest(String courseId, String studentId, String reason) {
         String response = "";
         try {
-            response = request.setMeeting(courseId, studentId, reason);
-        } catch (Exception ex) {
+             response = request.setMeeting(courseId, studentId,reason);
+        }
+        catch (SQLException ex){
             ex.getMessage();
             System.out.println("Error occured.. Unable to raise meeting.");
         }

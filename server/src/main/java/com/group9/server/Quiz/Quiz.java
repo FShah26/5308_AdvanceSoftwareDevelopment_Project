@@ -24,7 +24,7 @@ public class Quiz implements IQuiz {
 
     @Override
     public void addQuestion(String courseId, String quizNumber, String question, String optionA, String optionB, String
-            optionC, String optionD, String answer) throws SQLException {
+            optionC, String optionD, String answer) {
         String message = quizLogic.addQuestion(courseId, quizNumber, question, optionA, optionB, optionC, optionD, answer);
         System.out.println(message);
 

@@ -34,7 +34,7 @@ public class EnrollStudent implements IEnrollStudent {
         this.inputValidator = new AdminInputValidator();
     }
 
-    public void creation() throws SQLException {
+    public void creation()  {
         out.println("**********************************************************");
         out.println("      ENTER DETAILS TO ENROLL NEW STUDENT TO A COURSE     ");
         out.println("**********************************************************");
@@ -52,12 +52,12 @@ public class EnrollStudent implements IEnrollStudent {
 
     }
 
-    public void SelectMenu() throws SQLException {
+    public void SelectMenu()  {
         String menuOption = scanner.nextLine();
         ValidateInput(menuOption);
     }
 
-    public void ValidateInput(String input) throws SQLException {
+    public void ValidateInput(String input)  {
         if (this.inputValidator.validate(input)) {
             String output = validate.validateInput(userId, courseId, Term);
             final String TO_PROCEED = "true";

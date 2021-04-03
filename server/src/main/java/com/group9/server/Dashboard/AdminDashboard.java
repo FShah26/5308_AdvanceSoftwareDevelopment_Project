@@ -36,8 +36,7 @@ public class AdminDashboard implements IDashboard {
     }
 
     @Override
-    public void showDashboard() throws SQLException {
-
+    public void showDashboard() {
         out.println("************************************************");
         out.println("                 ADMIN DASHBOARD                ");
         out.println("************************************************");
@@ -56,13 +55,13 @@ public class AdminDashboard implements IDashboard {
         this.userName = userName;
     }
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu()  {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
-    public void checkInput(String selection) throws SQLException {
+    public void checkInput(String selection)  {
         if (this.inputValidator.validate(selection)) {
             if (selection.equals("1")) {
                 createCourse.creation();

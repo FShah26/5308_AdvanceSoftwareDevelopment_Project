@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -29,7 +28,7 @@ public class FacultyDashboard implements IDashboard {
     IManageMeeting manageMeeting;
 
     private String username;
-    private String role;
+    private final String role;
 
     @Autowired
     public FacultyDashboard(InputValidator validator, IFeedback feedback, ViewUserNotifications notifications, IManageLecture manageLecture, IQuiz quiz) {
@@ -42,8 +41,7 @@ public class FacultyDashboard implements IDashboard {
     }
 
     @Override
-    public void showDashboard() throws SQLException {
-
+    public void showDashboard() {
         out.println("************************************************");
         out.println("               FACULTY DASHBOARD                ");
         out.println("************************************************");
@@ -64,13 +62,13 @@ public class FacultyDashboard implements IDashboard {
         this.username = username;
     }
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkinput(menuOption);
     }
 
-    public void checkinput(String selection) throws SQLException {
+    public void checkinput(String selection) {
         if (this.validator.validate(selection)) {
             switch (selection) {
                 case "1":
@@ -94,7 +92,7 @@ public class FacultyDashboard implements IDashboard {
                     out.println("Enter the number of questions you want to add");
                     Scanner scanner = new Scanner(System.in);
                     int numberOfQuestions = scanner.nextInt();
-                    for(int i = 0; i < numberOfQuestions; i++) {
+                    for (int i = 0; i < numberOfQuestions; i++) {
                         String question = quiz.getQuestion();
                         String optionA = quiz.getOptionA();
                         String optionB = quiz.getOptionB();
