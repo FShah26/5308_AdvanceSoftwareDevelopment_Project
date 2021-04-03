@@ -1,14 +1,11 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.Admin.IAnnouncementInput;
-import com.group9.server.CourseCreation.ICreateCourse;
-import com.group9.server.StudentCourseEnrollment.EnrollStudent;
-import com.group9.server.UserCreation.AddUser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.group9.server.HomePage.UserConstants;
+import com.group9.server.IExecuteAction;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -20,19 +17,25 @@ public class AdminDashboard implements IDashboard {
     String userRole;
 
     InputValidator inputValidator;
-    @Qualifier("announcementInput")
-    @Autowired
-    IAnnouncementInput announcement;
-    @Autowired
-    ICreateCourse createCourse;
-    @Autowired
-    AddUser ac;
-    @Autowired
-    EnrollStudent es;
+    IExecuteAction createCourse;
+    IExecuteAction announcementInput;
+    IExecuteAction addUser;
+    IExecuteAction enrollStudent;
 
-    public AdminDashboard() {
+    Map<String, IExecuteAction> action = new HashMap<>();
+
+    public AdminDashboard(IExecuteAction announcementInput, IExecuteAction createCourse, IExecuteAction addUser, IExecuteAction enrollStudent) {
         this.inputValidator = new AdminInputValidator();
-        this.userRole = "admin";
+        this.userRole = UserConstants.ADMIN;
+        this.announcementInput = announcementInput;
+        this.createCourse = createCourse;
+        this.addUser = addUser;
+        this.enrollStudent = enrollStudent;
+        action.put("1", this.createCourse);
+        action.put("2", this.addUser);
+        action.put("3", this.enrollStudent);
+        action.put("4", this.announcementInput);
+        action.put("5", null);
     }
 
     @Override
@@ -55,28 +58,21 @@ public class AdminDashboard implements IDashboard {
         this.userName = userName;
     }
 
-    public void selectMenu()  {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
-    public void checkInput(String selection)  {
+    public void checkInput(String selection) {
         if (this.inputValidator.validate(selection)) {
-            if (selection.equals("1")) {
-                createCourse.creation();
-            } else if (selection.equals("2")) {
-                ac.creation();
-            } else if (selection.equals("3")) {
-                es.creation();
-            } else if (selection.equals("4")) {
-                announcement.announcement(userRole, userName);
+            IExecuteAction dashboardAction = action.get(selection);
+            if (null == dashboardAction) {
+                //logout
             } else {
-                out.println("Yet to develop..");
+                dashboardAction.execute(this.userRole, this.userName);
             }
-        } else {
-            displayInvalidMenuOptionMsg();
-            selectMenu();
+
         }
         showDashboard();
     }

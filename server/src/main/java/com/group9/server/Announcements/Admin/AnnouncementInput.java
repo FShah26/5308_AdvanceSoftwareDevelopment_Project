@@ -2,7 +2,6 @@ package com.group9.server.Announcements.Admin;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 @Component
@@ -19,7 +18,7 @@ public class AnnouncementInput implements IAnnouncementInput {
     }
 
     @Override
-    public void announcement(String userRole, String userId)  {
+    public void announcement(String userRole, String userId) {
         System.out.println("************************************************");
         System.out.println("                ENTER Announcement              ");
         System.out.println("************************************************");
@@ -47,5 +46,10 @@ public class AnnouncementInput implements IAnnouncementInput {
             System.out.println("Please select correct option");
             selectOption();
         }
+    }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        announcement(userRole, userId);
     }
 }

@@ -74,4 +74,8 @@ public class CreateCourse implements ICreateCourse {
         out.println("Invalid Option! Please choose a valid option from above menu.");
     }
 
+    @Override
+    public void execute(String userRole, String userId) {
+        creation();
+    }
 }

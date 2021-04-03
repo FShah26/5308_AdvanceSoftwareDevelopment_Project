@@ -1,6 +1,8 @@
 package com.group9.server.CourseCreation;
 
-public interface ICreateCourse {
+import com.group9.server.IExecuteAction;
+
+public interface ICreateCourse extends IExecuteAction {
     void creation();
 
     void selectMenu();

@@ -2,7 +2,6 @@ package com.group9.server.Announcements.Admin;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -38,7 +37,7 @@ public class FacultyAnnouncement implements IAnnouncementInput {
     }
 
     @Override
-    public void selectOption()  {
+    public void selectOption() {
         String print_output;
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");
@@ -68,5 +67,10 @@ public class FacultyAnnouncement implements IAnnouncementInput {
             return null;
         }
         return courseId;
+    }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        announcement(userRole, userId);
     }
 }
