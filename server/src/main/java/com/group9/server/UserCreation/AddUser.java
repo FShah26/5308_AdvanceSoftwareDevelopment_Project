@@ -23,13 +23,13 @@ public class AddUser {
     @Autowired
     IAddUserLogic addUserService;
     String id;
-    String userid;
+    String userId;
     String password;
-    String user_type;
+    String userType;
     String name;
-    String email_address;
+    String emailAddress;
     String department;
-    Scanner sc;
+    Scanner scanner;
 
     @Autowired
     public AddUser() {
@@ -41,21 +41,21 @@ public class AddUser {
         out.println("************************************************");
         out.println("      ENTER DETAILS TO CREATE NEW USER        ");
         out.println("************************************************");
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         out.print("Enter id : ");
-        id = sc.nextLine();
+        id = scanner.nextLine();
         out.print("Enter userid : ");
-        userid = sc.nextLine();
+        userId = scanner.nextLine();
         out.print("Enter password : ");
-        password = sc.nextLine();
+        password = scanner.nextLine();
         out.print("Enter user_type : ");
-        user_type = sc.nextLine();
+        userType = scanner.nextLine();
         out.print("Enter Name of the user : ");
-        name = sc.nextLine();
+        name = scanner.nextLine();
         out.print("Enter email address of the student : ");
-        email_address = sc.nextLine();
+        emailAddress = scanner.nextLine();
         out.print("Enter department : ");
-        department = sc.nextLine();
+        department = scanner.nextLine();
 
         out.println("-->Press 1 to confirm");
         out.println("-->Press 2 to Cancel");
@@ -64,17 +64,17 @@ public class AddUser {
     }
 
     public void selectMenu() throws SQLException {
-        String menuOption = sc.nextLine();
+        String menuOption = scanner.nextLine();
         validateInput(menuOption);
     }
 
     public void validateInput(String input) throws SQLException {
         if (this.inputValidator.validate(input)) {
-            String output = validate.validate_input(id, userid, password, user_type);
-
-            if (output.equals("true")) {
-                addUserService.addUser(id, userid, password, user_type);
-                addUserService.addUserDetails(userid, user_type, name, email_address, department);
+            String output = validate.validateInput(id, userId, password, userType);
+            String toProceed = "true";
+            if (output.equals(toProceed)) {
+                addUserService.addUser(id, userId, password, userType);
+                addUserService.addUserDetails(userId, userType, name, emailAddress, department);
                 dash.dashboard();
             } else
                 out.println(output);

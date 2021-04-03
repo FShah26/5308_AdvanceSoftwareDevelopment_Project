@@ -8,15 +8,15 @@ class ValidateAddUserTest {
 
     @Test
     void invalid_input() {
-        ValidateAddUser vcc = new ValidateAddUser();
+        ValidateAddUser validateAddUser = new ValidateAddUser();
         Assertions.assertEquals("False",
-                vcc.validate_input("24","un","u9","Faculty"));
+                validateAddUser.validateInput("24","un","u9","Faculty"));
     }
 
     @Test
     void valid_input() {
-        ValidateAddUser vcc = new ValidateAddUser();
+        ValidateAddUser validateAddUser = new ValidateAddUser();
         Assertions.assertEquals("true",
-                vcc.validate_input("1","unpatel22","utkarshp","2"));
+                validateAddUser.validateInput("1","unpatel22","utkarshp","2"));
     }
 }
