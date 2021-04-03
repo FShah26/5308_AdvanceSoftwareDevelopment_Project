@@ -1,6 +1,6 @@
 package com.group9.server.Meeting.FacultyManageMeeting;
 
-import com.group9.server.cnfg.DBConfig;
+import com.group9.server.Database.DBConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

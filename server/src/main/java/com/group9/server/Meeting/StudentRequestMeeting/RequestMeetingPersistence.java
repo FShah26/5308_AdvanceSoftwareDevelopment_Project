@@ -1,7 +1,7 @@
 package com.group9.server.Meeting.StudentRequestMeeting;
 
 import com.group9.server.Database.ISingletonDatabase;
-import com.group9.server.cnfg.DBConfig;
+import com.group9.server.Database.DBConfig;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;

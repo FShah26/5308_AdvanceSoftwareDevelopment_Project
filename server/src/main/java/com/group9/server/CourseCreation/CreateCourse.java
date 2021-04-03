@@ -69,7 +69,7 @@ public class CreateCourse implements ICreateCourse{
             if (this.inputValidator.validate(input)) {
                      message = courseService.courseCreate(course_id, course_name, course_credit, course_faculty, course_Department);
                      System.out.println(message);
-                     dash.dashboard();
+                     dash.showDashboard();
             } else {
                 displayInvalidMenuOptionMsg();
                 creation();

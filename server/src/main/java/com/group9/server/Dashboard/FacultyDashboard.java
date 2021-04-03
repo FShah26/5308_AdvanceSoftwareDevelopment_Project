@@ -1,6 +1,5 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.Admin.FacultyAnnouncement;
 import com.group9.server.Announcements.Admin.IAnnouncementInput;
 import com.group9.server.Feedback.IFeedback;
 import com.group9.server.ManageLecture.IManageLecture;
@@ -43,7 +42,7 @@ public class FacultyDashboard implements IDashboard {
     }
 
     @Override
-    public void dashboard() throws SQLException {
+    public void showDashboard() throws SQLException {
 
         out.println("************************************************");
         out.println("               FACULTY DASHBOARD                ");
@@ -113,7 +112,7 @@ public class FacultyDashboard implements IDashboard {
                 default:
                     out.println("Yet to develop..");
             }
-            dashboard();
+            showDashboard();
         } else {
             displayInvalidMenuOptionMsg();
             selectMenu();

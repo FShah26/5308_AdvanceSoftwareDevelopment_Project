@@ -45,7 +45,7 @@ public class Feedback implements IFeedback {
     public void addFeedback(String userId, String userName, String feedback,String facultyId) throws SQLException {
         String message = feedbackLogic.addFeedback(userId, userName, feedback, facultyId);
         System.out.println(message);
-        dashboard.dashboard();
+        dashboard.showDashboard();
     }
     @Override
     public String getStudentName() {

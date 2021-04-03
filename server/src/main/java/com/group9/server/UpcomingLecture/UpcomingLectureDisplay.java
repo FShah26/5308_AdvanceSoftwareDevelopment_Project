@@ -86,7 +86,7 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
         }
         else if(courseOption.equals("*"))
         {
-            dash.dashboard();
+            dash.showDashboard();
         }
         else
         {

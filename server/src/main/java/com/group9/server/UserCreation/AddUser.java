@@ -77,7 +77,7 @@ public class AddUser implements IAddUser {
             if (output.equals(TO_PROCEED)) {
                 addUserService.addUser(id, userId, password, userType);
                 addUserService.addUserDetails(userId, userType, name, emailAddress, department);
-                dash.dashboard();
+                dash.showDashboard();
             } else
                 out.println(output);
         } else {

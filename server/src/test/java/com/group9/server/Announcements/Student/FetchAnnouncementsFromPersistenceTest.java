@@ -1,7 +1,7 @@
 package com.group9.server.Announcements.Student;
 
 import com.group9.server.Database.ISingletonDatabase;
-import com.group9.server.cnfg.DBConfig;
+import com.group9.server.Database.DBConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

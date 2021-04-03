@@ -63,7 +63,7 @@ public class EnrollStudent implements IEnrollStudent {
             final String TO_PROCEED = "true";
             if (output.equals(TO_PROCEED)) {
                 enrollStudent.enrollStudent(userId, courseId, Term);
-                dash.dashboard();
+                dash.showDashboard();
             } else
                 out.println(output);
         } else {
