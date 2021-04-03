@@ -9,18 +9,18 @@ import java.sql.*;
 
 @Component
 public class NotesPersistence implements INotesPersistence {
-    Connection con;
+    Connection connection;
 
     @Autowired
     public NotesPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
-        con = databaseInstance.getConnection(config);
+        connection = databaseInstance.getConnection(config);
     }
 
     @Override
     public ResultSet fetchNotes(String studentId, String courseId) throws SQLException {
         final String FETCH_NOTES = "{call fetch_notes(?, ?)}";
-        CallableStatement statement = con.prepareCall(FETCH_NOTES);
+        CallableStatement statement = connection.prepareCall(FETCH_NOTES);
         statement.setString(1, studentId);
         statement.setString(2, courseId);
         ResultSet set = statement.executeQuery();
@@ -30,7 +30,7 @@ public class NotesPersistence implements INotesPersistence {
     @Override
     public String insertNotes(String studentId, String courseId, String notes) throws SQLException {
         final String ADD_NOTES = "{call add_notes(?, ?, ?, ?)}";
-        CallableStatement statement = con.prepareCall(ADD_NOTES);
+        CallableStatement statement = connection.prepareCall(ADD_NOTES);
         statement.registerOutParameter(4, Types.VARCHAR);
         statement.setString(1, studentId);
         statement.setString(2, courseId);

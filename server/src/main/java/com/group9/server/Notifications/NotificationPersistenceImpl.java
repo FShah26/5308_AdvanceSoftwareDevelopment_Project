@@ -12,18 +12,18 @@ import java.sql.SQLException;
 
 @Component
 public class NotificationPersistenceImpl implements NotificationPersistence {
-    Connection con;
+    Connection connection;
 
     @Autowired
     public NotificationPersistenceImpl(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
-        con = databaseInstance.getConnection(config);
+        connection = databaseInstance.getConnection(config);
     }
 
     @Override
     public ResultSet fetchNotificationsFromDatabase(String user) throws SQLException {
         final String FETCH_USER_NOTIFICATION = "{call fetch_user_notifications(?)}";
-        CallableStatement statement = con.prepareCall(FETCH_USER_NOTIFICATION);
+        CallableStatement statement = connection.prepareCall(FETCH_USER_NOTIFICATION);
         statement.setString(1, user);
         return statement.executeQuery();
     }

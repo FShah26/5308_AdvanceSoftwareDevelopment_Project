@@ -5,15 +5,18 @@ import com.group9.server.Dashboard.FacultyDashboard;
 import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.StudentDashboard;
 import com.group9.server.Database.ISingletonDatabase;
+import com.group9.server.Database.SingletonDatabase;
 import com.group9.server.HomePage.IHomePage;
 import com.group9.server.Login.IUserAuthLogic;
 import com.group9.server.Login.UserAuthenticationLogic;
+import com.group9.server.cnfg.DBConfig;
 import com.group9.server.cnfg.HomePageConfiguration;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 
@@ -24,6 +27,7 @@ public class ServerApplication implements CommandLineRunner {
     IUserAuthLogic authLogic;
     IDashboard dashboard;
     ISingletonDatabase database;
+    Connection connection;
 
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
@@ -36,7 +40,10 @@ public class ServerApplication implements CommandLineRunner {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
         authLogic = ctx.getBean(UserAuthenticationLogic.class);
         homePage = ctx.getBean("appHome", IHomePage.class);
-        
+        database = ctx.getBean(SingletonDatabase.class);
+        database = database.getInstance();
+        connection = database.getConnection(ctx.getBean(DBConfig.class));
+
         homePage.getMenu();
         AppUserRole = homePage.selectMenu();
 
@@ -60,5 +67,6 @@ public class ServerApplication implements CommandLineRunner {
             System.out.println("Please enter correct credentials.");
         }
         ctx.close();
+        connection.close();
     }
 }
