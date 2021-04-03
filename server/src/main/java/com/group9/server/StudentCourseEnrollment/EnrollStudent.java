@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 @Component
-public class EnrollStudent {
+public class EnrollStudent implements IEnrollStudent {
 
     @Autowired
     IValidateEnrollStudent validate;
@@ -23,6 +23,8 @@ public class EnrollStudent {
     InputValidator inputValidator;
     @Autowired
     IEnrollStudentLogic enrollStudent;
+    @Autowired
+    IEnrollStudent iEnrollStudent;
     String userId;
     String courseId;
     String Term;

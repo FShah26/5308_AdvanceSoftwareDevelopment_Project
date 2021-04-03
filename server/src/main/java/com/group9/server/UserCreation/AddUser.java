@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import static java.lang.System.out;
 
-public class AddUser {
+public class AddUser implements IAddUser {
 
     @Autowired
     IValidateAddUser validate;
@@ -22,6 +22,8 @@ public class AddUser {
     InputValidator inputValidator;
     @Autowired
     IAddUserLogic addUserService;
+    @Autowired
+    IAddUser addUser;
     String id;
     String userId;
     String password;
