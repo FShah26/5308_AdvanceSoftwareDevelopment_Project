@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public interface IRequestMeeting extends IExecuteAction {
     void meetingDisplay(String username) ;
     void selectMenu() ;
-    void checkinput(String selection) ;
+    void checkInput(String selection) ;
     void manageMeetingAction(String selection);
     void selectCourse(int select);
 }

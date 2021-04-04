@@ -1,8 +1,6 @@
 package com.group9.server.Meeting.StudentRequestMeeting;
 
-import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Login.IUserInputValidator;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class RequestMeeting implements IRequestMeeting {
     @Override
     public void selectMenu() {
         String menuOption = scanner.nextLine();
-        checkinput(menuOption);
+        checkInput(menuOption);
     }
 
     @Override
@@ -111,7 +109,7 @@ public class RequestMeeting implements IRequestMeeting {
     }
 
     @Override
-    public void checkinput(String selection) {
+    public void checkInput(String selection) {
         if (this.meetingOptionValidator.validate(selection)) {
             manageMeetingAction(selection);
         } else {

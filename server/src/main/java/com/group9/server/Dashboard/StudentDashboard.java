@@ -2,7 +2,6 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.HomePage.UserConstants;
 import com.group9.server.IExecuteAction;
-import com.group9.server.Quiz.Student.IQuizAssessment;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -14,7 +13,7 @@ import static java.lang.System.out;
 @Component
 public class StudentDashboard implements IDashboard {
     private final String role;
-    InputValidator validator;
+    InputValidator studentValidator;
     IExecuteAction feedback;
     IExecuteAction viewAnnouncements;
     IExecuteAction viewUserNotifications;
@@ -25,9 +24,9 @@ public class StudentDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public StudentDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback, IExecuteAction quizAssessment) {
+    public StudentDashboard(InputValidator studentValidator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback, IExecuteAction quizAssessment) {
         this.role = UserConstants.STUDENT;
-        this.validator = validator;
+        this.studentValidator = studentValidator;
         this.feedback = feedback;
         this.viewUserNotifications = viewUserNotifications;
         this.upcomingLectureDisplay = upcomingLectureDisplay;
@@ -76,7 +75,7 @@ public class StudentDashboard implements IDashboard {
     }
 
     public void checkInput(String selection) {
-        if (this.validator.validate(selection)) {
+        if (this.studentValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
                 //logout
