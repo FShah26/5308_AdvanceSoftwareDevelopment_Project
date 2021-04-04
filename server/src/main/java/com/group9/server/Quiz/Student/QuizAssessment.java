@@ -14,7 +14,7 @@ public class QuizAssessment implements IQuizAssessment {
     IUserInputValidator quizAssessmentOptionValidator;
     IQuizAssessmentLogic quizAssessmentLogic;
 
-    public void QuizAssessment(IQuizAssessmentLogic quizAssessmentLogic) {
+    public QuizAssessment(IQuizAssessmentLogic quizAssessmentLogic) {
         this.studentId = "";
         this.quizAssessmentOptionValidator = new QuizAssessmentOptionValidator();
         this.quizAssessmentLogic = quizAssessmentLogic;

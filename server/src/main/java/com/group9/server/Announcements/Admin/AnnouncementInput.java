@@ -32,19 +32,22 @@ public class AnnouncementInput implements IAnnouncementInput {
 
     @Override
     public void selectOption() {
-        String print_output;
+        String printOutput;
         System.out.println("-->Press 1 to confirm");
         System.out.println("-->Press 2 to Cancel");
-
         String menuOption = scanner.nextLine();
-        if (menuOption.equals("1")) {
-            print_output = announcementLogic.makeAnnouncement(userRole, null, input, userId);
-            System.out.println(print_output);
-        } else if (menuOption.equals("2")) {
-            System.out.println("Back to Dashboard");
-        } else {
-            System.out.println("Please select correct option");
-            selectOption();
+
+        switch (menuOption) {
+            case "1":
+                printOutput = announcementLogic.makeAnnouncement(userRole, null, input, userId);
+                System.out.println(printOutput);
+                break;
+            case "2":
+                System.out.println("Back to Dashboard");
+                break;
+            default:
+                System.out.println("Please select correct option");
+                selectOption();
         }
     }
 

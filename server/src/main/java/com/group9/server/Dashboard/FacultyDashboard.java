@@ -13,7 +13,7 @@ import static java.lang.System.out;
 @Component
 public class FacultyDashboard implements IDashboard {
     private final String role;
-    InputValidator validator;
+    InputValidator facultyValidator;
     IExecuteAction feedback;
     IExecuteAction quiz;
     IExecuteAction manageLecture;
@@ -23,8 +23,8 @@ public class FacultyDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public FacultyDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
-        this.validator = validator;
+    public FacultyDashboard(InputValidator facultyValidator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
+        this.facultyValidator = facultyValidator;
         this.feedback = feedback;
         this.viewUserNotifications = viewUserNotifications;
         this.manageLecture = manageLecture;
@@ -69,7 +69,7 @@ public class FacultyDashboard implements IDashboard {
     }
 
     public void checkinput(String selection) {
-        if (this.validator.validate(selection)) {
+        if (this.facultyValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
                 out.println("Logging out...");

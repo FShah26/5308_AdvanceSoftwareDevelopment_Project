@@ -10,7 +10,7 @@ import static java.lang.System.out;
 @Component
 public class CreateCourse implements ICreateCourse {
 
-    InputValidator inputValidator;
+    InputValidator adminCreateCourseConfirm;
     ICourseLogic courseService;
     String courseId;
     String courseName;
@@ -19,8 +19,8 @@ public class CreateCourse implements ICreateCourse {
     String courseDepartment;
     Scanner scanner;
 
-    public CreateCourse(InputValidator inputValidator, ICourseLogic courseService) {
-        this.inputValidator = inputValidator;
+    public CreateCourse(InputValidator adminCreateCourseConfirm, ICourseLogic courseService) {
+        this.adminCreateCourseConfirm = adminCreateCourseConfirm;
         this.courseService = courseService;
     }
 
@@ -57,7 +57,7 @@ public class CreateCourse implements ICreateCourse {
     public void validateInput(String input) {
         String message = " ";
         try {
-            if (this.inputValidator.validate(input)) {
+            if (this.adminCreateCourseConfirm.validate(input)) {
                 message = courseService.courseCreate(courseId, courseName, courseCredit, courseFaculty, courseDepartment);
                 System.out.println(message);
             } else {
