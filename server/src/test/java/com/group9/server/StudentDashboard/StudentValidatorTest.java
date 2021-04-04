@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class StudentValidatorTest {
     @ParameterizedTest
     @CsvSource({
-            "9, true",
+            "9, false",
             "25, false",
             "2, true",
     })
