@@ -1,13 +1,8 @@
 package com.group9.server.UserCreation;
 
-
-import com.group9.server.Dashboard.InputValidator;
-import com.group9.server.Feedback.IFeedbackLogic;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-
-import static java.lang.System.out;
 
 @Component
 public class AddUser implements IAddUser {
@@ -18,23 +13,12 @@ public class AddUser implements IAddUser {
         this.addUserLogic = addUserLogic;
     }
 
-//    IValidateAddUser validateAddUser;
-//    InputValidator inputValidator;
-//    IAddUserLogic addUserService;
-//    String id;
-//    String userId;
-//    String password;
-//    String userType;
-//    String name;
-//    String emailAddress;
-//    String department;
-//    Scanner scanner;
-
     @Override
     public void addUser(String id, String userId, String password, String userType) {
         String message = addUserLogic.addUser(id, userId, password, userType);
         System.out.println(message);
     }
+    @Override
     public void addUserDetails(String userId, String userType, String name, String emailAddress, String department){
         String message = addUserLogic.addUserDetails(userId, userType, name, emailAddress, department);
         System.out.println(message);

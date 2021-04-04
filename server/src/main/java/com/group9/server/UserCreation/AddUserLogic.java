@@ -1,9 +1,6 @@
 package com.group9.server.UserCreation;
 
-import com.group9.server.Feedback.IFeedbackPersistence;
 import org.springframework.stereotype.Component;
-
-import java.sql.SQLException;
 
 @Component
 public class AddUserLogic implements IAddUserLogic {
