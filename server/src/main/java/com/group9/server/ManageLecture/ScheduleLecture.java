@@ -1,6 +1,5 @@
 package com.group9.server.ManageLecture;
 
-import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -15,16 +14,13 @@ public class ScheduleLecture implements IManageLectureActions {
     public String lecDate;
 
     IManageLectureLogic manageLectureLogic;
-    IUserInputValidator userConfirmationOptionValidator;
 
     public ScheduleLecture(IManageLectureLogic manageLectureLogic) {
-        this.userConfirmationOptionValidator = new UserConfirmationOptionValidator();
         this.manageLectureLogic = manageLectureLogic;
     }
 
     @Override
     public void getUserInputs() {
-        String selectedOption;
         System.out.println("************************************************");
         System.out.println("               SCHEDULING LECTURE                ");
         System.out.println("************************************************");
@@ -33,23 +29,6 @@ public class ScheduleLecture implements IManageLectureActions {
         this.lecDate = getLectureDate();
     }
 
-    public void showUserConfirmationOptions() {
-        System.out.println("-->Press 1 to confirm");
-        System.out.println("-->Press 2 to Cancel");
-    }
-
-    @Override
-    public boolean getUserConfirmation() {
-        showUserConfirmationOptions();
-        Scanner sc = new Scanner(System.in);
-        String menuOption = sc.nextLine();
-        while (this.userConfirmationOptionValidator.validate(menuOption) == false) {
-            displayInvalidMenuOptionMsg();
-            showUserConfirmationOptions();
-            menuOption = sc.nextLine();
-        }
-        return (Integer.parseInt(menuOption.trim()) == 1);
-    }
 
     public String getCourseId() {
         System.out.println("Enter the course ID:");
@@ -79,11 +58,6 @@ public class ScheduleLecture implements IManageLectureActions {
             out.println("Lecture scheduling failed.");
         }
         return result;
-    }
-
-    @Override
-    public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from menu.");
     }
 
     @Override

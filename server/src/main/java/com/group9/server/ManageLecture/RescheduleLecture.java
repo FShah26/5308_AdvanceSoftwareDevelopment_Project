@@ -1,7 +1,5 @@
 package com.group9.server.ManageLecture;
 
-import com.group9.server.Login.IUserInputValidator;
-
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -14,10 +12,8 @@ public class RescheduleLecture implements IManageLectureActions {
     public String topic;
     public String lecDate;
     IManageLectureLogic manageLectureLogic;
-    IUserInputValidator userConfirmationOptionValidator;
 
     public RescheduleLecture(IManageLectureLogic manageLectureLogic) {
-        this.userConfirmationOptionValidator = new UserConfirmationOptionValidator();
         this.manageLectureLogic = manageLectureLogic;
     }
 
@@ -53,7 +49,6 @@ public class RescheduleLecture implements IManageLectureActions {
 
     @Override
     public void getUserInputs() {
-        String selectedOption;
         System.out.println("************************************************");
         System.out.println("               RESCHEDULING LECTURE                ");
         System.out.println("************************************************");
@@ -62,12 +57,6 @@ public class RescheduleLecture implements IManageLectureActions {
         this.lecId = getLectureId();
         this.topic = getLectureTopic();
         this.lecDate = getLectureDate();
-    }
-
-    @Override
-    public void showUserConfirmationOptions() {
-        System.out.println("-->Press 1 to confirm");
-        System.out.println("-->Press 2 to Cancel");
     }
 
     @Override
@@ -80,24 +69,6 @@ public class RescheduleLecture implements IManageLectureActions {
             out.println("Lecture Rescheduled Failed");
         }
         return result;
-    }
-
-    @Override
-    public boolean getUserConfirmation() {
-        showUserConfirmationOptions();
-        Scanner sc = new Scanner(System.in);
-        String menuOption = sc.nextLine();
-        while (this.userConfirmationOptionValidator.validate(menuOption) == false) {
-            displayInvalidMenuOptionMsg();
-            showUserConfirmationOptions();
-            menuOption = sc.nextLine();
-        }
-        return (Integer.parseInt(menuOption.trim()) == 1);
-    }
-
-    @Override
-    public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from menu.");
     }
 
     @Override

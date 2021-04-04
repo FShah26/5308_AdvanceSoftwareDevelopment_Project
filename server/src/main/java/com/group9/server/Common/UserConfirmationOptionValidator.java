@@ -1,13 +1,16 @@
-package com.group9.server.ManageLecture;
+package com.group9.server.Common;
 
 import com.group9.server.Login.IUserInputValidator;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserConfirmationOptionValidator implements IUserInputValidator {
 
+    static final String VALIDATION = "^\\s*([1-2])\\s*$";
     String regex;
 
     public UserConfirmationOptionValidator() {
-        this.regex = "^\\s*([1-2])\\s*$";
+        this.regex = VALIDATION;
     }
 
     @Override

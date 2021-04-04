@@ -1,5 +1,6 @@
 package com.group9.server.Announcements.Admin;
 
+import com.group9.server.Common.IUserConfirmation;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -8,13 +9,15 @@ import java.util.Scanner;
 public class AnnouncementInput implements IAnnouncementInput {
 
     IAnnouncementLogic announcementLogic;
+    IUserConfirmation userConfirmation;
     String input;
     Scanner scanner;
     String userRole;
     String userId;
 
-    public AnnouncementInput(IAnnouncementLogic announcementLogic) {
+    public AnnouncementInput(IAnnouncementLogic announcementLogic, IUserConfirmation userConfirmation) {
         this.announcementLogic = announcementLogic;
+        this.userConfirmation = userConfirmation;
     }
 
     @Override
@@ -33,21 +36,12 @@ public class AnnouncementInput implements IAnnouncementInput {
     @Override
     public void selectOption() {
         String printOutput;
-        System.out.println("-->Press 1 to confirm");
-        System.out.println("-->Press 2 to Cancel");
-        String menuOption = scanner.nextLine();
-
-        switch (menuOption) {
-            case "1":
-                printOutput = announcementLogic.makeAnnouncement(userRole, null, input, userId);
-                System.out.println(printOutput);
-                break;
-            case "2":
-                System.out.println("Back to Dashboard");
-                break;
-            default:
-                System.out.println("Please select correct option");
-                selectOption();
+        userConfirmation.showUserConfirmationOptions();
+        if (userConfirmation.getUserConfirmation()) {
+            printOutput = announcementLogic.makeAnnouncement(userRole, null, input, userId);
+            System.out.println(printOutput);
+        } else {
+            System.out.println("Navigating back to Dashboard");
         }
     }
 
