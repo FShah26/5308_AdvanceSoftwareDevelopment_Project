@@ -1,20 +1,23 @@
 package com.group9.server.UserCreation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AddUserLogic implements IAddUserLogic {
 
-    @Autowired
     IAddUserPersistence addUserPersistence;
+
+    public void AddUserLogic(IAddUserPersistence addUserPersistence) {
+        this.addUserPersistence = addUserPersistence;
+    }
 
     @Override
     public void addUser(String id, String userId, String password, String userType) {
-        addUserPersistence.addUser(id,userId,password,userType);
+        addUserPersistence.addUser(id, userId, password, userType);
     }
+
     @Override
-    public void addUserDetails(String userId, String userType, String name, String emailAddress, String department){
+    public void addUserDetails(String userId, String userType, String name, String emailAddress, String department) {
         addUserPersistence.addUserDetails(userId, userType, name, emailAddress, department);
     }
 

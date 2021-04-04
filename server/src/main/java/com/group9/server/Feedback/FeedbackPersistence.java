@@ -1,8 +1,7 @@
 package com.group9.server.Feedback;
 
-import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Database.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -14,7 +13,6 @@ public class FeedbackPersistence implements IFeedbackPersistence {
 
     Connection connection;
 
-    @Autowired
     public FeedbackPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
@@ -35,7 +33,7 @@ public class FeedbackPersistence implements IFeedbackPersistence {
         statement.setString(1, userId);
         statement.setString(2, userName);
         statement.setString(3, feedback);
-        statement.setString(4,facultyId);
+        statement.setString(4, facultyId);
         statement.execute();
 
         return statement.getString("message");

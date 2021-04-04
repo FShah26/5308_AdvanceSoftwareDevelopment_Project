@@ -1,6 +1,5 @@
 package com.group9.server.Notes;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -9,7 +8,6 @@ import java.util.Scanner;
 public class StudentNotes implements IStudentNotes {
     INotesLogic notesLogic;
 
-    @Autowired
     public StudentNotes(INotesLogic notesLogic) {
         this.notesLogic = notesLogic;
     }

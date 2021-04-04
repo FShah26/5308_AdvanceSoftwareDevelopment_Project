@@ -1,12 +1,11 @@
 package com.group9.server.Notifications;
 
-import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.ISingletonDatabase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -22,7 +21,6 @@ class INotificationPersistenceTest {
     INotificationPersistence underTest;
     ISingletonDatabase mockDatabase = mock(ISingletonDatabase.class);
 
-    @Autowired
     DBConfig config;
 
     @BeforeEach

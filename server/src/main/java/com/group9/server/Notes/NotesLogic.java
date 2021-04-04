@@ -1,6 +1,5 @@
 package com.group9.server.Notes;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -11,7 +10,6 @@ public class NotesLogic implements INotesLogic {
 
     INotesPersistence persistence;
 
-    @Autowired
     public NotesLogic(INotesPersistence persistence) {
         this.persistence = persistence;
     }

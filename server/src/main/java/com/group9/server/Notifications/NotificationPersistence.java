@@ -1,8 +1,7 @@
 package com.group9.server.Notifications;
 
-import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Database.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
 import java.sql.CallableStatement;
@@ -15,7 +14,6 @@ public class NotificationPersistence implements INotificationPersistence {
     final String FETCH_USER_NOTIFICATION = "{call fetch_user_notifications(?)}";
     Connection connection;
 
-    @Autowired
     public NotificationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);

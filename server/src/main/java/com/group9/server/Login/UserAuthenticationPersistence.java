@@ -2,17 +2,19 @@ package com.group9.server.Login;
 
 import com.group9.server.Database.DBConfig;
 import com.group9.server.Database.ISingletonDatabase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 
 @Component
 public class UserAuthenticationPersistence implements IUserAuthPersistence {
 
     Connection connection;
 
-    public UserAuthenticationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException{
+    public UserAuthenticationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }

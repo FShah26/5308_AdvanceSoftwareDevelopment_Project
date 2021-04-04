@@ -1,9 +1,7 @@
 package com.group9.server.Quiz.Student;
 
 import com.group9.server.Login.IUserInputValidator;
-import com.group9.server.Meeting.StudentRequestMeeting.MeetingDetails;
 import com.group9.server.Quiz.IQuizPersistence;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -24,7 +22,6 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     IUserInputValidator inputOptionsValidator;
 
 
-    @Autowired
     public QuizAssessmentLogic(IQuizPersistence quizPersistence, IGradingPersistence gradingPersistence) {
         this.quizPersistence = quizPersistence;
         this.gradingPersistence = gradingPersistence;
@@ -220,14 +217,14 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     }
 
     @Override
-    public void viewGrades(String studentId){
+    public void viewGrades(String studentId) {
         ArrayList<ViewGrades> grades = gradeList(studentId);
         if (grades.size() > 0) {
             System.out.println("__________________________________________________________________________________________________________________");
-            System.out.printf("%-20s%-15s%-20s%-35s%-30s\n", "Course ID", "Quiz ID", "Grades", "Attempt","Last Attempt");
+            System.out.printf("%-20s%-15s%-20s%-35s%-30s\n", "Course ID", "Quiz ID", "Grades", "Attempt", "Last Attempt");
             System.out.println("------------------------------------------------------------------------------------------------------------------");
             for (ViewGrades m : grades) {
-                System.out.printf("%-20s%-15s%-20s%-35s%-30s\n", m.courseId, m.quizId, m.grades, m.attempt,m.lastAttempt);
+                System.out.printf("%-20s%-15s%-20s%-35s%-30s\n", m.courseId, m.quizId, m.grades, m.attempt, m.lastAttempt);
             }
         } else {
             System.out.println("Seems like you haven't given any quizzes yet.");
@@ -236,15 +233,15 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
 
     public ArrayList<ViewGrades> gradeList(String studentId) {
         ArrayList<ViewGrades> grades = new ArrayList<ViewGrades>();
-        try{
+        try {
             ResultSet set = gradingPersistence.grades(studentId);
             while (set.next()) {
-                String courseId=set.getString(1);
+                String courseId = set.getString(1);
                 String quizId = set.getString(2);
                 String quizGrade = set.getString(3);
-                String attempt=set.getString(4);
-                String lastAttempt=set.getString(5);
-                ViewGrades viewGrades = new ViewGrades(courseId,quizId,quizGrade,attempt,lastAttempt);
+                String attempt = set.getString(4);
+                String lastAttempt = set.getString(5);
+                ViewGrades viewGrades = new ViewGrades(courseId, quizId, quizGrade, attempt, lastAttempt);
                 grades.add(viewGrades);
             }
         } catch (SQLException throwables) {

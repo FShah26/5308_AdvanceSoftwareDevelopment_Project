@@ -1,6 +1,5 @@
 package com.group9.server.UpcomingLecture;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -10,10 +9,8 @@ import java.util.ArrayList;
 @Component
 public class UpcomingLectureLogic implements IUpcomingLectureLogic {
 
-    @Autowired
     ILecturePersistence lecturePersistence;
 
-    @Autowired
     public UpcomingLectureLogic(ILecturePersistence lecture) {
         this.lecturePersistence = lecture;
     }

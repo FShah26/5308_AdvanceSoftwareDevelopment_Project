@@ -2,7 +2,6 @@ package com.group9.server.Quiz;
 
 import com.group9.server.Database.DBConfig;
 import com.group9.server.Database.ISingletonDatabase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -15,7 +14,6 @@ public class QuizPersistence implements IQuizPersistence {
     final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
     Connection connection;
 
-    @Autowired
     public QuizPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);

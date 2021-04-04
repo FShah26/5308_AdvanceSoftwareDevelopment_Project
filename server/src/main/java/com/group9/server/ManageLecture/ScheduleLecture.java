@@ -1,7 +1,6 @@
 package com.group9.server.ManageLecture;
 
 import com.group9.server.Login.IUserInputValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
