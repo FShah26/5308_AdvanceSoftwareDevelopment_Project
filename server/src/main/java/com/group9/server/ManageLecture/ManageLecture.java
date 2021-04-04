@@ -1,5 +1,6 @@
 package com.group9.server.ManageLecture;
 
+import com.group9.server.Common.IUserConfirmation;
 import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +16,13 @@ public class ManageLecture implements IManageLecture {
     String facultyId;
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator manageLectureOptionValidator;
+    IUserConfirmation userConfirmation;
     Map<String, IManageLectureActions> action = new HashMap<>();
 
-    public ManageLecture(IManageLectureLogic manageLectureLogic) {
+    public ManageLecture(IManageLectureLogic manageLectureLogic, IUserConfirmation userConfirmation) {
         this.facultyId = "";
         this.manageLectureLogic = manageLectureLogic;
+        this.userConfirmation = userConfirmation;
         this.manageLectureOptionValidator = new ManageLectureOptionValidator();
         action.put("1", new ScheduleLecture(this.manageLectureLogic));
         action.put("2", new RescheduleLecture(this.manageLectureLogic));
@@ -64,7 +67,7 @@ public class ManageLecture implements IManageLecture {
         if (manageLectureAction != null) {
             manageLectureAction.setFacultyId(this.facultyId);
             manageLectureAction.getUserInputs();
-            if (manageLectureAction.getUserConfirmation()) {
+            if (userConfirmation.getUserConfirmation()) {
                 if (manageLectureAction.save()) {
                     out.println("Operation Successful");
                 }
