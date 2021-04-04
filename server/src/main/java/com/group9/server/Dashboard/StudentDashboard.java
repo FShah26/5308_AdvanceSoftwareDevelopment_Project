@@ -25,11 +25,11 @@ public class StudentDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public StudentDashboard(InputValidator validator, IExecuteAction viewUserNotificationsImpl, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback) {
+    public StudentDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback) {
         this.role = UserConstants.STUDENT;
         this.validator = validator;
         this.feedback = feedback;
-        this.viewUserNotifications = viewUserNotificationsImpl;
+        this.viewUserNotifications = viewUserNotifications;
         this.upcomingLectureDisplay = upcomingLectureDisplay;
         this.viewAnnouncements = viewAnnouncements;
         this.studentNotes = studentNotes;
