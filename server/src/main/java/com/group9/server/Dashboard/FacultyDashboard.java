@@ -24,7 +24,6 @@ public class FacultyDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String username;
 
-    @Autowired
     public FacultyDashboard(InputValidator validator, IExecuteAction viewUserNotificationsImpl, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
         this.validator = validator;
         this.feedback = feedback;

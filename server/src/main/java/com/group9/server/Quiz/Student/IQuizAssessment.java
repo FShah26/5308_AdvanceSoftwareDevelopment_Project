@@ -1,6 +1,8 @@
 package com.group9.server.Quiz.Student;
 
-public interface IQuizAssessment {
+import com.group9.server.IExecuteAction;
+
+public interface IQuizAssessment extends IExecuteAction {
     void showQuizMenu(String studentId);
     void assessQuiz();
     void viewQuiz();

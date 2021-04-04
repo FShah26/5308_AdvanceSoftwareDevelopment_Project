@@ -47,4 +47,15 @@ public class StudentNotes implements IStudentNotes {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        String course = getCourseInput();
+        viewNotes(userId, course);
+
+        course = getCourseInput();
+        String text = getNotesText();
+
+        addNotes(userId, course, text);
+    }
 }

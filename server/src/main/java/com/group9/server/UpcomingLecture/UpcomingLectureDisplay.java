@@ -78,4 +78,9 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
             selectCourse(number);
         }
     }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        lectureDisplay(userId);
+    }
 }

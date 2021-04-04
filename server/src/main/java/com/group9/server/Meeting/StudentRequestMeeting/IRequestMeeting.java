@@ -1,8 +1,10 @@
 package com.group9.server.Meeting.StudentRequestMeeting;
 
+import com.group9.server.IExecuteAction;
+
 import java.sql.SQLException;
 
-public interface IRequestMeeting {
+public interface IRequestMeeting extends IExecuteAction {
     void meetingDisplay(String username) ;
     void selectMenu() ;
     void checkinput(String selection) ;

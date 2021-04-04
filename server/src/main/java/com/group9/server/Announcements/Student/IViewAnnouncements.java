@@ -1,6 +1,8 @@
 package com.group9.server.Announcements.Student;
 
-public interface IViewAnnouncements {
+import com.group9.server.IExecuteAction;
+
+public interface IViewAnnouncements extends IExecuteAction {
     IAnnouncementList fetchAnnouncements();
 
     void displayAllAnnouncements();

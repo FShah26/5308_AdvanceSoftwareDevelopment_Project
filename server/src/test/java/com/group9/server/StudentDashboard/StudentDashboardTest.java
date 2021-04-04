@@ -1,14 +1,8 @@
 package com.group9.server.StudentDashboard;
 
-import com.group9.server.Announcements.Student.IViewAnnouncements;
 import com.group9.server.Dashboard.InputValidator;
 import com.group9.server.Dashboard.StudentDashboard;
-import com.group9.server.Database.ISingletonDatabase;
-import com.group9.server.Feedback.IFeedback;
-import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
-import com.group9.server.Notes.IStudentNotes;
-import com.group9.server.Notifications.ViewUserNotifications;
-import com.group9.server.UpcomingLecture.IUpcomingLectureDisplay;
+import com.group9.server.IExecuteAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
@@ -16,17 +10,16 @@ public class StudentDashboardTest {
     StudentDashboard underTest;
 
     InputValidator mockValidator = Mockito.mock(InputValidator.class);
-    IStudentNotes mockStudentNotes = Mockito.mock(IStudentNotes.class);
-    IFeedback mockFeedback = Mockito.mock(IFeedback.class);
-    IViewAnnouncements announcements = Mockito.mock(IViewAnnouncements.class);
-    ViewUserNotifications notifications = Mockito.mock(ViewUserNotifications.class);
-    IRequestMeeting meeting = Mockito.mock(IRequestMeeting.class);
-    IUpcomingLectureDisplay lecture = Mockito.mock(IUpcomingLectureDisplay.class);
-    ISingletonDatabase mockDatabase = Mockito.mock(ISingletonDatabase.class);
+    IExecuteAction mockStudentNotes = Mockito.mock(IExecuteAction.class);
+    IExecuteAction mockFeedback = Mockito.mock(IExecuteAction.class);
+    IExecuteAction announcements = Mockito.mock(IExecuteAction.class);
+    IExecuteAction notifications = Mockito.mock(IExecuteAction.class);
+    IExecuteAction meeting = Mockito.mock(IExecuteAction.class);
+    IExecuteAction lecture = Mockito.mock(IExecuteAction.class);
 
     @BeforeEach
     public void setUp() {
-        underTest = new StudentDashboard(mockValidator, mockStudentNotes, mockFeedback, announcements, notifications, mockDatabase);
+        underTest = new StudentDashboard(mockValidator, notifications, lecture, announcements, mockStudentNotes, meeting, mockFeedback);
         underTest.setUsername("hashik");
     }
 }

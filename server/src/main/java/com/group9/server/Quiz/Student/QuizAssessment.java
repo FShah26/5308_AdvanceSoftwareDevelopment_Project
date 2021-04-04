@@ -13,10 +13,8 @@ public class QuizAssessment implements IQuizAssessment {
 
     String studentId;
     IUserInputValidator quizAssessmentOptionValidator;
-    @Autowired
     IQuizAssessmentLogic quizAssessmentLogic;
 
-    @Autowired
     public void QuizAssessment(IQuizAssessmentLogic quizAssessmentLogic) {
         this.studentId = "";
         this.quizAssessmentOptionValidator = new QuizAssessmentOptionValidator();
@@ -109,4 +107,8 @@ public class QuizAssessment implements IQuizAssessment {
         return quizNo;
     }
 
+    @Override
+    public void execute(String userRole, String userId) {
+        showQuizMenu(userId);
+    }
 }

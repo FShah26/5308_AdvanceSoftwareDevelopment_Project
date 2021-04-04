@@ -18,7 +18,6 @@ public class ScheduleLecture implements IManageLectureActions {
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator userConfirmationOptionValidator;
 
-    @Autowired
     public ScheduleLecture(IManageLectureLogic manageLectureLogic) {
         this.userConfirmationOptionValidator = new UserConfirmationOptionValidator();
         this.manageLectureLogic = manageLectureLogic;

@@ -49,4 +49,9 @@ public class ViewAnnouncements implements IViewAnnouncements {
     public void printAnnouncementList() {
         IAnnouncementList.printAllAnnouncements();
     }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        displayAllAnnouncements();
+    }
 }

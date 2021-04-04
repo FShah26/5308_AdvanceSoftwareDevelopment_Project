@@ -17,7 +17,6 @@ public class RescheduleLecture implements IManageLectureActions {
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator userConfirmationOptionValidator;
 
-    @Autowired
     public RescheduleLecture(IManageLectureLogic manageLectureLogic) {
         this.userConfirmationOptionValidator = new UserConfirmationOptionValidator();
         this.manageLectureLogic = manageLectureLogic;
