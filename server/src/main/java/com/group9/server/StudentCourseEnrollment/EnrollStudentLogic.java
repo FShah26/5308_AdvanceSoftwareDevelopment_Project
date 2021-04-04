@@ -5,16 +5,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class EnrollStudentLogic implements IEnrollStudentLogic {
 
-    IEnrollStudentPersistence enrollStudentPersistence;
+    IEnrollStudentPersistence persistence;
 
-    public void EnrollStudentLogic(IEnrollStudentPersistence enrollStudentPersistence)
-    {
-        this.enrollStudentPersistence = enrollStudentPersistence;
+    public EnrollStudentLogic(IEnrollStudentPersistence persistence) {
+        this.persistence = persistence;
     }
 
     @Override
-    public void enrollStudent(String userId, String courseId, String Term) {
-        enrollStudentPersistence.enrollStudent(userId,courseId,Term);
+    public String enrollStudent(String userId, String courseId, String term) {
+        String message = "";
+        try {
+            persistence.enrollStudent(userId, courseId, term);
+        } catch (Exception e) {
+            System.out.println("Adding feedback failed");
+            e.printStackTrace();
+        }    return message;
     }
+
 }
 
