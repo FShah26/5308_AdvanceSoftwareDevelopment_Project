@@ -1,49 +1,47 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.Admin.IAnnouncementInput;
-import com.group9.server.Feedback.IFeedback;
-import com.group9.server.ManageLecture.IManageLecture;
-import com.group9.server.Meeting.FacultyManageMeeting.IManageMeeting;
-import com.group9.server.Notifications.IViewUserNotifications;
-import com.group9.server.Quiz.IQuiz;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.group9.server.HomePage.UserConstants;
+import com.group9.server.IExecuteAction;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.lang.System.out;
 
 @Component
 public class FacultyDashboard implements IDashboard {
+    private final String role;
     InputValidator validator;
-    IFeedback feedback;
-    IQuiz quiz;
-    IManageLecture manageLecture;
-    IViewUserNotifications notifications;
-    @Qualifier("facultyAnnouncement")
-    @Autowired
-    IAnnouncementInput announcementInput;
-    @Autowired
-    IManageMeeting manageMeeting;
+    IExecuteAction feedback;
+    IExecuteAction quiz;
+    IExecuteAction manageLecture;
+    IExecuteAction viewUserNotifications;
+    IExecuteAction facultyAnnouncement;
+    IExecuteAction manageMeeting;
+    Map<String, IExecuteAction> action = new HashMap<>();
+    private String userName;
 
-    private String username;
-    private String role;
-
-    @Autowired
-    public FacultyDashboard(InputValidator validator, IFeedback feedback, IViewUserNotifications notifications, IManageLecture manageLecture, IQuiz quiz) {
+    public FacultyDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
         this.validator = validator;
         this.feedback = feedback;
-        this.notifications = notifications;
+        this.viewUserNotifications = viewUserNotifications;
         this.manageLecture = manageLecture;
+        this.facultyAnnouncement = facultyAnnouncement;
         this.quiz = quiz;
-        this.role = "admin";
+        this.manageMeeting = manageMeeting;
+        this.role = UserConstants.FACULTY;
+        action.put("1", this.viewUserNotifications);
+        action.put("2", this.manageLecture);
+        action.put("3", this.facultyAnnouncement);
+        action.put("4", this.manageMeeting);
+        action.put("5", this.feedback);
+        action.put("6", this.quiz);
     }
 
     @Override
-    public void showDashboard() throws SQLException {
-
+    public void showDashboard() {
         out.println("************************************************");
         out.println("               FACULTY DASHBOARD                ");
         out.println("************************************************");
@@ -60,57 +58,25 @@ public class FacultyDashboard implements IDashboard {
     }
 
     @Override
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkinput(menuOption);
     }
 
-    public void checkinput(String selection) throws SQLException {
+    public void checkinput(String selection) {
         if (this.validator.validate(selection)) {
-            switch (selection) {
-                case "1":
-                    notifications.displayAllNotifications(username);
-                    break;
-                case "2":
-                    manageLecture.showManageLectureMenu(this.username);
-                    break;
-                case "3":
-                    announcementInput.announcement(this.role,this.username);
-                    break;
-                case "4":
-                    manageMeeting.display(username);
-                    break;
-                case "5":
-                    feedback.viewFeedback(username);
-                    break;
-                case "6":
-                    String courseId = quiz.getCourseId();
-                    String quizNumber = quiz.getQuizNumber();
-                    out.println("Enter the number of questions you want to add");
-                    Scanner scanner = new Scanner(System.in);
-                    int numberOfQuestions = scanner.nextInt();
-                    for(int i = 0; i < numberOfQuestions; i++) {
-                        String question = quiz.getQuestion();
-                        String optionA = quiz.getOptionA();
-                        String optionB = quiz.getOptionB();
-                        String optionC = quiz.getOptionC();
-                        String optionD = quiz.getOptionD();
-                        String answer = quiz.getAnswer();
-                        quiz.addQuestion(courseId, quizNumber, question, optionA, optionB, optionC, optionD, answer);
-                    }
-                    break;
-                case "7":
-                    out.println("Logging out...");
-                    out.println("Logged out successfully...");
-                    System.exit(0);
-                    break;
-                default:
-                    out.println("Yet to develop..");
+            IExecuteAction dashboardAction = action.get(selection);
+            if (null == dashboardAction) {
+                out.println("Logging out...");
+                out.println("Logged out successfully...");
+                System.exit(0);
+            } else {
+                dashboardAction.execute(this.role, this.userName);
             }
             showDashboard();
         } else {

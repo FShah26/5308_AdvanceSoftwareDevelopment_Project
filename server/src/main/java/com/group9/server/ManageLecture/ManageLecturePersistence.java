@@ -2,7 +2,6 @@ package com.group9.server.ManageLecture;
 
 import com.group9.server.Database.DBConfig;
 import com.group9.server.Database.ISingletonDatabase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;

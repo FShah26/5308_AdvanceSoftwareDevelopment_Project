@@ -1,7 +1,7 @@
 package com.group9.server.UserCreation;
 
-import java.sql.SQLException;
+import com.group9.server.IExecuteAction;
 
-public interface IAddUser {
-    public void creation() throws SQLException;
+public interface IAddUser extends IExecuteAction {
+    void creation();
 }

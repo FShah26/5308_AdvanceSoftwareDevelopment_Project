@@ -47,7 +47,7 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
         System.out.println("Validating Credentials...");
         authStatus = userAuthPersistence.authorizeUser(uname, pass, userRole);
         if (authStatus) {
-            return dashboardFactory.getDashboard(userRole, userRole);
+            return dashboardFactory.getDashboard(userRole, uname);
         }
         return null;
     }

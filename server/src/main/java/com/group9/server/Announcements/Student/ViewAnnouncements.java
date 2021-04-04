@@ -1,6 +1,5 @@
 package com.group9.server.Announcements.Student;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -48,5 +47,10 @@ public class ViewAnnouncements implements IViewAnnouncements {
 
     public void printAnnouncementList() {
         IAnnouncementList.printAllAnnouncements();
+    }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        displayAllAnnouncements();
     }
 }

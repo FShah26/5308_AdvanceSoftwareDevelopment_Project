@@ -2,7 +2,6 @@ package com.group9.server.Quiz.Student;
 
 import com.group9.server.Database.DBConfig;
 import com.group9.server.Database.ISingletonDatabase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -15,7 +14,6 @@ public class GradingPersistence implements IGradingPersistence {
     final String VIEW_GRADES = "{call view_grades(?)}";
     Connection connection;
 
-    @Autowired
     public GradingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
@@ -54,6 +52,7 @@ public class GradingPersistence implements IGradingPersistence {
         statement.execute();
         return statement.getBoolean("isSuccessful");
     }
+
     @Override
     public ResultSet grades(String studentId) throws SQLException {
         CallableStatement statement = connection.prepareCall(VIEW_GRADES);

@@ -1,11 +1,12 @@
 package com.group9.server.UpcomingLecture;
 
+import com.group9.server.IExecuteAction;
+
 import java.sql.SQLException;
 
-public interface IUpcomingLectureDisplay {
-    void lectureDisplay(String userName) throws SQLException;
+public interface IUpcomingLectureDisplay extends IExecuteAction {
 
-    void checkInput() throws SQLException;
-
-    void selectCourse(int number) throws SQLException;
+     void lectureDisplay(String userName) ;
+     void checkInput() ;
+     void selectCourse(int number) ;
 }

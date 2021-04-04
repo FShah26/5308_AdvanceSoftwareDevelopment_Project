@@ -1,7 +1,6 @@
 package com.group9.server.ManageLecture;
 
 import com.group9.server.Login.IUserInputValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;
 
@@ -17,7 +16,6 @@ public class RescheduleLecture implements IManageLectureActions {
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator userConfirmationOptionValidator;
 
-    @Autowired
     public RescheduleLecture(IManageLectureLogic manageLectureLogic) {
         this.userConfirmationOptionValidator = new UserConfirmationOptionValidator();
         this.manageLectureLogic = manageLectureLogic;

@@ -1,11 +1,12 @@
 package com.group9.server.Meeting.FacultyManageMeeting;
 
-import java.sql.SQLException;
+import com.group9.server.IExecuteAction;
 
-public interface IManageMeeting {
-    void display(String username) throws SQLException;
+public interface IManageMeeting extends IExecuteAction {
 
-    void selectMenu() throws SQLException;
+    void display(String username);
+
+    void selectMenu();
 
     void checkInput(String selection);
 

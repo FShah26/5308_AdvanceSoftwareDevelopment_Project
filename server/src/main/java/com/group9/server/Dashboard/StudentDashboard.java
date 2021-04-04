@@ -1,50 +1,52 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.Student.IViewAnnouncements;
-import com.group9.server.Database.ISingletonDatabase;
-import com.group9.server.Feedback.IFeedback;
-import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeeting;
-import com.group9.server.Notes.IStudentNotes;
-import com.group9.server.Notifications.IViewUserNotifications;
+import com.group9.server.HomePage.UserConstants;
+import com.group9.server.IExecuteAction;
 import com.group9.server.Quiz.Student.IQuizAssessment;
-import com.group9.server.UpcomingLecture.UpcomingLectureDisplay;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.lang.System.out;
 
 @Component
 public class StudentDashboard implements IDashboard {
+    private final String role;
     InputValidator validator;
-    IStudentNotes notes;
-    ISingletonDatabase database;
-    @Autowired
-    IRequestMeeting meeting;
-    IFeedback feedback;
-    IViewAnnouncements announcements;
-    IViewUserNotifications notifications;
-    @Autowired
-    UpcomingLectureDisplay lecture;
-    @Autowired
+    IExecuteAction feedback;
+    IExecuteAction viewAnnouncements;
+    IExecuteAction viewUserNotifications;
+    IExecuteAction upcomingLectureDisplay;
+    IExecuteAction studentNotes;
+    IExecuteAction requestMeeting;
     IQuizAssessment quizAssessment;
-    private String username;
+    Map<String, IExecuteAction> action = new HashMap<>();
+    private String userName;
 
-    @Autowired
-    public StudentDashboard(InputValidator validator, IStudentNotes notes, IFeedback feedback, IViewAnnouncements announcements, IViewUserNotifications notifications, ISingletonDatabase database) {
+    public StudentDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback) {
+        this.role = UserConstants.STUDENT;
         this.validator = validator;
-        this.notes = notes;
         this.feedback = feedback;
-        this.announcements = announcements;
-        this.notifications = notifications;
-        this.database = database;
+        this.viewUserNotifications = viewUserNotifications;
+        this.upcomingLectureDisplay = upcomingLectureDisplay;
+        this.viewAnnouncements = viewAnnouncements;
+        this.studentNotes = studentNotes;
+        this.requestMeeting = requestMeeting;
+        action.put("1", this.viewUserNotifications);
+        action.put("2", this.upcomingLectureDisplay);
+        action.put("3", this.viewAnnouncements);
+        action.put("4", this.studentNotes);
+        action.put("5", this.studentNotes);
+        action.put("6", this.requestMeeting);
+        action.put("7", this.feedback);
+        action.put("8", this.quizAssessment);
+        action.put("9", null);
     }
 
     @Override
-    public void showDashboard() throws SQLException {
-
+    public void showDashboard() {
         System.out.println("************************************************");
         System.out.println("               STUDENT DASHBOARD                ");
         System.out.println("************************************************");
@@ -54,72 +56,37 @@ public class StudentDashboard implements IDashboard {
         System.out.println("Press 3 --> Announcements");
         System.out.println("Press 4 --> View Notes");
         System.out.println("Press 5 --> Add Notes");
-        System.out.println("Press 6 --> Attendance");
-        System.out.println("Press 7 --> Request Meeting");
-        System.out.println("Press 8 --> Send Feedback");
-        System.out.println("Press 9 --> Tests");
-        System.out.println();
+        System.out.println("Press 6 --> Request Meeting");
+        System.out.println("Press 7 --> Send Feedback");
+        System.out.println("Press 8 --> Tests");
+        System.out.println("Press 9 --> Log out");
+        System.out.println("Choose option : ");
         selectMenu();
     }
 
     @Override
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
-    public void checkInput(String selection) throws SQLException {
+    public void checkInput(String selection) {
         String course;
 
         if (this.validator.validate(selection)) {
-            switch (selection) {
-                case "1":
-                    notifications.displayAllNotifications(username);
-                    break;
-
-                case "2":
-                    lecture.lectureDisplay(username);
-                    break;
-
-                case "3":
-                    announcements.displayAllAnnouncements();
-                    break;
-
-                case "4":
-                    course = notes.getCourseInput();
-                    notes.viewNotes(username, course);
-                    break;
-
-                case "5":
-                    course = notes.getCourseInput();
-                    String text = notes.getNotesText();
-
-                    notes.addNotes(username, course, text);
-                    break;
-
-                case "7":
-                    meeting.meetingDisplay(username);
-                    break;
-
-                case "8":
-                    String student_name = feedback.getStudentName();
-                    String fb = feedback.getFeedbackText();
-                    String faculty = feedback.getFacultyID();
-
-                    feedback.addFeedback(username, student_name, fb, faculty);
-                    break;
-                case "9":
-                    quizAssessment.showQuizMenu(this.username);
-
-                default:
-                    showDashboard();
+            IExecuteAction dashboardAction = action.get(selection);
+            if (null == dashboardAction) {
+                //logout
+            } else {
+                dashboardAction.execute(this.role, this.userName);
             }
+
         } else {
             displayInvalidMenuOptionMsg();
             selectMenu();

@@ -1,13 +1,9 @@
 package com.group9.server.StudentCourseEnrollment;
 
 import com.group9.server.Dashboard.AdminInputValidator;
-import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.InputValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -15,26 +11,21 @@ import static java.lang.System.out;
 @Component
 public class EnrollStudent implements IEnrollStudent {
 
-    @Autowired
-    IValidateEnrollStudent validate;
-    @Qualifier("adminDashboard")
-    @Autowired
-    IDashboard dash;
+    IValidateEnrollStudent validateEnrollStudent;
     InputValidator inputValidator;
-    @Autowired
-    IEnrollStudentLogic enrollStudent;
-    @Autowired
-    IEnrollStudent iEnrollStudent;
+    IEnrollStudentLogic enrollStudentLogic;
     String userId;
     String courseId;
     String Term;
     Scanner scanner;
 
-    public EnrollStudent() {
+    public EnrollStudent(IEnrollStudentLogic enrollStudentLogic, IValidateEnrollStudent validateEnrollStudent) {
         this.inputValidator = new AdminInputValidator();
+        this.enrollStudentLogic = enrollStudentLogic;
+        this.validateEnrollStudent = validateEnrollStudent;
     }
 
-    public void creation() throws SQLException {
+    public void creation() {
         out.println("**********************************************************");
         out.println("      ENTER DETAILS TO ENROLL NEW STUDENT TO A COURSE     ");
         out.println("**********************************************************");
@@ -52,18 +43,18 @@ public class EnrollStudent implements IEnrollStudent {
 
     }
 
-    public void SelectMenu() throws SQLException {
+    public void SelectMenu() {
         String menuOption = scanner.nextLine();
         ValidateInput(menuOption);
     }
 
-    public void ValidateInput(String input) throws SQLException {
+    public void ValidateInput(String input) {
         if (this.inputValidator.validate(input)) {
-            String output = validate.validateInput(userId, courseId, Term);
+            String output = validateEnrollStudent.validateInput(userId, courseId, Term);
             final String TO_PROCEED = "true";
             if (output.equals(TO_PROCEED)) {
-                enrollStudent.enrollStudent(userId, courseId, Term);
-                dash.showDashboard();
+                enrollStudentLogic.enrollStudent(userId, courseId, Term);
+//                dash.showDashboard();
             } else
                 out.println(output);
         } else {
@@ -76,4 +67,8 @@ public class EnrollStudent implements IEnrollStudent {
         out.println("Invalid Option! Please choose a valid option from above menu.");
     }
 
+    @Override
+    public void execute(String userRole, String userId) {
+        creation();
+    }
 }

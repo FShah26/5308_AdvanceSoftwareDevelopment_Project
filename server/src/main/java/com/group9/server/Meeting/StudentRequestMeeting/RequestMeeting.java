@@ -5,7 +5,6 @@ import com.group9.server.Login.IUserInputValidator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,7 +28,7 @@ public class RequestMeeting implements IRequestMeeting {
     }
 
     @Override
-    public void meetingDisplay(String studentId) throws SQLException {
+    public void meetingDisplay(String studentId) {
         this.studentId = studentId;
         System.out.println("************************************************");
         System.out.println("                 REQUEST MEETING                ");
@@ -42,13 +41,13 @@ public class RequestMeeting implements IRequestMeeting {
     }
 
     @Override
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         String menuOption = scanner.nextLine();
-        checkInput(menuOption);
+        checkinput(menuOption);
     }
 
     @Override
-    public void selectCourse(int select) throws SQLException {
+    public void selectCourse(int select) {
         int courseOption = Integer.parseInt(scanner.nextLine());
         if (this.courseSelection.validate(String.valueOf(courseOption), select)) {
             System.out.println("Please give reason for Meeting :");
@@ -112,7 +111,7 @@ public class RequestMeeting implements IRequestMeeting {
     }
 
     @Override
-    public void checkInput(String selection) throws SQLException {
+    public void checkinput(String selection) {
         if (this.meetingOptionValidator.validate(selection)) {
             manageMeetingAction(selection);
         } else {
@@ -123,5 +122,10 @@ public class RequestMeeting implements IRequestMeeting {
 
     public void displayInvalidMenuOptionMsg() {
         System.out.println("Invalid Option! Please choose a valid option from above menu.");
+    }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        meetingDisplay(userId);
     }
 }

@@ -39,10 +39,9 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
     }
 
     public ResultSet getFacultyCourses(String facultyId) throws SQLException {
-        ResultSet set = null;
         CallableStatement statement = connection.prepareCall(GET_COURSES);
         statement.setString(1, facultyId);
-        set = statement.executeQuery();
+        ResultSet set = statement.executeQuery();
         return set;
     }
 

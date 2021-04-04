@@ -1,29 +1,19 @@
 package com.group9.server.UserCreation;
 
 
-import com.group9.server.Dashboard.AdminDashboard;
-import com.group9.server.Dashboard.IDashboard;
 import com.group9.server.Dashboard.InputValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import static java.lang.System.out;
 
+@Component
 public class AddUser implements IAddUser {
 
-    @Autowired
-    IValidateAddUser validate;
-    @Qualifier("adminDashboard")
-    @Autowired
-    IDashboard dash;
+    IValidateAddUser validateAddUser;
     InputValidator inputValidator;
-    @Autowired
     IAddUserLogic addUserService;
-    @Autowired
-    IAddUser addUser;
     String id;
     String userId;
     String password;
@@ -33,13 +23,13 @@ public class AddUser implements IAddUser {
     String department;
     Scanner scanner;
 
-    @Autowired
-    public AddUser() {
+    public AddUser(IAddUserLogic addUserService, IValidateAddUser validateAddUser) {
         this.inputValidator = new AdminAddUserConfirm();
-        this.dash = new AdminDashboard();
+        this.addUserService = addUserService;
+        this.validateAddUser = validateAddUser;
     }
 
-    public void creation() throws SQLException {
+    public void creation() {
         out.println("************************************************");
         out.println("      ENTER DETAILS TO CREATE NEW USER        ");
         out.println("************************************************");
@@ -65,19 +55,18 @@ public class AddUser implements IAddUser {
 
     }
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         String menuOption = scanner.nextLine();
         validateInput(menuOption);
     }
 
-    public void validateInput(String input) throws SQLException {
+    public void validateInput(String input) {
         if (this.inputValidator.validate(input)) {
-            String output = validate.validateInput(id, userId, password, userType);
+            String output = validateAddUser.validateInput(id, userId, password, userType);
             final String TO_PROCEED = "true";
             if (output.equals(TO_PROCEED)) {
                 addUserService.addUser(id, userId, password, userType);
                 addUserService.addUserDetails(userId, userType, name, emailAddress, department);
-                dash.showDashboard();
             } else
                 out.println(output);
         } else {
@@ -90,4 +79,8 @@ public class AddUser implements IAddUser {
         out.println("Invalid Option! Please choose a valid option from above menu.");
     }
 
+    @Override
+    public void execute(String userRole, String userId) {
+        creation();
+    }
 }

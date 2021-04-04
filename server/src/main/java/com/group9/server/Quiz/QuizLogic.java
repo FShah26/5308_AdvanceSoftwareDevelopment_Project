@@ -1,9 +1,7 @@
 package com.group9.server.Quiz;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
@@ -11,7 +9,6 @@ public class QuizLogic implements IQuizLogic {
 
     IQuizPersistence persistence;
 
-    @Autowired
     public QuizLogic(IQuizPersistence persistence) {
         this.persistence = persistence;
     }

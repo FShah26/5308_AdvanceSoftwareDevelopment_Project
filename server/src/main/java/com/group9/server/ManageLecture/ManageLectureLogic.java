@@ -1,6 +1,5 @@
 package com.group9.server.ManageLecture;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -17,14 +16,11 @@ import static java.lang.Integer.parseInt;
 @Component
 public class ManageLectureLogic implements IManageLectureLogic {
 
-    @Autowired
     IManageLecturePersistence manageLecturePersistence;
 
-    @Autowired
     IDateValidator dateValidator;
 
 
-    @Autowired
     public ManageLectureLogic(IManageLecturePersistence manageLecturePersistence) {
         this.manageLecturePersistence = manageLecturePersistence;
         this.dateValidator = new ValidateDate();

@@ -2,7 +2,6 @@ package com.group9.server.HomePage;
 
 import com.group9.server.Login.IUserInputValidator;
 import com.group9.server.Login.RoleValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -16,7 +15,6 @@ public class ApplicationHome implements IHomePage {
     private static final String STUDENT_SELECTION = "3";
     IUserInputValidator inputValidator;
 
-    @Autowired
     public ApplicationHome() {
         this.inputValidator = new RoleValidator();
     }

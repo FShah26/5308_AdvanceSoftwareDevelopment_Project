@@ -1,8 +1,7 @@
 package com.group9.server.Notes;
 
-import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Database.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -13,7 +12,6 @@ public class NotesPersistence implements INotesPersistence {
     final String ADD_NOTES = "{call add_notes(?, ?, ?, ?)}";
     Connection connection;
 
-    @Autowired
     public NotesPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);

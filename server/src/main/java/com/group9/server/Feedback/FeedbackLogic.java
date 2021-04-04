@@ -1,6 +1,5 @@
 package com.group9.server.Feedback;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
@@ -11,7 +10,6 @@ public class FeedbackLogic implements IFeedbackLogic {
 
     IFeedbackPersistence persistence;
 
-    @Autowired
     public FeedbackLogic(IFeedbackPersistence persistence) {
         this.persistence = persistence;
     }

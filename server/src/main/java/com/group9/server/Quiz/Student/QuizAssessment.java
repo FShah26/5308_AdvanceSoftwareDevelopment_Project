@@ -1,7 +1,6 @@
 package com.group9.server.Quiz.Student;
 
 import com.group9.server.Login.IUserInputValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -13,10 +12,8 @@ public class QuizAssessment implements IQuizAssessment {
 
     String studentId;
     IUserInputValidator quizAssessmentOptionValidator;
-    @Autowired
     IQuizAssessmentLogic quizAssessmentLogic;
 
-    @Autowired
     public void QuizAssessment(IQuizAssessmentLogic quizAssessmentLogic) {
         this.studentId = "";
         this.quizAssessmentOptionValidator = new QuizAssessmentOptionValidator();
@@ -109,4 +106,8 @@ public class QuizAssessment implements IQuizAssessment {
         return quizNo;
     }
 
+    @Override
+    public void execute(String userRole, String userId) {
+        showQuizMenu(userId);
+    }
 }

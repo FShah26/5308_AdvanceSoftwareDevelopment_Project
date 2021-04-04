@@ -34,4 +34,9 @@ public class ViewUserNotifications implements IViewUserNotifications {
             exception.printStackTrace();
         }
     }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        displayAllNotifications(userId);
+    }
 }
