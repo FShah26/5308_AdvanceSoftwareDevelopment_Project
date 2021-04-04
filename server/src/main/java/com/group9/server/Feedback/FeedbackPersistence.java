@@ -9,6 +9,9 @@ import java.sql.*;
 
 @Component
 public class FeedbackPersistence implements IFeedbackPersistence {
+    final String FETCH_FEEDBACK = "{call fetch_feedback(?)}";
+    final String ADD_FEEDBACK = "{call add_feedback(?, ?, ?, ?, ?)}";
+
     Connection connection;
 
     @Autowired
@@ -19,7 +22,6 @@ public class FeedbackPersistence implements IFeedbackPersistence {
 
     @Override
     public ResultSet fetchFeedback(String facultyId) throws SQLException {
-        final String FETCH_FEEDBACK = "{call fetch_feedback(?)}";
         CallableStatement statement = connection.prepareCall(FETCH_FEEDBACK);
         statement.setString(1, facultyId);
         ResultSet set = statement.executeQuery();
@@ -28,7 +30,6 @@ public class FeedbackPersistence implements IFeedbackPersistence {
 
     @Override
     public String insertFeedback(String userId, String userName, String feedback, String facultyId) throws SQLException {
-        final String ADD_FEEDBACK = "{call add_feedback(?, ?, ?, ?, ?)}";
         CallableStatement statement = connection.prepareCall(ADD_FEEDBACK);
         statement.registerOutParameter(5, Types.VARCHAR);
         statement.setString(1, userId);

@@ -2,7 +2,6 @@ package com.group9.server.Dashboard;
 
 import com.group9.server.HomePage.UserConstants;
 import com.group9.server.IExecuteAction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -22,12 +21,12 @@ public class FacultyDashboard implements IDashboard {
     IExecuteAction facultyAnnouncement;
     IExecuteAction manageMeeting;
     Map<String, IExecuteAction> action = new HashMap<>();
-    private String username;
+    private String userName;
 
-    public FacultyDashboard(InputValidator validator, IExecuteAction viewUserNotificationsImpl, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
+    public FacultyDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
         this.validator = validator;
         this.feedback = feedback;
-        this.viewUserNotifications = viewUserNotificationsImpl;
+        this.viewUserNotifications = viewUserNotifications;
         this.manageLecture = manageLecture;
         this.facultyAnnouncement = facultyAnnouncement;
         this.quiz = quiz;
@@ -59,8 +58,8 @@ public class FacultyDashboard implements IDashboard {
     }
 
     @Override
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
     public void selectMenu() {
@@ -77,7 +76,7 @@ public class FacultyDashboard implements IDashboard {
                 out.println("Logged out successfully...");
                 System.exit(0);
             } else {
-                dashboardAction.execute(this.role, this.username);
+                dashboardAction.execute(this.role, this.userName);
             }
             showDashboard();
         } else {

@@ -1,7 +1,5 @@
 package com.group9.server.Notifications;
 
-import com.mysql.cj.jdbc.result.ResultSetImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,10 +9,10 @@ import java.sql.SQLException;
 
 import static org.mockito.Mockito.when;
 
-class ViewUserNotificationsTest {
-    ViewUserNotifications underTest;
+class IViewUserNotificationsTest {
+    IViewUserNotifications underTest;
     ResultSet mockSet = Mockito.mock(ResultSet.class);
-    NotificationPersistence mockPersistence = Mockito.mock(NotificationPersistence.class);
+    INotificationPersistence mockPersistence = Mockito.mock(INotificationPersistence.class);
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -22,7 +20,7 @@ class ViewUserNotificationsTest {
         when(mockSet.getString(2)).thenReturn("Test Notification");
         when(mockPersistence.fetchNotificationsFromDatabase("Some Guy")).thenReturn(mockSet);
 
-        underTest = new ViewUserNotificationsImpl(mockPersistence);
+        underTest = new ViewUserNotifications(mockPersistence);
     }
 
     @Test

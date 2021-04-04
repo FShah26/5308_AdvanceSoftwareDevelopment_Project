@@ -9,7 +9,10 @@ import java.sql.*;
 
 @Component
 public class GradingPersistence implements IGradingPersistence {
-
+    final String ADD_QUIZ_GRADES = "{call add_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
+    final String UPDATE_QUIZ_GRADES = "{call update_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
+    final String FETCH_GRADES = "{call fetch_grades(?, ?, ?)}";
+    final String VIEW_GRADES = "{call view_grades(?)}";
     Connection connection;
 
     @Autowired
@@ -20,21 +23,18 @@ public class GradingPersistence implements IGradingPersistence {
 
     @Override
     public boolean addStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException {
-        final String ADD_QUIZ_GRADES = "{call add_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement statement = connection.prepareCall(ADD_QUIZ_GRADES);
         return executeGradeModification(studentId, quizNumber, courseId, grades, attempt, lastAttemptDate, statement);
     }
 
     @Override
     public boolean updateStudentGrades(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate) throws SQLException {
-        final String UPDATE_QUIZ_GRADES = "{call update_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
         CallableStatement statement = connection.prepareCall(UPDATE_QUIZ_GRADES);
         return executeGradeModification(studentId, quizNumber, courseId, grades, attempt, lastAttemptDate, statement);
     }
 
     @Override
     public ResultSet fetchPreviousGrades(String courseId, String studentId, String quizNumber) throws SQLException {
-        final String FETCH_GRADES = "{call fetch_grades(?, ?, ?)}";
         CallableStatement statement = connection.prepareCall(FETCH_GRADES);
         statement.setString(1, courseId);
         statement.setString(2, studentId);
@@ -56,7 +56,6 @@ public class GradingPersistence implements IGradingPersistence {
     }
     @Override
     public ResultSet grades(String studentId) throws SQLException {
-        final String VIEW_GRADES = "{call view_grades(?)}";
         CallableStatement statement = connection.prepareCall(VIEW_GRADES);
         statement.setString(1, studentId);
         ResultSet set = statement.executeQuery();

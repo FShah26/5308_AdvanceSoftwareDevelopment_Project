@@ -10,7 +10,12 @@ import java.util.Date;
 
 @Component
 public class ManageLecturePersistence implements IManageLecturePersistence {
-
+    final String FETCH_LECTURES_BY_FACULTY = "{call fetchLecturesByFaculty(?)}";
+    final String ADD_LECTURE = "{call add_lecture(?, ?, ?, ?,?)}";
+    final String UPDATE_LECTURE = "{call update_lecture(?, ?, ?, ?)}";
+    final String DELETE_LECTURE = "{call delete_lecture(?, ?)}";
+    final String GET_ASSIGNED_COURSES = "{call get_assigned_courses(?)}";
+    final String FETCH_LECTURES_BY_COURSE = "{call fetchLecturesByCourse(?)}";
     Connection connection;
 
     public ManageLecturePersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -20,7 +25,6 @@ public class ManageLecturePersistence implements IManageLecturePersistence {
 
     @Override
     public ResultSet getAllLectures(String facultyId) throws SQLException {
-        final String FETCH_LECTURES_BY_FACULTY = "{call fetchLecturesByFaculty(?)}";
         CallableStatement statement = connection.prepareCall(FETCH_LECTURES_BY_FACULTY);
         statement.setString(1, facultyId);
         ResultSet set = statement.executeQuery();
@@ -29,7 +33,6 @@ public class ManageLecturePersistence implements IManageLecturePersistence {
 
     @Override
     public boolean addLecture(String facultyId, String courseId, String lecTopic, Date lecDate) throws SQLException {
-        final String ADD_LECTURE = "{call add_lecture(?, ?, ?, ?,?)}";
         CallableStatement statement = connection.prepareCall(ADD_LECTURE);
         statement.registerOutParameter(5, Types.BOOLEAN);
         statement.setString(1, facultyId);
@@ -43,8 +46,7 @@ public class ManageLecturePersistence implements IManageLecturePersistence {
 
     @Override
     public boolean updateLecture(String lecId, String lecAgenda, Date lecDate) throws SQLException {
-        final String UPDATE_LECTURE = "{call update_lecture(?, ?, ?, ?)}";
-        CallableStatement statement = connection.prepareCall("{call update_lecture(?, ?, ?, ?)}");
+        CallableStatement statement = connection.prepareCall(UPDATE_LECTURE);
         statement.registerOutParameter(4, Types.BOOLEAN);
         statement.setString(1, lecId);
         statement.setString(2, lecAgenda);
@@ -55,7 +57,6 @@ public class ManageLecturePersistence implements IManageLecturePersistence {
 
     @Override
     public boolean deleteLecture(String lectureId) throws SQLException {
-        final String DELETE_LECTURE = "{call delete_lecture(?, ?)}";
         CallableStatement statement = connection.prepareCall(DELETE_LECTURE);
         statement.registerOutParameter(2, Types.BOOLEAN);
         statement.setString(1, lectureId);
@@ -64,7 +65,6 @@ public class ManageLecturePersistence implements IManageLecturePersistence {
     }
 
     public ResultSet getFacultyCourses(String facultyId) throws SQLException {
-        final String GET_ASSIGNED_COURSES = "{call get_assigned_courses(?)}";
         CallableStatement statement = connection.prepareCall(GET_ASSIGNED_COURSES);
         statement.setString(1, facultyId);
         ResultSet set = statement.executeQuery();
@@ -72,7 +72,6 @@ public class ManageLecturePersistence implements IManageLecturePersistence {
     }
 
     public ResultSet getCourseLectures(String courseId) throws SQLException {
-        final String FETCH_LECTURES_BY_COURSE = "{call fetchLecturesByCourse(?)}";
         CallableStatement statement = connection.prepareCall(FETCH_LECTURES_BY_COURSE);
         statement.setString(1, courseId);
         ResultSet set = statement.executeQuery();
