@@ -21,11 +21,11 @@ public class StudentDashboard implements IDashboard {
     IExecuteAction upcomingLectureDisplay;
     IExecuteAction studentNotes;
     IExecuteAction requestMeeting;
-    IQuizAssessment quizAssessment;
+    IExecuteAction quizAssessment;
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public StudentDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback) {
+    public StudentDashboard(InputValidator validator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback, IExecuteAction quizAssessment) {
         this.role = UserConstants.STUDENT;
         this.validator = validator;
         this.feedback = feedback;
@@ -34,15 +34,15 @@ public class StudentDashboard implements IDashboard {
         this.viewAnnouncements = viewAnnouncements;
         this.studentNotes = studentNotes;
         this.requestMeeting = requestMeeting;
+        this.quizAssessment = quizAssessment;
         action.put("1", this.viewUserNotifications);
         action.put("2", this.upcomingLectureDisplay);
         action.put("3", this.viewAnnouncements);
         action.put("4", this.studentNotes);
-        action.put("5", this.studentNotes);
-        action.put("6", this.requestMeeting);
-        action.put("7", this.feedback);
-        action.put("8", this.quizAssessment);
-        action.put("9", null);
+        action.put("5", this.requestMeeting);
+        action.put("6", this.feedback);
+        action.put("7", this.quizAssessment);
+        action.put("8", null);
     }
 
     @Override
@@ -54,12 +54,11 @@ public class StudentDashboard implements IDashboard {
         System.out.println("Press 1 --> Notifications");
         System.out.println("Press 2 --> Up-coming lectures");
         System.out.println("Press 3 --> Announcements");
-        System.out.println("Press 4 --> View Notes");
-        System.out.println("Press 5 --> Add Notes");
-        System.out.println("Press 6 --> Request Meeting");
-        System.out.println("Press 7 --> Send Feedback");
-        System.out.println("Press 8 --> Tests");
-        System.out.println("Press 9 --> Log out");
+        System.out.println("Press 4 --> Notes (View/Add)");
+        System.out.println("Press 5 --> Request Meeting");
+        System.out.println("Press 6 --> Send Feedback");
+        System.out.println("Press 7 --> Tests");
+        System.out.println("Press 8 --> Log out");
         System.out.println("Choose option : ");
         selectMenu();
     }
@@ -77,8 +76,6 @@ public class StudentDashboard implements IDashboard {
     }
 
     public void checkInput(String selection) {
-        String course;
-
         if (this.validator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
