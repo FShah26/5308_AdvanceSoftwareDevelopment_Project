@@ -20,7 +20,7 @@ public class RequestMeeting implements IRequestMeeting {
     String studentId = "";
     Scanner scanner = new Scanner(System.in);
 
-    public RequestMeeting(IUserInputValidator meetingOptionValidator, IRequestMeetingLogic meeting, ICourseSelectionValidator courseSelection, IRequestMeetingLogic meetingLogic, @Qualifier("studentDashboard") IDashboard dash) {
+    public RequestMeeting(IUserInputValidator meetingOptionValidator, IRequestMeetingLogic meeting, ICourseSelectionValidator courseSelection, IRequestMeetingLogic meetingLogic) {
         this.meetingOptionValidator = meetingOptionValidator;
         this.meeting = meeting;
         this.courseSelection = courseSelection;
