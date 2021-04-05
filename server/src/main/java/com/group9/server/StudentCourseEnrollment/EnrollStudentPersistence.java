@@ -11,7 +11,7 @@ import java.sql.Types;
 
 @Component
 public class EnrollStudentPersistence implements IEnrollStudentPersistence {
-    final String STUDENT_COURSE_ENROLLMENT = "{call StudentCourseEnrollment(?, ?, ?, ?)}";
+    final String STUDENT_COURSE_ENROLLMENT = "{call studentCourseEnrollments(?, ?, ?, ?)}";
     Connection connection;
 
     public EnrollStudentPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

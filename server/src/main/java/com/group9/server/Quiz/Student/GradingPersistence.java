@@ -8,10 +8,10 @@ import java.sql.*;
 
 @Component
 public class GradingPersistence implements IGradingPersistence {
-    final String ADD_QUIZ_GRADES = "{call add_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
-    final String UPDATE_QUIZ_GRADES = "{call update_quiz_grades(?, ?, ?, ?, ?, ?, ?)}";
-    final String FETCH_GRADES = "{call fetch_grades(?, ?, ?)}";
-    final String VIEW_GRADES = "{call view_grades(?)}";
+    final String ADD_QUIZ_GRADES = "{call addQuizGrades(?, ?, ?, ?, ?, ?, ?)}";
+    final String UPDATE_QUIZ_GRADES = "{call updateQuizGrades(?, ?, ?, ?, ?, ?, ?)}";
+    final String FETCH_GRADES = "{call fetchGrades(?, ?, ?)}";
+    final String VIEW_GRADES = "{call viewGrades(?)}";
     Connection connection;
 
     public GradingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

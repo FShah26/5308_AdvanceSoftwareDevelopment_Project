@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @Component
 public class LecturePersistence implements ILecturePersistence {
-    final String UPCOMING_LECTURE = "{call UpcomingLectures(?)}";
+    final String UPCOMING_LECTURE = "{call upcomingLecture(?)}";
     Connection connection;
 
     public LecturePersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

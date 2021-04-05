@@ -9,8 +9,8 @@ import java.sql.*;
 @Component
 public class AnnouncementPersistence implements IAnnouncementPersistence {
 
-    final String MAKE_ANNOUNCEMENT = "{call Make_NewAnnouncement(?, ?, ?, ?, ?)}";
-    final String GET_COURSES = "{call get_assigned_courses(?)}";
+    final String MAKE_ANNOUNCEMENT = "{call makeNewAnnouncement(?, ?, ?, ?, ?)}";
+    final String GET_COURSES = "{call getAssignedCourses(?)}";
     Connection connection;
 
     public AnnouncementPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

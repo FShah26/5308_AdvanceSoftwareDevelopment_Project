@@ -10,10 +10,10 @@ import java.util.Date;
 @Component
 public class ManageLecturePersistence implements IManageLecturePersistence {
     final String FETCH_LECTURES_BY_FACULTY = "{call fetchLecturesByFaculty(?)}";
-    final String ADD_LECTURE = "{call add_lecture(?, ?, ?, ?,?)}";
-    final String UPDATE_LECTURE = "{call update_lecture(?, ?, ?, ?)}";
-    final String DELETE_LECTURE = "{call delete_lecture(?, ?)}";
-    final String GET_ASSIGNED_COURSES = "{call get_assigned_courses(?)}";
+    final String ADD_LECTURE = "{call addLecture(?, ?, ?, ?,?)}";
+    final String UPDATE_LECTURE = "{call updateLecture(?, ?, ?, ?)}";
+    final String DELETE_LECTURE = "{call deleteLecture(?, ?)}";
+    final String GET_ASSIGNED_COURSES = "{call getAssignedCourses(?)}";
     final String FETCH_LECTURES_BY_COURSE = "{call fetchLecturesByCourse(?)}";
     Connection connection;
 

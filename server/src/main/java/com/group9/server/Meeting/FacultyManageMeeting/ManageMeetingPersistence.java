@@ -8,8 +8,8 @@ import java.sql.*;
 
 @Component
 public class ManageMeetingPersistence implements IManageMeetingPersistence {
-    final String SHOW_MEETING = "{call showfacultymeetings(?,?)}";
-    final String MEETING_RESPONSE = "{call meeting_response(?,?,?,?)}";
+    final String SHOW_MEETING = "{call showFacultyMeeting(?,?)}";
+    final String MEETING_RESPONSE = "{call meetingResponse(?,?,?,?)}";
     Connection connection;
 
     public ManageMeetingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

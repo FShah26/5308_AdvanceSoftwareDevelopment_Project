@@ -1,5 +1,6 @@
 package com.group9.server.CourseCreation;
 
+import com.group9.server.Common.IUserConfirmation;
 import com.group9.server.Dashboard.InputValidator;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import static java.lang.System.out;
 public class CreateCourse implements ICreateCourse {
 
     InputValidator adminCreateCourseConfirm;
+    IUserConfirmation userConfirmation;
     ICourseLogic courseService;
     String courseId;
     String courseName;
@@ -19,9 +21,10 @@ public class CreateCourse implements ICreateCourse {
     String courseDepartment;
     Scanner scanner;
 
-    public CreateCourse(InputValidator adminCreateCourseConfirm, ICourseLogic courseService) {
+    public CreateCourse(InputValidator adminCreateCourseConfirm, ICourseLogic courseService, IUserConfirmation userConfirmation) {
         this.adminCreateCourseConfirm = adminCreateCourseConfirm;
         this.courseService = courseService;
+        this.userConfirmation = userConfirmation;
     }
 
     @Override
@@ -40,38 +43,18 @@ public class CreateCourse implements ICreateCourse {
         courseFaculty = scanner.nextLine();
         out.print("DEPARTMENT : ");
         courseDepartment = scanner.nextLine();
-
-        out.println("-->Press 1 to confirm");
-        out.println("-->Press 2 to Cancel");
-        selectMenu();
-
+        validateInput();
     }
 
     @Override
-    public void selectMenu() {
-        String menuOption = scanner.nextLine();
-        validateInput(menuOption);
-    }
-
-    @Override
-    public void validateInput(String input) {
+    public void validateInput() {
         String message = " ";
-        try {
-            if (this.adminCreateCourseConfirm.validate(input)) {
-                message = courseService.courseCreate(courseId, courseName, courseCredit, courseFaculty, courseDepartment);
-                System.out.println(message);
-            } else {
-                displayInvalidMenuOptionMsg();
-                creation();
-            }
-        } catch (Exception ex) {
-            System.out.print("Some Unknown Error Occured..");
+        if (userConfirmation.getUserConfirmation()) {
+            message = courseService.courseCreate(courseId, courseName, courseCredit, courseFaculty, courseDepartment);
+            System.out.println(message);
+        } else {
+            System.out.println("Navigating back to Dashboard");
         }
-    }
-
-    @Override
-    public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from above menu.");
     }
 
     @Override

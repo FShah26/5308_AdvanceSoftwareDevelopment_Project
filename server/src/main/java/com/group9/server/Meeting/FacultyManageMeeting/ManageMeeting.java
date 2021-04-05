@@ -1,5 +1,6 @@
 package com.group9.server.Meeting.FacultyManageMeeting;
 
+import com.group9.server.Common.IUserConfirmation;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,11 +12,13 @@ import static java.lang.System.out;
 public class ManageMeeting implements IManageMeeting {
 
     IManageMeetingLogic manageMeetingLogic;
+    IUserConfirmation userConfirmation;
     String facultyId;
     Scanner scanner = new Scanner(System.in);
 
-    public ManageMeeting(IManageMeetingLogic manageMeetingLogic) {
+    public ManageMeeting(IManageMeetingLogic manageMeetingLogic, IUserConfirmation userConfirmation) {
         this.manageMeetingLogic = manageMeetingLogic;
+        this.userConfirmation = userConfirmation;
     }
 
     @Override
@@ -40,9 +43,7 @@ public class ManageMeeting implements IManageMeeting {
 
     public void manageMeetingAction(String selection) {
         try {
-            if (selection.equals("*")) {
-                System.out.println("Back to Dashboard");
-            } else {
+            if (Character.isDigit(selection.charAt(0))) {
                 ArrayList<ManageMeetingDetails> details = manageMeetingLogic.viewMeetings(this.facultyId, selection);
                 if (details.size() > 0) {
                     System.out.println("________________________________________________________________________________________________________________________________");
@@ -51,13 +52,11 @@ public class ManageMeeting implements IManageMeeting {
                     for (ManageMeetingDetails meeting : details) {
                         System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s\n", meeting.meetingId, meeting.raisedBy, meeting.raisedFor, meeting.raisedOn, meeting.status, meeting.reason);
                     }
+
                     if (selection.equals("1")) {
                         System.out.println("Do you want to respond to any meeting request? ");
-                        System.out.println("yes");
-                        System.out.println("no");
-                        String userinput = scanner.nextLine();
 
-                        if (userinput.equals("yes")) {
+                        if (userConfirmation.getUserConfirmation()) {
                             System.out.println("Enter meeting id for which you want to respond:");
                             String meetId = scanner.nextLine();
                             System.out.println("Enter meeting Response(Approve/Reject): ");
@@ -71,15 +70,15 @@ public class ManageMeeting implements IManageMeeting {
                                 System.out.println("Incorrect inputs provided..");
                                 checkInput(selection);
                             }
-                        } else if (userinput.equals("no")) {
-                            display(this.facultyId);
                         } else {
-                            System.out.print("Incorrect Input");
+                            display(this.facultyId);
                         }
                     }
                 } else {
                     System.out.println("Seems like you don't have any request in this state..");
                 }
+            } else {
+                System.out.println("Back to Dashboard");
             }
         } catch (Exception ex) {
             System.out.println("Error occurred");

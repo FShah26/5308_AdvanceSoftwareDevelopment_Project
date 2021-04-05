@@ -42,7 +42,6 @@ public class FacultyAnnouncement implements IAnnouncementInput {
     @Override
     public void selectOption() {
         String printOutput;
-        userConfirmation.showUserConfirmationOptions();
         if (userConfirmation.getUserConfirmation()) {
             printOutput = announcementLogic.makeAnnouncement(userRole, courseId, input, userId);
             System.out.println(printOutput);

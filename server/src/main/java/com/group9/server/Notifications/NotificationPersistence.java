@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @Component
 public class NotificationPersistence implements INotificationPersistence {
-    final String FETCH_USER_NOTIFICATION = "{call fetch_user_notifications(?)}";
+    final String FETCH_USER_NOTIFICATION = "{call fetchUserNotifications(?)}";
     Connection connection;
 
     public NotificationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
