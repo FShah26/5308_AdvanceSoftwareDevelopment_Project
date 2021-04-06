@@ -8,8 +8,8 @@ import java.sql.*;
 
 @Component
 public class NotesPersistence implements INotesPersistence {
-    final String FETCH_NOTES = "{call fetch_notes(?, ?)}";
-    final String ADD_NOTES = "{call add_notes(?, ?, ?, ?)}";
+    final String FETCH_NOTES = "{call fetchNotes(?, ?)}";
+    final String ADD_NOTES = "{call addNotes(?, ?, ?, ?)}";
     Connection connection;
 
     public NotesPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

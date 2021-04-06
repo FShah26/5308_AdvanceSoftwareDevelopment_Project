@@ -8,8 +8,8 @@ import java.sql.*;
 
 @Component
 public class AddUserPersistence implements IAddUserPersistence {
-    final String CREATE_NEW_USER = "{call Create_NewUser(?, ?, ?, ?, ?)}";
-    final String USER_DETAILS = "{call add_user_details(?, ?, ?, ?, ?, ?)}";
+    final String CREATE_NEW_USER = "{call createNewUser(?, ?, ?, ?, ?)}";
+    final String USER_DETAILS = "{call addUserDetails(?, ?, ?, ?, ?, ?)}";
     Connection connection;
 
     public AddUserPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -29,7 +29,7 @@ public class AddUserPersistence implements IAddUserPersistence {
             statement.setString(3, password);
             statement.setString(4, userType);
             statement.execute();
-            output = statement.getString("msg");
+            output = statement.getString("message");
             statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
