@@ -17,18 +17,21 @@ public class EnrollStudent implements IEnrollStudent {
         String message = enrollStudentLogic.enrollStudent(userId, courseId, term);
         System.out.println(message);
     }
+
     @Override
     public String getUserId() {
         System.out.println("Enter User ID:");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
     @Override
     public String getCourseId() {
         System.out.println("Enter Course ID:");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
     @Override
     public String getTerm() {
         System.out.println("Enter Term:");

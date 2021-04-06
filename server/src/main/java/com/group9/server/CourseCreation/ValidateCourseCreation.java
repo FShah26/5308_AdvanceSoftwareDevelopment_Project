@@ -11,7 +11,7 @@ public class ValidateCourseCreation implements IValidate {
         String output = "";
         if (courseId.length() < 4)
             output = "PLEASE ENTER VALID COURSE ID STARTING WITH CSCI";
-        else if (!(courseId.substring(0, 4)).equals("CSCI"))
+        else if (!(courseId).startsWith("CSCI"))
             output = "PLEASE ENTER VALID COURSE ID STARTING WITH CSCI";
         else if (facultyId.length() < 3)
             output = "PLEASE ENTER VALID FACULTY ID";

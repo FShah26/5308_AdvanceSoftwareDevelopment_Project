@@ -33,7 +33,7 @@ public class SingletonDatabase implements ISingletonDatabase {
 
     @Override
     public void closeConnection() throws SQLException {
-        if(connection != null){
+        if (connection != null) {
             connection.close();
         }
     }

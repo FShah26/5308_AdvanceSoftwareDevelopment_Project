@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 import static java.lang.System.out;
+
 @Component
 public class UserConfirmation implements IUserConfirmation {
 
     IUserInputValidator userConfirmationOptionValidator;
-    public UserConfirmation(IUserInputValidator userConfirmationOptionValidator){
+
+    public UserConfirmation(IUserInputValidator userConfirmationOptionValidator) {
         this.userConfirmationOptionValidator = userConfirmationOptionValidator;
     }
 

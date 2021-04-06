@@ -4,7 +4,10 @@ import com.group9.server.Database.DBConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 
 @Component
 public class AddUserPersistence implements IAddUserPersistence {
@@ -16,11 +19,12 @@ public class AddUserPersistence implements IAddUserPersistence {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }
+
     @Override
     public void addUser(String id, String userId, String password, String userType) {
         String output = "";
         try (
-                CallableStatement statement = connection.prepareCall(CREATE_NEW_USER);
+                CallableStatement statement = connection.prepareCall(CREATE_NEW_USER)
         ) {
 
             statement.registerOutParameter(5, Types.VARCHAR);
@@ -42,7 +46,7 @@ public class AddUserPersistence implements IAddUserPersistence {
     public void addUserDetails(String userId, String userType, String name, String emailAddress, String department) {
         String output = "";
         try (
-                CallableStatement statement = connection.prepareCall(USER_DETAILS);
+                CallableStatement statement = connection.prepareCall(USER_DETAILS)
         ) {
 
             statement.registerOutParameter(6, Types.VARCHAR);

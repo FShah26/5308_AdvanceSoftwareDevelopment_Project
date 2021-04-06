@@ -1,13 +1,13 @@
 package com.group9.server;
 
 import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.Database.DBConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Database.SingletonDatabase;
 import com.group9.server.HomePage.HomePageConfiguration;
 import com.group9.server.HomePage.IHomePage;
 import com.group9.server.Login.IUserAuthLogic;
 import com.group9.server.Login.UserAuthenticationLogic;
-import com.group9.server.Database.DBConfig;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
