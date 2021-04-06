@@ -6,7 +6,7 @@ stages:
 variables:
   MAVEN_CLI_OP: "clean"
 
-### Only on develop ###
+### Only on develop ### Use 'dev' DBConfig
 build:
   stage: build
   script:
@@ -37,7 +37,7 @@ test:
   only:
     - develop
 
-## Only on master ###
+## Only on master ### Use 'production' DBConfig
 build:
   stage: build
   script:
@@ -87,7 +87,7 @@ deploy:
   only:
     - master
 
-### All Other Branches ###
+### All Other Branches ### Use 'test' DBConfig
 build:
   stage: build
   script:
