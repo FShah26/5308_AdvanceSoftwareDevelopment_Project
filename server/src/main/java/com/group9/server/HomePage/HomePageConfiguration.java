@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @ComponentScan(basePackages = "com.group9.server.*")
 @Configuration
-@PropertySource("classpath:JDBC.properties")
+@PropertySource("classpath:JDBC-${spring.profiles.active}.properties")
 public class HomePageConfiguration {
 
     @Bean

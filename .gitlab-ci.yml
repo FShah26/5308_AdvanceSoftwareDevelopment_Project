@@ -6,24 +6,27 @@ stages:
 variables:
   MAVEN_CLI_OP: "clean"
 
+### Only on develop ###
 build:
   stage: build
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile
+    - mvn $MAVEN_CLI_OP compile -Pdev
   artifacts:
     paths:
       - server/target
   tags:
     - ugrad
+  only:
+    - develop
 
 test:
   stage: test
   script:
     - cd server
     - echo "Testing..."
-    - mvn verify
+    - mvn verify -Pdev
   artifacts:
     when: always
     reports:
@@ -31,6 +34,39 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
+  only:
+    - develop
+
+## Only on master ###
+build:
+  stage: build
+  script:
+    - cd server
+    - echo "Building with Maven"
+    - mvn $MAVEN_CLI_OP compile -Pproduction
+  artifacts:
+    paths:
+      - server/target
+  tags:
+    - ugrad
+  only:
+    - master
+
+test:
+  stage: test
+  script:
+    - cd server
+    - echo "Testing..."
+    - mvn verify -Pproduction
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - server/target/surefire-reports/TEST-*.xml
+  tags:
+    - ugrad
+  only:
+    - master
 
 # Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
 deploy:
@@ -49,4 +85,37 @@ deploy:
   tags:
     - ugrad
   only:
+    - master
+
+### All Other Branches ###
+build:
+  stage: build
+  script:
+    - cd server
+    - echo "Building with Maven"
+    - mvn $MAVEN_CLI_OP compile -Ptest
+  artifacts:
+    paths:
+      - server/target
+  tags:
+    - ugrad
+  except:
+    - develop
+    - master
+
+test:
+  stage: test
+  script:
+    - cd server
+    - echo "Testing..."
+    - mvn verify -Ptest
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - server/target/surefire-reports/TEST-*.xml
+  tags:
+    - ugrad
+  except:
+    - develop
     - master
