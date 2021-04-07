@@ -18,12 +18,10 @@ public class FacultyAnnouncement implements IAnnouncementInput {
     String userId;
     String courseId;
 
-
     public FacultyAnnouncement(IAnnouncementLogic announcementLogic, IUserConfirmation userConfirmation) {
         this.announcementLogic = announcementLogic;
         this.userConfirmation = userConfirmation;
     }
-
 
     @Override
     public void announcement(String userRole, String userId) {
@@ -41,9 +39,8 @@ public class FacultyAnnouncement implements IAnnouncementInput {
 
     @Override
     public void selectOption() {
-        String printOutput;
         if (userConfirmation.getUserConfirmation()) {
-            printOutput = announcementLogic.makeAnnouncement(userRole, courseId, input, userId);
+            String printOutput = announcementLogic.makeAnnouncement(userRole, courseId, input, userId);
             System.out.println(printOutput);
         } else {
             System.out.println("Navigating back to Dashboard");
