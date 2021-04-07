@@ -82,7 +82,7 @@ public class StudentDashboard implements IDashboard {
             } else {
                 dashboardAction.execute(this.role, this.userName);
             }
-
+            showDashboard();
         } else {
             displayInvalidMenuOptionMsg();
             selectMenu();

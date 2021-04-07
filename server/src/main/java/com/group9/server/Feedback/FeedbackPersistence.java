@@ -8,8 +8,8 @@ import java.sql.*;
 
 @Component
 public class FeedbackPersistence implements IFeedbackPersistence {
-    final String FETCH_FEEDBACK = "{call fetch_feedback(?)}";
-    final String ADD_FEEDBACK = "{call add_feedback(?, ?, ?, ?, ?)}";
+    final String FETCH_FEEDBACK = "{call fetchFeedback(?)}";
+    final String ADD_FEEDBACK = "{call addFeedback(?, ?, ?, ?, ?)}";
 
     Connection connection;
 

@@ -8,9 +8,9 @@ import java.sql.*;
 
 @Component
 public class RequestMeetingPersistence implements IRequestMeetingPersistence {
-    final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
-    final String REQUEST_MEETING = "{call RequestMeeting_Student(?,?,?,?)}";
-    final String VIEW_MEETING = "{call ViewMeetingStatus(?)}";
+    final String REGISTERED_COURSE = "{call registeredCourse(?)}";
+    final String REQUEST_MEETING = "{call requestMeetingStudent(?,?,?,?)}";
+    final String VIEW_MEETING = "{call viewMeetingStatuses(?)}";
     Connection connection;
 
     public RequestMeetingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

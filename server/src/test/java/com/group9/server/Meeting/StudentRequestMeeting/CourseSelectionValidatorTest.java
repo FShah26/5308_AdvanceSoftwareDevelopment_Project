@@ -14,7 +14,7 @@ class CourseSelectionValidatorTest {
     })
     @DisplayName("validateTest")
     void validateTest(String value, int length, boolean expectedOutput) {
-        CourseSelectionValidator validator = new CourseSelectionValidator();
+        ICourseSelectionValidator validator = new CourseSelectionValidator();
         boolean testOutput = validator.validate(value, length);
         Assertions.assertEquals(testOutput, expectedOutput);
     }

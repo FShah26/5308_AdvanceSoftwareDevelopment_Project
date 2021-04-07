@@ -22,11 +22,11 @@ public class UpcomingLectureLogic implements IUpcomingLectureLogic {
             ResultSet set = lecturePersistence.viewLecture(studentId);
             if (set != null) {
                 while (set.next()) {
-                    String facultyid = set.getString(1);
-                    String courseid = set.getString(2);
+                    String facultyId = set.getString(1);
+                    String courseId = set.getString(2);
                     String topic = set.getString(3);
                     String date = set.getString(4);
-                    LectureDetails lectureDetails = new LectureDetails(facultyid, courseid, topic, date);
+                    LectureDetails lectureDetails = new LectureDetails(facultyId, courseId, topic, date);
                     details.add(lectureDetails);
                 }
             }

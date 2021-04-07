@@ -8,10 +8,10 @@ import java.sql.*;
 
 @Component
 public class QuizPersistence implements IQuizPersistence {
-    final String ADD_QUESTION = "{call add_question(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
-    final String FETCH_QUIZ = "{call fetch_quiz(?,?)}";
-    final String FETCH_COURSE = "{call fetch_course_quiz(?)}";
-    final String REGISTERED_COURSE = "{call RegisteredCourses(?)}";
+    final String ADD_QUESTION = "{call addQuestion(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+    final String FETCH_QUIZ = "{call fetchQuiz(?,?)}";
+    final String FETCH_COURSE = "{call fetchCourseQuiz(?)}";
+    final String REGISTERED_COURSE = "{call RegisteredCourse(?)}";
     Connection connection;
 
     public QuizPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

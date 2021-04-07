@@ -1,6 +1,5 @@
 package com.group9.server.UpcomingLecture;
 
-import com.group9.server.Meeting.StudentRequestMeeting.ICourseSelectionValidator;
 import com.group9.server.Meeting.StudentRequestMeeting.IRequestMeetingLogic;
 import com.group9.server.Meeting.StudentRequestMeeting.RegisteredCourses;
 import org.springframework.stereotype.Component;
@@ -12,7 +11,7 @@ import java.util.Scanner;
 public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
 
     IRequestMeetingLogic meeting;
-    ICourseSelectionValidator courseSelection;
+    IChooseCourseValidate chooseCourseValidate;
     IUpcomingLectureLogic lectureLogic;
 
     RegisteredCourses course;
@@ -20,9 +19,9 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     Scanner scanner = new Scanner(System.in);
     String studentId = "";
 
-    public UpcomingLectureDisplay(IRequestMeetingLogic meeting, ICourseSelectionValidator courseSelection, IUpcomingLectureLogic lectureLogic) {
+    public UpcomingLectureDisplay(IRequestMeetingLogic meeting, IChooseCourseValidate chooseCourseValidate, IUpcomingLectureLogic lectureLogic) {
         this.meeting = meeting;
-        this.courseSelection = courseSelection;
+        this.chooseCourseValidate = chooseCourseValidate;
         this.lectureLogic = lectureLogic;
     }
 
@@ -55,22 +54,24 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     @Override
     public void selectCourse(int number) {
         String courseOption = scanner.nextLine();
-        if (this.courseSelection.validate(courseOption, number)) {
-            String selected = course.courseId.get(Integer.parseInt(courseOption) - 1);
-            ArrayList<LectureDetails> details = lectureLogic.upcoming(selected);
-            if (details.size() > 0) {
-                System.out.println("________________________________________________________________________________________________________________");
-                System.out.printf("%-20s%-15s%-50s%-50s\n", "Faculty ID", "Course", "Topic", "Lecture Date and Time");
-                System.out.println("----------------------------------------------------------------------------------------------------------------");
-                for (LectureDetails m : details) {
-                    System.out.printf("%-20s%-15s%-50s%-50s\n", m.facultyId, m.courseId, m.topic, m.date);
+        if (this.chooseCourseValidate.validate(courseOption, number)) {
+            if (Character.isDigit(courseOption.charAt(0))) {
+                String selected = course.courseId.get(Integer.parseInt(courseOption) - 1);
+                ArrayList<LectureDetails> details = lectureLogic.upcoming(selected);
+                if (details.size() > 0) {
+                    System.out.println("________________________________________________________________________________________________________________");
+                    System.out.printf("%-20s%-15s%-50s%-50s\n", "Faculty ID", "Course", "Topic", "Lecture Date and Time");
+                    System.out.println("----------------------------------------------------------------------------------------------------------------");
+                    for (LectureDetails m : details) {
+                        System.out.printf("%-20s%-15s%-50s%-50s\n", m.facultyId, m.courseId, m.topic, m.date);
+                    }
+                } else {
+                    System.out.println("Seems like there is no upcoming lecture for this course as of now.Select different course or navigate back to your dashboard.");
                 }
+                lectureDisplay(studentId);
             } else {
-                System.out.println("Seems like there is no upcoming lecture for this course as of now.Select different course or navigate back to your dashboard.");
+                System.out.println("Back to Dashboard");
             }
-            lectureDisplay(studentId);
-        } else if (courseOption.equals("*")) {
-            System.out.println("Back to Dashboard");
         } else {
             System.out.println("Please select valid option from the above mentioned courses..");
             selectCourse(number);

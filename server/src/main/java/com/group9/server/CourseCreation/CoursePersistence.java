@@ -12,7 +12,7 @@ import java.sql.Types;
 @Component
 public class CoursePersistence implements ICoursePersistence {
 
-    final String CREATE_COURSE = "{call Create_NewCourse(?, ?, ?, ?, ?, ?)}";
+    final String CREATE_COURSE = "{call createNewCourse(?, ?, ?, ?, ?, ?)}";
     Connection connection;
 
     public CoursePersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

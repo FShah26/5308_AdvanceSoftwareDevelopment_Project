@@ -34,5 +34,4 @@ public class UserConfirmation implements IUserConfirmation {
         }
         return (Integer.parseInt(menuOption.trim()) == 1);
     }
-
 }

@@ -1,6 +1,5 @@
-package com.group9.server.Announcements;
+package com.group9.server.Announcements.Admin;
 
-import com.group9.server.Announcements.Admin.ValidateAnnouncementMade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,8 +13,8 @@ class ValidateAnnouncementMadeTest {
             "Hi this is my first test announcement and it has limit upto 2000 characters,true",
     })
     @DisplayName("validate_announcementTest")
-    void validate_announcementTest(String value, boolean expectedOutput) {
-        ValidateAnnouncementMade validator = new ValidateAnnouncementMade();
+    void validateAnnouncementTest(String value, boolean expectedOutput) {
+        IValidateAnnouncementMade validator = new ValidateAnnouncementMade();
         boolean testOutput = validator.validateAnnouncement(value);
         Assertions.assertEquals(testOutput, expectedOutput);
     }

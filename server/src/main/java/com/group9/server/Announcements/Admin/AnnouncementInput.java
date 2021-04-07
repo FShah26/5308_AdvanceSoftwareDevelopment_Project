@@ -36,7 +36,6 @@ public class AnnouncementInput implements IAnnouncementInput {
     @Override
     public void selectOption() {
         String printOutput;
-        userConfirmation.showUserConfirmationOptions();
         if (userConfirmation.getUserConfirmation()) {
             printOutput = announcementLogic.makeAnnouncement(userRole, null, input, userId);
             System.out.println(printOutput);
