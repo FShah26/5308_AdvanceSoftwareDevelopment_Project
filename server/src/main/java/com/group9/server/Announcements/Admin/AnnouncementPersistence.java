@@ -11,6 +11,10 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
 
     final String MAKE_ANNOUNCEMENT = "{call makeNewAnnouncement(?, ?, ?, ?, ?)}";
     final String GET_COURSES = "{call getAssignedCourses(?)}";
+
+    final String PARAMETER_MESSAGE = "msg";
+    final String ERROR_OUTPUT_MESSAGE = "Error Catched";
+
     Connection connection;
 
     public AnnouncementPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -20,7 +24,7 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
 
     @Override
     public String InsertAnnouncement(String userRole, String courseId, String message, String userId) {
-        String output = "";
+        String output;
         try {
             CallableStatement statement = connection.prepareCall(MAKE_ANNOUNCEMENT);
             statement.registerOutParameter(5, Types.VARCHAR);
@@ -29,11 +33,11 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
             statement.setString(3, message);
             statement.setString(4, courseId);
             statement.execute();
-            output = statement.getString("msg");
+            output = statement.getString(PARAMETER_MESSAGE);
             statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output = "Error Catched";
+            output = ERROR_OUTPUT_MESSAGE;
         }
         return output;
     }
