@@ -19,7 +19,8 @@ public class EnrollStudentLogic implements IEnrollStudentLogic {
         } catch (Exception e) {
             System.out.println("Adding feedback failed");
             e.printStackTrace();
-        }    return message;
+        }
+        return message;
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:JDBC.properties")
+@PropertySource("classpath:JDBC-${spring.profiles.active}.properties")
 public class DBConfig {
     @Value("${JDBC.driver}")
     public String driverClassName;

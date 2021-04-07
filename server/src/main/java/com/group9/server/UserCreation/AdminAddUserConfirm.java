@@ -6,8 +6,8 @@ public class AdminAddUserConfirm implements InputValidator {
 
     String regex;
 
-    public AdminAddUserConfirm(){
-        this.regex="^\\s*([1-3])\\s*$";
+    public AdminAddUserConfirm() {
+        this.regex = "^\\s*([1-3])\\s*$";
     }
 
     @Override

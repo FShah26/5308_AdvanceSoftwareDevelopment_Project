@@ -17,13 +17,12 @@ public class ValidateDate implements IDateValidator {
 
     @Override
     public boolean validate(String userInput) {
-        return(ValidateFormat(userInput) && ValidateFutureDate(userInput));
+        return (ValidateFormat(userInput) && ValidateFutureDate(userInput));
     }
 
     @Override
-    public boolean ValidateFormat(String userInput)
-    {
-        if(userInput.matches(this.regex)){
+    public boolean ValidateFormat(String userInput) {
+        if (userInput.matches(this.regex)) {
             return true;
         }
         System.out.println("Date entered in incorrect format!");
@@ -31,17 +30,17 @@ public class ValidateDate implements IDateValidator {
     }
 
     @Override
-    public boolean ValidateFutureDate(String userInput){
-        SimpleDateFormat df =new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        try{
-            Date dt= df.parse(userInput);
-            if(dt.after(new Date())){
+    public boolean ValidateFutureDate(String userInput) {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        try {
+            Date dt = df.parse(userInput);
+            if (dt.after(new Date())) {
                 return true;
             }
             System.out.println("Past date entered!");
             return false;
 
-        }catch(ParseException ex){
+        } catch (ParseException ex) {
             System.out.println(ex.getMessage());
             return false;
         }

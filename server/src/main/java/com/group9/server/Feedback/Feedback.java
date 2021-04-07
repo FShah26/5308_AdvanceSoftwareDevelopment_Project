@@ -1,6 +1,5 @@
 package com.group9.server.Feedback;
 
-import com.group9.server.Dashboard.AdminDashboard;
 import com.group9.server.HomePage.UserConstants;
 import org.springframework.stereotype.Component;
 
@@ -62,10 +61,9 @@ public class Feedback implements IFeedback {
 
     @Override
     public void execute(String userRole, String userId) {
-        if(userRole.equals(UserConstants.FACULTY)){
+        if (userRole.equals(UserConstants.FACULTY)) {
             viewFeedback(userId);
-        }
-        else if(userRole.equals(UserConstants.STUDENT)){
+        } else if (userRole.equals(UserConstants.STUDENT)) {
             String studentName = getStudentName();
             String feedback = getFeedbackText();
             String faculty = getFacultyID();

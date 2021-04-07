@@ -19,15 +19,16 @@ public class AddUserLogic implements IAddUserLogic {
         } catch (Exception e) {
             System.out.println("Adding feedback failed");
             e.printStackTrace();
-        }    return message;
+        }
+        return message;
     }
 
     @Override
     public String addUserDetails(String userId, String userType, String name, String emailAddress, String department) {
         String message = "Added user details";
-        try{
+        try {
             persistence.addUserDetails(userId, userType, name, emailAddress, department);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Failed");
             e.printStackTrace();
         }

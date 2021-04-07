@@ -20,18 +20,12 @@ public class ManageMeetingLogic implements IManageMeetingLogic {
 
     @Override
     public Boolean meetingValidation(String selectedOption) {
-        if (this.managemeetingvalidate.validate(selectedOption)) {
-            return true;
-        }
-        return false;
+        return this.managemeetingvalidate.validate(selectedOption);
     }
 
     @Override
     public Boolean validateInput(String selection, String decision) {
-        if (selection.matches("[0-9]+") && selection.length() > 0 && (decision.equals("Approve") || decision.equals("Reject"))) {
-            return true;
-        }
-        return false;
+        return selection.matches("[0-9]+") && selection.length() > 0 && (decision.equals("Approve") || decision.equals("Reject"));
     }
 
     @Override
