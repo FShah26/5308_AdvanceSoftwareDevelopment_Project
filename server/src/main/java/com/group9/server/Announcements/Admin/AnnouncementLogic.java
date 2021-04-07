@@ -9,6 +9,8 @@ import java.util.List;
 
 @Component
 public class AnnouncementLogic implements IAnnouncementLogic {
+    private final String ANNOUNCEMENT_FAILED = "Failed to make announcement";
+    private final String INVALID_INPUT = "Please enter only valid message with upto 2000 characters...";
 
     IValidateAnnouncementMade validate;
     IAnnouncementPersistence persist;
@@ -20,17 +22,15 @@ public class AnnouncementLogic implements IAnnouncementLogic {
 
     @Override
     public String makeAnnouncement(String userRole, String courseId, String message, String userId) {
-        String output;
         if (validate.validateAnnouncement(message)) {
             try {
-                output = persist.InsertAnnouncement(userRole, courseId, message, userId);
+                return persist.InsertAnnouncement(userRole, courseId, message, userId);
             } catch (Exception ex) {
-                output = "Failed to make announcement";
+                return ANNOUNCEMENT_FAILED;
             }
         } else {
-            output = "Please enter only valid message with upto 2000 characters...";
+            return INVALID_INPUT;
         }
-        return output;
     }
 
     public int validateCourseId(String facultyId, String courseId) {
@@ -38,7 +38,7 @@ public class AnnouncementLogic implements IAnnouncementLogic {
         ResultSet set;
         try {
             set = persist.getFacultyCourses(facultyId);
-            if (null == set || set.next() == false) {
+            if (set == null || set.next() == false) {
                 System.out.println("No course assigned to you");
                 return -1;
             } else {
@@ -53,7 +53,7 @@ public class AnnouncementLogic implements IAnnouncementLogic {
 
         } catch (SQLException ex) {
             System.out.println("Error validating courseId");
-            ex.getMessage();
+            ex.printStackTrace();
             return -1;
         }
         System.out.println("Incorrect Course Id");
