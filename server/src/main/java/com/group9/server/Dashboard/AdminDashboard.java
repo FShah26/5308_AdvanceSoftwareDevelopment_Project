@@ -18,6 +18,8 @@ public class AdminDashboard implements IDashboard {
     private static final String ENROLL_STUDENT ="3";
     private static final String ANNOUNCEMENT ="4";
     private static final String LOGOUT ="5";
+    private static final int SYSTEM_EXIT = 0;
+
     String userName;
     String userRole;
 
@@ -74,13 +76,17 @@ public class AdminDashboard implements IDashboard {
         if (this.IInputValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
-                //logout
+                out.println("Logging out...");
+                out.println("Logged out successfully...");
+                System.exit(SYSTEM_EXIT);
             } else {
                 dashboardAction.execute(this.userRole, this.userName);
             }
-
+            showDashboard();
+        } else {
+            displayInvalidMenuOptionMsg();
+            selectMenu();
         }
-        showDashboard();
     }
 
     public void displayInvalidMenuOptionMsg() {

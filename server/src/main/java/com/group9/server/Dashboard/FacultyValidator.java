@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FacultyValidator implements IInputValidator {
 
-    private static final String VALIDATION = "^\\s*([1-6])\\s*$";
+    private static final String VALIDATION = "^\\s*([1-7])\\s*$";
     String regex;
 
     public FacultyValidator() {

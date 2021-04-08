@@ -21,6 +21,7 @@ public class StudentDashboard implements IDashboard {
     private static final String FEEDBACK = "6";
     private static final String QUIZ = "7";
     private static final String LOGOUT = "8";
+    private static final int SYSTEM_EXIT = 0;
     
     private final String role;
     IInputValidator studentValidator;
@@ -88,7 +89,9 @@ public class StudentDashboard implements IDashboard {
         if (this.studentValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
-                //logout
+                out.println("Logging out...");
+                out.println("Logged out successfully...");
+                System.exit(SYSTEM_EXIT);
             } else {
                 dashboardAction.execute(this.role, this.userName);
             }
