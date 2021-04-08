@@ -26,8 +26,8 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     }
 
     @Override
-    public void lectureDisplay(String username) {
-        studentId = username;
+    public void lectureDisplay(String userName) {
+        studentId = userName;
         System.out.println("************************************************");
         System.out.println("              UPCOMING LECTURES                 ");
         System.out.println("************************************************");
@@ -38,17 +38,17 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     @Override
     public void checkInput() {
         course = meeting.viewCourse(studentId);
-        int coursenumber = 0;
+        int courseNumber = 0;
         if (course.courseId.size() == 0) {
             System.out.println("Looks like you not enrolled to any courses.");
         } else {
-            for (String courseid : course.courseId) {
-                coursenumber++;
-                System.out.println("Press " + coursenumber + " for " + courseid);
+            for (String courseId : course.courseId) {
+                courseNumber++;
+                System.out.println("Press " + courseNumber + " for " + courseId);
             }
         }
         System.out.println("Press * to navigate to your dashboard ");
-        selectCourse(coursenumber);
+        selectCourse(courseNumber);
     }
 
     @Override
