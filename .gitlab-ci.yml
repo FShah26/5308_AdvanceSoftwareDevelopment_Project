@@ -43,11 +43,8 @@ testdbdev:
 
 
 ## Only on master ### Use 'production' DBConfig
-variables:
-  MAVEN_CLI_OP: "clean"
-
-builddeploy:
-  stage: builddeploy
+builddbdprod:
+  stage: builddbdprod
   script:
     - cd server
     - echo "Building with Maven"
@@ -111,7 +108,10 @@ builddbtest:
     - develop
     - master
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f51c247198019fd51bf7f2898defac6d13f9959d
 testdbtest:
   stage: testdbtest
   script:
