@@ -1,7 +1,6 @@
 package com.group9.server.Feedback;
 
 import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -18,25 +17,25 @@ public class FeedbackLogic implements IFeedbackLogic {
 
     @Override
     public FeedbackList viewFeedback(String facultyId) {
-        FeedbackList feedback = new FeedbackList();
+        FeedbackList feedbackList = new FeedbackList();
 
         try {
             ResultSet set = persistence.fetchFeedback(facultyId);
 
             if (set != null) {
                 while (set.next()) {
-                    feedback.feedback.add(set.getString(STUDENT_NAME));
-                    feedback.feedback.add(set.getString(FEEDBACK));
+                    feedbackList.feedback.add(set.getString(STUDENT_NAME));
+                    feedbackList.feedback.add(set.getString(FEEDBACK));
                 }
             }
-            return feedback;
+            return feedbackList;
 
         } catch (SQLException throwables) {
             System.out.println("Fetching feedback Failed");
             throwables.printStackTrace();
         }
 
-        return feedback;
+        return feedbackList;
     }
 
 

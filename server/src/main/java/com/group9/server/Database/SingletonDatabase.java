@@ -24,7 +24,7 @@ public class SingletonDatabase implements ISingletonDatabase {
     }
 
     @Override
-    public Connection getConnection(DBConfig config) throws SQLException {
+    public Connection getConnection(DatabaseConfig config) throws SQLException {
         if (connection == null) {
             connection = DriverManager.getConnection(config.url, config.user, config.password);
         }

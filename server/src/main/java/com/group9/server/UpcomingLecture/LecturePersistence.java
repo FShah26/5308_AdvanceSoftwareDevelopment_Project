@@ -1,6 +1,6 @@
 package com.group9.server.UpcomingLecture;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class LecturePersistence implements ILecturePersistence {
     final String UPCOMING_LECTURE = "{call upcomingLecture(?)}";
     Connection connection;
 
-    public LecturePersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public LecturePersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }

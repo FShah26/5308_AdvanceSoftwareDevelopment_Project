@@ -1,6 +1,6 @@
 package com.group9.server.UserCreation;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class AddUserPersistence implements IAddUserPersistence {
     final String USER_DETAILS = "{call addUserDetails(?, ?, ?, ?, ?, ?)}";
     Connection connection;
 
-    public AddUserPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public AddUserPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }

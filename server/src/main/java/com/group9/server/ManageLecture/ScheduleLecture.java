@@ -1,10 +1,7 @@
 package com.group9.server.ManageLecture;
 
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
-
-import static java.lang.System.out;
 
 @Component
 public class ScheduleLecture implements IManageLectureActions {
@@ -53,9 +50,9 @@ public class ScheduleLecture implements IManageLectureActions {
         boolean result = false;
         result = manageLectureLogic.scheduleLecture(this.facultyId, this.courseId, this.topic, this.lecDate);
         if (result) {
-            out.println("Lecture Scheduled successfully");
+            System.out.println("Lecture Scheduled successfully");
         } else {
-            out.println("Lecture scheduling failed.");
+            System.out.println("Lecture scheduling failed.");
         }
         return result;
     }

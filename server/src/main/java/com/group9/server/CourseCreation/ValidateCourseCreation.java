@@ -13,15 +13,20 @@ public class ValidateCourseCreation implements IValidate {
     @Override
     public Boolean validateInput(String courseId, String credit, String facultyId) {
 
-        if (courseId.length() < COURSE_LENGTH_CHECKER)
+        if (courseId.length() < COURSE_LENGTH_CHECKER) {
             return false;
-        else if (facultyId.length() < FACULTY_LENGTH_CHECKER)
+        }
+        else if (facultyId.length() < FACULTY_LENGTH_CHECKER) {
             return false;
-        else if (Integer.parseInt(credit) >= MAX_CREDITS || Integer.parseInt(credit) == MIN_CREDITS)
+        }
+        else if (Integer.parseInt(credit) >= MAX_CREDITS || Integer.parseInt(credit) == MIN_CREDITS){
             return false;
-        else if (courseId.startsWith(COURSE_ID_STARTING))
+        }
+        else if (courseId.startsWith(COURSE_ID_STARTING)){
             return true;
-        else
+        }
+        else {
             return false;
+        }
     }
 }

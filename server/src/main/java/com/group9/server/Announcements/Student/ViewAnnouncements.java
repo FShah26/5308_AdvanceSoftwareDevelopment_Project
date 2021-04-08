@@ -1,12 +1,12 @@
 package com.group9.server.Announcements.Student;
 
 import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
 public class ViewAnnouncements implements IViewAnnouncements {
+
     private static final int USER_ID = 1;
     private static final int ANNOUNCEMENT = 2;
     IAnnouncementList IAnnouncementList;

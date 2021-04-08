@@ -1,6 +1,6 @@
 package com.group9.server.Quiz.Student;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class GradingPersistence implements IGradingPersistence {
     final String VIEW_GRADES = "{call viewGrades(?)}";
     Connection connection;
 
-    public GradingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public GradingPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }

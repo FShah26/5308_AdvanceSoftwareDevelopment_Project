@@ -33,7 +33,7 @@ public class AdminDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
 
     public AdminDashboard(IExecuteAction announcementInput, IExecuteAction createCourse, IExecuteAction addUser, IExecuteAction enrollStudent) {
-        this.IInputValidator = new AdminIInputValidator();
+        this.IInputValidator = new AdminInputValidator();
         this.userRole = UserConstants.ADMIN;
         this.announcementInput = announcementInput;
         this.createCourse = createCourse;
@@ -48,16 +48,16 @@ public class AdminDashboard implements IDashboard {
 
     @Override
     public void showDashboard() {
-        out.println("************************************************");
-        out.println("                 ADMIN DASHBOARD                ");
-        out.println("************************************************");
+        System.out.println("************************************************");
+        System.out.println("                 ADMIN DASHBOARD                ");
+        System.out.println("************************************************");
 
-        out.println("Press 1 --> Enter Course and Assign Faculty.");
-        out.println("Press 2 --> Add New User.");
-        out.println("Press 3 --> Student Course Enrollment.");
-        out.println("Press 4 --> Making General Announcement.");
-        out.println("Press 5 --> To Log Out.");
-        out.println();
+        System.out.println("Press 1 --> Enter Course and Assign Faculty.");
+        System.out.println("Press 2 --> Add New User.");
+        System.out.println("Press 3 --> Student Course Enrollment.");
+        System.out.println("Press 4 --> Making General Announcement.");
+        System.out.println("Press 5 --> To Log Out.");
+        System.out.println();
         selectMenu();
     }
 
@@ -66,12 +66,14 @@ public class AdminDashboard implements IDashboard {
         this.userName = userName;
     }
 
+    @Override
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
+    @Override
     public void checkInput(String selection) {
         if (this.IInputValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
@@ -89,6 +91,7 @@ public class AdminDashboard implements IDashboard {
         }
     }
 
+    @Override
     public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from menu.");
     }

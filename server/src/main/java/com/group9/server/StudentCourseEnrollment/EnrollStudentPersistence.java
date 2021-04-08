@@ -1,6 +1,6 @@
 package com.group9.server.StudentCourseEnrollment;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class EnrollStudentPersistence implements IEnrollStudentPersistence {
     final String STUDENT_COURSE_ENROLLMENT = "{call studentCourseEnrollments(?, ?, ?, ?)}";
     Connection connection;
 
-    public EnrollStudentPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public EnrollStudentPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }

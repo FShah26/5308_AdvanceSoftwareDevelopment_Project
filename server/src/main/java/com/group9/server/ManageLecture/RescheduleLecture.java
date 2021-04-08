@@ -1,7 +1,6 @@
 package com.group9.server.ManageLecture;
 
 import java.util.Scanner;
-
 import static java.lang.System.out;
 
 public class RescheduleLecture implements IManageLectureActions {

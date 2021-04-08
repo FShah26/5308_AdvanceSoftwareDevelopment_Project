@@ -2,8 +2,6 @@ package com.group9.server.ManageLecture;
 
 import java.util.Scanner;
 
-import static java.lang.System.out;
-
 public class CancelLecture implements IManageLectureActions {
     public String facultyId;
     public String courseId;
@@ -45,12 +43,12 @@ public class CancelLecture implements IManageLectureActions {
 
     @Override
     public boolean save() {
-        boolean result = false;
+        boolean result;
         result = manageLectureLogic.cancelLecture(this.courseId, this.lecId);
         if (result) {
-            out.println("Lecture Cancelled successfully");
+            System.out.println("Lecture Cancelled successfully");
         } else {
-            out.println("Lecture Cancelled Failed");
+            System.out.println("Lecture Cancelled Failed");
         }
         return result;
     }
