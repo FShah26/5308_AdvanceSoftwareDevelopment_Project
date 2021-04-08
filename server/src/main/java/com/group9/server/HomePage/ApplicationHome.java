@@ -25,7 +25,6 @@ public class ApplicationHome implements IHomePage {
         out.println("1 -> Admin");
         out.println("2 -> Faculty");
         out.println("3 -> Student");
-        out.println("* -> Configure database");
         out.println("Please enter an option and press \"Enter\" key :");
     }
 
