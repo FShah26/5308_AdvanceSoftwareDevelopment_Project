@@ -13,6 +13,7 @@ import java.sql.Types;
 public class AddUserPersistence implements IAddUserPersistence {
     final String CREATE_NEW_USER = "{call createNewUser(?, ?, ?, ?, ?)}";
     final String USER_DETAILS = "{call addUserDetails(?, ?, ?, ?, ?, ?)}";
+    private static final String RETURN_MESSAGE = "message";
     Connection connection;
 
     public AddUserPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
@@ -22,7 +23,6 @@ public class AddUserPersistence implements IAddUserPersistence {
 
     @Override
     public void addUser(String id, String userId, String password, String userType) {
-        String output = "";
         try (
                 CallableStatement statement = connection.prepareCall(CREATE_NEW_USER)
         ) {
@@ -33,11 +33,8 @@ public class AddUserPersistence implements IAddUserPersistence {
             statement.setString(3, password);
             statement.setString(4, userType);
             statement.execute();
-            output = statement.getString("message");
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output = "Error Catched";
         }
 
     }
@@ -56,13 +53,11 @@ public class AddUserPersistence implements IAddUserPersistence {
             statement.setString(4, emailAddress);
             statement.setString(5, department);
             statement.execute();
-            output = statement.getString("msg");
-            statement.close();
+            output = statement.getString(RETURN_MESSAGE);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output = "Error Catched";
+            output = "Error Caught";
         }
-
         System.out.println(output);
 
     }
