@@ -1,15 +1,18 @@
 stages:
-  - build
-  - builddeploy
-  - test
-  - testdeploy
+  - builddbdev
+  - builddbtest
+  - builddbdprod
+  - testdbdev
+  - testdbtest
+  - testdbprod
   - deploy
 
 variables:
   MAVEN_CLI_OP: "clean"
 
-build:
-  stage: build
+### Only on develop ### Use 'dev' DBConfig
+builddbdev:
+  stage: builddbdev
   script:
     - cd server
     - echo "Building with Maven"
@@ -19,9 +22,11 @@ build:
       - server/target
   tags:
     - ugrad
+  only:
+    - develop
 
-test:
-  stage: test
+testdbdev:
+  stage: testdbdev
   script:
     - cd server
     - echo "Testing..."
@@ -33,13 +38,12 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
+  only:
+    - develop
 
-# Master only
-variables:
-  MAVEN_CLI_OP: "clean"
-
-builddeploy:
-  stage: builddeploy
+## Only on master ### Use 'production' DBConfig
+builddbdprod:
+  stage: builddbdprod
   script:
     - cd server
     - echo "Building with Maven"
@@ -52,8 +56,8 @@ builddeploy:
   only:
     - master
 
-testdeploy:
-  stage: testdeploy
+testdbprod:
+  stage: testdbprod
   script:
     - cd server
     - echo "Testing..."
@@ -66,7 +70,7 @@ testdeploy:
   tags:
     - ugrad
   only:
-    - ci-cd-test
+    - master
 
 # Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
 deploy:
@@ -85,4 +89,37 @@ deploy:
   tags:
     - ugrad
   only:
-    - ci-cd-test
+    - master
+
+### All Other Branches ### Use 'test' DBConfig
+builddbtest:
+  stage: builddbtest
+  script:
+    - cd server
+    - echo "Building with Maven"
+    - mvn $MAVEN_CLI_OP compile -Ptest
+  artifacts:
+    paths:
+      - server/target
+  tags:
+    - ugrad
+  except:
+    - develop
+    - master
+
+testdbtest:
+  stage: testdbtest
+  script:
+    - cd server
+    - echo "Testing..."
+    - mvn verify -Ptest
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - server/target/surefire-reports/TEST-*.xml
+  tags:
+    - ugrad
+  except:
+    - develop
+    - master
