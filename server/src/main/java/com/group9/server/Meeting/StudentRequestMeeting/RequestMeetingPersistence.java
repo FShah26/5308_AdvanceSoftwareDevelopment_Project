@@ -8,9 +8,14 @@ import java.sql.*;
 
 @Component
 public class RequestMeetingPersistence implements IRequestMeetingPersistence {
-    final String REGISTERED_COURSE = "{call registeredCourse(?)}";
-    final String REQUEST_MEETING = "{call requestMeetingStudent(?,?,?,?)}";
-    final String VIEW_MEETING = "{call viewMeetingStatuses(?)}";
+    private static final int STUDENT_ID = 1;
+    private static final int COURSE_ID = 2;
+    private static final int REASON = 3;
+    private static final int OUTPUT = 4;
+    private static final String MESSAGE = "message";
+    private static final String REGISTERED_COURSE = "{call registeredCourse(?)}";
+    private static final String REQUEST_MEETING = "{call requestMeetingStudent(?,?,?,?)}";
+    private static final String VIEW_MEETING = "{call viewMeetingStatuses(?)}";
     Connection connection;
 
     public RequestMeetingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -21,7 +26,7 @@ public class RequestMeetingPersistence implements IRequestMeetingPersistence {
     @Override
     public ResultSet fetchRegisteredCourses(String studentId) throws SQLException {
         CallableStatement statement = connection.prepareCall(REGISTERED_COURSE);
-        statement.setString(1, studentId);
+        statement.setString(STUDENT_ID, studentId);
         ResultSet set = statement.executeQuery();
         return set;
     }
@@ -30,19 +35,19 @@ public class RequestMeetingPersistence implements IRequestMeetingPersistence {
     public String setMeeting(String courseId, String studentId, String reason) throws SQLException {
         CallableStatement statement = connection.prepareCall(REQUEST_MEETING);
 
-        statement.registerOutParameter(4, Types.VARCHAR);
-        statement.setString(1, studentId);
-        statement.setString(2, courseId);
-        statement.setString(3, reason);
+        statement.registerOutParameter(OUTPUT, Types.VARCHAR);
+        statement.setString(STUDENT_ID, studentId);
+        statement.setString(COURSE_ID, courseId);
+        statement.setString(REASON, reason);
         statement.execute();
-        String output = statement.getString("message");
+        String output = statement.getString(MESSAGE);
         return output;
     }
 
     @Override
     public ResultSet viewMeeting(String studentId) throws SQLException {
         CallableStatement statement = connection.prepareCall(VIEW_MEETING);
-        statement.setString(1, studentId);
+        statement.setString(STUDENT_ID, studentId);
         ResultSet set = statement.executeQuery();
         return set;
     }

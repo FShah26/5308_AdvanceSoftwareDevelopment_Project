@@ -18,7 +18,7 @@ public class ISingleAnnouncementTest {
 
     @Test
     void setUserIDTest() {
-        underTest.setUserID("TEST1");
+        underTest.setUserId("TEST1");
     }
 
     @Test

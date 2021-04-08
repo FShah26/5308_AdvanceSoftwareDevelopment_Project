@@ -10,6 +10,8 @@ import static java.lang.System.out;
 @Component
 public class UserConfirmation implements IUserConfirmation {
 
+    private static final int CHECK_VALUE = 1;
+    private static final boolean CHECK_VALIDATE = false;
     IUserInputValidator userConfirmationOptionValidator;
 
     public UserConfirmation(IUserInputValidator userConfirmationOptionValidator) {
@@ -27,11 +29,11 @@ public class UserConfirmation implements IUserConfirmation {
         showUserConfirmationOptions();
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
-        while (this.userConfirmationOptionValidator.validate(menuOption) == false) {
-            out.println("Invalid Option! Please choose a valid option from menu.");
+        while (this.userConfirmationOptionValidator.validate(menuOption) == CHECK_VALIDATE) {
+            System.out.println("Invalid Option! Please choose a valid option from menu.");
             showUserConfirmationOptions();
             menuOption = sc.nextLine();
         }
-        return (Integer.parseInt(menuOption.trim()) == 1);
+        return (Integer.parseInt(menuOption.trim()) == CHECK_VALUE);
     }
 }

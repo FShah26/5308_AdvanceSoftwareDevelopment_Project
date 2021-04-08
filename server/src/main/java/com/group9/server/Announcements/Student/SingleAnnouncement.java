@@ -11,7 +11,7 @@ public class SingleAnnouncement implements ISingleAnnouncement {
     }
 
     @Override
-    public void setUserID(String id) {
+    public void setUserId(String id) {
         this.userID = id;
     }
 

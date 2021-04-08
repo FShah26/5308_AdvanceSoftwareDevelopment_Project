@@ -10,6 +10,8 @@ import static java.lang.System.out;
 @Component
 public class FacultyAnnouncement implements IAnnouncementInput {
 
+    private static final int VALIDATE_COURSE_ID = 0;
+    private static final int NON_VALIDATE_COURSE_ID = -1;
     IAnnouncementLogic announcementLogic;
     IUserConfirmation userConfirmation;
     String input;
@@ -51,15 +53,15 @@ public class FacultyAnnouncement implements IAnnouncementInput {
     }
 
     public String getValidCourseIdInput() {
-        int state = 0;
+        int state;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter CourseId: ");
         String courseId = sc.nextLine();
-        while ((state = announcementLogic.validateCourseId(this.userId, courseId)) == 0) {
-            out.println("Enter a valid courseID: ");
+        while ((state = announcementLogic.validateCourseId(this.userId, courseId)) == VALIDATE_COURSE_ID) {
+            System.out.println("Enter a valid courseID: ");
             courseId = sc.nextLine();
         }
-        if (state == -1) {
+        if (state == NON_VALIDATE_COURSE_ID) {
             return null;
         }
         return courseId;
