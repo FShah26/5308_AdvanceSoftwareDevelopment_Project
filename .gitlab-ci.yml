@@ -1,10 +1,6 @@
 stages:
-  - builddbdev  
-  - builddbtest
-  - builddbdprod
-  - testdbdev
-  - testdbtest
-  - testdbprod
+  - build
+  - test
   - deploy
 
 variables:
@@ -12,7 +8,7 @@ variables:
 
 ### Only on develop ### Use 'dev' DBConfig
 build:
-  stage: builddbdev
+  stage: build
   script:
     - cd server
     - echo "Building with Maven"
@@ -26,7 +22,7 @@ build:
     - develop
 
 test:
-  stage: testdbdev
+  stage: test
   script:
     - cd server
     - echo "Testing..."
@@ -43,7 +39,7 @@ test:
 
 ## Only on master ### Use 'production' DBConfig
 build:
-  stage: builddbdprod
+  stage: build
   script:
     - cd server
     - echo "Building with Maven"
@@ -57,7 +53,7 @@ build:
     - master
 
 test:
-  stage: testdbprod
+  stage: test
   script:
     - cd server
     - echo "Testing..."
@@ -93,7 +89,7 @@ deploy:
 
 ### All Other Branches ### Use 'test' DBConfig
 build:
-  stage: builddbtest
+  stage: build
   script:
     - cd server
     - echo "Building with Maven"
@@ -108,7 +104,7 @@ build:
     - master
 
 test:
-  stage: testdbtest
+  stage: test
   script:
     - cd server
     - echo "Testing..."
