@@ -18,7 +18,7 @@ class AdminIInputValidatorTest {
     void invalid_input() {
         AdminIInputValidator vcc = new AdminIInputValidator();
         Assertions.assertEquals(false,
-                vcc.validate("5"));
+                vcc.validate("6"));
     }
 
 }
