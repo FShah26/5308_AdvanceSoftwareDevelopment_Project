@@ -1,14 +1,18 @@
 stages:
-  - build
-  - test
+  - builddbdev
+  - builddbtest
+  - builddbdprod
+  - testdbdev
+  - testdbtest
+  - testdbprod
   - deploy
 
 variables:
   MAVEN_CLI_OP: "clean"
 
 ### Only on develop ### Use 'dev' DBConfig
-build:
-  stage: build
+builddbdev:
+  stage: builddbdev
   script:
     - cd server
     - echo "Building with Maven"
@@ -21,8 +25,8 @@ build:
   only:
     - develop
 
-test:
-  stage: test
+testdbdev:
+  stage: testdbdev
   script:
     - cd server
     - echo "Testing..."
@@ -38,8 +42,8 @@ test:
     - develop
 
 ## Only on master ### Use 'production' DBConfig
-build:
-  stage: build
+builddbdprod:
+  stage: builddbdprod
   script:
     - cd server
     - echo "Building with Maven"
@@ -52,8 +56,8 @@ build:
   only:
     - master
 
-test:
-  stage: test
+testdbprod:
+  stage: testdbprod
   script:
     - cd server
     - echo "Testing..."
@@ -88,8 +92,8 @@ deploy:
     - master
 
 ### All Other Branches ### Use 'test' DBConfig
-build:
-  stage: build
+builddbtest:
+  stage: builddbtest
   script:
     - cd server
     - echo "Building with Maven"
@@ -103,8 +107,8 @@ build:
     - develop
     - master
 
-test:
-  stage: test
+testdbtest:
+  stage: testdbtest
   script:
     - cd server
     - echo "Testing..."
