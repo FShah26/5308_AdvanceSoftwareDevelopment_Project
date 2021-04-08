@@ -2,10 +2,7 @@ package com.group9.server.Announcements.Admin;
 
 import com.group9.server.Common.IUserConfirmation;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
-
-import static java.lang.System.out;
 
 @Component
 public class FacultyAnnouncement implements IAnnouncementInput {

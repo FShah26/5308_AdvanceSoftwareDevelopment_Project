@@ -9,6 +9,7 @@ import java.util.List;
 
 @Component
 public class AnnouncementLogic implements IAnnouncementLogic {
+
     private static final int COURSE_VALUE = 1;
     IValidateAnnouncementMade validate;
     IAnnouncementPersistence persist;
@@ -33,6 +34,7 @@ public class AnnouncementLogic implements IAnnouncementLogic {
         return output;
     }
 
+    @Override
     public int validateCourseId(String facultyId, String courseId) {
         List<String> lstStudentCourse = new ArrayList<>();
         ResultSet set;

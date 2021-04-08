@@ -1,7 +1,7 @@
 package com.group9.server;
 
 import com.group9.server.Dashboard.IDashboard;
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import com.group9.server.Database.SingletonDatabase;
 import com.group9.server.HomePage.HomePageConfiguration;
@@ -37,7 +37,7 @@ public class ServerApplication implements CommandLineRunner {
         homePage = ctx.getBean("appHome", IHomePage.class);
         database = ctx.getBean(SingletonDatabase.class);
         database = database.getInstance();
-        connection = database.getConnection(ctx.getBean(DBConfig.class));
+        connection = database.getConnection(ctx.getBean(DatabaseConfig.class));
 
         homePage.getMenu();
         userType = homePage.UserTypeSelectMenu();

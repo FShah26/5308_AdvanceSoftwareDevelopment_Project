@@ -3,7 +3,6 @@ package com.group9.server.Dashboard;
 import com.group9.server.HomePage.UserConstants;
 import com.group9.server.IExecuteAction;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -78,13 +77,14 @@ public class StudentDashboard implements IDashboard {
         this.userName = userName;
     }
 
-
+    @Override
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
+    @Override
     public void checkInput(String selection) {
         if (this.studentValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
@@ -102,6 +102,7 @@ public class StudentDashboard implements IDashboard {
         }
     }
 
+    @Override
     public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from menu.");
     }

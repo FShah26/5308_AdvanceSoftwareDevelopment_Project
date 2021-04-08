@@ -92,6 +92,7 @@ public class RequestMeeting implements IRequestMeeting {
                 break;
             default:
                 System.out.println("Incorrect input provided");
+                break;
         }
     }
 

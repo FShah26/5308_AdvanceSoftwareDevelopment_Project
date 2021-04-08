@@ -2,10 +2,8 @@ package com.group9.server.Common;
 
 import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 
-import static java.lang.System.out;
 
 @Component
 public class UserConfirmation implements IUserConfirmation {

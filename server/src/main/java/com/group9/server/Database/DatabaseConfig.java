@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource("classpath:JDBC-${spring.profiles.active}.properties")
 public class
-DBConfig {
+DatabaseConfig {
     @Value("${JDBC.driver}")
     public String driverClassName;
     @Value("${JDBC.url}")

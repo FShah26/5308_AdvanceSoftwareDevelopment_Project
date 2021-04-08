@@ -1,6 +1,6 @@
 package com.group9.server.Quiz;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class QuizPersistence implements IQuizPersistence {
     final String REGISTERED_COURSE = "{call RegisteredCourse(?)}";
     Connection connection;
 
-    public QuizPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public QuizPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }

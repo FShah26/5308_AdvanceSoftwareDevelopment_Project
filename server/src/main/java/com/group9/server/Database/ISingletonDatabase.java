@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface ISingletonDatabase {
-    ISingletonDatabase getInstance();
+    ISingletonDatabase getInstance() throws SQLException;
 
-    Connection getConnection(DBConfig config) throws SQLException;
+    Connection getConnection(DatabaseConfig config) throws SQLException;
 
     void closeConnection() throws SQLException;
 }

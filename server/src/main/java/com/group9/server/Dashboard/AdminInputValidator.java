@@ -3,13 +3,13 @@ package com.group9.server.Dashboard;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AdminIInputValidator implements IInputValidator {
+public class AdminInputValidator implements IInputValidator {
 
-    private static final String VALIDATION = "^\\s*([1-5])\\s*$";
+    private static final String ADMIN_INPUT_VALIDATION = "^\\s*([1-5])\\s*$";
     String regex;
 
-    public AdminIInputValidator() {
-        this.regex = VALIDATION;
+    public AdminInputValidator() {
+        this.regex = ADMIN_INPUT_VALIDATION;
     }
 
     @Override

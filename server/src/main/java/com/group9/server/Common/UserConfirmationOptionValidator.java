@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConfirmationOptionValidator implements IUserInputValidator {
 
-    static final String VALIDATION = "^\\s*([1-2])\\s*$";
+    private static final String VALIDATION = "^\\s*([1-2])\\s*$";
     String regex;
 
     public UserConfirmationOptionValidator() {
