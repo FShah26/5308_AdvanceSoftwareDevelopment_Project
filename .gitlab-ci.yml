@@ -1,15 +1,18 @@
 stages:
-  - build
-  - builddeploy
-  - test
-  - testdeploy
+  - builddbdev
+  - builddbtest
+  - builddbdprod
+  - testdbdev
+  - testdbtest
+  - testdbprod
   - deploy
 
 variables:
   MAVEN_CLI_OP: "clean"
 
-build:
-  stage: build
+### Only on develop ### Use 'dev' DBConfig
+builddbdev:
+  stage: builddbdev
   script:
     - cd server
     - echo "Building with Maven"
@@ -19,9 +22,11 @@ build:
       - server/target
   tags:
     - ugrad
+  only:
+    - develop
 
-test:
-  stage: test
+testdbdev:
+  stage: testdbdev
   script:
     - cd server
     - echo "Testing..."
@@ -33,20 +38,16 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
+  only:
+    - develop
 
-<<<<<<< HEAD
 
 ## Only on master ### Use 'production' DBConfig
-build:
-  stage: build
-=======
-# Master only
 variables:
   MAVEN_CLI_OP: "clean"
 
 builddeploy:
   stage: builddeploy
->>>>>>> ad66f3e (Added master only stages)
   script:
     - cd server
     - echo "Building with Maven"
@@ -59,8 +60,8 @@ builddeploy:
   only:
     - master
 
-testdeploy:
-  stage: testdeploy
+testdbprod:
+  stage: testdbprod
   script:
     - cd server
     - echo "Testing..."
@@ -73,7 +74,7 @@ testdeploy:
   tags:
     - ugrad
   only:
-    - ci-cd-test
+    - master
 
 # Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
 deploy:
@@ -95,8 +96,8 @@ deploy:
     - master
 
 ### All Other Branches ### Use 'test' DBConfig
-build:
-  stage: build
+builddbtest:
+  stage: builddbtest
   script:
     - cd server
     - echo "Building with Maven"
@@ -110,8 +111,9 @@ build:
     - develop
     - master
 
-test:
-  stage: test
+
+testdbtest:
+  stage: testdbtest
   script:
     - cd server
     - echo "Testing..."
