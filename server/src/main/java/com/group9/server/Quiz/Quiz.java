@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-import static java.lang.System.out;
 
 @Component
 public class Quiz implements IQuiz {
@@ -27,7 +26,7 @@ public class Quiz implements IQuiz {
     public void createQuiz() {
         String courseId = getCourseId();
         String quizNumber = getQuizNumber();
-        out.println("Enter the number of questions you want to add");
+        System.out.println("Enter the number of questions you want to add");
         Scanner scanner = new Scanner(System.in);
         int numberOfQuestions = scanner.nextInt();
         for (int i = 0; i < numberOfQuestions; i++) {

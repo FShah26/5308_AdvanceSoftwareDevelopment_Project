@@ -1,6 +1,5 @@
 package com.group9.server.StudentCourseEnrollment;
 
-import com.group9.server.StudentCourseEnrollment.ValidateEnrollStudent;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

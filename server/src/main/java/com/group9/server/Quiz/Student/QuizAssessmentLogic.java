@@ -21,6 +21,22 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     IGradingPersistence gradingPersistence;
     IUserInputValidator inputOptionsValidator;
 
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_1 = 1;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_2 = 2;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_3 = 3;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_4 = 4;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_5 = 5;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_6 = 6;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_7 = 7;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_8 = 8;
+    private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_9 = 9;
+    private static final int VALIDATE_COURSE_ID_VALID = 1;
+    private static final int VALIDATE_COURSE_ID_INVALID = 0;
+    private static final int QUIZ_NOT_ATTEMPTED = 0;
+    private static final int VALIDATE_COURSE_ID_EXCEPTION = -1;
+    private static final double PERCENTAGE_LIMIT = 100.00;
+    private static final double POINT_FOR_CORRECT_ANS = 1.00;
+
 
     public QuizAssessmentLogic(IQuizPersistence quizPersistence, IGradingPersistence gradingPersistence) {
         this.quizPersistence = quizPersistence;
@@ -35,7 +51,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
             if (set != null) {
                 lstQuiz = new ArrayList<>();
                 while (set.next()) {
-                    lstQuiz.add(set.getString(1));
+                    lstQuiz.add(set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_1));
                 }
             }
         } catch (SQLException ex) {
@@ -53,13 +69,13 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
                 lstQuizQuestions = new ArrayList<>();
                 while (set.next()) {
                     QuizQuestions question = new QuizQuestions();
-                    question.QuestionId = set.getString(1);
-                    question.Question = set.getString(4);
-                    question.OptionA = set.getString(5);
-                    question.OptionB = set.getString(6);
-                    question.OptionC = set.getString(7);
-                    question.OptionD = set.getString(8);
-                    question.Solution = set.getString(9);
+                    question.QuestionId = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_1);
+                    question.Question = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_4);
+                    question.OptionA = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_5);
+                    question.OptionB = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_6);
+                    question.OptionC = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_7);
+                    question.OptionD = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_8);
+                    question.Solution = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_9);
                     question.Answer = "";
                     lstQuizQuestions.add(question);
                 }
@@ -96,24 +112,24 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
             ResultSet set = quizPersistence.fetchRegisteredCourses(studentId);
             if (null == set || set.next() == false) {
                 System.out.println("No course registered for you");
-                return -1;
+                return VALIDATE_COURSE_ID_EXCEPTION;
             } else {
-                lstStudentCourse.add(set.getString(1));
+                lstStudentCourse.add(set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_1));
                 while (set.next()) {
-                    lstStudentCourse.add(set.getString(1));
+                    lstStudentCourse.add(set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_1));
                 }
             }
             if (lstStudentCourse.contains(courseId)) {
-                return 1;
+                return VALIDATE_COURSE_ID_VALID;
             }
 
         } catch (SQLException ex) {
             System.out.println("Error validating courseId");
             ex.getMessage();
-            return -1;
+            return VALIDATE_COURSE_ID_EXCEPTION;
         }
         System.out.println("Incorrect Course Id");
-        return 0;
+        return VALIDATE_COURSE_ID_INVALID;
     }
 
     @Override
@@ -163,7 +179,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
             ResultSet set = this.gradingPersistence.fetchPreviousGrades(courseId, studentId, quizNumber);
             if (set != null) {
                 while (set.next()) {
-                    attempt = set.getInt(1);
+                    attempt = set.getInt(QUIZ_QUESTIONS_PARAMETER_INDEX_1);
                 }
             }
         } catch (SQLException ex) {
@@ -188,7 +204,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     public boolean updateGrades(String courseId, String studentId, String quizNumber, double grades, int attempt, Timestamp lastAttemptTimestamp) {
         boolean result = false;
         try {
-            if (attempt == 0) {
+            if (attempt == QUIZ_NOT_ATTEMPTED) {
                 attempt += 1;
                 result = gradingPersistence.addStudentGrades(studentId, quizNumber, courseId, grades, attempt, lastAttemptTimestamp);
             } else {
@@ -209,10 +225,10 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
         double correct = 0.0;
         for (QuizQuestions question : lstQuestions) {
             if (question.Answer.equalsIgnoreCase(question.Solution)) {
-                correct += 1.0;
+                correct += POINT_FOR_CORRECT_ANS;
             }
         }
-        grade = (correct / total) * 100.00;
+        grade = (correct / total) * PERCENTAGE_LIMIT;
         return grade;
     }
 
@@ -236,16 +252,16 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
         try {
             ResultSet set = gradingPersistence.grades(studentId);
             while (set.next()) {
-                String courseId = set.getString(1);
-                String quizId = set.getString(2);
-                String quizGrade = set.getString(3);
-                String attempt = set.getString(4);
-                String lastAttempt = set.getString(5);
+                String courseId = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_1);
+                String quizId = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_2);
+                String quizGrade = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_3);
+                String attempt = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_4);
+                String lastAttempt = set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_5);
                 ViewGrades viewGrades = new ViewGrades(courseId, quizId, quizGrade, attempt, lastAttempt);
                 grades.add(viewGrades);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
         return grades;
     }

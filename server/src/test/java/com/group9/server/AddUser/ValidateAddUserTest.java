@@ -7,16 +7,14 @@ import org.junit.jupiter.api.Test;
 class ValidateAddUserTest {
 
     @Test
-    void invalid_input() {
+    void invalidInput() {
         ValidateAddUser validateAddUser = new ValidateAddUser();
-        Assertions.assertEquals("False",
-                validateAddUser.validateInput("24","un","u9","Faculty"));
+        Assertions.assertFalse(validateAddUser.validateInput("24","un","u9","Faculty"));
     }
 
     @Test
-    void valid_input() {
+    void validInput() {
         ValidateAddUser validateAddUser = new ValidateAddUser();
-        Assertions.assertEquals("true",
-                validateAddUser.validateInput("1","unpatel22","utkarshp","2"));
+        Assertions.assertTrue(validateAddUser.validateInput("1","unpatel22","utkarshp","2"));
     }
 }

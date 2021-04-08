@@ -19,6 +19,9 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 public class ServerApplication implements CommandLineRunner {
+
+    private static final String BEAN_APP_HOME = "appHome";
+
     String userType;
     IUserAuthLogic authLogic;
     IDashboard userDashboard;
@@ -34,7 +37,7 @@ public class ServerApplication implements CommandLineRunner {
     public void run(String[] args) throws SQLException {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(HomePageConfiguration.class);
         authLogic = ctx.getBean(UserAuthenticationLogic.class);
-        homePage = ctx.getBean("appHome", IHomePage.class);
+        homePage = ctx.getBean(BEAN_APP_HOME, IHomePage.class);
         database = ctx.getBean(SingletonDatabase.class);
         database = database.getInstance();
         connection = database.getConnection(ctx.getBean(DatabaseConfig.class));
@@ -51,5 +54,6 @@ public class ServerApplication implements CommandLineRunner {
         }
         ctx.close();
         connection.close();
+        database.closeConnection();
     }
 }
