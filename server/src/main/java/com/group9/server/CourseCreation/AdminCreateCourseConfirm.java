@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AdminCreateCourseConfirm implements InputValidator {
 
-    final String CONDITION = "^\\s*([1-2])\\s*$";
+    private static final String CONDITION = "^\\s*([1-2])\\s*$";
     String regex;
 
     public AdminCreateCourseConfirm() {

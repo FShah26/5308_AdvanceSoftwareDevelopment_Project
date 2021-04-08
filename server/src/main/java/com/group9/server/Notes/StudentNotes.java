@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class StudentNotes implements IStudentNotes {
     private static final int ADD_NOTES_OPTION = 1;
     private static final int VIEW_NOTES_OPTION = 2;
+    private static final int NOT_NULL_CHECKER = 0;
     INotesLogic notesLogic;
     Scanner scanner;
 
@@ -21,7 +22,7 @@ public class StudentNotes implements IStudentNotes {
         NotesList list = notesLogic.viewNotes(studentId, courseId);
 
         System.out.println("Notes for course ID: " + courseId);
-        if (list.notes.size() == 0) {
+        if (list.notes.size() == NOT_NULL_CHECKER) {
             System.out.println("Looks like you don't have any notes for this course");
         } else {
             for (String note : list.notes) {

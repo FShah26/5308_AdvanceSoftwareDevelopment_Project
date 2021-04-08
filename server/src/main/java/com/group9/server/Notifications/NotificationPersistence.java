@@ -11,7 +11,8 @@ import java.sql.SQLException;
 
 @Component
 public class NotificationPersistence implements INotificationPersistence {
-    final String FETCH_USER_NOTIFICATION = "{call fetchUserNotifications(?)}";
+    private static final String FETCH_USER_NOTIFICATION = "{call fetchUserNotifications(?)}";
+    private static final int USER = 1;
     Connection connection;
 
     public NotificationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -22,7 +23,7 @@ public class NotificationPersistence implements INotificationPersistence {
     @Override
     public ResultSet fetchNotificationsFromDatabase(String user) throws SQLException {
         CallableStatement statement = connection.prepareCall(FETCH_USER_NOTIFICATION);
-        statement.setString(1, user);
+        statement.setString(USER, user);
         return statement.executeQuery();
     }
 }
