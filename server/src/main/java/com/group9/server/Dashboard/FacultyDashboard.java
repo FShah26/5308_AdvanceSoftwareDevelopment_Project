@@ -12,8 +12,16 @@ import static java.lang.System.out;
 
 @Component
 public class FacultyDashboard implements IDashboard {
+    private static final String VIEW_NOTIFICATION ="1";
+    private static final String MANAGE_LECTURE ="2";
+    private static final String FACULTY_ANNOUNCEMENT ="3";
+    private static final String MANAGE_MEETING ="4";
+    private static final String FEEDBACK ="5";
+    private static final String QUIZ ="6";
+    private static final int SYSTEM_EXIT =0;
+
     private final String role;
-    InputValidator facultyValidator;
+    IInputValidator facultyValidator;
     IExecuteAction feedback;
     IExecuteAction quiz;
     IExecuteAction manageLecture;
@@ -23,7 +31,7 @@ public class FacultyDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public FacultyDashboard(InputValidator facultyValidator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
+    public FacultyDashboard(IInputValidator facultyValidator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
         this.facultyValidator = facultyValidator;
         this.feedback = feedback;
         this.viewUserNotifications = viewUserNotifications;
@@ -32,12 +40,12 @@ public class FacultyDashboard implements IDashboard {
         this.quiz = quiz;
         this.manageMeeting = manageMeeting;
         this.role = UserConstants.FACULTY;
-        action.put("1", this.viewUserNotifications);
-        action.put("2", this.manageLecture);
-        action.put("3", this.facultyAnnouncement);
-        action.put("4", this.manageMeeting);
-        action.put("5", this.feedback);
-        action.put("6", this.quiz);
+        action.put(VIEW_NOTIFICATION, this.viewUserNotifications);
+        action.put(MANAGE_LECTURE, this.manageLecture);
+        action.put(FACULTY_ANNOUNCEMENT, this.facultyAnnouncement);
+        action.put(MANAGE_MEETING, this.manageMeeting);
+        action.put(FEEDBACK, this.feedback);
+        action.put(QUIZ, this.quiz);
     }
 
     @Override
@@ -74,7 +82,7 @@ public class FacultyDashboard implements IDashboard {
             if (null == dashboardAction) {
                 out.println("Logging out...");
                 out.println("Logged out successfully...");
-                System.exit(0);
+                System.exit(SYSTEM_EXIT);
             } else {
                 dashboardAction.execute(this.role, this.userName);
             }

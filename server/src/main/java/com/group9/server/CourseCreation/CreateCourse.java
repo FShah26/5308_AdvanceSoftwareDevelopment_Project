@@ -1,7 +1,7 @@
 package com.group9.server.CourseCreation;
 
 import com.group9.server.Common.IUserConfirmation;
-import com.group9.server.Dashboard.InputValidator;
+import com.group9.server.Dashboard.IInputValidator;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -11,7 +11,7 @@ import static java.lang.System.out;
 @Component
 public class CreateCourse implements ICreateCourse {
 
-    InputValidator adminCreateCourseConfirm;
+    IInputValidator adminCreateCourseConfirm;
     IUserConfirmation userConfirmation;
     ICourseLogic courseService;
     String courseId;
@@ -21,7 +21,7 @@ public class CreateCourse implements ICreateCourse {
     String courseDepartment;
     Scanner scanner;
 
-    public CreateCourse(InputValidator adminCreateCourseConfirm, ICourseLogic courseService, IUserConfirmation userConfirmation) {
+    public CreateCourse(IInputValidator adminCreateCourseConfirm, ICourseLogic courseService, IUserConfirmation userConfirmation) {
         this.adminCreateCourseConfirm = adminCreateCourseConfirm;
         this.courseService = courseService;
         this.userConfirmation = userConfirmation;
