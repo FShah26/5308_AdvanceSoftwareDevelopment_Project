@@ -13,29 +13,35 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
+    private static final String CREATE_COURSE ="1";
+    private static final String ADD_USER ="2";
+    private static final String ENROLL_STUDENT ="3";
+    private static final String ANNOUNCEMENT ="4";
+    private static final String LOGOUT ="5";
     String userName;
     String userRole;
 
-    InputValidator inputValidator;
+    IInputValidator IInputValidator;
     IExecuteAction createCourse;
     IExecuteAction announcementInput;
     IExecuteAction addUser;
     IExecuteAction enrollStudent;
 
+
     Map<String, IExecuteAction> action = new HashMap<>();
 
     public AdminDashboard(IExecuteAction announcementInput, IExecuteAction createCourse, IExecuteAction addUser, IExecuteAction enrollStudent) {
-        this.inputValidator = new AdminInputValidator();
+        this.IInputValidator = new AdminIInputValidator();
         this.userRole = UserConstants.ADMIN;
         this.announcementInput = announcementInput;
         this.createCourse = createCourse;
         this.addUser = addUser;
         this.enrollStudent = enrollStudent;
-        action.put("1", this.createCourse);
-        action.put("2", this.addUser);
-        action.put("3", this.enrollStudent);
-        action.put("4", this.announcementInput);
-        action.put("5", null);
+        action.put(CREATE_COURSE, this.createCourse);
+        action.put(ADD_USER, this.addUser);
+        action.put(ENROLL_STUDENT, this.enrollStudent);
+        action.put(ANNOUNCEMENT, this.announcementInput);
+        action.put(LOGOUT, null);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class AdminDashboard implements IDashboard {
     }
 
     public void checkInput(String selection) {
-        if (this.inputValidator.validate(selection)) {
+        if (this.IInputValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
                 //logout

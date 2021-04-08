@@ -12,8 +12,18 @@ import static java.lang.System.out;
 
 @Component
 public class StudentDashboard implements IDashboard {
+
+    private static final String VIEW_NOTIFICATION = "1";
+    private static final String UPCOMING_LECTURE = "2";
+    private static final String VIEW_ANNOUNCEMENT = "3";
+    private static final String NOTES = "4";
+    private static final String REQUEST_MEETING = "5";
+    private static final String FEEDBACK = "6";
+    private static final String QUIZ = "7";
+    private static final String LOGOUT = "8";
+    
     private final String role;
-    InputValidator studentValidator;
+    IInputValidator studentValidator;
     IExecuteAction feedback;
     IExecuteAction viewAnnouncements;
     IExecuteAction viewUserNotifications;
@@ -24,7 +34,7 @@ public class StudentDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public StudentDashboard(InputValidator studentValidator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback, IExecuteAction quizAssessment) {
+    public StudentDashboard(IInputValidator studentValidator, IExecuteAction viewUserNotifications, IExecuteAction upcomingLectureDisplay, IExecuteAction viewAnnouncements, IExecuteAction studentNotes, IExecuteAction requestMeeting, IExecuteAction feedback, IExecuteAction quizAssessment) {
         this.role = UserConstants.STUDENT;
         this.studentValidator = studentValidator;
         this.feedback = feedback;
@@ -34,14 +44,14 @@ public class StudentDashboard implements IDashboard {
         this.studentNotes = studentNotes;
         this.requestMeeting = requestMeeting;
         this.quizAssessment = quizAssessment;
-        action.put("1", this.viewUserNotifications);
-        action.put("2", this.upcomingLectureDisplay);
-        action.put("3", this.viewAnnouncements);
-        action.put("4", this.studentNotes);
-        action.put("5", this.requestMeeting);
-        action.put("6", this.feedback);
-        action.put("7", this.quizAssessment);
-        action.put("8", null);
+        action.put(VIEW_NOTIFICATION, this.viewUserNotifications);
+        action.put(UPCOMING_LECTURE, this.upcomingLectureDisplay);
+        action.put(VIEW_ANNOUNCEMENT, this.viewAnnouncements);
+        action.put(NOTES, this.studentNotes);
+        action.put(REQUEST_MEETING, this.requestMeeting);
+        action.put(FEEDBACK, this.feedback);
+        action.put(QUIZ, this.quizAssessment);
+        action.put(LOGOUT, null);
     }
 
     @Override

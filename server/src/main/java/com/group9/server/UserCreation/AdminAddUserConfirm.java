@@ -1,8 +1,8 @@
 package com.group9.server.UserCreation;
 
-import com.group9.server.Dashboard.InputValidator;
+import com.group9.server.Dashboard.IInputValidator;
 
-public class AdminAddUserConfirm implements InputValidator {
+public class AdminAddUserConfirm implements IInputValidator {
 
     String regex;
 
