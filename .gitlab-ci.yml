@@ -20,8 +20,6 @@ build:
       - server/target
   tags:
     - ugrad
-  except:
-    - master
 
 test:
   stage: testdbdev
@@ -36,8 +34,7 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
-  except:
-    - master
+
 
 ## Only on master ### Use 'production' DBConfig
 build:
