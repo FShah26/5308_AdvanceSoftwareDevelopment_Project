@@ -16,7 +16,7 @@ builddbdev:
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Pdev
+    - mvn $MAVEN_CLI_OP package -Pdev
   artifacts:
     paths:
       - server/target
@@ -54,7 +54,7 @@ builddbdprod:
   tags:
     - ugrad
   only:
-    - jar-test
+    - master
 
 testdbprod:
   stage: testdbprod
@@ -70,7 +70,7 @@ testdbprod:
   tags:
     - ugrad
   only:
-    - jar-test
+    - master
 
 # Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
 deploy:
@@ -89,7 +89,7 @@ deploy:
   tags:
     - ugrad
   only:
-    - jar-test
+    - master
 
 ### All Other Branches ### Use 'test' DBConfig
 builddbtest:
@@ -97,7 +97,7 @@ builddbtest:
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Ptest
+    - mvn $MAVEN_CLI_OP package -Ptest
   artifacts:
     paths:
       - server/target
@@ -106,7 +106,6 @@ builddbtest:
   except:
     - develop
     - master
-    - jar-test
 
 testdbtest:
   stage: testdbtest
@@ -124,4 +123,3 @@ testdbtest:
   except:
     - develop
     - master
-    - jar-test
