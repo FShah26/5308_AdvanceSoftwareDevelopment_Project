@@ -4,8 +4,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ValidateAnnouncementMade implements IValidateAnnouncementMade {
+    private static final int CONDITION = 2000;
     @Override
     public Boolean validateAnnouncement(String message) {
-        return message.length() < 2000;
+        return message.length() < CONDITION;
     }
 }

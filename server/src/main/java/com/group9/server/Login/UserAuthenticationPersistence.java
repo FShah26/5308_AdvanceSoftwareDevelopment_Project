@@ -12,6 +12,13 @@ import java.sql.Types;
 @Component
 public class UserAuthenticationPersistence implements IUserAuthPersistence {
 
+    private static final String VERIFY_USER_CREDENTIAL = "{call VerifyUserCredentials(?, ?, ?, ?)}";
+    private static final int USER_NAME = 1;
+    private static final int PASSWORD = 2;
+    private static final int USER_ROLE = 3;
+    private static final int OUTPUT = 4;
+    private static final String FETCH_OUTPUT_VALUE = "isValid";
+
     Connection connection;
 
     public UserAuthenticationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
@@ -21,18 +28,18 @@ public class UserAuthenticationPersistence implements IUserAuthPersistence {
 
     @Override
     public boolean authorizeUser(String uname, String pass, String role) {
-        Boolean output = false;
-        final String VERIFY_CREDENTIALS = "{call VerifyUserCredentials(?, ?, ?, ?)}";
+        Boolean output;
+        final String VERIFY_CREDENTIALS = VERIFY_USER_CREDENTIAL;
         try (
                 CallableStatement statement = connection.prepareCall(VERIFY_CREDENTIALS)
         ) {
 
-            statement.registerOutParameter(4, Types.VARCHAR);
-            statement.setString(1, uname);
-            statement.setString(2, pass);
-            statement.setString(3, role);
+            statement.registerOutParameter(OUTPUT, Types.VARCHAR);
+            statement.setString(USER_NAME, uname);
+            statement.setString(PASSWORD, pass);
+            statement.setString(USER_ROLE, role);
             statement.execute();
-            output = statement.getBoolean("isValid");
+            output = statement.getBoolean(FETCH_OUTPUT_VALUE);
         } catch (SQLException ex) {
             ex.printStackTrace();
             output = false;

@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 @Component
 public class Feedback implements IFeedback {
+
+    private static final int FEEDBACK_SIZE = 0;
     IFeedbackLogic feedbackLogic;
 
     public Feedback(IFeedbackLogic feedbackLogic) {
@@ -18,7 +20,7 @@ public class Feedback implements IFeedback {
     public void viewFeedback(String facultyId) {
         FeedbackList list = feedbackLogic.viewFeedback(facultyId);
 
-        if (list.feedback.size() == 0) {
+        if (list.feedback.size() == FEEDBACK_SIZE) {
             System.out.println("Looks like you don't have any feedback");
         } else {
             ArrayList<String> fb = list.feedback;

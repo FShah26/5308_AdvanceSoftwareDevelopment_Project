@@ -2,11 +2,11 @@ package com.group9.server.Dashboard;
 
 public class AdminInputValidator implements InputValidator {
 
-    final String CONDITION = "^\\s*([1-4])\\s*$";
+    static final String VALIDATION = "^\\s*([1-4])\\s*$";
     String regex;
 
     public AdminInputValidator() {
-        this.regex = "^\\s*([1-4])\\s*$";
+        this.regex = VALIDATION;
     }
 
     @Override

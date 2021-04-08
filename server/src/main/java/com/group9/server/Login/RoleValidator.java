@@ -4,10 +4,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RoleValidator implements IUserInputValidator {
+    private static final String VALIDATION = "^\\s*([1-3]|[*])\\s*$";
     String regex;
 
     public RoleValidator() {
-        this.regex = "^\\s*([1-3]|[*])\\s*$";
+        this.regex = VALIDATION;
     }
 
     @Override

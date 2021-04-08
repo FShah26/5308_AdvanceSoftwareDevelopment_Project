@@ -8,6 +8,8 @@ import java.sql.SQLException;
 @Component
 public class FeedbackLogic implements IFeedbackLogic {
 
+    private static final int STUDENT_NAME = 1;
+    private static final int FEEDBACK = 2;
     IFeedbackPersistence persistence;
 
     public FeedbackLogic(IFeedbackPersistence persistence) {
@@ -23,8 +25,8 @@ public class FeedbackLogic implements IFeedbackLogic {
 
             if (set != null) {
                 while (set.next()) {
-                    feedback.feedback.add(set.getString(1));
-                    feedback.feedback.add(set.getString(2));
+                    feedback.feedback.add(set.getString(STUDENT_NAME));
+                    feedback.feedback.add(set.getString(FEEDBACK));
                 }
             }
             return feedback;

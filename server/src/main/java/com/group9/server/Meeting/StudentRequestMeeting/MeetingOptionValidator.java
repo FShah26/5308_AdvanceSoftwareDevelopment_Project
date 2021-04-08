@@ -6,10 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MeetingOptionValidator implements IUserInputValidator {
 
+    private static final String OPTION_VALIDATE = "^\\s*([1-2]|\\*)\\s*$";
     String regex;
 
     public MeetingOptionValidator() {
-        this.regex = "^\\s*([1-2]|\\*)\\s*$";
+        this.regex = OPTION_VALIDATE;
     }
 
     @Override

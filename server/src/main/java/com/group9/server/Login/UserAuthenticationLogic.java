@@ -12,6 +12,8 @@ import java.util.Scanner;
 public class UserAuthenticationLogic implements IUserAuthLogic {
     IUserAuthPersistence userAuthPersistence;
     IUserDashboardFactory dashboardFactory;
+    private static final int USER_NAME = 0;
+    private static final int USER_PASSWORD = 1;
     private String username;
     private String password;
     private boolean authStatus = false;
@@ -24,7 +26,7 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     @Override
     public IDashboard initiateLogin(String userRole) {
         List<String> credentials = getUserCredentials();
-        return validateUserCredentials(credentials.get(0), credentials.get(1), userRole);
+        return validateUserCredentials(credentials.get(USER_NAME), credentials.get(USER_PASSWORD), userRole);
     }
 
     @Override

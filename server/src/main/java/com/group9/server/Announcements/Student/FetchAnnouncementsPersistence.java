@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @Component
 public class FetchAnnouncementsPersistence implements IFetchAnnouncementsFromPersistence {
-    final String FETCH_ANNOUNCEMENT = "{call fetchAnnouncements()}";
+    private static final String FETCH_ANNOUNCEMENT = "{call fetchAnnouncements()}";
     Connection connection;
 
     public FetchAnnouncementsPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {

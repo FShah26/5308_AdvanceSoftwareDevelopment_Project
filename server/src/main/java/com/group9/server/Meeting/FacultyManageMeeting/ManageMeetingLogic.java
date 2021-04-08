@@ -10,22 +10,31 @@ import java.util.ArrayList;
 @Component
 public class ManageMeetingLogic implements IManageMeetingLogic {
 
-    IUserInputValidator managemeetingvalidate;
+    static final String OPTION_VALIDATE = "[0-9]+";
+    static final String APPROVE_VALIDATION = "Approve";
+    static final String REJECT_VALIDATION = "Reject";
+    static final int MEETING_ID = 1;
+    static final int RAISED_BY = 2;
+    static final int RAISED_FOR = 3;
+    static final int RAISED_ON = 4;
+    static final int STATUS = 5;
+    static final int REASON = 6;
+    IUserInputValidator manageMeetingValidate;
     IManageMeetingPersistence meetingPersistence;
 
     public ManageMeetingLogic(IManageMeetingPersistence meetingPersistence) {
-        this.managemeetingvalidate = new ManageMeetingOptionValidator();
+        this.manageMeetingValidate = new ManageMeetingOptionValidator();
         this.meetingPersistence = meetingPersistence;
     }
 
     @Override
     public Boolean meetingValidation(String selectedOption) {
-        return this.managemeetingvalidate.validate(selectedOption);
+        return this.manageMeetingValidate.validate(selectedOption);
     }
 
     @Override
     public Boolean validateInput(String selection, String decision) {
-        return selection.matches("[0-9]+") && selection.length() > 0 && (decision.equals("Approve") || decision.equals("Reject"));
+        return selection.matches(OPTION_VALIDATE) && selection.length() > 0 && (decision.equals(APPROVE_VALIDATION) || decision.equals(REJECT_VALIDATION));
     }
 
     @Override
@@ -34,12 +43,12 @@ public class ManageMeetingLogic implements IManageMeetingLogic {
         try {
             ResultSet set = meetingPersistence.meetingLog(facultyId, selection);
             while (set.next()) {
-                String meetingId = set.getString(1);
-                String raisedBy = set.getString(2);
-                String raisedFor = set.getString(3);
-                String raisedOn = set.getString(4);
-                String status = set.getString(5);
-                String reason = set.getString(6);
+                String meetingId = set.getString(MEETING_ID);
+                String raisedBy = set.getString(RAISED_BY);
+                String raisedFor = set.getString(RAISED_FOR);
+                String raisedOn = set.getString(RAISED_ON);
+                String status = set.getString(STATUS);
+                String reason = set.getString(REASON);
                 ManageMeetingDetails meetingDetails = new ManageMeetingDetails(meetingId, raisedBy, raisedFor, raisedOn, status, reason);
                 details.add(meetingDetails);
             }
