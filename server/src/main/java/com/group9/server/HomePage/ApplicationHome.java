@@ -3,7 +3,6 @@ package com.group9.server.HomePage;
 import com.group9.server.Login.IUserInputValidator;
 import com.group9.server.Login.RoleValidator;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 
 import static java.lang.System.out;

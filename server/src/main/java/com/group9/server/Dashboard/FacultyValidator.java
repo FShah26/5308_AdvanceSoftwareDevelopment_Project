@@ -3,9 +3,9 @@ package com.group9.server.Dashboard;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FacultyValidator implements InputValidator {
+public class FacultyValidator implements IInputValidator {
 
-    static final String VALIDATION = "^\\s*([1-6])\\s*$";
+    private static final String VALIDATION = "^\\s*([1-7])\\s*$";
     String regex;
 
     public FacultyValidator() {

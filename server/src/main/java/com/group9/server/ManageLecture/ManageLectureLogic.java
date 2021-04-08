@@ -75,7 +75,7 @@ public class ManageLectureLogic implements IManageLectureLogic {
 
     @Override
     public boolean scheduleLecture(String facultyId, String courseId, String topic, String lecDate) {
-        boolean result = false;
+        boolean result;
         try {
             if (validateCourseId(facultyId, courseId) && dateValidator.validate(lecDate)) {
                 SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
@@ -152,13 +152,13 @@ public class ManageLectureLogic implements IManageLectureLogic {
 
 
     public boolean validateCourseId(String facultyId, String courseId) {
-        ArrayList<String> lstFacultyCourse = new ArrayList<String>();
+        ArrayList<String> listFacultyCourse = new ArrayList<String>();
         try {
             ResultSet set = manageLecturePersistence.getFacultyCourses(facultyId);
 
             if (set != null) {
                 while (set.next()) {
-                    lstFacultyCourse.add(set.getString(COLUMN_INDEX_1));
+                    listFacultyCourse.add(set.getString(COLUMN_INDEX_1));
                 }
             }
 
@@ -167,7 +167,7 @@ public class ManageLectureLogic implements IManageLectureLogic {
             ex.getMessage();
             return false;
         }
-        if (lstFacultyCourse.contains(courseId)) {
+        if (listFacultyCourse.contains(courseId)) {
             return true;
         }
         System.out.println("Incorrect Course Id");
@@ -175,15 +175,15 @@ public class ManageLectureLogic implements IManageLectureLogic {
     }
 
     public boolean doesCourseExist(String facultyId, String courseId, Date lecDate) {
-        boolean result = false;
-        ArrayList<Lecture> lstFacultyLectures = new ArrayList<Lecture>();
+        boolean result;
+        ArrayList<Lecture> listFacultyLectures = new ArrayList<Lecture>();
         try {
             ResultSet set = manageLecturePersistence.getAllLectures(facultyId);
             if (set == null) {
                 result = false;
             } else {
-                lstFacultyLectures = getListFromResultSet(set);
-                result = lstFacultyLectures.stream().anyMatch(x -> x.courseId == courseId && x.lectureDate == lecDate);
+                listFacultyLectures = getListFromResultSet(set);
+                result = listFacultyLectures.stream().anyMatch(x -> x.courseId == courseId && x.lectureDate == lecDate);
             }
         } catch (SQLException ex) {
             System.out.println("Error validating if course exists");
@@ -194,13 +194,13 @@ public class ManageLectureLogic implements IManageLectureLogic {
 
     public boolean validateLectureId(String courseId, String lectureId) {
         boolean result = false;
-        ArrayList<Lecture> lstCourseLectures = new ArrayList<>();
+        ArrayList<Lecture> listCourseLectures = new ArrayList<>();
         try {
             ResultSet set = manageLecturePersistence.getCourseLectures(courseId);
 
             if (set != null) {
-                lstCourseLectures = getListFromResultSet(set);
-                result = lstCourseLectures.stream().anyMatch(x -> x.lectureId == parseInt(lectureId));
+                listCourseLectures = getListFromResultSet(set);
+                result = listCourseLectures.stream().anyMatch(x -> x.lectureId == parseInt(lectureId));
             }
 
         } catch (SQLException ex) {
@@ -218,14 +218,14 @@ public class ManageLectureLogic implements IManageLectureLogic {
 
     public boolean doesLectureExist(String courseId, Date lecDate) {
         boolean result = false;
-        ArrayList<Lecture> lstCourseLectures = new ArrayList<>();
+        ArrayList<Lecture> listCourseLectures = new ArrayList<>();
         try {
             ResultSet set = manageLecturePersistence.getCourseLectures(courseId);
             if (set == null) {
                 result = false;
             } else {
-                lstCourseLectures = getListFromResultSet(set);
-                result = lstCourseLectures.stream().anyMatch(x -> x.courseId.equals(courseId) && x.lectureDate == lecDate);
+                listCourseLectures = getListFromResultSet(set);
+                result = listCourseLectures.stream().anyMatch(x -> x.courseId.equals(courseId) && x.lectureDate == lecDate);
             }
         } catch (SQLException ex) {
             System.out.println("Error validating if lecture exists");
@@ -236,16 +236,16 @@ public class ManageLectureLogic implements IManageLectureLogic {
 
 
     private ArrayList<Lecture> getListFromResultSet(ResultSet set) throws SQLException {
-        ArrayList<Lecture> lstLectures = new ArrayList<>();
+        ArrayList<Lecture> listLectures = new ArrayList<>();
         while (set.next()) {
             Integer lecId = set.getInt(COLUMN_INDEX_1);
             String course = set.getString(COLUMN_INDEX_3);
             String topic = set.getString(COLUMN_INDEX_4);
             Timestamp date = set.getTimestamp(COLUMN_INDEX_5);
             Lecture lec = new Lecture(lecId, course, topic, date);
-            lstLectures.add(lec);
+            listLectures.add(lec);
         }
-        return lstLectures;
+        return listLectures;
     }
 
 

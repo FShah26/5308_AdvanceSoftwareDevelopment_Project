@@ -1,12 +1,14 @@
 package com.group9.server.Announcements.Student;
 
 import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
 public class ViewAnnouncements implements IViewAnnouncements {
+
+    private static final int USER_ID = 1;
+    private static final int ANNOUNCEMENT = 2;
     IAnnouncementList IAnnouncementList;
     IFetchAnnouncementsFromPersistence announcementsPersistence;
     ResultSet announcementResultSet;
@@ -33,8 +35,8 @@ public class ViewAnnouncements implements IViewAnnouncements {
         try {
             while (announcementResultSet.next()) {
                 ISingleAnnouncement announcement = new SingleAnnouncement();
-                announcement.setUserID(announcementResultSet.getString(1));
-                announcement.setAnnouncement(announcementResultSet.getString(2));
+                announcement.setUserId(announcementResultSet.getString(USER_ID));
+                announcement.setAnnouncement(announcementResultSet.getString(ANNOUNCEMENT));
                 IAnnouncementList.addAnnouncement(announcement);
             }
 

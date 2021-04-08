@@ -41,10 +41,10 @@ public class EnrollStudent implements IEnrollStudent {
 
     @Override
     public void execute(String userRole, String userId) {
-        String usrId = getUserId();
+        userId = getUserId();
         String courseId = getCourseId();
         String term = getTerm();
 
-        enrollStudent(usrId, courseId, term);
+        enrollStudent(userId, courseId, term);
     }
 }

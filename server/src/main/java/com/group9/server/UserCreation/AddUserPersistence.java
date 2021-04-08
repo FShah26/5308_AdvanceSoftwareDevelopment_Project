@@ -1,6 +1,6 @@
 package com.group9.server.UserCreation;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +13,16 @@ import java.sql.Types;
 public class AddUserPersistence implements IAddUserPersistence {
     final String CREATE_NEW_USER = "{call createNewUser(?, ?, ?, ?, ?)}";
     final String USER_DETAILS = "{call addUserDetails(?, ?, ?, ?, ?, ?)}";
+    private static final int ADD_USER_PARAMETER_INDEX_1 = 1;
+    private static final int ADD_USER_PARAMETER_INDEX_2 = 2;
+    private static final int ADD_USER_PARAMETER_INDEX_3 = 3;
+    private static final int ADD_USER_PARAMETER_INDEX_4 = 4;
+    private static final int ADD_USER_PARAMETER_INDEX_5 = 5;
+    private static final int ADD_USER_PARAMETER_INDEX_6 = 6;
+    private static final String RETURN_MESSAGE = "message";
     Connection connection;
 
-    public AddUserPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public AddUserPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }
@@ -27,17 +34,14 @@ public class AddUserPersistence implements IAddUserPersistence {
                 CallableStatement statement = connection.prepareCall(CREATE_NEW_USER)
         ) {
 
-            statement.registerOutParameter(5, Types.VARCHAR);
-            statement.setString(1, id);
-            statement.setString(2, userId);
-            statement.setString(3, password);
-            statement.setString(4, userType);
+            statement.registerOutParameter(ADD_USER_PARAMETER_INDEX_5, Types.VARCHAR);
+            statement.setString(ADD_USER_PARAMETER_INDEX_1, id);
+            statement.setString(ADD_USER_PARAMETER_INDEX_2, userId);
+            statement.setString(ADD_USER_PARAMETER_INDEX_3, password);
+            statement.setString(ADD_USER_PARAMETER_INDEX_4, userType);
             statement.execute();
-            output = statement.getString("message");
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output = "Error Catched";
         }
 
     }
@@ -49,20 +53,18 @@ public class AddUserPersistence implements IAddUserPersistence {
                 CallableStatement statement = connection.prepareCall(USER_DETAILS)
         ) {
 
-            statement.registerOutParameter(6, Types.VARCHAR);
-            statement.setString(1, userId);
-            statement.setString(2, userType);
-            statement.setString(3, name);
-            statement.setString(4, emailAddress);
-            statement.setString(5, department);
+            statement.registerOutParameter(ADD_USER_PARAMETER_INDEX_6, Types.VARCHAR);
+            statement.setString(ADD_USER_PARAMETER_INDEX_1, userId);
+            statement.setString(ADD_USER_PARAMETER_INDEX_2, userType);
+            statement.setString(ADD_USER_PARAMETER_INDEX_3, name);
+            statement.setString(ADD_USER_PARAMETER_INDEX_4, emailAddress);
+            statement.setString(ADD_USER_PARAMETER_INDEX_5, department);
             statement.execute();
-            output = statement.getString("msg");
-            statement.close();
+            output = statement.getString(RETURN_MESSAGE);
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output = "Error Catched";
+            output = "Error Caught";
         }
-
         System.out.println(output);
 
     }

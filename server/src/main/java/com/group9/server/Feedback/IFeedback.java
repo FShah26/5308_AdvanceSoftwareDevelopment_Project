@@ -11,5 +11,5 @@ public interface IFeedback extends IExecuteAction {
 
     String getFeedbackText();
 
-    String getFacultyID();
+    String getFacultyId();
 }

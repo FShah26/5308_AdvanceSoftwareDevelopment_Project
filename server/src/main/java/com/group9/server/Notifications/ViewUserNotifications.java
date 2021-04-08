@@ -8,6 +8,8 @@ import java.sql.SQLException;
 @Component
 public class ViewUserNotifications implements IViewUserNotifications {
     INotificationPersistence persistence;
+    private static final int FROM = 1;
+    private static final int MESSAGE = 1;
 
     public ViewUserNotifications(INotificationPersistence persistence) {
         this.persistence = persistence;
@@ -24,8 +26,8 @@ public class ViewUserNotifications implements IViewUserNotifications {
 
             System.out.println("============== Notifications ============== ");
             while (notificationsSet.next()) {
-                String from = notificationsSet.getString(1);
-                String message = notificationsSet.getString(2);
+                String from = notificationsSet.getString(FROM);
+                String message = notificationsSet.getString(MESSAGE);
                 printNotification(from, message);
             }
 

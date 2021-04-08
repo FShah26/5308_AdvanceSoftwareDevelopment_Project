@@ -1,12 +1,15 @@
 package com.group9.server.Dashboard;
 
-public class AdminInputValidator implements InputValidator {
+import org.springframework.stereotype.Component;
 
-    final String CONDITION = "^\\s*([1-4])\\s*$";
+@Component
+public class AdminInputValidator implements IInputValidator {
+
+    private static final String ADMIN_INPUT_VALIDATION = "^\\s*([1-5])\\s*$";
     String regex;
 
     public AdminInputValidator() {
-        this.regex = "^\\s*([1-4])\\s*$";
+        this.regex = ADMIN_INPUT_VALIDATION;
     }
 
     @Override

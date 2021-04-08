@@ -11,5 +11,9 @@ public interface IRequestMeeting extends IExecuteAction {
 
     void manageMeetingAction(String selection);
 
+    void raiseMeeting(String Student);
+
+    void viewMeeting(String Student);
+
     void selectCourse(int select);
 }

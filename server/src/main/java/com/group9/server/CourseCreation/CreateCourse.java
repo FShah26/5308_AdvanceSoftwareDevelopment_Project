@@ -1,17 +1,15 @@
 package com.group9.server.CourseCreation;
 
 import com.group9.server.Common.IUserConfirmation;
-import com.group9.server.Dashboard.InputValidator;
+import com.group9.server.Dashboard.IInputValidator;
 import org.springframework.stereotype.Component;
-
 import java.util.Scanner;
 
-import static java.lang.System.out;
 
 @Component
 public class CreateCourse implements ICreateCourse {
 
-    InputValidator adminCreateCourseConfirm;
+    IInputValidator adminCreateCourseConfirm;
     IUserConfirmation userConfirmation;
     ICourseLogic courseService;
     String courseId;
@@ -21,7 +19,7 @@ public class CreateCourse implements ICreateCourse {
     String courseDepartment;
     Scanner scanner;
 
-    public CreateCourse(InputValidator adminCreateCourseConfirm, ICourseLogic courseService, IUserConfirmation userConfirmation) {
+    public CreateCourse(IInputValidator adminCreateCourseConfirm, ICourseLogic courseService, IUserConfirmation userConfirmation) {
         this.adminCreateCourseConfirm = adminCreateCourseConfirm;
         this.courseService = courseService;
         this.userConfirmation = userConfirmation;
@@ -29,19 +27,19 @@ public class CreateCourse implements ICreateCourse {
 
     @Override
     public void creation() {
-        out.println("************************************************");
-        out.println("      ENTER DETAILS TO CREATE NEW COURSE        ");
-        out.println("************************************************");
+        System.out.println("************************************************");
+        System.out.println("      ENTER DETAILS TO CREATE NEW COURSE        ");
+        System.out.println("************************************************");
         scanner = new Scanner(System.in);
-        out.print("Enter Course ID : ");
+        System.out.print("Enter Course ID : ");
         courseId = scanner.nextLine();
-        out.print("Enter Course Name : ");
+        System.out.print("Enter Course Name : ");
         courseName = scanner.nextLine();
-        out.print("Enter Course Credit : ");
+        System.out.print("Enter Course Credit : ");
         courseCredit = scanner.nextLine();
-        out.print("Enter Faculty Moderator ID : ");
+        System.out.print("Enter Faculty Moderator ID : ");
         courseFaculty = scanner.nextLine();
-        out.print("DEPARTMENT : ");
+        System.out.print("DEPARTMENT : ");
         courseDepartment = scanner.nextLine();
         validateInput();
     }

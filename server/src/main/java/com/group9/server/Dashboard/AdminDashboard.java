@@ -13,43 +13,51 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
+    private static final String CREATE_COURSE ="1";
+    private static final String ADD_USER ="2";
+    private static final String ENROLL_STUDENT ="3";
+    private static final String ANNOUNCEMENT ="4";
+    private static final String LOGOUT ="5";
+    private static final int SYSTEM_EXIT = 0;
+
     String userName;
     String userRole;
 
-    InputValidator inputValidator;
+    IInputValidator IInputValidator;
     IExecuteAction createCourse;
     IExecuteAction announcementInput;
     IExecuteAction addUser;
     IExecuteAction enrollStudent;
 
+
     Map<String, IExecuteAction> action = new HashMap<>();
 
     public AdminDashboard(IExecuteAction announcementInput, IExecuteAction createCourse, IExecuteAction addUser, IExecuteAction enrollStudent) {
-        this.inputValidator = new AdminInputValidator();
+        this.IInputValidator = new AdminInputValidator();
         this.userRole = UserConstants.ADMIN;
         this.announcementInput = announcementInput;
         this.createCourse = createCourse;
         this.addUser = addUser;
         this.enrollStudent = enrollStudent;
-        action.put("1", this.createCourse);
-        action.put("2", this.addUser);
-        action.put("3", this.enrollStudent);
-        action.put("4", this.announcementInput);
-        action.put("5", null);
+        action.put(CREATE_COURSE, this.createCourse);
+        action.put(ADD_USER, this.addUser);
+        action.put(ENROLL_STUDENT, this.enrollStudent);
+        action.put(ANNOUNCEMENT, this.announcementInput);
+        action.put(LOGOUT, null);
     }
 
     @Override
     public void showDashboard() {
-        out.println("************************************************");
-        out.println("                 ADMIN DASHBOARD                ");
-        out.println("************************************************");
+        System.out.println("************************************************");
+        System.out.println("                 ADMIN DASHBOARD                ");
+        System.out.println("************************************************");
 
-        out.println("Press 1 --> Enter Course and Assign Faculty.");
-        out.println("Press 2 --> Add New User.");
-        out.println("Press 3 --> Student Course Enrollment.");
-        out.println("Press 4 --> Making General Announcement.");
-        out.println("Press 5 --> To Log Out.");
-        out.println();
+        System.out.println("Press 1 --> Enter Course and Assign Faculty.");
+        System.out.println("Press 2 --> Add New User.");
+        System.out.println("Press 3 --> Student Course Enrollment.");
+        System.out.println("Press 4 --> Making General Announcement.");
+        System.out.println("Press 5 --> To Log Out.");
+        System.out.println();
         selectMenu();
     }
 
@@ -58,25 +66,32 @@ public class AdminDashboard implements IDashboard {
         this.userName = userName;
     }
 
+    @Override
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
+    @Override
     public void checkInput(String selection) {
-        if (this.inputValidator.validate(selection)) {
+        if (this.IInputValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
-                //logout
+                out.println("Logging out...");
+                out.println("Logged out successfully...");
+                System.exit(SYSTEM_EXIT);
             } else {
                 dashboardAction.execute(this.userRole, this.userName);
             }
-
+            showDashboard();
+        } else {
+            displayInvalidMenuOptionMsg();
+            selectMenu();
         }
-        showDashboard();
     }
 
+    @Override
     public void displayInvalidMenuOptionMsg() {
         out.println("Invalid Option! Please choose a valid option from menu.");
     }

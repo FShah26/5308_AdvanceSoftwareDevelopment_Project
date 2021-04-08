@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
-import static java.lang.System.out;
 
 @Component
 public class QuizAssessment implements IQuizAssessment {
@@ -13,6 +12,10 @@ public class QuizAssessment implements IQuizAssessment {
     String studentId;
     IUserInputValidator quizAssessmentOptionValidator;
     IQuizAssessmentLogic quizAssessmentLogic;
+    private static final String ASSESS_QUIZ = "1";
+    private static final String VIEW_QUIZ = "2";
+    private static final int STATE_INVALID = 0;
+    private static final int STATE_ERROR = -1;
 
     public QuizAssessment(IQuizAssessmentLogic quizAssessmentLogic) {
         this.studentId = "";
@@ -37,16 +40,16 @@ public class QuizAssessment implements IQuizAssessment {
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
-        checkinput(menuOption);
+        checkInput(menuOption);
     }
 
-    public void checkinput(String selection) {
+    public void checkInput(String selection) {
         if (this.quizAssessmentOptionValidator.validate(selection)) {
             switch (selection) {
-                case "1":
+                case ASSESS_QUIZ:
                     assessQuiz();
                     break;
-                case "2":
+                case VIEW_QUIZ:
                     viewQuiz();
                     break;
                 default:
@@ -60,13 +63,13 @@ public class QuizAssessment implements IQuizAssessment {
     }
 
     public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from menu.");
+        System.out.println("Invalid Option! Please choose a valid option from menu.");
     }
 
     @Override
     public void assessQuiz() {
         String courseId = getValidCourseIdInput();
-        if (courseId != null) {
+        if (courseId.length() > 0) {
             if (quizAssessmentLogic.viewQuizForCourse(courseId)) {
                 String quizNo = getValidQuizNoInput(courseId);
                 quizAssessmentLogic.startQuiz(courseId, this.studentId, quizNo);
@@ -83,13 +86,13 @@ public class QuizAssessment implements IQuizAssessment {
     public String getValidCourseIdInput() {
         int state = 0;
         Scanner sc = new Scanner(System.in);
-        out.println("Enter CourseId: ");
+        System.out.println("Enter CourseId: ");
         String courseId = sc.nextLine();
-        while ((state = quizAssessmentLogic.validateCourseId(this.studentId, courseId)) == 0) {
-            out.println("Enter a valid courseID: ");
+        while ((state = quizAssessmentLogic.validateCourseId(this.studentId, courseId)) == STATE_INVALID) {
+            System.out.println("Enter a valid courseID: ");
             courseId = sc.nextLine();
         }
-        if (state == -1) {
+        if (state == STATE_ERROR) {
             return null;
         }
         return courseId;
@@ -97,10 +100,10 @@ public class QuizAssessment implements IQuizAssessment {
 
     public String getValidQuizNoInput(String courseId) {
         Scanner sc = new Scanner(System.in);
-        out.println("Enter Quiz No : ");
+        System.out.println("Enter Quiz No : ");
         String quizNo = sc.nextLine();
         while (false == quizAssessmentLogic.validateQuizNo(courseId, quizNo)) {
-            out.println("Enter a valid quiz number : ");
+            System.out.println("Enter a valid quiz number : ");
             quizNo = sc.nextLine();
         }
         return quizNo;

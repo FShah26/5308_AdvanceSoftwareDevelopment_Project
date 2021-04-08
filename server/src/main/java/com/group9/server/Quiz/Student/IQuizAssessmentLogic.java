@@ -14,7 +14,7 @@ public interface IQuizAssessmentLogic {
 
     boolean updateGrades(String courseId, String studentId, String quizNumber, double grades, int attempt, Timestamp lastAttemptTimestamp);
 
-    double computeGrades(List<QuizQuestions> lstQuestions);
+    double computeGrades(List<QuizQuestions> listQuestions);
 
     void viewGrades(String studentId);
 }

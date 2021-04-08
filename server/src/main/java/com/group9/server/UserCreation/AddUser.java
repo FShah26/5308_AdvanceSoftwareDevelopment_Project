@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 @Component
 public class AddUser implements IAddUser {
-    final String TO_PROCEED = "true";
     IAddUserLogic addUserLogic;
 
     public AddUser(IAddUserLogic addUserLogic) {
@@ -77,14 +76,14 @@ public class AddUser implements IAddUser {
     @Override
     public void execute(String userRole, String userId) {
         String id = getId();
-        String usrId = getUserId();
+        String newUserId = getUserId();
         String password = getPassword();
         String userType = getUserType();
         String name = getName();
         String email = getEmail();
         String department = getDepartment();
 
-        addUser(id, usrId, password, userType);
-        addUserDetails(usrId, userType, name, email, department);
+        addUser(id, newUserId, password, userType);
+        addUserDetails(newUserId, userType, name, email, department);
     }
 }

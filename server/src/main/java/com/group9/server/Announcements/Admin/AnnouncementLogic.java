@@ -10,6 +10,7 @@ import java.util.List;
 @Component
 public class AnnouncementLogic implements IAnnouncementLogic {
 
+    private static final int COURSE_VALUE = 1;
     IValidateAnnouncementMade validate;
     IAnnouncementPersistence persist;
 
@@ -33,6 +34,7 @@ public class AnnouncementLogic implements IAnnouncementLogic {
         return output;
     }
 
+    @Override
     public int validateCourseId(String facultyId, String courseId) {
         List<String> lstStudentCourse = new ArrayList<>();
         ResultSet set;
@@ -42,9 +44,9 @@ public class AnnouncementLogic implements IAnnouncementLogic {
                 System.out.println("No course assigned to you");
                 return -1;
             } else {
-                lstStudentCourse.add(set.getString(1));
+                lstStudentCourse.add(set.getString(COURSE_VALUE));
                 while (set.next()) {
-                    lstStudentCourse.add(set.getString(1));
+                    lstStudentCourse.add(set.getString(COURSE_VALUE));
                 }
             }
             if (lstStudentCourse.contains(courseId)) {

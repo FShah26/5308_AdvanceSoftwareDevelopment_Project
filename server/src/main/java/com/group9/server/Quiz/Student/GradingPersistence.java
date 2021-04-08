@@ -1,6 +1,6 @@
 package com.group9.server.Quiz.Student;
 
-import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.DatabaseConfig;
 import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +12,18 @@ public class GradingPersistence implements IGradingPersistence {
     final String UPDATE_QUIZ_GRADES = "{call updateQuizGrades(?, ?, ?, ?, ?, ?, ?)}";
     final String FETCH_GRADES = "{call fetchGrades(?, ?, ?)}";
     final String VIEW_GRADES = "{call viewGrades(?)}";
+
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_1 = 1;
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_2 = 2;
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_3 = 3;
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_4 = 4;
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_5 = 5;
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_6 = 6;
+    private static final int GRADING_PERSISTENCE_PARAMETER_INDEX_7 = 7;
+    private static final String GRADING_PERSISTENCE_OUT_PARAM = "isSuccessful";
     Connection connection;
 
-    public GradingPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+    public GradingPersistence(DatabaseConfig config, ISingletonDatabase database) throws SQLException {
         ISingletonDatabase databaseInstance = database.getInstance();
         connection = databaseInstance.getConnection(config);
     }
@@ -34,29 +43,29 @@ public class GradingPersistence implements IGradingPersistence {
     @Override
     public ResultSet fetchPreviousGrades(String courseId, String studentId, String quizNumber) throws SQLException {
         CallableStatement statement = connection.prepareCall(FETCH_GRADES);
-        statement.setString(1, courseId);
-        statement.setString(2, studentId);
-        statement.setString(3, quizNumber);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_1, courseId);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_2, studentId);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_3, quizNumber);
         ResultSet set = statement.executeQuery();
         return set;
     }
 
     private boolean executeGradeModification(String studentId, String quizNumber, String courseId, double grades, int attempt, Timestamp lastAttemptDate, CallableStatement statement) throws SQLException {
-        statement.registerOutParameter(7, Types.BOOLEAN);
-        statement.setString(1, quizNumber);
-        statement.setString(2, courseId);
-        statement.setString(3, studentId);
-        statement.setDouble(4, grades);
-        statement.setInt(5, attempt);
-        statement.setTimestamp(6, lastAttemptDate);
+        statement.registerOutParameter(GRADING_PERSISTENCE_PARAMETER_INDEX_7, Types.BOOLEAN);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_1, quizNumber);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_2, courseId);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_3, studentId);
+        statement.setDouble(GRADING_PERSISTENCE_PARAMETER_INDEX_4, grades);
+        statement.setInt(GRADING_PERSISTENCE_PARAMETER_INDEX_5, attempt);
+        statement.setTimestamp(GRADING_PERSISTENCE_PARAMETER_INDEX_6, lastAttemptDate);
         statement.execute();
-        return statement.getBoolean("isSuccessful");
+        return statement.getBoolean(GRADING_PERSISTENCE_OUT_PARAM);
     }
 
     @Override
     public ResultSet grades(String studentId) throws SQLException {
         CallableStatement statement = connection.prepareCall(VIEW_GRADES);
-        statement.setString(1, studentId);
+        statement.setString(GRADING_PERSISTENCE_PARAMETER_INDEX_1, studentId);
         ResultSet set = statement.executeQuery();
         return set;
     }

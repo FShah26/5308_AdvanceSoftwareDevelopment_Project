@@ -16,7 +16,7 @@ builddbdev:
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Pdev
+    - mvn $MAVEN_CLI_OP package -Pdev
   artifacts:
     paths:
       - server/target
@@ -47,7 +47,7 @@ builddbdprod:
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Pproduction
+    - mvn $MAVEN_CLI_OP package -Pproduction
   artifacts:
     paths:
       - server/target
@@ -97,7 +97,7 @@ builddbtest:
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Ptest
+    - mvn $MAVEN_CLI_OP package -Ptest
   artifacts:
     paths:
       - server/target

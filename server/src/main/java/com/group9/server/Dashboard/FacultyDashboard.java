@@ -3,17 +3,22 @@ package com.group9.server.Dashboard;
 import com.group9.server.HomePage.UserConstants;
 import com.group9.server.IExecuteAction;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import static java.lang.System.out;
-
 @Component
 public class FacultyDashboard implements IDashboard {
+    private static final String VIEW_NOTIFICATION ="1";
+    private static final String MANAGE_LECTURE ="2";
+    private static final String FACULTY_ANNOUNCEMENT ="3";
+    private static final String MANAGE_MEETING ="4";
+    private static final String FEEDBACK ="5";
+    private static final String QUIZ ="6";
+    private static final int SYSTEM_EXIT =0;
+
     private final String role;
-    InputValidator facultyValidator;
+    IInputValidator facultyValidator;
     IExecuteAction feedback;
     IExecuteAction quiz;
     IExecuteAction manageLecture;
@@ -23,7 +28,7 @@ public class FacultyDashboard implements IDashboard {
     Map<String, IExecuteAction> action = new HashMap<>();
     private String userName;
 
-    public FacultyDashboard(InputValidator facultyValidator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
+    public FacultyDashboard(IInputValidator facultyValidator, IExecuteAction viewUserNotifications, IExecuteAction manageLecture, IExecuteAction facultyAnnouncement, IExecuteAction manageMeeting, IExecuteAction feedback, IExecuteAction quiz) {
         this.facultyValidator = facultyValidator;
         this.feedback = feedback;
         this.viewUserNotifications = viewUserNotifications;
@@ -32,28 +37,28 @@ public class FacultyDashboard implements IDashboard {
         this.quiz = quiz;
         this.manageMeeting = manageMeeting;
         this.role = UserConstants.FACULTY;
-        action.put("1", this.viewUserNotifications);
-        action.put("2", this.manageLecture);
-        action.put("3", this.facultyAnnouncement);
-        action.put("4", this.manageMeeting);
-        action.put("5", this.feedback);
-        action.put("6", this.quiz);
+        action.put(VIEW_NOTIFICATION, this.viewUserNotifications);
+        action.put(MANAGE_LECTURE, this.manageLecture);
+        action.put(FACULTY_ANNOUNCEMENT, this.facultyAnnouncement);
+        action.put(MANAGE_MEETING, this.manageMeeting);
+        action.put(FEEDBACK, this.feedback);
+        action.put(QUIZ, this.quiz);
     }
 
     @Override
     public void showDashboard() {
-        out.println("************************************************");
-        out.println("               FACULTY DASHBOARD                ");
-        out.println("************************************************");
+        System.out.println("************************************************");
+        System.out.println("               FACULTY DASHBOARD                ");
+        System.out.println("************************************************");
 
-        out.println("Press 1 --> Notifications");
-        out.println("Press 2 --> Manage Lectures");
-        out.println("Press 3 --> Send Announcement");
-        out.println("Press 4 --> Manage Meetings");
-        out.println("Press 5 --> View Feedback");
-        out.println("Press 6 --> Add question for a quiz");
-        out.println("Press 7 --> Log out");
-        out.println("Choose Option:");
+        System.out.println("Press 1 --> Notifications");
+        System.out.println("Press 2 --> Manage Lectures");
+        System.out.println("Press 3 --> Send Announcement");
+        System.out.println("Press 4 --> Manage Meetings");
+        System.out.println("Press 5 --> View Feedback");
+        System.out.println("Press 6 --> Add question for a quiz");
+        System.out.println("Press 7 --> Log out");
+        System.out.println("Choose Option:");
         selectMenu();
     }
 
@@ -62,19 +67,21 @@ public class FacultyDashboard implements IDashboard {
         this.userName = userName;
     }
 
+    @Override
     public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
-        checkinput(menuOption);
+        checkInput(menuOption);
     }
 
-    public void checkinput(String selection) {
+    @Override
+    public void checkInput(String selection) {
         if (this.facultyValidator.validate(selection)) {
             IExecuteAction dashboardAction = action.get(selection);
             if (null == dashboardAction) {
-                out.println("Logging out...");
-                out.println("Logged out successfully...");
-                System.exit(0);
+                System.out.println("Logging out...");
+                System.out.println("Logged out successfully...");
+                System.exit(SYSTEM_EXIT);
             } else {
                 dashboardAction.execute(this.role, this.userName);
             }
@@ -85,7 +92,8 @@ public class FacultyDashboard implements IDashboard {
         }
     }
 
+    @Override
     public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from menu.");
+        System.out.println("Invalid Option! Please choose a valid option from menu.");
     }
 }

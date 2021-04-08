@@ -3,12 +3,9 @@ package com.group9.server.ManageLecture;
 import com.group9.server.Common.IUserConfirmation;
 import com.group9.server.Login.IUserInputValidator;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import static java.lang.System.out;
 
 @Component
 public class ManageLecture implements IManageLecture {
@@ -31,7 +28,6 @@ public class ManageLecture implements IManageLecture {
         action.put(RESCHEDULE_LECTURE_PARAMETER, new RescheduleLecture(this.manageLectureLogic));
         action.put(CANCEL_LECTURE_PARAMETER, new CancelLecture(this.manageLectureLogic));
         action.put(NULL_PARAMETER, null);
-
     }
 
     @Override
@@ -72,19 +68,16 @@ public class ManageLecture implements IManageLecture {
             manageLectureAction.getUserInputs();
             if (userConfirmation.getUserConfirmation()) {
                 if (manageLectureAction.save()) {
-                    out.println("Operation Successful");
+                    System.out.println("Operation Successful");
                 }
             }
             showManageLectureMenu(this.facultyId);
         }
-
     }
-
 
     public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from menu.");
+        System.out.println("Invalid Option! Please choose a valid option from menu.");
     }
-
 
     @Override
     public void execute(String userRole, String userId) {
