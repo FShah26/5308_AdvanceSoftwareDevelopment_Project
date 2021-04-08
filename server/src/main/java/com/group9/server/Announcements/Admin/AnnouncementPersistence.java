@@ -14,6 +14,7 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
     private static final int ANNOUNCEMENT_PARAMETER_INDEX_4 = 4;
     private static final int ANNOUNCEMENT_PARAMETER_INDEX_5 = 5;
     private static final String OUT_PARAMETER = "message";
+    private static final String ERROR_OUTPUT = "Error Catched";
     private static final String MAKE_ANNOUNCEMENT = "{call makeNewAnnouncement(?, ?, ?, ?, ?)}";
     private static final String GET_COURSES = "{call getAssignedCourses(?)}";
     Connection connection;
@@ -38,7 +39,7 @@ public class AnnouncementPersistence implements IAnnouncementPersistence {
             statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output = "Error Catched";
+            output = ERROR_OUTPUT;
         }
         return output;
     }
