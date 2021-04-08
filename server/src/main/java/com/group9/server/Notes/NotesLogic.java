@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 @Component
 public class NotesLogic implements INotesLogic {
-
+    private static final int COLUMN_INDEX = 1;
     INotesPersistence persistence;
 
     public NotesLogic(INotesPersistence persistence) {
@@ -23,7 +23,7 @@ public class NotesLogic implements INotesLogic {
 
             if (set != null) {
                 while (set.next()) {
-                    subjectNotes.notes.add(set.getString(1));
+                    subjectNotes.notes.add(set.getString(COLUMN_INDEX));
                 }
             }
             return subjectNotes;

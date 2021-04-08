@@ -3,11 +3,11 @@ package com.group9.server.ManageLecture;
 import com.group9.server.Login.IUserInputValidator;
 
 public class ManageLectureOptionValidator implements IUserInputValidator {
-
+    private static final String REGEX = "^\\s*([1-3]|\\*)\\s*$";
     String regex;
 
     public ManageLectureOptionValidator() {
-        this.regex = "^\\s*([1-3]|\\*)\\s*$";
+        this.regex = REGEX;
     }
 
     @Override
