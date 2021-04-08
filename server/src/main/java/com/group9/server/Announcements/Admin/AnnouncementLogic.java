@@ -11,6 +11,9 @@ import java.util.List;
 public class AnnouncementLogic implements IAnnouncementLogic {
     private final String ANNOUNCEMENT_FAILED = "Failed to make announcement";
     private final String INVALID_INPUT = "Please enter only valid message with upto 2000 characters...";
+    private final int VALIDATING_ERR = -1;
+    private final int INCORRECT_COURSE_ID_ERR = 0;
+    private final int COURSE_EXISTS_SUCCESS = 1;
 
     IValidateAnnouncementMade validate;
     IAnnouncementPersistence persist;
@@ -48,15 +51,15 @@ public class AnnouncementLogic implements IAnnouncementLogic {
                 }
             }
             if (lstStudentCourse.contains(courseId)) {
-                return 1;
+                return COURSE_EXISTS_SUCCESS;
             }
 
         } catch (SQLException ex) {
             System.out.println("Error validating courseId");
             ex.printStackTrace();
-            return -1;
+            return VALIDATING_ERR;
         }
         System.out.println("Incorrect Course Id");
-        return 0;
+        return INCORRECT_COURSE_ID_ERR;
     }
 }
