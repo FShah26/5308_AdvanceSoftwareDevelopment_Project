@@ -1,9 +1,7 @@
 stages:
   - builddbdev  
-  - builddbtest
   - builddbdprod
   - testdbdev
-  - testdbtest
   - testdbprod
   - deploy
 
@@ -22,8 +20,8 @@ build:
       - server/target
   tags:
     - ugrad
-  only:
-    - develop
+  except:
+    - master
 
 test:
   stage: testdbdev
@@ -38,8 +36,8 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
-  only:
-    - develop
+  except:
+    - master
 
 ## Only on master ### Use 'production' DBConfig
 build:
@@ -89,37 +87,4 @@ deploy:
   tags:
     - ugrad
   only:
-    - master
-
-### All Other Branches ### Use 'test' DBConfig
-build:
-  stage: builddbtest
-  script:
-    - cd server
-    - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Ptest
-  artifacts:
-    paths:
-      - server/target
-  tags:
-    - ugrad
-  except:
-    - develop
-    - master
-
-test:
-  stage: testdbtest
-  script:
-    - cd server
-    - echo "Testing..."
-    - mvn verify -Ptest
-  artifacts:
-    when: always
-    reports:
-      junit:
-        - server/target/surefire-reports/TEST-*.xml
-  tags:
-    - ugrad
-  except:
-    - develop
     - master
