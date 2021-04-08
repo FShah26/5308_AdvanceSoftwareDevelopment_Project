@@ -1,26 +1,30 @@
 package com.group9.server.Login;
 
-import com.group9.server.cnfg.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 
 @Component
 public class UserAuthenticationPersistence implements IUserAuthPersistence {
 
-    @Autowired
-    DBConfig db;
+    Connection connection;
+
+    public UserAuthenticationPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
+    }
 
     @Override
     public boolean authorizeUser(String uname, String pass, String role) {
-        String dbURL = db.url;
-        String user = db.user;
-        String password = db.password;
         Boolean output = false;
+        final String VERIFY_CREDENTIALS = "{call VerifyUserCredentials(?, ?, ?, ?)}";
         try (
-                Connection conn = DriverManager.getConnection(dbURL, user, password);
-                CallableStatement statement = conn.prepareCall("{call VerifyUserCredentials(?, ?, ?, ?)}")
+                CallableStatement statement = connection.prepareCall(VERIFY_CREDENTIALS)
         ) {
 
             statement.registerOutParameter(4, Types.VARCHAR);
@@ -29,7 +33,6 @@ public class UserAuthenticationPersistence implements IUserAuthPersistence {
             statement.setString(3, role);
             statement.execute();
             output = statement.getBoolean("isValid");
-            statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             output = false;

@@ -1,7 +1,25 @@
 package com.group9.server.Announcements.Student;
 
-public interface AnnouncementList {
-    void printAllAnnouncements();
+import java.util.ArrayList;
+import java.util.List;
 
-    void addAnnouncement(SingleAnnouncement announcement);
+public class AnnouncementList implements IAnnouncementList {
+    List<ISingleAnnouncement> announcementList;
+
+    public AnnouncementList() {
+        announcementList = new ArrayList<>();
+    }
+
+    @Override
+    public void printAllAnnouncements() {
+        System.out.println("============== Announcements ============== ");
+        for (ISingleAnnouncement announcement : announcementList) {
+            announcement.printAnnouncement();
+        }
+    }
+
+    @Override
+    public void addAnnouncement(ISingleAnnouncement announcement) {
+        announcementList.add(announcement);
+    }
 }

@@ -1,23 +1,28 @@
 package com.group9.server.UpcomingLecture;
 
-import com.group9.server.cnfg.DBConfig;
+import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class LecturePersistence implements ILecturePersistence {
-    DBConfig config;
-    Connection con;
+    final String UPCOMING_LECTURE = "{call upcomingLecture(?)}";
+    Connection connection;
 
-    public LecturePersistence(DBConfig config) throws SQLException {
-        this.config = config;
-        con = DriverManager.getConnection(config.url, config.user, config.password);
+    public LecturePersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
     }
+
     @Override
-    public ResultSet viewLecture(String courseid) throws SQLException {
-        CallableStatement statement = con.prepareCall("{call UpcomingLectures(?)}");
-        statement.setString(1, courseid);
+    public ResultSet viewLecture(String courseId) throws SQLException {
+        CallableStatement statement = connection.prepareCall(UPCOMING_LECTURE);
+        statement.setString(1, courseId);
         ResultSet set = statement.executeQuery();
         return set;
     }

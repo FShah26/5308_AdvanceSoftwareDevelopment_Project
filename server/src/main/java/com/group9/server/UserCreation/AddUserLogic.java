@@ -1,22 +1,38 @@
 package com.group9.server.UserCreation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AddUserLogic implements IAddUserLogic {
 
-    @Autowired
-    IAddUserPersistence addUserPersistence;
+    IAddUserPersistence persistence;
 
-    @Override
-    public void addUser(String id, String userid, String password, String user_type) {
-        addUserPersistence.addUser(id,userid,password,user_type);
-    }
-    @Override
-    public void addUserDetails(String userid, String user_type, String name, String email_address, String department){
-        addUserPersistence.addUserDetails(userid, user_type, name, email_address, department);
+    public AddUserLogic(IAddUserPersistence persistence) {
+        this.persistence = persistence;
     }
 
+    @Override
+    public String addUser(String id, String userId, String password, String userType) {
+        String message = "Added user";
+        try {
+            persistence.addUser(id, userId, password, userType);
+        } catch (Exception e) {
+            System.out.println("Adding feedback failed");
+            e.printStackTrace();
+        }
+        return message;
+    }
+
+    @Override
+    public String addUserDetails(String userId, String userType, String name, String emailAddress, String department) {
+        String message = "Added user details";
+        try {
+            persistence.addUserDetails(userId, userType, name, emailAddress, department);
+        } catch (Exception e) {
+            System.out.println("Failed");
+            e.printStackTrace();
+        }
+        return message;
+    }
 }
 

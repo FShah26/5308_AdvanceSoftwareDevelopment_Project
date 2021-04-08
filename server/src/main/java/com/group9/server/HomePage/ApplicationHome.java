@@ -2,7 +2,6 @@ package com.group9.server.HomePage;
 
 import com.group9.server.Login.IUserInputValidator;
 import com.group9.server.Login.RoleValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -11,10 +10,11 @@ import static java.lang.System.out;
 
 @Component
 public class ApplicationHome implements IHomePage {
-
+    private static final String ADMIN_SELECTION = "1";
+    private static final String FACULTY_SELECTION = "2";
+    private static final String STUDENT_SELECTION = "3";
     IUserInputValidator inputValidator;
 
-    @Autowired
     public ApplicationHome() {
         this.inputValidator = new RoleValidator();
     }
@@ -31,27 +31,26 @@ public class ApplicationHome implements IHomePage {
     }
 
     @Override
-    public String selectMenu() {
-        Scanner sc = new Scanner(System.in);
-        String menuOption = sc.nextLine();
+    public String UserTypeSelectMenu() {
+        Scanner scanner = new Scanner(System.in);
+        String menuOption = scanner.nextLine();
         validateSelectedMenuOption(menuOption);
         switch (menuOption.trim()) {
-            case "1":
-                return "admin";
-            case "2":
-                return "faculty";
-            case "3":
-                return "student";
-            default:
-                return "admin";
+            case ADMIN_SELECTION:
+                return UserConstants.ADMIN;
+            case FACULTY_SELECTION:
+                return UserConstants.FACULTY;
+            case STUDENT_SELECTION:
+                return UserConstants.STUDENT;
         }
+        return UserConstants.ADMIN;
     }
 
     @Override
     public void validateSelectedMenuOption(String menuOption) {
         if (!this.inputValidator.validate(menuOption)) {
             displayInvalidMenuOptionMsg();
-            selectMenu();
+            UserTypeSelectMenu();
         }
     }
 

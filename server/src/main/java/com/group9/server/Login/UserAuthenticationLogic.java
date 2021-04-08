@@ -1,6 +1,7 @@
 package com.group9.server.Login;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Dashboard.IDashboard;
+import com.group9.server.HomePage.IUserDashboardFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,14 +10,19 @@ import java.util.Scanner;
 
 @Component
 public class UserAuthenticationLogic implements IUserAuthLogic {
-
-    @Autowired
     IUserAuthPersistence userAuthPersistence;
+    IUserDashboardFactory dashboardFactory;
     private String username;
     private String password;
+    private boolean authStatus = false;
+
+    public UserAuthenticationLogic(IUserAuthPersistence userAuthPersistence, IUserDashboardFactory dashboardFactory) {
+        this.userAuthPersistence = userAuthPersistence;
+        this.dashboardFactory = dashboardFactory;
+    }
 
     @Override
-    public boolean initiateLogin(String userRole) {
+    public IDashboard initiateLogin(String userRole) {
         List<String> credentials = getUserCredentials();
         return validateUserCredentials(credentials.get(0), credentials.get(1), userRole);
     }
@@ -24,22 +30,31 @@ public class UserAuthenticationLogic implements IUserAuthLogic {
     @Override
     public ArrayList<String> getUserCredentials() {
         ArrayList<String> credentials = new ArrayList<String>();
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome User !");
         System.out.println("Please enter your username :");
-        username = sc.nextLine();
+        username = scanner.nextLine();
         credentials.add(username);
         System.out.println("Please enter your password :");
-        password = sc.nextLine();
+        password = scanner.nextLine();
         credentials.add(password);
 
         return credentials;
     }
 
     @Override
-    public boolean validateUserCredentials(String uname, String pass, String role) {
+    public IDashboard validateUserCredentials(String uname, String pass, String userRole) {
         System.out.println("Validating Credentials...");
-        return userAuthPersistence.authorizeUser(uname, pass, role);
+        authStatus = userAuthPersistence.authorizeUser(uname, pass, userRole);
+        if (authStatus) {
+            return dashboardFactory.getDashboard(userRole, uname);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isAuthSuccessful() {
+        return authStatus;
     }
 
     @Override

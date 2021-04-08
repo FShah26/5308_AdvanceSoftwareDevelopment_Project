@@ -6,8 +6,8 @@ public class NotesList {
     String subject;
     ArrayList<String> notes;
 
-    public NotesList(String courseID) {
-        this.subject = courseID;
+    public NotesList(String courseId) {
+        this.subject = courseId;
         this.notes = new ArrayList<>();
     }
 }

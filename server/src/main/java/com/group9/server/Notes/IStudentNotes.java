@@ -1,9 +1,11 @@
 package com.group9.server.Notes;
 
-public interface IStudentNotes {
-    void viewNotes(String studentID, String courseID);
+import com.group9.server.IExecuteAction;
 
-    void addNotes(String studentID, String courseID, String notes);
+public interface IStudentNotes extends IExecuteAction {
+    void viewNotes(String studentId, String courseId);
+
+    void addNotes(String studentId, String courseId, String notes);
 
     String getCourseInput();
 

@@ -1,13 +1,11 @@
 package com.group9.server.Dashboard;
 
-import com.group9.server.Announcements.Admin.IAnnouncementInput;
-import com.group9.server.CourseCreation.ICreateCourse;
-import com.group9.server.StudentCourseEnrollment.EnrollStudent;
-import com.group9.server.UserCreation.AddUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.HomePage.UserConstants;
+import com.group9.server.IExecuteAction;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import static java.lang.System.out;
@@ -15,68 +13,68 @@ import static java.lang.System.out;
 @Component
 public class AdminDashboard implements IDashboard {
 
-    String username;
-    String userrole;
+    String userName;
+    String userRole;
 
     InputValidator inputValidator;
-    @Autowired
-    IAnnouncementInput announcement;
-    @Autowired
-    ICreateCourse cc;
-    @Autowired
-    AddUser ac;
-    @Autowired
-    EnrollStudent es;
+    IExecuteAction createCourse;
+    IExecuteAction announcementInput;
+    IExecuteAction addUser;
+    IExecuteAction enrollStudent;
 
-    public AdminDashboard() {
+    Map<String, IExecuteAction> action = new HashMap<>();
+
+    public AdminDashboard(IExecuteAction announcementInput, IExecuteAction createCourse, IExecuteAction addUser, IExecuteAction enrollStudent) {
         this.inputValidator = new AdminInputValidator();
-        this.userrole = "admin";
+        this.userRole = UserConstants.ADMIN;
+        this.announcementInput = announcementInput;
+        this.createCourse = createCourse;
+        this.addUser = addUser;
+        this.enrollStudent = enrollStudent;
+        action.put("1", this.createCourse);
+        action.put("2", this.addUser);
+        action.put("3", this.enrollStudent);
+        action.put("4", this.announcementInput);
+        action.put("5", null);
     }
 
     @Override
-    public void dashboard() throws SQLException {
+    public void showDashboard() {
+        out.println("************************************************");
+        out.println("                 ADMIN DASHBOARD                ");
+        out.println("************************************************");
 
-        System.out.println("************************************************");
-        System.out.println("                 ADMIN DASHBOARD                ");
-        System.out.println("************************************************");
-
-        System.out.println("Press 1 --> Enter Course and Assign Faculty.");
-        System.out.println("Press 2 --> Add New User.");
-        System.out.println("Press 3 --> Student Course Enrollment.");
-        System.out.println("Press 4 --> Making General Announcement.");
-        System.out.println("Press 5 --> To Log Out.");
-        System.out.println();
+        out.println("Press 1 --> Enter Course and Assign Faculty.");
+        out.println("Press 2 --> Add New User.");
+        out.println("Press 3 --> Student Course Enrollment.");
+        out.println("Press 4 --> Making General Announcement.");
+        out.println("Press 5 --> To Log Out.");
+        out.println();
         selectMenu();
     }
 
     @Override
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String userName) {
+        this.userName = userName;
     }
 
-    public void selectMenu() throws SQLException {
+    public void selectMenu() {
         Scanner sc = new Scanner(System.in);
         String menuOption = sc.nextLine();
         checkInput(menuOption);
     }
 
-    public void checkInput(String selection) throws SQLException {
+    public void checkInput(String selection) {
         if (this.inputValidator.validate(selection)) {
-            if (selection.equals("1")) {
-                cc.creation();
-            } else if (selection.equals("2")) {
-                ac.creation();
-            } else if (selection.equals("3")) {
-                es.creation();
-            } else if (selection.equals("4")) {
-                announcement.make_announcement(userrole, username);
+            IExecuteAction dashboardAction = action.get(selection);
+            if (null == dashboardAction) {
+                //logout
             } else {
-                System.out.println("Yet to develop..");
+                dashboardAction.execute(this.userRole, this.userName);
             }
-        } else {
-            displayInvalidMenuOptionMsg();
-            selectMenu();
+
         }
+        showDashboard();
     }
 
     public void displayInvalidMenuOptionMsg() {

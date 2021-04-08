@@ -1,9 +1,10 @@
 package com.group9.server.Announcements.Admin;
 
-import java.sql.SQLException;
+import com.group9.server.IExecuteAction;
 
-public interface IAnnouncementInput {
+public interface IAnnouncementInput extends IExecuteAction {
 
-    void make_announcement(String userRole,String userId) throws SQLException;
-    void select_option() throws SQLException;
+    void announcement(String userRole, String userId);
+
+    void selectOption();
 }

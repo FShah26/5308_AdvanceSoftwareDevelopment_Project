@@ -1,91 +1,90 @@
 package com.group9.server.UserCreation;
 
+import org.springframework.stereotype.Component;
 
-import com.group9.server.Dashboard.AdminDashboard;
-import com.group9.server.Dashboard.IDashboard;
-import com.group9.server.Dashboard.InputValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-import java.sql.SQLException;
 import java.util.Scanner;
 
-import static java.lang.System.out;
+@Component
+public class AddUser implements IAddUser {
+    final String TO_PROCEED = "true";
+    IAddUserLogic addUserLogic;
 
-public class AddUser {
-
-    @Autowired
-    IValidateAddUser validate;
-    @Qualifier("adminDashboard")
-    @Autowired
-    IDashboard dash;
-    InputValidator inputValidator;
-    @Autowired
-    IAddUserLogic addUserService;
-    String id;
-    String userid;
-    String password;
-    String user_type;
-    String name;
-    String email_address;
-    String department;
-    Scanner sc;
-
-    @Autowired
-    public AddUser() {
-        this.inputValidator = new AdminAddUserConfirm();
-        this.dash = new AdminDashboard();
+    public AddUser(IAddUserLogic addUserLogic) {
+        this.addUserLogic = addUserLogic;
     }
 
-    public void creation() throws SQLException {
-        out.println("************************************************");
-        out.println("      ENTER DETAILS TO CREATE NEW USER        ");
-        out.println("************************************************");
-        sc = new Scanner(System.in);
-        out.print("Enter id : ");
-        id = sc.nextLine();
-        out.print("Enter userid : ");
-        userid = sc.nextLine();
-        out.print("Enter password : ");
-        password = sc.nextLine();
-        out.print("Enter user_type : ");
-        user_type = sc.nextLine();
-        out.print("Enter Name of the user : ");
-        name = sc.nextLine();
-        out.print("Enter email address of the student : ");
-        email_address = sc.nextLine();
-        out.print("Enter department : ");
-        department = sc.nextLine();
-
-        out.println("-->Press 1 to confirm");
-        out.println("-->Press 2 to Cancel");
-        selectMenu();
-
+    @Override
+    public void addUser(String id, String userId, String password, String userType) {
+        String message = addUserLogic.addUser(id, userId, password, userType);
+        System.out.println(message);
     }
 
-    public void selectMenu() throws SQLException {
-        String menuOption = sc.nextLine();
-        validateInput(menuOption);
+    @Override
+    public void addUserDetails(String userId, String userType, String name, String emailAddress, String department) {
+        String message = addUserLogic.addUserDetails(userId, userType, name, emailAddress, department);
+        System.out.println(message);
     }
 
-    public void validateInput(String input) throws SQLException {
-        if (this.inputValidator.validate(input)) {
-            String output = validate.validate_input(id, userid, password, user_type);
-
-            if (output.equals("true")) {
-                addUserService.addUser(id, userid, password, user_type);
-                addUserService.addUserDetails(userid, user_type, name, email_address, department);
-                dash.dashboard();
-            } else
-                out.println(output);
-        } else {
-            displayInvalidMenuOptionMsg();
-            creation();
-        }
+    @Override
+    public String getId() {
+        System.out.println("Enter ID:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    public void displayInvalidMenuOptionMsg() {
-        out.println("Invalid Option! Please choose a valid option from above menu.");
+    @Override
+    public String getUserId() {
+        System.out.println("Enter UserID:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
+    @Override
+    public String getPassword() {
+        System.out.println("Enter Password:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String getUserType() {
+        System.out.println("Enter Type of User:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String getName() {
+        System.out.println("Enter name:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String getEmail() {
+        System.out.println("Enter Email:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String getDepartment() {
+        System.out.println("Enter Department:");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public void execute(String userRole, String userId) {
+        String id = getId();
+        String usrId = getUserId();
+        String password = getPassword();
+        String userType = getUserType();
+        String name = getName();
+        String email = getEmail();
+        String department = getDepartment();
+
+        addUser(id, usrId, password, userType);
+        addUserDetails(usrId, userType, name, email, department);
+    }
 }

@@ -1,26 +1,29 @@
 package com.group9.server.StudentCourseEnrollment;
 
-import com.group9.server.cnfg.DBConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.group9.server.Database.DBConfig;
+import com.group9.server.Database.ISingletonDatabase;
 import org.springframework.stereotype.Component;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Types;
 
 @Component
 public class EnrollStudentPersistence implements IEnrollStudentPersistence {
+    final String STUDENT_COURSE_ENROLLMENT = "{call studentCourseEnrollments(?, ?, ?, ?)}";
+    Connection connection;
 
-    @Autowired
-    DBConfig db;
+    public EnrollStudentPersistence(DBConfig config, ISingletonDatabase database) throws SQLException {
+        ISingletonDatabase databaseInstance = database.getInstance();
+        connection = databaseInstance.getConnection(config);
+    }
 
     @Override
     public void enrollStudent(String userId, String courseId, String Term) {
-        String dbURL = db.url;
-        String user = db.user;
-        String pass = db.password;
-        String output="";
+        String output = "";
         try (
-                Connection conn = DriverManager.getConnection(dbURL, user, pass);
-                CallableStatement statement = conn.prepareCall("{call StudentCourseEnrollment(?, ?, ?, ?)}");
+                CallableStatement statement = connection.prepareCall(STUDENT_COURSE_ENROLLMENT)
         ) {
             statement.registerOutParameter(4, Types.VARCHAR);
             statement.setString(1, userId);
@@ -31,7 +34,7 @@ public class EnrollStudentPersistence implements IEnrollStudentPersistence {
             statement.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            output ="Error Catched";
+            output = "Error Catched";
         }
         System.out.println(output);
     }

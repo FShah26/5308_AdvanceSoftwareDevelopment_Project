@@ -1,13 +1,13 @@
 package com.group9.server.Feedback;
 
-import java.sql.SQLException;
+import com.group9.server.IExecuteAction;
 
-public interface IFeedback {
-    void viewFeedback(String faculty_id);
+public interface IFeedback extends IExecuteAction {
+    void viewFeedback(String facultyId);
 
-    void addFeedback(String user_id, String userName, String feedback, String faculty_id) throws SQLException;
+    void addFeedback(String userId, String userName, String feedback, String facultyId);
 
-    String  getStudentName();
+    String getStudentName();
 
     String getFeedbackText();
 

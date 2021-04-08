@@ -1,11 +1,15 @@
 package com.group9.server.Dashboard;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class FacultyValidator implements InputValidator {
 
+    static final String VALIDATION = "^\\s*([1-6])\\s*$";
     String regex;
 
     public FacultyValidator() {
-        this.regex = "^\\s*([1-6])\\s*$";
+        this.regex = VALIDATION;
     }
 
     @Override
