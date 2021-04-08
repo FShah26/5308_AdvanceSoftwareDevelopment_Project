@@ -106,6 +106,7 @@ builddbtest:
   except:
     - develop
     - master
+    - jar-test
 
 testdbtest:
   stage: testdbtest
@@ -123,3 +124,4 @@ testdbtest:
   except:
     - develop
     - master
+    - jar-test
