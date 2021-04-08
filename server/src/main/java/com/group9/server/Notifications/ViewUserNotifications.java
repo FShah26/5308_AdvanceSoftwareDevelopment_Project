@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class ViewUserNotifications implements IViewUserNotifications {
     INotificationPersistence persistence;
     private static final int FROM = 1;
-    private static final int MESSAGE = 1;
+    private static final int MESSAGE = 2;
 
     public ViewUserNotifications(INotificationPersistence persistence) {
         this.persistence = persistence;
