@@ -9,10 +9,12 @@ import java.util.Date;
 
 @Component
 public class ValidateDate implements IDateValidator {
+    private static final String REGEX_DATE = "^\\s*([0-3]\\d\\/[01]\\d\\/\\d{4}\\s[0-2]\\d\\:[0-5]\\d\\:[0-5]\\d)\\s*$";
+    private static final String DATE_FORMAT = "dd/MM/yyyy HH:mm:ss";
     String regex;
 
     public ValidateDate() {
-        this.regex = "^\\s*([0-3]\\d\\/[01]\\d\\/\\d{4}\\s[0-2]\\d\\:[0-5]\\d\\:[0-5]\\d)\\s*$";
+        this.regex = REGEX_DATE;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class ValidateDate implements IDateValidator {
 
     @Override
     public boolean ValidateFutureDate(String userInput) {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
         try {
             Date dt = df.parse(userInput);
             if (dt.after(new Date())) {

@@ -15,7 +15,11 @@ import static java.lang.Integer.parseInt;
 
 @Component
 public class ManageLectureLogic implements IManageLectureLogic {
-
+    private static final String DATE_FORMAT= "dd/MM/yyyy HH:mm:ss";
+    private static final int COLUMN_INDEX_1 = 1;
+    private static final int COLUMN_INDEX_3 = 3;
+    private static final int COLUMN_INDEX_4 = 4;
+    private static final int COLUMN_INDEX_5 = 5;
     IManageLecturePersistence manageLecturePersistence;
 
     IDateValidator dateValidator;
@@ -46,7 +50,6 @@ public class ManageLectureLogic implements IManageLectureLogic {
             return true;
         }
 
-
     }
 
     @Override
@@ -75,7 +78,7 @@ public class ManageLectureLogic implements IManageLectureLogic {
         boolean result = false;
         try {
             if (validateCourseId(facultyId, courseId) && dateValidator.validate(lecDate)) {
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
                 try {
                     Date lectureDt = df.parse(lecDate);
                     if (doesCourseExist(facultyId, courseId, lectureDt)) {
@@ -105,7 +108,7 @@ public class ManageLectureLogic implements IManageLectureLogic {
         boolean result;
         try {
             if (validateLectureId(courseId, lecId) && dateValidator.validate(lecDate)) {
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat(DATE_FORMAT);
                 try {
                     Date lectureDt = df.parse(lecDate);
                     if (doesLectureExist(courseId, lectureDt)) {
@@ -155,7 +158,7 @@ public class ManageLectureLogic implements IManageLectureLogic {
 
             if (set != null) {
                 while (set.next()) {
-                    lstFacultyCourse.add(set.getString(1));
+                    lstFacultyCourse.add(set.getString(COLUMN_INDEX_1));
                 }
             }
 
@@ -235,10 +238,10 @@ public class ManageLectureLogic implements IManageLectureLogic {
     private ArrayList<Lecture> getListFromResultSet(ResultSet set) throws SQLException {
         ArrayList<Lecture> lstLectures = new ArrayList<>();
         while (set.next()) {
-            Integer lecId = set.getInt(1);
-            String course = set.getString(3);
-            String topic = set.getString(4);
-            Timestamp date = set.getTimestamp(5);
+            Integer lecId = set.getInt(COLUMN_INDEX_1);
+            String course = set.getString(COLUMN_INDEX_3);
+            String topic = set.getString(COLUMN_INDEX_4);
+            Timestamp date = set.getTimestamp(COLUMN_INDEX_5);
             Lecture lec = new Lecture(lecId, course, topic, date);
             lstLectures.add(lec);
         }

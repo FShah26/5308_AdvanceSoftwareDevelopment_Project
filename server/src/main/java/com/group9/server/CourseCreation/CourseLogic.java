@@ -4,7 +4,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CourseLogic implements ICourseLogic {
-
+    private static final String INVALID_OUTPUT = "Validation Error : Please enter Course ID staring with \"CSCI\",CREDIT BETWEEN 1 TO 5 and valid faculty ID.";
+    private static final String OUTPUT_ERROR = "Some error occurred..";
     IValidate validate;
     ICoursePersistence coursePersistence;
 
@@ -22,10 +23,10 @@ public class CourseLogic implements ICourseLogic {
             if (validation) {
                 output = coursePersistence.createCourses(courseId, courseName, courseCredit, courseFaculty, courseDepartment);
             } else {
-                output = "Validation Error : Please enter Course ID staring with \"CSCI\",CREDIT BETWEEN 1 TO 5 and valid faculty ID.";
+                output = INVALID_OUTPUT;
             }
         } catch (Exception ex) {
-            output = "Some error occurred..";
+            output = OUTPUT_ERROR;
         }
         return output;
     }

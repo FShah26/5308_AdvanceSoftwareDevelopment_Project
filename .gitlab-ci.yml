@@ -1,5 +1,5 @@
 stages:
-  - builddbdev  
+  - builddbdev
   - builddbtest
   - builddbdprod
   - testdbdev
@@ -11,7 +11,7 @@ variables:
   MAVEN_CLI_OP: "clean"
 
 ### Only on develop ### Use 'dev' DBConfig
-build:
+builddbdev:
   stage: builddbdev
   script:
     - cd server
@@ -25,7 +25,7 @@ build:
   only:
     - develop
 
-test:
+testdbdev:
   stage: testdbdev
   script:
     - cd server
@@ -42,7 +42,7 @@ test:
     - develop
 
 ## Only on master ### Use 'production' DBConfig
-build:
+builddbdprod:
   stage: builddbdprod
   script:
     - cd server
@@ -56,7 +56,7 @@ build:
   only:
     - master
 
-test:
+testdbprod:
   stage: testdbprod
   script:
     - cd server
@@ -92,7 +92,7 @@ deploy:
     - master
 
 ### All Other Branches ### Use 'test' DBConfig
-build:
+builddbtest:
   stage: builddbtest
   script:
     - cd server
@@ -107,7 +107,7 @@ build:
     - develop
     - master
 
-test:
+testdbtest:
   stage: testdbtest
   script:
     - cd server

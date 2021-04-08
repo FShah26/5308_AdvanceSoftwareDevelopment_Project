@@ -12,7 +12,10 @@ import static java.lang.System.out;
 
 @Component
 public class ManageLecture implements IManageLecture {
-
+    private static final String SCHEDULE_LECTURE_PARAMETER = "1";
+    private static final String RESCHEDULE_LECTURE_PARAMETER = "2";
+    private static final String CANCEL_LECTURE_PARAMETER = "3";
+    private static final String NULL_PARAMETER = "*";
     String facultyId;
     IManageLectureLogic manageLectureLogic;
     IUserInputValidator manageLectureOptionValidator;
@@ -24,10 +27,10 @@ public class ManageLecture implements IManageLecture {
         this.manageLectureLogic = manageLectureLogic;
         this.userConfirmation = userConfirmation;
         this.manageLectureOptionValidator = new ManageLectureOptionValidator();
-        action.put("1", new ScheduleLecture(this.manageLectureLogic));
-        action.put("2", new RescheduleLecture(this.manageLectureLogic));
-        action.put("3", new CancelLecture(this.manageLectureLogic));
-        action.put("*", null);
+        action.put(SCHEDULE_LECTURE_PARAMETER, new ScheduleLecture(this.manageLectureLogic));
+        action.put(RESCHEDULE_LECTURE_PARAMETER, new RescheduleLecture(this.manageLectureLogic));
+        action.put(CANCEL_LECTURE_PARAMETER, new CancelLecture(this.manageLectureLogic));
+        action.put(NULL_PARAMETER, null);
 
     }
 
