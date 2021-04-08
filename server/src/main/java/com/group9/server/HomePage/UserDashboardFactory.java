@@ -7,6 +7,7 @@ import com.group9.server.Dashboard.StudentDashboard;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -16,6 +17,7 @@ public class UserDashboardFactory implements IUserDashboardFactory {
 
     public UserDashboardFactory(ApplicationContext context) {
         this.context = context;
+        action = new HashMap<>();
         action.put(UserConstants.ADMIN,context.getBean(AdminDashboard.class));
         action.put(UserConstants.FACULTY,context.getBean(FacultyDashboard.class));
         action.put(UserConstants.STUDENT,context.getBean(StudentDashboard.class));
