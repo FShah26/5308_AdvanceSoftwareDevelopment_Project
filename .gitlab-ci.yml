@@ -1,20 +1,17 @@
 stages:
-  - builddbdev  
-  - builddbdprod
-  - testdbdev
-  - testdbprod
+  - build
+  - test
   - deploy
 
 variables:
   MAVEN_CLI_OP: "clean"
 
-### Only on develop ### Use 'dev' DBConfig
 build:
   stage: build
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile -Pdev
+    - mvn $MAVEN_CLI_OP compile
   artifacts:
     paths:
       - server/target
@@ -26,7 +23,7 @@ test:
   script:
     - cd server
     - echo "Testing..."
-    - mvn verify -Pdev
+    - mvn verify
   artifacts:
     when: always
     reports:
