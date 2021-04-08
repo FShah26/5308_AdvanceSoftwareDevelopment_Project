@@ -26,7 +26,7 @@ public class UserDashboardFactory implements IUserDashboardFactory {
     @Override
     public IDashboard getDashboard(String userType, String userName) {
         IDashboard userDashboard = null;
-        action.get(userType);
+        userDashboard = action.get(userType);
         userDashboard.setUsername(userName);
         return userDashboard;
     }
