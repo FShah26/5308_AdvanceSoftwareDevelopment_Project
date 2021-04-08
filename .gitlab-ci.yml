@@ -1,6 +1,8 @@
 stages:
   - build
+  - builddeploy
   - test
+  - testdeploy
   - deploy
 
 variables:
@@ -11,7 +13,7 @@ build:
   script:
     - cd server
     - echo "Building with Maven"
-    - mvn $MAVEN_CLI_OP compile
+    - mvn $MAVEN_CLI_OP compile -Pdev
   artifacts:
     paths:
       - server/target
@@ -23,7 +25,7 @@ test:
   script:
     - cd server
     - echo "Testing..."
-    - mvn verify
+    - mvn verify -Pdev
   artifacts:
     when: always
     reports:
@@ -32,10 +34,19 @@ test:
   tags:
     - ugrad
 
+<<<<<<< HEAD
 
 ## Only on master ### Use 'production' DBConfig
 build:
   stage: build
+=======
+# Master only
+variables:
+  MAVEN_CLI_OP: "clean"
+
+builddeploy:
+  stage: builddeploy
+>>>>>>> ad66f3e (Added master only stages)
   script:
     - cd server
     - echo "Building with Maven"
@@ -48,8 +59,8 @@ build:
   only:
     - master
 
-test:
-  stage: test
+testdeploy:
+  stage: testdeploy
   script:
     - cd server
     - echo "Testing..."
