@@ -69,7 +69,6 @@ public class RequestMeeting implements IRequestMeeting {
             } else {
                 String output = meetingLogic.raiseMeetingRequest(selected, this.studentId, reason);
                 System.out.println(output);
-                meetingDisplay(this.studentId);
             }
         } else {
             System.out.println("Please select again valid option from the above mentioned courses..");
