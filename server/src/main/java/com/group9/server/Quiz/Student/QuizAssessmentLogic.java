@@ -32,6 +32,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     private static final int QUIZ_QUESTIONS_PARAMETER_INDEX_9 = 9;
     private static final int VALIDATE_COURSE_ID_VALID = 1;
     private static final int VALIDATE_COURSE_ID_INVALID = 0;
+    private static final int QUIZ_NOT_ATTEMPTED = 0;
     private static final int VALIDATE_COURSE_ID_EXCEPTION = -1;
     private static final double PERCENTAGE_LIMIT = 100.00;
     private static final double POINT_FOR_CORRECT_ANS = 1.00;
@@ -50,7 +51,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
             if (set != null) {
                 lstQuiz = new ArrayList<>();
                 while (set.next()) {
-                    lstQuiz.add(set.getString(1));
+                    lstQuiz.add(set.getString(QUIZ_QUESTIONS_PARAMETER_INDEX_1));
                 }
             }
         } catch (SQLException ex) {
@@ -178,7 +179,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
             ResultSet set = this.gradingPersistence.fetchPreviousGrades(courseId, studentId, quizNumber);
             if (set != null) {
                 while (set.next()) {
-                    attempt = set.getInt(1);
+                    attempt = set.getInt(QUIZ_QUESTIONS_PARAMETER_INDEX_1);
                 }
             }
         } catch (SQLException ex) {
@@ -203,7 +204,7 @@ public class QuizAssessmentLogic implements IQuizAssessmentLogic {
     public boolean updateGrades(String courseId, String studentId, String quizNumber, double grades, int attempt, Timestamp lastAttemptTimestamp) {
         boolean result = false;
         try {
-            if (attempt == 0) {
+            if (attempt == QUIZ_NOT_ATTEMPTED) {
                 attempt += 1;
                 result = gradingPersistence.addStudentGrades(studentId, quizNumber, courseId, grades, attempt, lastAttemptTimestamp);
             } else {

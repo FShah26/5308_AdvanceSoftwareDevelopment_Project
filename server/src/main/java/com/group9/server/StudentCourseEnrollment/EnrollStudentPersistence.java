@@ -26,7 +26,6 @@ public class EnrollStudentPersistence implements IEnrollStudentPersistence {
 
     @Override
     public void enrollStudent(String userId, String courseId, String Term) {
-        String output;
         try (
                 CallableStatement statement = connection.prepareCall(STUDENT_COURSE_ENROLLMENT)
         ) {
@@ -35,7 +34,6 @@ public class EnrollStudentPersistence implements IEnrollStudentPersistence {
             statement.setString(ENROLL_STUDENT_PARAMETER_INDEX_2, courseId);
             statement.setString(ENROLL_STUDENT_PARAMETER_INDEX_3, Term);
             statement.execute();
-            output = statement.getString(RETURN_MESSAGE);
         } catch (SQLException ex) {
             ex.printStackTrace();
             System.out.println("Error Catched");

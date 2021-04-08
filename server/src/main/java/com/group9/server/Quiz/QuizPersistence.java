@@ -42,9 +42,7 @@ public class QuizPersistence implements IQuizPersistence {
         statement.setString(QUIZ_PERSISTENCE_PARAMETER_INDEX_6, optionC);
         statement.setString(QUIZ_PERSISTENCE_PARAMETER_INDEX_7, optionD);
         statement.setString(QUIZ_PERSISTENCE_PARAMETER_INDEX_8, answer);
-
         statement.execute();
-
         return statement.getString(QUIZ_PERSISTENCE_MESSAGE);
     }
 
@@ -72,6 +70,4 @@ public class QuizPersistence implements IQuizPersistence {
         ResultSet set = statement.executeQuery();
         return set;
     }
-
-
 }

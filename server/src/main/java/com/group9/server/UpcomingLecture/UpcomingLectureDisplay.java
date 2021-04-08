@@ -10,6 +10,9 @@ import java.util.Scanner;
 @Component
 public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
 
+    private static final int LENGTH = 0;
+    private static final int DECREMENT = 1;
+
     IRequestMeetingLogic meeting;
     IChooseCourseValidate chooseCourseValidate;
     IUpcomingLectureLogic lectureLogic;
@@ -39,7 +42,7 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     public void checkInput() {
         course = meeting.viewCourse(studentId);
         int courseNumber = 0;
-        if (course.courseId.size() == 0) {
+        if (course.courseId.size() == LENGTH) {
             System.out.println("Looks like you not enrolled to any courses.");
         } else {
             for (String courseId : course.courseId) {
@@ -55,10 +58,10 @@ public class UpcomingLectureDisplay implements IUpcomingLectureDisplay {
     public void selectCourse(int number) {
         String courseOption = scanner.nextLine();
         if (this.chooseCourseValidate.validate(courseOption, number)) {
-            if (Character.isDigit(courseOption.charAt(0))) {
-                String selected = course.courseId.get(Integer.parseInt(courseOption) - 1);
+            if (Character.isDigit(courseOption.charAt(LENGTH))) {
+                String selected = course.courseId.get(Integer.parseInt(courseOption) - DECREMENT);
                 ArrayList<LectureDetails> details = lectureLogic.upcoming(selected);
-                if (details.size() > 0) {
+                if (details.size() > LENGTH) {
                     System.out.println("________________________________________________________________________________________________________________");
                     System.out.printf("%-20s%-15s%-50s%-50s\n", "Faculty ID", "Course", "Topic", "Lecture Date and Time");
                     System.out.println("----------------------------------------------------------------------------------------------------------------");
