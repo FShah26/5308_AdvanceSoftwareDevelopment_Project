@@ -29,6 +29,7 @@ public class AddUserPersistence implements IAddUserPersistence {
 
     @Override
     public void addUser(String id, String userId, String password, String userType) {
+        String output = "";
         try (
                 CallableStatement statement = connection.prepareCall(CREATE_NEW_USER)
         ) {
