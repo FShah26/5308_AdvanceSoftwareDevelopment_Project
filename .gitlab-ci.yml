@@ -1,6 +1,8 @@
 stages:
-  - build
-  - test
+  - builddbdev  
+  - builddbdprod
+  - testdbdev
+  - testdbprod
   - deploy
 
 variables:
@@ -18,8 +20,8 @@ build:
       - server/target
   tags:
     - ugrad
-  only:
-    - develop
+  except:
+    - master
 
 test:
   stage: test
@@ -34,8 +36,8 @@ test:
         - server/target/surefire-reports/TEST-*.xml
   tags:
     - ugrad
-  only:
-    - develop
+  except:
+    - master
 
 ## Only on master ### Use 'production' DBConfig
 build:
