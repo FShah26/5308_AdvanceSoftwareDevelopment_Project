@@ -66,7 +66,7 @@ testdeploy:
   tags:
     - ugrad
   only:
-    - master
+    - ci-cd-test
 
 # Reference: https://docs.gitlab.com/ee/ci/ssh_keys/
 deploy:
@@ -85,4 +85,4 @@ deploy:
   tags:
     - ugrad
   only:
-    - master
+    - ci-cd-test
